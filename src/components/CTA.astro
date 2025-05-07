@@ -1,0 +1,180 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  secondaryText?: string;
+  secondaryLink?: string;
+}
+
+const {
+  title = "Ready to transform your business?",
+  subtitle = "Join thousands of companies using our platform to scale efficiently. Start your free trial today.",
+  ctaText = "Get Started",
+  ctaLink = "/signup",
+  secondaryText = "Book a Demo",
+  secondaryLink = "/demo"
+} = Astro.props;
+---
+
+<section class="py-20 px-8 overflow-hidden relative">
+  <!-- Background elements for visual interest -->
+  <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700"></div>
+  <div class="absolute inset-0 bg-grid opacity-20"></div>
+  <div class="absolute -right-64 -top-64 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+  <div class="absolute -left-64 -bottom-64 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+  
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="text-center cta-content bg-white/5 backdrop-blur-lg p-12 rounded-2xl shadow-highlight border border-white/10">
+      <h2 class="text-4xl font-bold text-white mb-6">{title}</h2>
+      <p class="text-xl text-white/80 max-w-3xl mx-auto mb-10">{subtitle}</p>
+      
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href={ctaLink} class="btn-glow inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 font-semibold text-indigo-600 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px]">
+          {ctaText}
+        </a>
+        <a href={secondaryLink} class="inline-flex h-12 items-center justify-center rounded-lg border border-white/30 px-8 font-semibold text-white hover:bg-white/10 transition-colors">
+          {secondaryText}
+        </a>
+      </div>
+      
+      <!-- Trust badges -->
+      <div class="mt-12 flex flex-col items-center">
+        <p class="text-white/70 text-sm mb-4">Trusted by leading companies worldwide</p>
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+          <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+            <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 36L20 8L32 36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 26H28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M48 12H40V32H48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M48 22H40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="59" cy="22" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M80 32V12L90 24L100 12V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M110 12H122C124.209 12 126 13.7909 126 16V16C126 18.2091 124.209 20 122 20H110V12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M110 20H124C126.209 20 128 21.7909 128 24V24C128 26.2091 126.209 28 124 28H110V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M110 28V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M138 12C134.686 12 132 14.6863 132 18V26C132 29.3137 134.686 32 138 32H146C149.314 32 152 29.3137 152 26V18C152 14.6863 149.314 12 146 12H138Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+            <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 8C13.3726 8 8 13.3726 8 20C8 26.6274 13.3726 32 20 32C26.6274 32 32 26.6274 32 20C32 13.3726 26.6274 8 20 8Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 18.5C16 17.1193 17.1193 16 18.5 16H21.5C22.8807 16 24 17.1193 24 18.5V21.5C24 22.8807 22.8807 24 21.5 24H18.5C17.1193 24 16 22.8807 16 21.5V18.5Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M44 8H52L60 28H52" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M52 20H60" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M76 8L64 20L76 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M64 20H88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+            <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="12" width="20" height="20" rx="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M28 24C28 17.3726 33.3726 12 40 12V32C33.3726 32 28 26.6274 28 20V24Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M48 12H60C64.4183 12 68 15.5817 68 20V20C68 24.4183 64.4183 28 60 28H48V12Z" stroke="currentColor" stroke-width="2"/>
+              <circle cx="59" cy="20" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Gradient background with grid pattern */
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+  
+  /* Highlight shadow effect */
+  .shadow-highlight {
+    box-shadow: 
+      0 10px 20px -5px rgba(0, 0, 0, 0.2),
+      0 0 30px 5px rgba(79, 70, 229, 0.15);
+  }
+  
+  /* Button glow effect */
+  .btn-glow {
+    position: relative;
+  }
+  
+  .btn-glow:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-glow:hover:before {
+    opacity: 1;
+  }
+  
+  /* Animations */
+  .cta-content {
+    animation: scale-up 0.5s ease-out forwards;
+    transform: scale(0.97);
+    opacity: 0;
+  }
+  
+  @keyframes scale-up {
+    0% {
+      transform: scale(0.97);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes animate-blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  
+  .animate-blob {
+    animation: animate-blob 7s ease-in-out infinite;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  /* Floating effect */
+  .cta-content {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+</style>
