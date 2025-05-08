@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { navConfig } from "../config/nav";
 import { companyConfig } from "../config/company";
-import { ctaConfig } from "../config/company";
+import { ctaConfig } from "../config/cta";
 
 interface Props {
   companyName?: string;
@@ -61,7 +61,7 @@ const currentYear = new Date().getFullYear();
         <ul class="mt-4 space-y-3">
           {navConfig.footerNav.company.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-slate-600 hover:text-indigo-600 transition-colors">
+              <a href={item.href} class="text-sm transition-colors" style="color: var(--color-text-light); transition: all var(--transition-normal);">
                 {item.title}
               </a>
             </li>
@@ -74,7 +74,7 @@ const currentYear = new Date().getFullYear();
         <ul class="mt-4 space-y-3">
           {navConfig.footerNav.legal.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-slate-600 hover:text-indigo-600 transition-colors">
+              <a href={item.href} class="text-sm transition-colors" style="color: var(--color-text-light); transition: all var(--transition-normal);">
                 {item.title}
               </a>
             </li>

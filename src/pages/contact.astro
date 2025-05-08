@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { contactPageConfig } from '../config/pages';
 import { companyConfig } from '../config/company';
+import CTA from '../components/CTA.astro';
 
 // Extract sections from config
 const heroSection = contactPageConfig.sections.find(section => section.type === "contactHero");
@@ -10,6 +11,7 @@ const contactInfoSection = contactPageConfig.sections.find(section => section.ty
 const formSection = contactPageConfig.sections.find(section => section.type === "contactForm");
 const mapSection = contactPageConfig.sections.find(section => section.type === "map");
 const hoursSection = contactPageConfig.sections.find(section => section.type === "businessHours");
+const ctaSection = contactPageConfig.sections.find(section => section.type === "cta");
 ---
 
 <Layout 
@@ -237,5 +239,17 @@ const hoursSection = contactPageConfig.sections.find(section => section.type ===
         </div>
       </div>
     </section>
+  )}
+  
+  <!-- CTA Section -->
+  {ctaSection && (
+    <CTA 
+      title={ctaSection.title}
+      subtitle={ctaSection.subtitle}
+      ctaText={ctaSection.ctaPrimary.text}
+      ctaLink={ctaSection.ctaPrimary.link}
+      secondaryText={ctaSection.ctaSecondary?.text}
+      secondaryLink={ctaSection.ctaSecondary?.link}
+    />
   )}
 </Layout>

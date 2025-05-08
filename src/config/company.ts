@@ -1,3 +1,6 @@
+// CTA config is now imported from cta.ts
+import { CTAConfig, ctaConfig } from './cta';
+
 export interface CompanyConfig {
   name: string;
   tagline: string;
@@ -22,19 +25,6 @@ export interface CompanyConfig {
     url: string;
     icon: string;
   }[];
-}
-
-export interface CTAConfig {
-  title: string;
-  description: string;
-  primaryAction: {
-    text: string;
-    href: string;
-  };
-  secondaryAction?: {
-    text: string;
-    href: string;
-  };
 }
 
 export const companyConfig: CompanyConfig = {
@@ -80,15 +70,4 @@ export const companyConfig: CompanyConfig = {
   ],
 };
 
-export const ctaConfig: CTAConfig = {
-  title: "Ready to transform your business?",
-  description: "Get started today and see the difference our services can make for your business growth and success.",
-  primaryAction: {
-    text: "Get Started",
-    href: "/contact",
-  },
-  secondaryAction: {
-    text: "Learn More",
-    href: "/services",
-  },
-};
+// The CTA config is now imported at the top of the file

@@ -1,0 +1,106 @@
+---
+import { Icon } from 'astro-icon/components';
+import { companyConfig } from '../config/company';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "Welcome to " + companyConfig.name,
+  subtitle = "We provide professional solutions for your business needs. Our experienced team is dedicated to helping your company grow and succeed in today's competitive market."
+} = Astro.props;
+---
+
+<section class="section-padding" style="background-color: var(--color-background);">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div class="welcome-content">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: var(--color-text);">{title}</h2>
+        <p class="text-lg mb-8" style="color: var(--color-text-light);">{subtitle}</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div class="p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg);">
+            <div class="mb-4" style="color: var(--color-primary);">
+              <Icon name="mdi:shield-check" class="h-8 w-8" />
+            </div>
+            <h3 class="text-xl font-semibold mb-2" style="color: var(--color-text);">Trusted Service</h3>
+            <p style="color: var(--color-text-light);">We pride ourselves on reliability and excellence in every project we undertake.</p>
+          </div>
+          
+          <div class="p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg);">
+            <div class="mb-4" style="color: var(--color-secondary);">
+              <Icon name="mdi:lightbulb" class="h-8 w-8" />
+            </div>
+            <h3 class="text-xl font-semibold mb-2" style="color: var(--color-text);">Innovative Solutions</h3>
+            <p style="color: var(--color-text-light);">We bring creative thinking and modern approaches to solve your business challenges.</p>
+          </div>
+        </div>
+        
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="/services" class="btn btn-primary inline-flex items-center">
+            Our Services
+            <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
+          </a>
+          <a href="/about" class="btn btn-secondary inline-flex items-center">
+            About Us
+          </a>
+        </div>
+      </div>
+      
+      <div class="welcome-image-container">
+        <div class="relative">
+          <div class="absolute -top-4 -left-4 w-24 h-24 rounded-full" style="background-color: var(--color-primary); opacity: 0.1;"></div>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-full" style="background-color: var(--color-secondary); opacity: 0.1;"></div>
+          
+          <div class="rounded-2xl overflow-hidden shadow-xl relative" style="border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl);">
+            <img 
+              src="https://placehold.co/800x600?text=Professional+Team"
+              alt="Professional team working together" 
+              class="w-full h-auto"
+              style="aspect-ratio: 4/3; object-fit: cover;"
+            />
+            <div class="absolute inset-0" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);"></div>
+          </div>
+          
+          <div class="absolute -bottom-6 right-8 px-6 py-3" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+            <p class="font-bold">15+ Years Experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .welcome-content {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  .welcome-image-container {
+    animation: fadeInRight 1s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>

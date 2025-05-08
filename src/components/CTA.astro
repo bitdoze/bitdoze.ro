@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { ctaConfig } from "../config/company";
+import { ctaConfig } from "../config/cta";
+import { imageAssets } from "../config/assets";
 
 interface Props {
   title?: string;
@@ -46,38 +47,14 @@ const {
       <div class="mt-12 flex flex-col items-center">
         <p class="text-white/70 text-sm mb-4">Trusted by leading companies worldwide</p>
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
-          <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
-            <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 36L20 8L32 36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 26H28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M48 12H40V32H48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M48 22H40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="59" cy="22" r="10" stroke="currentColor" stroke-width="2"/>
-              <path d="M80 32V12L90 24L100 12V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M110 12H122C124.209 12 126 13.7909 126 16V16C126 18.2091 124.209 20 122 20H110V12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M110 20H124C126.209 20 128 21.7909 128 24V24C128 26.2091 126.209 28 124 28H110V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M110 28V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M138 12C134.686 12 132 14.6863 132 18V26C132 29.3137 134.686 32 138 32H146C149.314 32 152 29.3137 152 26V18C152 14.6863 149.314 12 146 12H138Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
-            <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 8C13.3726 8 8 13.3726 8 20C8 26.6274 13.3726 32 20 32C26.6274 32 32 26.6274 32 20C32 13.3726 26.6274 8 20 8Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M16 18.5C16 17.1193 17.1193 16 18.5 16H21.5C22.8807 16 24 17.1193 24 18.5V21.5C24 22.8807 22.8807 24 21.5 24H18.5C17.1193 24 16 22.8807 16 21.5V18.5Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M44 8H52L60 28H52" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M52 20H60" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M76 8L64 20L76 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M64 20H88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
-            <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="8" y="12" width="20" height="20" rx="10" stroke="currentColor" stroke-width="2"/>
-              <path d="M28 24C28 17.3726 33.3726 12 40 12V32C33.3726 32 28 26.6274 28 20V24Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M48 12H60C64.4183 12 68 15.5817 68 20V20C68 24.4183 64.4183 28 60 28H48V12Z" stroke="currentColor" stroke-width="2"/>
-              <circle cx="59" cy="20" r="3" fill="currentColor"/>
-            </svg>
-          </div>
+          {imageAssets.logos.trustedBadges.slice(0, 3).map(badge => (
+            <div class="h-8 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+              <svg class="h-full" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d={badge.svgPath} stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                {badge.id === "badge3" && <circle cx="59" cy="20" r="3" fill="currentColor"/>}
+              </svg>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -92,8 +69,6 @@ const {
       linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   }
-  
-  /* Highlight shadow effect - now using CSS variables in component directly */
   
   /* Button glow effect */
   .btn-glow {
@@ -117,24 +92,7 @@ const {
     opacity: 1;
   }
   
-  /* Animations */
-  .cta-content {
-    animation: scale-up 0.5s ease-out forwards;
-    transform: scale(0.97);
-    opacity: 0;
-  }
-  
-  @keyframes scale-up {
-    0% {
-      transform: scale(0.97);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
+  /* BLOB Animations */
   @keyframes animate-blob {
     0% {
       transform: translate(0px, 0px) scale(1);
@@ -158,13 +116,12 @@ const {
     animation-delay: 2s;
   }
   
-  /* Floating effect */
+  /* Subtle floating animation for the CTA content */
   .cta-content {
-    animation: float 6s ease-in-out infinite;
-    animation-delay: 0.5s;
+    animation: gentle-float 6s ease-in-out infinite;
   }
   
-  @keyframes float {
+  @keyframes gentle-float {
     0% {
       transform: translateY(0px);
     }

@@ -1,4 +1,6 @@
 ---
+import { imageAssets } from "../config/assets";
+
 interface Testimonial {
   content: string;
   author: string;
@@ -53,96 +55,14 @@ const {
     <!-- Company logos -->
     <div class="mb-16 logo-carousel">
       <div class="flex justify-between items-center gap-8 opacity-60" style="color: var(--color-text);">
-        <div class="grayscale hover:grayscale-0 transition-all duration-300">
-          <svg class="h-8 w-auto" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 36L20 8L32 36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 26H28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M48 12H40V32H48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M48 22H40" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="59" cy="22" r="10" stroke="currentColor" stroke-width="2"/>
-            <path d="M80 32V12L90 24L100 12V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M110 12H122C124.209 12 126 13.7909 126 16V16C126 18.2091 124.209 20 122 20H110V12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M110 20H124C126.209 20 128 21.7909 128 24V24C128 26.2091 126.209 28 124 28H110V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M110 28V32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M138 12C134.686 12 132 14.6863 132 18V26C132 29.3137 134.686 32 138 32H146C149.314 32 152 29.3137 152 26V18C152 14.6863 149.314 12 146 12H138Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="156" cy="16" r="2" fill="currentColor"/>
-            <circle cx="162" cy="16" r="2" fill="currentColor"/>
-            <circle cx="168" cy="16" r="2" fill="currentColor"/>
-            <circle cx="156" cy="28" r="2" fill="currentColor"/>
-            <circle cx="162" cy="28" r="2" fill="currentColor"/>
-            <circle cx="168" cy="28" r="2" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="grayscale hover:grayscale-0 transition-all duration-300">
-          <svg class="h-8 w-auto" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 8C13.3726 8 8 13.3726 8 20C8 26.6274 13.3726 32 20 32C26.6274 32 32 26.6274 32 20C32 13.3726 26.6274 8 20 8Z" stroke="#374151" stroke-width="2"/>
-            <path d="M16 18.5C16 17.1193 17.1193 16 18.5 16H21.5C22.8807 16 24 17.1193 24 18.5V21.5C24 22.8807 22.8807 24 21.5 24H18.5C17.1193 24 16 22.8807 16 21.5V18.5Z" stroke="#374151" stroke-width="2"/>
-            <path d="M44 8H52L60 28H52" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M52 20H60" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M76 8L64 20L76 32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M64 20H88" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M104 12H96V32H104" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M104 22H96" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M128 8H136L144 28H136" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M136 20H144" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M160 8L148 20L160 32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M148 20H168" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="grayscale hover:grayscale-0 transition-all duration-300">
-          <svg class="h-8 w-auto" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="12" width="20" height="20" rx="10" stroke="#374151" stroke-width="2"/>
-            <path d="M28 24C28 17.3726 33.3726 12 40 12V32C33.3726 32 28 26.6274 28 20V24Z" stroke="#374151" stroke-width="2"/>
-            <path d="M48 12H60C64.4183 12 68 15.5817 68 20V20C68 24.4183 64.4183 28 60 28H48V12Z" stroke="#374151" stroke-width="2"/>
-            <circle cx="59" cy="20" r="3" fill="#374151"/>
-            <path d="M76 12H88C92.4183 12 96 15.5817 96 20V20C96 24.4183 92.4183 28 88 28H76V12Z" stroke="#374151" stroke-width="2"/>
-            <circle cx="87" cy="20" r="3" fill="#374151"/>
-            <path d="M104 12V32" stroke="#374151" stroke-width="2"/>
-            <path d="M96 12H112" stroke="#374151" stroke-width="2"/>
-            <path d="M96 32H112" stroke="#374151" stroke-width="2"/>
-            <path d="M120 12V32" stroke="#374151" stroke-width="2"/>
-            <path d="M120 22H132" stroke="#374151" stroke-width="2"/>
-            <path d="M132 12V32" stroke="#374151" stroke-width="2"/>
-            <path d="M140 12H152C156.418 12 160 15.5817 160 20V20C160 24.4183 156.418 28 152 28H140V12Z" stroke="#374151" stroke-width="2"/>
-            <circle cx="151" cy="20" r="3" fill="#374151"/>
-          </svg>
-        </div>
-        <div class="grayscale hover:grayscale-0 transition-all duration-300">
-          <svg class="h-8 w-auto" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 8L8 20L20 32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8 20H32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M48 8L36 20L48 32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M60 8L72 20L60 32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M36 20H72" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M88 12C84.6863 12 82 14.6863 82 18V26C82 29.3137 84.6863 32 88 32H96C99.3137 32 102 29.3137 102 26V18C102 14.6863 99.3137 12 96 12H88Z" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M110 12H118C122.418 12 126 15.5817 126 20V20C126 24.4183 122.418 28 118 28H110V12Z" stroke="#374151" stroke-width="2"/>
-            <circle cx="117" cy="20" r="3" fill="#374151"/>
-            <rect x="132" y="12" width="12" height="20" rx="2" stroke="#374151" stroke-width="2"/>
-            <path d="M144 16H152C156.418 16 160 19.5817 160 24V24C160 28.4183 156.418 32 152 32H144V16Z" stroke="#374151" stroke-width="2"/>
-            <circle cx="152" cy="24" r="3" fill="#374151"/>
-          </svg>
-        </div>
-        <div class="grayscale hover:grayscale-0 transition-all duration-300">
-          <svg class="h-8 w-auto" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 32C26.6274 32 32 26.6274 32 20C32 13.3726 26.6274 8 20 8C13.3726 8 8 13.3726 8 20C8 26.6274 13.3726 32 20 32Z" stroke="#374151" stroke-width="2"/>
-            <path d="M16 18C16 16.8954 16.8954 16 18 16H22C23.1046 16 24 16.8954 24 18V22C24 23.1046 23.1046 24 22 24H18C16.8954 24 16 23.1046 16 22V18Z" stroke="#374151" stroke-width="2"/>
-            <path d="M44 12H56C58.2091 12 60 13.7909 60 16V16C60 18.2091 58.2091 20 56 20H44V12Z" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M44 20H58C60.2091 20 62 21.7909 62 24V24C62 26.2091 60.2091 28 58 28H44V20Z" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M44 28V32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M76 12H72C69.7909 12 68 13.7909 68 16V28C68 30.2091 69.7909 32 72 32H76" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M76 22H68" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M92 12H88C85.7909 12 84 13.7909 84 16V28C84 30.2091 85.7909 32 88 32H92" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M92 22H84" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M108 12V32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M100 12H116" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M124 12V32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M132 12V32" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M124 22H132" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M148 12H144C141.791 12 140 13.7909 140 16V28C140 30.2091 141.791 32 144 32H148" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M148 22H140" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M164 32C158.667 32 156 29.3333 156 24V20V16C156 10.6667 158.667 8 164 8" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        {imageAssets.logos.trustedBadges.map((badge) => (
+          <div class="grayscale hover:grayscale-0 transition-all duration-300">
+            <svg class="h-8 w-auto" viewBox="0 0 168 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d={badge.svgPath} stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              {badge.id === "badge3" && <circle cx="59" cy="20" r="3" fill="currentColor"/>}
+            </svg>
+          </div>
+        ))}
       </div>
     </div>
     

@@ -31,10 +31,6 @@ export const navConfig: NavConfig = {
       title: "Contact",
       href: "/contact",
     },
-    {
-      title: "Blog",
-      href: "/blog",
-    },
   ],
   footerNav: {
     company: [

@@ -1,9 +1,15 @@
-I can't directly create binary content like a JPG image through text output. However, you would normally place an appropriate image file in the `astro-bitdoze-starter/public/images/` directory.
+I can't create a binary JPG image file through text output. You would need to add an actual image file to your project at this location:
 
-For a welcome image, you would typically want:
-- A professional-looking business image
-- Dimensions around 800x600px or similar 4:3 aspect ratio
-- Optimized for web use (file size under 200KB)
+astro-bitdoze-starter/public/images/welcome-image.jpg
 
-You'll need to manually add an image file to this location, or use a placeholder service like:
-`https://placehold.co/800x600/png?text=Welcome+Image`
+You could either:
+
+1. Use a placeholder image service in your component:
+   - Update the Welcome.astro component to use a placeholder URL like:
+   `src="https://placehold.co/800x600?text=Welcome+Image"`
+
+2. Download a suitable stock image and place it in that location
+
+3. Create a placeholder image with design software and save it to that path
+
+The image should ideally be professional-looking with dimensions appropriate for the component (around 800x600px or similar 4:3 aspect ratio).

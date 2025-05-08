@@ -65,10 +65,11 @@ All site configuration is located in the `src/config` directory:
 
 - **site.ts** - Website name, description, and SEO information
 - **nav.ts** - Navigation links for header and footer
-- **company.ts** - Company information and CTA content
+- **company.ts** - Company information
 - **services.ts** - Service descriptions and icons
 - **assets.ts** - Image paths and assets
 - **pages.ts** - Page content and section configurations
+- **cta.ts** - Shared Call-to-Action configuration
 
 ### Update Company Information
 
@@ -112,6 +113,14 @@ Edit `src/config/pages.ts` to update:
 - Section content for all pages
 - Component properties and configurations
 - Content structure for each page section
+
+### Update Call-to-Action Content
+
+Edit `src/config/cta.ts` to update:
+
+- CTA title and description text
+- Primary and secondary button text and links
+- This shared configuration ensures consistent CTAs across all pages
 
 ## 📦 Project Structure
 

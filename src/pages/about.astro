@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { aboutPageConfig } from '../config/pages';
+import CTA from '../components/CTA.astro';
 
 // Extract sections from config
 const aboutHeroSection = aboutPageConfig.sections.find(section => section.type === "aboutHero");
@@ -104,23 +105,13 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
 
   <!-- CTA Section -->
   {ctaSection && (
-    <section class="section-padding text-white" style="background-color: var(--color-primary);">
-      <div class="container text-center">
-        <h2 class="text-3xl font-bold mb-4">{ctaSection.title}</h2>
-        <p class="max-w-2xl mx-auto mb-8" style="color: rgba(255, 255, 255, 0.9);">
-          {ctaSection.subtitle}
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href={ctaSection.ctaPrimary.link} class="btn inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
-            {ctaSection.ctaPrimary.text}
-          </a>
-          {ctaSection.ctaSecondary && (
-            <a href={ctaSection.ctaSecondary.link} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
-              {ctaSection.ctaSecondary.text}
-            </a>
-          )}
-        </div>
-      </div>
-    </section>
+    <CTA 
+      title={ctaSection.title}
+      subtitle={ctaSection.subtitle}
+      ctaText={ctaSection.ctaPrimary.text}
+      ctaLink={ctaSection.ctaPrimary.link}
+      secondaryText={ctaSection.ctaSecondary?.text}
+      secondaryLink={ctaSection.ctaSecondary?.link}
+    />
   )}
 </Layout>

@@ -1,8 +1,8 @@
 import { siteConfig } from "./site";
 import { companyConfig } from "./company";
-import { ctaConfig } from "./company";
 import { imageAssets } from "./assets";
 import { services } from "./services";
+import { getCtaSection, ctaConfig } from "./cta";
 
 // Page configuration interfaces
 export interface PageConfig {
@@ -222,12 +222,12 @@ export const homePageConfig: PageConfig = {
       title: "Elevate Your Business with Professional Solutions",
       subtitle: "We provide comprehensive business services designed to help your company grow and succeed in today's competitive market.",
       ctaPrimary: {
-        text: ctaConfig.primaryAction.text,
-        link: ctaConfig.primaryAction.href,
+        text: "Get Started",
+        link: "/contact",
       },
       ctaSecondary: {
-        text: ctaConfig.secondaryAction?.text || "Learn More",
-        link: ctaConfig.secondaryAction?.href || "/services",
+        text: "Learn More",
+        link: "/services",
       },
       imageUrl: imageAssets.hero.main,
     },
@@ -297,19 +297,7 @@ export const homePageConfig: PageConfig = {
         }
       ],
     },
-    {
-      type: "cta",
-      title: ctaConfig.title,
-      subtitle: ctaConfig.description,
-      ctaPrimary: {
-        text: ctaConfig.primaryAction.text,
-        link: ctaConfig.primaryAction.href,
-      },
-      ctaSecondary: ctaConfig.secondaryAction ? {
-        text: ctaConfig.secondaryAction.text,
-        link: ctaConfig.secondaryAction.href,
-      } : undefined,
-    },
+    getCtaSection(),
   ],
 };
 
@@ -400,19 +388,7 @@ export const aboutPageConfig: PageConfig = {
         },
       ],
     },
-    {
-      type: "cta",
-      title: ctaConfig.title,
-      subtitle: ctaConfig.description,
-      ctaPrimary: {
-        text: ctaConfig.primaryAction.text,
-        link: ctaConfig.primaryAction.href,
-      },
-      ctaSecondary: ctaConfig.secondaryAction ? {
-        text: ctaConfig.secondaryAction.text,
-        link: ctaConfig.secondaryAction.href,
-      } : undefined,
-    },
+    getCtaSection(),
   ],
 };
 
@@ -486,19 +462,7 @@ export const servicesPageConfig: PageConfig = {
         }
       ],
     },
-    {
-      type: "cta",
-      title: ctaConfig.title,
-      subtitle: ctaConfig.description,
-      ctaPrimary: {
-        text: ctaConfig.primaryAction.text,
-        link: ctaConfig.primaryAction.href,
-      },
-      ctaSecondary: ctaConfig.secondaryAction ? {
-        text: ctaConfig.secondaryAction.text,
-        link: ctaConfig.secondaryAction.href,
-      } : undefined,
-    },
+    getCtaSection(),
   ],
 };
 
@@ -630,5 +594,6 @@ export const contactPageConfig: PageConfig = {
       ],
       note: "Need assistance outside of business hours? Send us an email, and we'll get back to you as soon as possible.",
     },
+    getCtaSection(),
   ],
 };
