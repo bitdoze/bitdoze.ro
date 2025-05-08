@@ -71,34 +71,34 @@ const faqItems = [
   }}
 >
   <!-- Hero Section -->
-  <section class="py-16 md:py-24 bg-gradient-to-b from-indigo-50 to-white">
-    <div class="container mx-auto px-4 text-center">
+  <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+    <div class="container text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-      <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
         {description}
       </p>
     </div>
   </section>
 
   <!-- Services -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-4">
+  <section class="section-padding">
+    <div class="container">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold mb-4">What We Offer</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
+        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
           Our comprehensive suite of services is designed to help businesses of all sizes achieve their goals and overcome challenges.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service) => (
-          <div class="bg-white p-8 rounded-lg shadow-sm border border-slate-100 flex flex-col">
-            <div class="rounded-full bg-indigo-100 w-14 h-14 flex items-center justify-center mb-6">
-              <Icon name={service.icon} class="h-7 w-7 text-indigo-600" />
+          <div class="p-8 flex flex-col" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+            <div class="rounded-full w-14 h-14 flex items-center justify-center mb-6" style="background-color: rgba(79, 70, 229, 0.1);">
+              <Icon name={service.icon} class="h-7 w-7" style="color: var(--color-primary);" />
             </div>
             <h3 class="text-xl font-bold mb-3">{service.title}</h3>
-            <p class="text-slate-600 mb-6 flex-grow">{service.description}</p>
-            <a href={service.link} class="text-indigo-600 font-medium hover:text-indigo-800 inline-flex items-center">
+            <p style="color: var(--color-text-light);" class="mb-6 flex-grow">{service.description}</p>
+            <a href={service.link} class="font-medium inline-flex items-center" style="color: var(--color-primary);">
               Learn more
               <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
             </a>
@@ -109,24 +109,24 @@ const faqItems = [
   </section>
 
   <!-- Our Process -->
-  <section class="py-16 md:py-24 bg-slate-50">
-    <div class="container mx-auto px-4">
+  <section class="section-padding" style="background-color: var(--color-background-alt);">
+    <div class="container">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold mb-4">Our Process</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
+        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
           We follow a structured approach to ensure consistent, high-quality results for every client project.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {processSteps.map((step) => (
-          <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col items-center text-center">
-            <div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center mb-4 text-xl font-bold">
+          <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+            <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
               {step.step}
             </div>
-            <Icon name={step.icon} class="h-10 w-10 text-indigo-600 mb-4" />
+            <Icon name={step.icon} class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
             <h3 class="text-xl font-bold mb-2">{step.title}</h3>
-            <p class="text-slate-600">{step.description}</p>
+            <p style="color: var(--color-text-light);">{step.description}</p>
           </div>
         ))}
       </div>
@@ -134,20 +134,20 @@ const faqItems = [
   </section>
 
   <!-- FAQ Section -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-4">
+  <section class="section-padding">
+    <div class="container">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
+        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
           Get answers to common questions about our services and how we work with clients.
         </p>
       </div>
 
-      <div class="max-w-3xl mx-auto divide-y divide-slate-200">
+      <div class="max-w-3xl mx-auto divide-y" style="border-color: var(--color-text-lighter);">
         {faqItems.map((item, index) => (
           <div class="py-6">
             <h3 class="text-lg font-semibold mb-2">{item.question}</h3>
-            <p class="text-slate-600">{item.answer}</p>
+            <p style="color: var(--color-text-light);">{item.answer}</p>
           </div>
         ))}
       </div>
@@ -155,18 +155,18 @@ const faqItems = [
   </section>
 
   <!-- CTA Section -->
-  <section class="py-16 md:py-24 bg-indigo-600 text-white">
-    <div class="container mx-auto px-4 text-center">
+  <section class="section-padding text-white" style="background-color: var(--color-primary);">
+    <div class="container text-center">
       <h2 class="text-3xl font-bold mb-4">{ctaConfig.title}</h2>
-      <p class="text-indigo-100 max-w-2xl mx-auto mb-8">
+      <p style="color: rgba(255, 255, 255, 0.9);" class="max-w-2xl mx-auto mb-8">
         {ctaConfig.description}
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href={ctaConfig.primaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium rounded-md bg-white text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+        <a href={ctaConfig.primaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
           {ctaConfig.primaryAction.text}
         </a>
         {ctaConfig.secondaryAction && (
-          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium rounded-md border border-white text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
             {ctaConfig.secondaryAction.text}
           </a>
         )}

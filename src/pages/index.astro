@@ -1,20 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Testimonials from '../components/Testimonials.astro';
-import CTA from '../components/CTA.astro';
-import Welcome from '../components/Welcome.astro';
-import { siteConfig } from '../config/site';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CTA from "../components/CTA.astro";
+
+import { siteConfig } from "../config/site";
 ---
 
-<Layout
-  title={siteConfig.name}
-  description={siteConfig.description}
->
-	<Hero />
-	<Welcome />
-	<Services showAllServices={false} limit={3} />
-	<Testimonials />
-	<CTA />
+<Layout title={siteConfig.name} description={siteConfig.description}>
+    <Hero />
+    <Services showAllServices={false} limit={3} />
+    <Testimonials />
+    <CTA />
 </Layout>

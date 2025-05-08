@@ -5,6 +5,7 @@ A professional and customizable Astro-based business website template with SEO o
 ## 🚀 Features
 
 - **Modern Design** with Tailwind CSS 4
+- **CSS Variables** for easy theme customization in global.css
 - **SEO Optimized** with structured data and meta tags
 - **Fully Responsive** for all screen sizes
 - **Performance Focused** built with Astro
@@ -44,6 +45,19 @@ npm run dev
 ```
 
 ## 🛠️ Customization
+
+### Theme Customization
+
+The theme styling is controlled through CSS variables in `src/styles/global.css`. The template uses a robust design system with consistent variables for:
+
+- **Colors**: Customize primary, secondary, accent, and neutral colors
+- **Spacing**: Consistent spacing scale for margins, padding, and gaps
+- **Border Radius**: Various radius options from small to full rounded corners
+- **Box Shadows**: Shadow levels from subtle to pronounced
+- **Typography**: Font families, weights, and sizes
+- **Transitions**: Animation timing variables for smooth interactions
+
+Simply modify the variables in `global.css` to update the entire site's appearance consistently. No Tailwind config file is needed as this uses Tailwind CSS 4's global CSS variable approach.
 
 ### Configuration Files
 
@@ -113,14 +127,26 @@ This template uses [Astro Icon](https://github.com/natemoo-re/astro-icon) for ic
 To use an icon:
 
 ```astro
-<Icon name="mdi:account" class="h-6 w-6" />
+<Icon name="mdi:account" class="h-6 w-6" style="color: var(--color-primary);" />
 ```
+
+Notice how you can apply the global CSS variables to your icons for consistent coloring.
 
 ## 🏗️ Adding New Pages
 
 1. Create a new file in `src/pages/` with the `.astro` extension
 2. Use the Layout component and add your content
 3. Update the navigation config if needed
+4. Utilize global CSS variables for consistent styling
+
+### Styling Best Practices
+
+When styling new components or pages:
+- Access color values with `var(--color-primary)`, `var(--color-secondary)`, etc.
+- Use spacing variables like `var(--space-4)` or the `.section-padding` utility class
+- Apply border radius with `var(--radius-lg)` or other radius variables
+- Use shadow variables like `var(--shadow-sm)` for consistent elevation
+- Apply transitions with `var(--transition-normal)` for smooth animations
 
 ## 📝 License
 

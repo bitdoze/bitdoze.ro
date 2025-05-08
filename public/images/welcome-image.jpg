@@ -1,0 +1,9 @@
+I can't directly create binary content like a JPG image through text output. However, you would normally place an appropriate image file in the `astro-bitdoze-starter/public/images/` directory.
+
+For a welcome image, you would typically want:
+- A professional-looking business image
+- Dimensions around 800x600px or similar 4:3 aspect ratio
+- Optimized for web use (file size under 200KB)
+
+You'll need to manually add an image file to this location, or use a placeholder service like:
+`https://placehold.co/800x600/png?text=Welcome+Image`

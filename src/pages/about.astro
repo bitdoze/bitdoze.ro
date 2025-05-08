@@ -70,35 +70,35 @@ const values = [
   ogType="website"
 >
   <!-- Hero Section -->
-  <section class="py-16 md:py-24 bg-gradient-to-b from-indigo-50 to-white">
-    <div class="container mx-auto px-4 text-center">
+  <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+    <div class="container text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-      <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
         {companyConfig.description}
       </p>
     </div>
   </section>
 
   <!-- Our Story -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-4">
+  <section class="section-padding">
+    <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-3xl font-bold mb-6">Our Story</h2>
-          <p class="text-slate-600 mb-6">
+          <p class="mb-6" style="color: var(--color-text-light);">
             Founded in 2010, {companyConfig.name} started with a simple mission: to help businesses thrive in the digital age. What began as a small team of passionate experts has grown into a company trusted by clients worldwide.
           </p>
-          <p class="text-slate-600 mb-6">
+          <p class="mb-6" style="color: var(--color-text-light);">
             Our journey has been defined by continuous innovation, strategic growth, and an unwavering commitment to our clients' success. Through economic changes and technological evolution, we've adapted and thrived by staying true to our core values.
           </p>
-          <p class="text-slate-600">
+          <p style="color: var(--color-text-light);">
             Today, we're proud to serve diverse clients across industries, providing solutions that drive real business results.
           </p>
         </div>
-        <div class="bg-slate-100 rounded-lg p-8 flex flex-col items-center text-center">
-          <Icon name="mdi:domain" class="w-16 h-16 text-indigo-600 mb-4" />
+        <div class="p-8 flex flex-col items-center text-center" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg);">
+          <Icon name="mdi:domain" class="w-16 h-16 mb-4" style="color: var(--color-primary);" />
           <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-          <p class="text-slate-600">
+          <p style="color: var(--color-text-light);">
             To empower businesses with innovative solutions that drive growth, efficiency, and lasting success in an ever-changing digital landscape.
           </p>
         </div>
@@ -107,21 +107,21 @@ const values = [
   </section>
 
   <!-- Company Values -->
-  <section class="py-16 md:py-24 bg-slate-50">
-    <div class="container mx-auto px-4">
+  <section class="section-padding" style="background-color: var(--color-background-alt);">
+    <div class="container">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold mb-4">Our Values</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
+        <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
           These core principles guide everything we do, from how we develop our products to how we interact with our clients and each other.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {values.map(value => (
-          <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col items-center text-center">
-            <Icon name={value.icon} class="w-12 h-12 text-indigo-600 mb-4" />
+          <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+            <Icon name={value.icon} class="w-12 h-12 mb-4" style="color: var(--color-primary);" />
             <h3 class="text-xl font-bold mb-2">{value.title}</h3>
-            <p class="text-slate-600">{value.description}</p>
+            <p style="color: var(--color-text-light);">{value.description}</p>
           </div>
         ))}
       </div>
@@ -129,24 +129,24 @@ const values = [
   </section>
 
   <!-- Team Section -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-4">
+  <section class="section-padding">
+    <div class="container">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold mb-4">Meet Our Team</h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
+        <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
           Our talented team brings diverse skills and perspectives to deliver exceptional results for our clients.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {teamMembers.map(member => (
-          <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col items-center text-center">
-            <div class="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-              <Icon name={member.icon} class="w-12 h-12 text-slate-400" />
+          <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+            <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4" style="background-color: var(--color-background-alt);">
+              <Icon name={member.icon} class="w-12 h-12" style="color: var(--color-text-lighter);" />
             </div>
             <h3 class="text-xl font-bold mb-1">{member.name}</h3>
-            <p class="text-indigo-600 mb-4">{member.position}</p>
-            <p class="text-slate-600">{member.bio}</p>
+            <p class="mb-4" style="color: var(--color-primary);">{member.position}</p>
+            <p style="color: var(--color-text-light);">{member.bio}</p>
           </div>
         ))}
       </div>
@@ -154,18 +154,18 @@ const values = [
   </section>
 
   <!-- CTA Section -->
-  <section class="py-16 md:py-24 bg-indigo-600 text-white">
-    <div class="container mx-auto px-4 text-center">
+  <section class="section-padding text-white" style="background-color: var(--color-primary);">
+    <div class="container text-center">
       <h2 class="text-3xl font-bold mb-4">{ctaConfig.title}</h2>
-      <p class="text-indigo-100 max-w-2xl mx-auto mb-8">
+      <p class="max-w-2xl mx-auto mb-8" style="color: rgba(255, 255, 255, 0.9);">
         {ctaConfig.description}
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href={ctaConfig.primaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium rounded-md bg-white text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+        <a href={ctaConfig.primaryAction.href} class="btn inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
           {ctaConfig.primaryAction.text}
         </a>
         {ctaConfig.secondaryAction && (
-          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium rounded-md border border-white text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
             {ctaConfig.secondaryAction.text}
           </a>
         )}

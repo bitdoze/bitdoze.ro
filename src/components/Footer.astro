@@ -17,23 +17,23 @@ const {
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-slate-50 border-t border-slate-200">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<footer class="border-t" style="background-color: var(--color-background-alt); border-color: var(--color-text-lighter);">
+  <div class="container mx-auto">
     <div class="grid grid-cols-1 gap-8 py-12 md:grid-cols-3 lg:grid-cols-5">
       <!-- Company info -->
       <div class="col-span-1 md:col-span-1 lg:col-span-2">
         <a href="/" class="flex items-center gap-2">
-          <Icon name={companyConfig.logo.icon} class="h-8 w-8 text-indigo-600" />
+          <Icon name={companyConfig.logo.icon} class="h-8 w-8" style="color: var(--color-primary);" />
           <span class="font-semibold text-xl">{companyName}</span>
         </a>
-        <p class="mt-4 text-sm text-slate-600 max-w-xs">
+        <p class="mt-4 text-sm max-w-xs" style="color: var(--color-text-light);">
           {companyTagline}
         </p>
         <div class="mt-6 flex space-x-4">
           {companyConfig.socialMedia.map((social) => (
             <a 
               href={social.url} 
-              class="text-slate-500 hover:text-indigo-600" 
+              class="transition-colors" style="color: var(--color-text-lighter); transition: all var(--transition-normal);"
               aria-label={social.platform}
             >
               <Icon name={social.icon} class="h-5 w-5" />
@@ -44,11 +44,11 @@ const currentYear = new Date().getFullYear();
 
       <!-- Navigation -->
       <div>
-        <h3 class="text-sm font-semibold text-slate-900">Resources</h3>
+        <h3 class="text-sm font-semibold" style="color: var(--color-text);">Resources</h3>
         <ul class="mt-4 space-y-3">
           {navConfig.footerNav.resources.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-slate-600 hover:text-indigo-600 transition-colors">
+              <a href={item.href} class="text-sm transition-colors" style="color: var(--color-text-light); transition: all var(--transition-normal);">
                 {item.title}
               </a>
             </li>
@@ -57,7 +57,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold text-slate-900">Company</h3>
+        <h3 class="text-sm font-semibold" style="color: var(--color-text);">Company</h3>
         <ul class="mt-4 space-y-3">
           {navConfig.footerNav.company.map((item) => (
             <li>
@@ -70,7 +70,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold text-slate-900">Legal</h3>
+        <h3 class="text-sm font-semibold" style="color: var(--color-text);">Legal</h3>
         <ul class="mt-4 space-y-3">
           {navConfig.footerNav.legal.map((item) => (
             <li>
@@ -84,14 +84,14 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Bottom section with copyright -->
-    <div class="flex flex-col md:flex-row justify-between py-6 border-t border-slate-200">
-      <p class="text-sm text-slate-500">
+    <div class="flex flex-col md:flex-row justify-between py-6 border-t" style="border-color: var(--color-text-lighter);">
+      <p class="text-sm" style="color: var(--color-text-lighter);">
         &copy; {currentYear} {companyName}. All rights reserved.
       </p>
       <div class="mt-4 md:mt-0">
         <a 
           href={ctaConfig.primaryAction.href} 
-          class="inline-flex h-9 items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500"
+          class="btn btn-primary inline-flex h-9 items-center justify-center px-4 py-2 text-sm font-medium text-white shadow"
         >
           {ctaConfig.primaryAction.text}
         </a>
