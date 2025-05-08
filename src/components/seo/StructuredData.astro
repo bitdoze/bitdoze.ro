@@ -1,0 +1,132 @@
+---
+interface Props {
+  type: 'website' | 'organization' | 'localBusiness' | 'article' | 'faq' | 'service';
+  data: Record<string, any>;
+}
+
+import { siteConfig } from "../../config/site";
+import { companyConfig } from "../../config/company";
+
+const { type, data } = Astro.props;
+
+let structuredData;
+
+// Base data objects for different structured data types
+const websiteData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  description: siteConfig.description,
+  ...data
+};
+
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: companyConfig.name,
+  url: siteConfig.url,
+  logo: data.logo || (siteConfig.url ? `${siteConfig.url}/logo.png` : `/logo.png`),
+  sameAs: companyConfig.socialMedia.map(social => social.url),
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: companyConfig.contact.phone,
+    email: companyConfig.contact.email,
+    contactType: "customer service"
+  },
+  ...data
+};
+
+const localBusinessData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: companyConfig.name,
+  url: siteConfig.url,
+  image: data.image || (siteConfig.url ? `${siteConfig.url}/storefront.jpg` : `/storefront.jpg`),
+  telephone: companyConfig.contact.phone,
+  email: companyConfig.contact.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: companyConfig.contact.address.street,
+    addressLocality: companyConfig.contact.address.city,
+    addressRegion: companyConfig.contact.address.state,
+    postalCode: companyConfig.contact.address.zip,
+    addressCountry: companyConfig.contact.address.country
+  },
+  ...data
+};
+
+const articleData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: data.title || "Article Title",
+  image: data.image || (siteConfig.url ? `${siteConfig.url}/article-image.jpg` : `/article-image.jpg`),
+  author: {
+    "@type": "Person",
+    name: data.author?.name || "Author Name"
+  },
+  publisher: {
+    "@type": "Organization",
+    name: companyConfig.name,
+    logo: {
+      "@type": "ImageObject",
+      url: siteConfig.url ? `${siteConfig.url}/logo.png` : `/logo.png`
+    }
+  },
+  datePublished: data.datePublished || new Date().toISOString(),
+  dateModified: data.dateModified || new Date().toISOString(),
+  ...data
+};
+
+const faqData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: data.questions?.map(q => ({
+    "@type": "Question",
+    name: q.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: q.answer
+    }
+  })) || [],
+  ...data
+};
+
+const serviceData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: data.name || "Service Name",
+  provider: {
+    "@type": "Organization",
+    name: companyConfig.name
+  },
+  description: data.description || "Service description",
+  ...data
+};
+
+// Select the appropriate structured data based on type
+switch (type) {
+  case 'website':
+    structuredData = websiteData;
+    break;
+  case 'organization':
+    structuredData = organizationData;
+    break;
+  case 'localBusiness':
+    structuredData = localBusinessData;
+    break;
+  case 'article':
+    structuredData = articleData;
+    break;
+  case 'faq':
+    structuredData = faqData;
+    break;
+  case 'service':
+    structuredData = serviceData;
+    break;
+  default:
+    structuredData = websiteData;
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>

@@ -2,6 +2,40 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import MetaTags from "../components/seo/MetaTags.astro";
+import StructuredData from "../components/seo/StructuredData.astro";
+import { siteConfig } from "../config/site";
+import { companyConfig } from "../config/company";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  ogType?: "website" | "article";
+  twitterCard?: "summary" | "summary_large_image";
+  noindex?: boolean;
+  nofollow?: boolean;
+  structuredData?: {
+    type: 'website' | 'organization' | 'localBusiness' | 'article' | 'faq' | 'service';
+    data: Record<string, any>;
+  };
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  canonical = Astro.url.pathname,
+  ogType = "website",
+  twitterCard = "summary_large_image",
+  noindex = false,
+  nofollow = false,
+  structuredData = {
+    type: 'organization',
+    data: { name: companyConfig.name }
+  }
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -9,9 +43,22 @@ import Footer from "../components/Footer.astro";
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro Basics</title>
+        
+        <!-- SEO Meta Tags -->
+        <MetaTags 
+          title={title}
+          description={description}
+          canonical={canonical}
+          image={image}
+          ogType={ogType}
+          twitterCard={twitterCard}
+          noindex={noindex}
+          nofollow={nofollow}
+        />
+        
+        <!-- Structured Data -->
+        <StructuredData type={structuredData.type} data={structuredData.data} />
     </head>
     <body>
         <Header />

@@ -4,11 +4,17 @@ import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
 import Testimonials from '../components/Testimonials.astro';
 import CTA from '../components/CTA.astro';
+import Welcome from '../components/Welcome.astro';
+import { siteConfig } from '../config/site';
 ---
 
-<Layout>
+<Layout
+  title={siteConfig.name}
+  description={siteConfig.description}
+>
 	<Hero />
-	<Services />
+	<Welcome />
+	<Services showAllServices={false} limit={3} />
 	<Testimonials />
 	<CTA />
 </Layout>

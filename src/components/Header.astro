@@ -1,9 +1,13 @@
 ---
+import { Icon } from "astro-icon/components";
+import { navConfig } from "../config/nav";
+import { companyConfig } from "../config/company";
+
 interface Props {
   logoText?: string;
 }
 
-const { logoText = "SaaSify" } = Astro.props;
+const { logoText = companyConfig.logo.text } = Astro.props;
 ---
 
 <header class="sticky top-0 z-40 w-full backdrop-blur">
@@ -11,26 +15,31 @@ const { logoText = "SaaSify" } = Astro.props;
     <!-- Logo -->
     <div class="flex shrink-0 items-center">
       <a href="/" class="flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 text-indigo-600">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-        </svg>
+        <Icon name={companyConfig.logo.icon} class="h-8 w-8 text-indigo-600" />
         <span class="font-semibold text-xl">{logoText}</span>
       </a>
     </div>
 
     <!-- Navigation -->
     <nav class="hidden md:flex space-x-8">
-      <a href="/features" class="text-sm font-medium hover:text-indigo-600 transition-colors">Features</a>
-      <a href="/pricing" class="text-sm font-medium hover:text-indigo-600 transition-colors">Pricing</a>
-      <a href="/about" class="text-sm font-medium hover:text-indigo-600 transition-colors">About</a>
-      <a href="/blog" class="text-sm font-medium hover:text-indigo-600 transition-colors">Blog</a>
+      {navConfig.mainNav.map((item) => (
+        <a 
+          href={item.href} 
+          class="text-sm font-medium hover:text-indigo-600 transition-colors"
+          aria-disabled={item.disabled}
+        >
+          {item.title}
+        </a>
+      ))}
     </nav>
 
-    <!-- Auth Buttons -->
+    <!-- Primary Action Button -->
     <div class="hidden md:flex items-center space-x-4">
-      <a href="/login" class="text-sm font-medium hover:text-indigo-600 transition-colors">Login</a>
-      <a href="/signup" class="inline-flex h-9 items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500">
-        Sign Up
+      <a 
+        href="/contact" 
+        class="inline-flex h-9 items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500"
+      >
+        Get in Touch
       </a>
     </div>
 
@@ -38,9 +47,7 @@ const { logoText = "SaaSify" } = Astro.props;
     <div class="flex md:hidden">
       <button type="button" id="mobile-menu-button" aria-expanded="false" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-indigo-600 focus:outline-none">
         <span class="sr-only">Open main menu</span>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
+        <Icon name="mdi:menu" class="w-6 h-6" />
       </button>
     </div>
   </div>
@@ -48,15 +55,24 @@ const { logoText = "SaaSify" } = Astro.props;
   <!-- Mobile menu, show/hide based on menu state. -->
   <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md p-4">
     <div class="space-y-1 pb-3">
-      <a href="/features" class="block py-2 text-base font-medium hover:text-indigo-600 transition-colors">Features</a>
-      <a href="/pricing" class="block py-2 text-base font-medium hover:text-indigo-600 transition-colors">Pricing</a>
-      <a href="/about" class="block py-2 text-base font-medium hover:text-indigo-600 transition-colors">About</a>
-      <a href="/blog" class="block py-2 text-base font-medium hover:text-indigo-600 transition-colors">Blog</a>
+      {navConfig.mainNav.map((item) => (
+        <a 
+          href={item.href} 
+          class="block py-2 text-base font-medium hover:text-indigo-600 transition-colors"
+          aria-disabled={item.disabled}
+        >
+          {item.title}
+        </a>
+      ))}
     </div>
     <div class="border-t border-gray-200 pt-4 pb-3">
-      <div class="flex items-center gap-4">
-        <a href="/login" class="w-full rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-medium hover:bg-gray-50">Login</a>
-        <a href="/signup" class="w-full rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700">Sign Up</a>
+      <div class="flex items-center">
+        <a 
+          href="/contact" 
+          class="w-full rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700"
+        >
+          Get in Touch
+        </a>
       </div>
     </div>
   </div>

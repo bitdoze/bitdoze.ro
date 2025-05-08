@@ -1,48 +1,133 @@
-# Astro Starter Kit: Basics
+# Business Website Template
 
-```sh
-npm create astro@latest -- --template basics
+A professional and customizable Astro-based business website template with SEO optimization, responsive design, and modular configuration.
+
+## 🚀 Features
+
+- **Modern Design** with Tailwind CSS 4
+- **SEO Optimized** with structured data and meta tags
+- **Fully Responsive** for all screen sizes
+- **Performance Focused** built with Astro
+- **Customizable** with easy-to-update configuration files
+- **Icon Integration** using Astro Icon
+
+## 📋 Pages
+
+- **Home** - Landing page with hero, services, testimonials and CTA
+- **About** - Company information, values, and team
+- **Services** - Comprehensive overview of offered services
+- **Contact** - Contact form and company information
+
+## 🔧 Getting Started
+
+### Prerequisites
+
+- Node.js (version 18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/business-website-template.git
+cd business-website-template
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+2. Install dependencies:
+```bash
+npm install
+```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+3. Start the development server:
+```bash
+npm run dev
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🛠️ Customization
 
-## 🚀 Project Structure
+### Configuration Files
 
-Inside of your Astro project, you'll see the following folders and files:
+All site configuration is located in the `src/config` directory:
 
-```text
+- **site.ts** - Website name, description, and SEO information
+- **nav.ts** - Navigation links for header and footer
+- **company.ts** - Company information and CTA content
+- **services.ts** - Service descriptions and icons
+- **assets.ts** - Image paths and assets
+
+### Update Company Information
+
+Edit `src/config/company.ts` to change:
+
+- Company name and tagline
+- Contact information
+- Social media links
+- Call-to-action text and links
+
+### Customize Navigation
+
+Edit `src/config/nav.ts` to update:
+
+- Main navigation links
+- Footer navigation categories
+- Page links and titles
+
+### Modify Services
+
+Edit `src/config/services.ts` to update:
+
+- Service titles and descriptions
+- Service icons (using Iconify icon names)
+- Service detail page links
+
+### Change Assets and Images
+
+Edit `src/config/assets.ts` to update image paths for:
+
+- Hero section images
+- Team member photos
+- Service illustrations
+- Logo and partner logos
+
+## 📦 Project Structure
+
+```
 /
-├── public/
-│   └── favicon.svg
+├── public/             # Static assets
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/         # Images and other assets
+│   ├── components/     # UI components
+│   │   └── seo/        # SEO related components
+│   ├── config/         # Site configuration
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # Page components
+│   ├── scripts/        # JavaScript files
+│   └── styles/         # CSS files
+└── package.json        # Project dependencies
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🖼️ Icons
 
-## 🧞 Commands
+This template uses [Astro Icon](https://github.com/natemoo-re/astro-icon) for icons, which provides access to popular icon sets like Material Design Icons.
 
-All commands are run from the root of the project, from a terminal:
+To use an icon:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```astro
+<Icon name="mdi:account" class="h-6 w-6" />
+```
 
-## 👀 Want to learn more?
+## 🏗️ Adding New Pages
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. Create a new file in `src/pages/` with the `.astro` extension
+2. Use the Layout component and add your content
+3. Update the navigation config if needed
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- [Astro](https://astro.build/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Iconify](https://iconify.design/)

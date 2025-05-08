@@ -1,0 +1,67 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  ogType?: "website" | "article";
+  twitterCard?: "summary" | "summary_large_image" | "app" | "player";
+  noindex?: boolean;
+  nofollow?: boolean;
+}
+
+import { siteConfig } from "../../config/site";
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  canonical = Astro.url.pathname,
+  image = siteConfig.ogImage,
+  ogType = "website",
+  twitterCard = "summary_large_image",
+  noindex = false,
+  nofollow = false,
+} = Astro.props;
+
+// Format title
+const formattedTitle = title === siteConfig.name 
+  ? title
+  : `${title} | ${siteConfig.name}`;
+
+// Build canonical URL
+const canonicalURL = new URL(canonical, Astro.site || Astro.url.origin).toString();
+
+// Format robots meta
+const robotsContent = [];
+if (noindex) robotsContent.push("noindex");
+if (nofollow) robotsContent.push("nofollow");
+---
+
+<!-- Primary Meta Tags -->
+<title>{formattedTitle}</title>
+<meta name="title" content={formattedTitle} />
+<meta name="description" content={description} />
+{robotsContent.length > 0 && <meta name="robots" content={robotsContent.join(", ")} />}
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={formattedTitle} />
+<meta property="og:description" content={description} />
+{image && <meta property="og:image" content={image.startsWith('http') ? image : new URL(image, Astro.url.origin).toString()} />}
+<meta property="og:site_name" content={siteConfig.name} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content={twitterCard} />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={formattedTitle} />
+<meta property="twitter:description" content={description} />
+{image && <meta property="twitter:image" content={image.startsWith('http') ? image : new URL(image, Astro.url.origin).toString()} />}
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#ffffff" />

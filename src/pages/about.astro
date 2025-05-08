@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import { companyConfig } from '../config/company';
+import { ctaConfig } from '../config/company';
+
+const title = "About Us";
+const description = "Learn about our company's mission, vision, and the team behind our success.";
+
+// Team members (example data)
+const teamMembers = [
+  {
+    name: "Jane Doe",
+    position: "CEO & Founder",
+    bio: "With over 15 years of industry experience, Jane leads our company's vision and strategy.",
+    image: "/images/team/jane-doe.jpg",
+    icon: "mdi:account"
+  },
+  {
+    name: "John Smith",
+    position: "CTO",
+    bio: "John brings technical leadership and innovation to our product development.",
+    image: "/images/team/john-smith.jpg",
+    icon: "mdi:account"
+  },
+  {
+    name: "Emily Chen",
+    position: "Head of Marketing",
+    bio: "Emily leads our marketing efforts with creative strategies that drive growth.",
+    image: "/images/team/emily-chen.jpg",
+    icon: "mdi:account"
+  },
+  {
+    name: "Michael Brown",
+    position: "Customer Success",
+    bio: "Michael ensures our clients receive exceptional service and achieve their goals.",
+    image: "/images/team/michael-brown.jpg",
+    icon: "mdi:account"
+  },
+];
+
+// Values and mission
+const values = [
+  {
+    title: "Innovation",
+    description: "We continuously seek new and better ways to solve problems and create value.",
+    icon: "mdi:lightbulb"
+  },
+  {
+    title: "Integrity",
+    description: "We are committed to honesty, transparency, and ethical business practices.",
+    icon: "mdi:shield-check"
+  },
+  {
+    title: "Excellence",
+    description: "We strive for the highest standards in everything we do.",
+    icon: "mdi:star"
+  },
+  {
+    title: "Customer Focus",
+    description: "Our clients' success is our success. We're dedicated to delivering exceptional value.",
+    icon: "mdi:account-group"
+  },
+];
+---
+
+<Layout 
+  title={title}
+  description={description}
+  ogType="website"
+>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-indigo-50 to-white">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+        {companyConfig.description}
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Our Story</h2>
+          <p class="text-slate-600 mb-6">
+            Founded in 2010, {companyConfig.name} started with a simple mission: to help businesses thrive in the digital age. What began as a small team of passionate experts has grown into a company trusted by clients worldwide.
+          </p>
+          <p class="text-slate-600 mb-6">
+            Our journey has been defined by continuous innovation, strategic growth, and an unwavering commitment to our clients' success. Through economic changes and technological evolution, we've adapted and thrived by staying true to our core values.
+          </p>
+          <p class="text-slate-600">
+            Today, we're proud to serve diverse clients across industries, providing solutions that drive real business results.
+          </p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-8 flex flex-col items-center text-center">
+          <Icon name="mdi:domain" class="w-16 h-16 text-indigo-600 mb-4" />
+          <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+          <p class="text-slate-600">
+            To empower businesses with innovative solutions that drive growth, efficiency, and lasting success in an ever-changing digital landscape.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Values -->
+  <section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">Our Values</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">
+          These core principles guide everything we do, from how we develop our products to how we interact with our clients and each other.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {values.map(value => (
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col items-center text-center">
+            <Icon name={value.icon} class="w-12 h-12 text-indigo-600 mb-4" />
+            <h3 class="text-xl font-bold mb-2">{value.title}</h3>
+            <p class="text-slate-600">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 md:py-24">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">Meet Our Team</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">
+          Our talented team brings diverse skills and perspectives to deliver exceptional results for our clients.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {teamMembers.map(member => (
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-100 flex flex-col items-center text-center">
+            <div class="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+              <Icon name={member.icon} class="w-12 h-12 text-slate-400" />
+            </div>
+            <h3 class="text-xl font-bold mb-1">{member.name}</h3>
+            <p class="text-indigo-600 mb-4">{member.position}</p>
+            <p class="text-slate-600">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 md:py-24 bg-indigo-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">{ctaConfig.title}</h2>
+      <p class="text-indigo-100 max-w-2xl mx-auto mb-8">
+        {ctaConfig.description}
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href={ctaConfig.primaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium rounded-md bg-white text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+          {ctaConfig.primaryAction.text}
+        </a>
+        {ctaConfig.secondaryAction && (
+          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium rounded-md border border-white text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+            {ctaConfig.secondaryAction.text}
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

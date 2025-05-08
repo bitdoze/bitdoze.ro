@@ -1,4 +1,7 @@
 ---
+import { Icon } from 'astro-icon/components';
+import { ctaConfig } from "../config/company";
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -9,12 +12,12 @@ interface Props {
 }
 
 const {
-  title = "Ready to transform your business?",
-  subtitle = "Join thousands of companies using our platform to scale efficiently. Start your free trial today.",
-  ctaText = "Get Started",
-  ctaLink = "/signup",
-  secondaryText = "Book a Demo",
-  secondaryLink = "/demo"
+  title = ctaConfig.title,
+  subtitle = ctaConfig.description,
+  ctaText = ctaConfig.primaryAction.text,
+  ctaLink = ctaConfig.primaryAction.href,
+  secondaryText = ctaConfig.secondaryAction?.text || "Learn More",
+  secondaryLink = ctaConfig.secondaryAction?.href || "/services"
 } = Astro.props;
 ---
 
