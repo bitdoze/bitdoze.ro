@@ -1,175 +1,126 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
-import { companyConfig } from '../config/company';
-import { ctaConfig } from '../config/company';
+import { aboutPageConfig } from '../config/pages';
 
-const title = "About Us";
-const description = "Learn about our company's mission, vision, and the team behind our success.";
-
-// Team members (example data)
-const teamMembers = [
-  {
-    name: "Jane Doe",
-    position: "CEO & Founder",
-    bio: "With over 15 years of industry experience, Jane leads our company's vision and strategy.",
-    image: "/images/team/jane-doe.jpg",
-    icon: "mdi:account"
-  },
-  {
-    name: "John Smith",
-    position: "CTO",
-    bio: "John brings technical leadership and innovation to our product development.",
-    image: "/images/team/john-smith.jpg",
-    icon: "mdi:account"
-  },
-  {
-    name: "Emily Chen",
-    position: "Head of Marketing",
-    bio: "Emily leads our marketing efforts with creative strategies that drive growth.",
-    image: "/images/team/emily-chen.jpg",
-    icon: "mdi:account"
-  },
-  {
-    name: "Michael Brown",
-    position: "Customer Success",
-    bio: "Michael ensures our clients receive exceptional service and achieve their goals.",
-    image: "/images/team/michael-brown.jpg",
-    icon: "mdi:account"
-  },
-];
-
-// Values and mission
-const values = [
-  {
-    title: "Innovation",
-    description: "We continuously seek new and better ways to solve problems and create value.",
-    icon: "mdi:lightbulb"
-  },
-  {
-    title: "Integrity",
-    description: "We are committed to honesty, transparency, and ethical business practices.",
-    icon: "mdi:shield-check"
-  },
-  {
-    title: "Excellence",
-    description: "We strive for the highest standards in everything we do.",
-    icon: "mdi:star"
-  },
-  {
-    title: "Customer Focus",
-    description: "Our clients' success is our success. We're dedicated to delivering exceptional value.",
-    icon: "mdi:account-group"
-  },
-];
+// Extract sections from config
+const aboutHeroSection = aboutPageConfig.sections.find(section => section.type === "aboutHero");
+const storySection = aboutPageConfig.sections.find(section => section.type === "story");
+const valuesSection = aboutPageConfig.sections.find(section => section.type === "values");
+const teamSection = aboutPageConfig.sections.find(section => section.type === "team");
+const ctaSection = aboutPageConfig.sections.find(section => section.type === "cta");
 ---
 
 <Layout 
-  title={title}
-  description={description}
-  ogType="website"
+  title={aboutPageConfig.title}
+  description={aboutPageConfig.description}
+  ogType={aboutPageConfig.ogType}
 >
   <!-- Hero Section -->
-  <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <div class="container text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
-        {companyConfig.description}
-      </p>
-    </div>
-  </section>
+  {aboutHeroSection && (
+    <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+      <div class="container text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{aboutHeroSection.title}</h1>
+        <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
+          {aboutHeroSection.subtitle}
+        </p>
+      </div>
+    </section>
+  )}
 
   <!-- Our Story -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-3xl font-bold mb-6">Our Story</h2>
-          <p class="mb-6" style="color: var(--color-text-light);">
-            Founded in 2010, {companyConfig.name} started with a simple mission: to help businesses thrive in the digital age. What began as a small team of passionate experts has grown into a company trusted by clients worldwide.
-          </p>
-          <p class="mb-6" style="color: var(--color-text-light);">
-            Our journey has been defined by continuous innovation, strategic growth, and an unwavering commitment to our clients' success. Through economic changes and technological evolution, we've adapted and thrived by staying true to our core values.
-          </p>
-          <p style="color: var(--color-text-light);">
-            Today, we're proud to serve diverse clients across industries, providing solutions that drive real business results.
-          </p>
-        </div>
-        <div class="p-8 flex flex-col items-center text-center" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg);">
-          <Icon name="mdi:domain" class="w-16 h-16 mb-4" style="color: var(--color-primary);" />
-          <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-          <p style="color: var(--color-text-light);">
-            To empower businesses with innovative solutions that drive growth, efficiency, and lasting success in an ever-changing digital landscape.
-          </p>
+  {storySection && (
+    <section class="section-padding">
+      <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold mb-6">{storySection.title}</h2>
+            {storySection.paragraphs.map(paragraph => (
+              <p class="mb-6" style="color: var(--color-text-light);">{paragraph}</p>
+            ))}
+          </div>
+          <div class="p-8 flex flex-col items-center text-center" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg);">
+            <Icon name={storySection.mission.icon} class="w-16 h-16 mb-4" style="color: var(--color-primary);" />
+            <h3 class="text-2xl font-bold mb-4">{storySection.mission.title}</h3>
+            <p style="color: var(--color-text-light);">
+              {storySection.mission.description}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Company Values -->
-  <section class="section-padding" style="background-color: var(--color-background-alt);">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">Our Values</h2>
-        <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
-          These core principles guide everything we do, from how we develop our products to how we interact with our clients and each other.
-        </p>
-      </div>
+  {valuesSection && (
+    <section class="section-padding" style="background-color: var(--color-background-alt);">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">{valuesSection.title}</h2>
+          <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
+            {valuesSection.subtitle}
+          </p>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {values.map(value => (
-          <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-            <Icon name={value.icon} class="w-12 h-12 mb-4" style="color: var(--color-primary);" />
-            <h3 class="text-xl font-bold mb-2">{value.title}</h3>
-            <p style="color: var(--color-text-light);">{value.description}</p>
-          </div>
-        ))}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {valuesSection.values.map(value => (
+            <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+              <Icon name={value.icon} class="w-12 h-12 mb-4" style="color: var(--color-primary);" />
+              <h3 class="text-xl font-bold mb-2">{value.title}</h3>
+              <p style="color: var(--color-text-light);">{value.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Team Section -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">Meet Our Team</h2>
-        <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
-          Our talented team brings diverse skills and perspectives to deliver exceptional results for our clients.
-        </p>
-      </div>
+  {teamSection && (
+    <section class="section-padding">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">{teamSection.title}</h2>
+          <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
+            {teamSection.subtitle}
+          </p>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {teamMembers.map(member => (
-          <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-            <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4" style="background-color: var(--color-background-alt);">
-              <Icon name={member.icon} class="w-12 h-12" style="color: var(--color-text-lighter);" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {teamSection.members.map(member => (
+            <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+              <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4" style="background-color: var(--color-background-alt);">
+                <Icon name={member.icon} class="w-12 h-12" style="color: var(--color-text-lighter);" />
+              </div>
+              <h3 class="text-xl font-bold mb-1">{member.name}</h3>
+              <p class="mb-4" style="color: var(--color-primary);">{member.position}</p>
+              <p style="color: var(--color-text-light);">{member.bio}</p>
             </div>
-            <h3 class="text-xl font-bold mb-1">{member.name}</h3>
-            <p class="mb-4" style="color: var(--color-primary);">{member.position}</p>
-            <p style="color: var(--color-text-light);">{member.bio}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- CTA Section -->
-  <section class="section-padding text-white" style="background-color: var(--color-primary);">
-    <div class="container text-center">
-      <h2 class="text-3xl font-bold mb-4">{ctaConfig.title}</h2>
-      <p class="max-w-2xl mx-auto mb-8" style="color: rgba(255, 255, 255, 0.9);">
-        {ctaConfig.description}
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href={ctaConfig.primaryAction.href} class="btn inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
-          {ctaConfig.primaryAction.text}
-        </a>
-        {ctaConfig.secondaryAction && (
-          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
-            {ctaConfig.secondaryAction.text}
+  {ctaSection && (
+    <section class="section-padding text-white" style="background-color: var(--color-primary);">
+      <div class="container text-center">
+        <h2 class="text-3xl font-bold mb-4">{ctaSection.title}</h2>
+        <p class="max-w-2xl mx-auto mb-8" style="color: rgba(255, 255, 255, 0.9);">
+          {ctaSection.subtitle}
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href={ctaSection.ctaPrimary.link} class="btn inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
+            {ctaSection.ctaPrimary.text}
           </a>
-        )}
+          {ctaSection.ctaSecondary && (
+            <a href={ctaSection.ctaSecondary.link} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
+              {ctaSection.ctaSecondary.text}
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </Layout>

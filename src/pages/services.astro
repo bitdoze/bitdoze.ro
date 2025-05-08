@@ -2,63 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { services } from '../config/services';
-import { ctaConfig } from '../config/company';
+import { servicesPageConfig } from '../config/pages';
 
-const title = "Our Services";
-const description = "Explore our comprehensive range of services designed to help your business succeed.";
-
-// Process Steps
-const processSteps = [
-  {
-    step: "1",
-    title: "Discovery",
-    description: "We start by understanding your business needs, goals, and challenges through in-depth consultation.",
-    icon: "mdi:magnify"
-  },
-  {
-    step: "2",
-    title: "Strategy",
-    description: "We develop a customized strategy and plan of action tailored to your specific requirements.",
-    icon: "mdi:strategy"
-  },
-  {
-    step: "3",
-    title: "Implementation",
-    description: "Our expert team executes the strategy with precision, keeping you informed throughout the process.",
-    icon: "mdi:rocket-launch"
-  },
-  {
-    step: "4",
-    title: "Optimization",
-    description: "We continuously monitor, analyze, and refine our approach to ensure optimal results.",
-    icon: "mdi:chart-line"
-  }
-];
-
-// FAQ items
-const faqItems = [
-  {
-    question: "How do you tailor your services to meet my specific business needs?",
-    answer: "We begin with a thorough discovery process to understand your unique business challenges and goals. Based on this assessment, we create a customized service package designed specifically for your situation, ensuring that our solutions align perfectly with your objectives."
-  },
-  {
-    question: "What is your typical timeframe for delivering results?",
-    answer: "While each project is unique, we typically begin showing initial results within 30-60 days. More substantial outcomes develop over 3-6 months as our strategies gain momentum. We provide regular progress reports and maintain transparent communication throughout the process."
-  },
-  {
-    question: "Do you offer ongoing support after the initial project is complete?",
-    answer: "Absolutely! We offer various support packages to ensure the continued success of your project. These include regular maintenance, performance monitoring, strategic adjustments, and access to our support team for any questions or assistance you might need."
-  },
-  {
-    question: "How do you measure the success of your services?",
-    answer: "We establish clear, measurable KPIs at the beginning of each project, tailored to your specific goals. Throughout our engagement, we provide detailed analytics and reporting that track these metrics, allowing both teams to objectively assess performance and ROI."
-  }
-];
+// Extract sections from config
+const heroSection = servicesPageConfig.sections.find(section => section.type === "aboutHero");
+const servicesListSection = servicesPageConfig.sections.find(section => section.type === "servicesList");
+const processSection = servicesPageConfig.sections.find(section => section.type === "process");
+const faqSection = servicesPageConfig.sections.find(section => section.type === "faq");
+const ctaSection = servicesPageConfig.sections.find(section => section.type === "cta");
 ---
 
 <Layout 
-  title={title}
-  description={description}
+  title={servicesPageConfig.title}
+  description={servicesPageConfig.description}
+  ogType={servicesPageConfig.ogType}
   structuredData={{
     type: 'service',
     data: {
@@ -71,106 +28,116 @@ const faqItems = [
   }}
 >
   <!-- Hero Section -->
-  <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <div class="container text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
-        {description}
-      </p>
-    </div>
-  </section>
+  {heroSection && (
+    <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+      <div class="container text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{heroSection.title}</h1>
+        <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
+          {heroSection.subtitle}
+        </p>
+      </div>
+    </section>
+  )}
 
   <!-- Services -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">What We Offer</h2>
-        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-          Our comprehensive suite of services is designed to help businesses of all sizes achieve their goals and overcome challenges.
-        </p>
-      </div>
+  {servicesListSection && (
+    <section class="section-padding">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">{servicesListSection.title}</h2>
+          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+            {servicesListSection.subtitle}
+          </p>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service) => (
-          <div class="p-8 flex flex-col" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-            <div class="rounded-full w-14 h-14 flex items-center justify-center mb-6" style="background-color: rgba(79, 70, 229, 0.1);">
-              <Icon name={service.icon} class="h-7 w-7" style="color: var(--color-primary);" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <div class="p-8 flex flex-col" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+              <div class="rounded-full w-14 h-14 flex items-center justify-center mb-6" style="background-color: rgba(79, 70, 229, 0.1);">
+                <Icon name={service.icon} class="h-7 w-7" style="color: var(--color-primary);" />
+              </div>
+              <h3 class="text-xl font-bold mb-3">{service.title}</h3>
+              <p style="color: var(--color-text-light);" class="mb-6 flex-grow">{service.description}</p>
+              <a href={service.link} class="font-medium inline-flex items-center" style="color: var(--color-primary);">
+                Learn more
+                <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
+              </a>
             </div>
-            <h3 class="text-xl font-bold mb-3">{service.title}</h3>
-            <p style="color: var(--color-text-light);" class="mb-6 flex-grow">{service.description}</p>
-            <a href={service.link} class="font-medium inline-flex items-center" style="color: var(--color-primary);">
-              Learn more
-              <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
-            </a>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Our Process -->
-  <section class="section-padding" style="background-color: var(--color-background-alt);">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">Our Process</h2>
-        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-          We follow a structured approach to ensure consistent, high-quality results for every client project.
-        </p>
-      </div>
+  {processSection && (
+    <section class="section-padding" style="background-color: var(--color-background-alt);">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">{processSection.title}</h2>
+          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+            {processSection.subtitle}
+          </p>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {processSteps.map((step) => (
-          <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-            <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
-              {step.step}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {processSection.steps.map((step) => (
+            <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+              <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
+                {step.step}
+              </div>
+              <Icon name={step.icon} class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
+              <h3 class="text-xl font-bold mb-2">{step.title}</h3>
+              <p style="color: var(--color-text-light);">{step.description}</p>
             </div>
-            <Icon name={step.icon} class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
-            <h3 class="text-xl font-bold mb-2">{step.title}</h3>
-            <p style="color: var(--color-text-light);">{step.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- FAQ Section -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-          Get answers to common questions about our services and how we work with clients.
-        </p>
-      </div>
+  {faqSection && (
+    <section class="section-padding">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">{faqSection.title}</h2>
+          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+            {faqSection.subtitle}
+          </p>
+        </div>
 
-      <div class="max-w-3xl mx-auto divide-y" style="border-color: var(--color-text-lighter);">
-        {faqItems.map((item, index) => (
-          <div class="py-6">
-            <h3 class="text-lg font-semibold mb-2">{item.question}</h3>
-            <p style="color: var(--color-text-light);">{item.answer}</p>
-          </div>
-        ))}
+        <div class="max-w-3xl mx-auto divide-y" style="border-color: var(--color-text-lighter);">
+          {faqSection.items.map((item) => (
+            <div class="py-6">
+              <h3 class="text-lg font-semibold mb-2">{item.question}</h3>
+              <p style="color: var(--color-text-light);">{item.answer}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- CTA Section -->
-  <section class="section-padding text-white" style="background-color: var(--color-primary);">
-    <div class="container text-center">
-      <h2 class="text-3xl font-bold mb-4">{ctaConfig.title}</h2>
-      <p style="color: rgba(255, 255, 255, 0.9);" class="max-w-2xl mx-auto mb-8">
-        {ctaConfig.description}
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href={ctaConfig.primaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
-          {ctaConfig.primaryAction.text}
-        </a>
-        {ctaConfig.secondaryAction && (
-          <a href={ctaConfig.secondaryAction.href} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
-            {ctaConfig.secondaryAction.text}
+  {ctaSection && (
+    <section class="section-padding text-white" style="background-color: var(--color-primary);">
+      <div class="container text-center">
+        <h2 class="text-3xl font-bold mb-4">{ctaSection.title}</h2>
+        <p style="color: rgba(255, 255, 255, 0.9);" class="max-w-2xl mx-auto mb-8">
+          {ctaSection.subtitle}
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href={ctaSection.ctaPrimary.link} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg);">
+            {ctaSection.ctaPrimary.text}
           </a>
-        )}
+          {ctaSection.ctaSecondary && (
+            <a href={ctaSection.ctaSecondary.link} class="inline-flex items-center justify-center h-12 px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid white; color: white; transition: all var(--transition-normal);">
+              {ctaSection.ctaSecondary.text}
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </Layout>

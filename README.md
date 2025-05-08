@@ -68,6 +68,7 @@ All site configuration is located in the `src/config` directory:
 - **company.ts** - Company information and CTA content
 - **services.ts** - Service descriptions and icons
 - **assets.ts** - Image paths and assets
+- **pages.ts** - Page content and section configurations
 
 ### Update Company Information
 
@@ -102,6 +103,15 @@ Edit `src/config/assets.ts` to update image paths for:
 - Team member photos
 - Service illustrations
 - Logo and partner logos
+
+### Edit Page Content
+
+Edit `src/config/pages.ts` to update:
+
+- Page titles, descriptions, and metadata
+- Section content for all pages
+- Component properties and configurations
+- Content structure for each page section
 
 ## 📦 Project Structure
 

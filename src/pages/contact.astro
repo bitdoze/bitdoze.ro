@@ -1,39 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
+import { contactPageConfig } from '../config/pages';
 import { companyConfig } from '../config/company';
 
-const title = "Contact Us";
-const description = "Get in touch with our team for inquiries, support, or to discuss how we can help your business.";
-
-// Contact info
-const contactInfo = [
-  {
-    title: "Email Us",
-    details: companyConfig.contact.email,
-    icon: "mdi:email",
-    link: `mailto:${companyConfig.contact.email}`
-  },
-  {
-    title: "Call Us",
-    details: companyConfig.contact.phone,
-    icon: "mdi:phone",
-    link: `tel:${companyConfig.contact.phone.replace(/\s+/g, '')}`
-  },
-  {
-    title: "Visit Us",
-    details: `${companyConfig.contact.address.street}, ${companyConfig.contact.address.city}, ${companyConfig.contact.address.state} ${companyConfig.contact.address.zip}`,
-    icon: "mdi:map-marker",
-    link: `https://maps.google.com/?q=${encodeURIComponent(
-      `${companyConfig.contact.address.street}, ${companyConfig.contact.address.city}, ${companyConfig.contact.address.state} ${companyConfig.contact.address.zip}`
-    )}`
-  }
-];
+// Extract sections from config
+const heroSection = contactPageConfig.sections.find(section => section.type === "contactHero");
+const contactInfoSection = contactPageConfig.sections.find(section => section.type === "contactInfo");
+const formSection = contactPageConfig.sections.find(section => section.type === "contactForm");
+const mapSection = contactPageConfig.sections.find(section => section.type === "map");
+const hoursSection = contactPageConfig.sections.find(section => section.type === "businessHours");
 ---
 
 <Layout 
-  title={title}
-  description={description}
+  title={contactPageConfig.title}
+  description={contactPageConfig.description}
   structuredData={{
     type: 'localBusiness',
     data: {
@@ -43,238 +24,218 @@ const contactInfo = [
   }}
 >
   <!-- Hero Section -->
-  <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <div class="container text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
-        {description}
-      </p>
-    </div>
-  </section>
+  {heroSection && (
+    <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+      <div class="container text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{heroSection.title}</h1>
+        <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
+          {heroSection.subtitle}
+        </p>
+      </div>
+    </section>
+  )}
 
   <!-- Contact Info & Form -->
   <section class="section-padding">
     <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <!-- Contact Information -->
-        <div>
-          <h2 class="text-2xl font-bold mb-6">Get in Touch</h2>
-          <p style="color: var(--color-text-light);" class="mb-8">
-            Have questions or ready to get started? Reach out to us using any of the methods below, and we'll get back to you as soon as possible.
-          </p>
-          
-          <div class="space-y-6">
-            {contactInfo.map((item) => (
-              <a href={item.link} class="flex items-start p-4 transition-colors" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); transition: all var(--transition-normal);">
-                <div class="rounded-full p-3 mr-4" style="background-color: rgba(79, 70, 229, 0.1);">
-                  <Icon name={item.icon} class="h-6 w-6" style="color: var(--color-primary);" />
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg">{item.title}</h3>
-                  <p style="color: var(--color-text-light);">{item.details}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-          
-          <div class="mt-8">
-            <h3 class="font-semibold text-lg mb-4">Connect With Us</h3>
-            <div class="flex space-x-4">
-              {companyConfig.socialMedia.map((social) => (
-                <a 
-                  href={social.url} 
-                  class="p-3 rounded-full transition-colors" 
-                  style="background-color: var(--color-background-alt); transition: all var(--transition-normal);"
-                  aria-label={social.platform}
-                >
-                  <Icon name={social.icon} class="h-5 w-5" style="color: var(--color-primary);" />
+        {contactInfoSection && (
+          <div>
+            <h2 class="text-2xl font-bold mb-6">{contactInfoSection.title}</h2>
+            <p style="color: var(--color-text-light);" class="mb-8">
+              {contactInfoSection.subtitle}
+            </p>
+            
+            <div class="space-y-6">
+              {contactInfoSection.contactInfo.map((item) => (
+                <a href={item.link} class="flex items-start p-4 transition-colors" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); transition: all var(--transition-normal);">
+                  <div class="rounded-full p-3 mr-4" style="background-color: rgba(79, 70, 229, 0.1);">
+                    <Icon name={item.icon} class="h-6 w-6" style="color: var(--color-primary);" />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg">{item.title}</h3>
+                    <p style="color: var(--color-text-light);">{item.details}</p>
+                  </div>
                 </a>
               ))}
             </div>
+            
+            <div class="mt-8">
+              <h3 class="font-semibold text-lg mb-4">Connect With Us</h3>
+              <div class="flex space-x-4">
+                {companyConfig.socialMedia.map((social) => (
+                  <a 
+                    href={social.url} 
+                    class="p-3 rounded-full transition-colors" 
+                    style="background-color: var(--color-background-alt); transition: all var(--transition-normal);"
+                    aria-label={social.platform}
+                  >
+                    <Icon name={social.icon} class="h-5 w-5" style="color: var(--color-primary);" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
         
         <!-- Contact Form -->
-        <div class="lg:col-span-2">
-          <div class="p-8" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-            <h2 class="text-2xl font-bold mb-6">Send Us a Message</h2>
-            <form class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label for="first-name" class="block text-sm font-medium mb-1" style="color: var(--color-text);">First Name</label>
-                  <input 
-                    type="text" 
-                    id="first-name" 
-                    name="first-name" 
-                    class="w-full px-4 py-2 border" 
-                    style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                    required
-                  />
+        {formSection && (
+          <div class="lg:col-span-2">
+            <div class="p-8" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+              <h2 class="text-2xl font-bold mb-6">{formSection.title}</h2>
+              <form class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {formSection.fields.filter(field => field.type === 'text').slice(0, 2).map(field => (
+                    <div>
+                      <label for={field.id} class="block text-sm font-medium mb-1" style="color: var(--color-text);">{field.label}</label>
+                      <input 
+                        type={field.type}
+                        id={field.id}
+                        name={field.name}
+                        class="w-full px-4 py-2 border" 
+                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
+                        required={field.required}
+                      />
+                    </div>
+                  ))}
                 </div>
+                
+                {formSection.fields.filter(field => !['text', 'checkbox'].includes(field.type)).map(field => (
+                  <div>
+                    <label for={field.id} class="block text-sm font-medium mb-1" style="color: var(--color-text);">{field.label}</label>
+                    {field.type === 'textarea' ? (
+                      <textarea 
+                        id={field.id}
+                        name={field.name}
+                        rows="5"
+                        class="w-full px-4 py-2 border" 
+                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
+                        required={field.required}
+                      ></textarea>
+                    ) : field.type === 'select' ? (
+                      <select 
+                        id={field.id}
+                        name={field.name}
+                        class="w-full px-4 py-2 border" 
+                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
+                        required={field.required}
+                      >
+                        <option value="" disabled selected>Please select</option>
+                        {field.options?.map(option => (
+                          <option value={option.value}>{option.label}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input 
+                        type={field.type}
+                        id={field.id}
+                        name={field.name}
+                        class="w-full px-4 py-2 border" 
+                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
+                        required={field.required}
+                      />
+                    )}
+                  </div>
+                ))}
+                
+                {formSection.fields.filter(field => field.type === 'checkbox').map(field => (
+                  <div class="flex items-start">
+                    <input 
+                      type="checkbox"
+                      id={field.id}
+                      name={field.name}
+                      class="mt-1 h-4 w-4" 
+                      style="color: var(--color-primary); border-color: var(--color-text-lighter);"
+                      required={field.required}
+                    />
+                    <label for={field.id} class="ml-2 block text-sm" style="color: var(--color-text);">
+                      {field.label}
+                    </label>
+                  </div>
+                ))}
+                
                 <div>
-                  <label for="last-name" class="block text-sm font-medium mb-1" style="color: var(--color-text);">Last Name</label>
-                  <input 
-                    type="text" 
-                    id="last-name" 
-                    name="last-name" 
-                    class="w-full px-4 py-2 border" 
-                    style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                    required
-                  />
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary inline-flex justify-center w-full md:w-auto px-6 py-3 text-base font-medium text-white"
+                  >
+                    {formSection.submitText}
+                  </button>
                 </div>
-              </div>
-              
-              <div>
-                <label for="email" class="block text-sm font-medium mb-1" style="color: var(--color-text);">Email Address</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  class="w-full px-4 py-2 border" 
-                  style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label for="phone" class="block text-sm font-medium mb-1" style="color: var(--color-text);">Phone Number</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="phone" 
-                  class="w-full px-4 py-2 border" 
-                  style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                />
-              </div>
-              
-              <div>
-                <label for="subject" class="block text-sm font-medium mb-1" style="color: var(--color-text);">Subject</label>
-                <select 
-                  id="subject" 
-                  name="subject" 
-                  class="w-full px-4 py-2 border" 
-                  style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                  required
-                >
-                  <option value="" disabled selected>Please select</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="support">Support</option>
-                  <option value="sales">Sales</option>
-                  <option value="partnership">Partnership</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              
-              <div>
-                <label for="message" class="block text-sm font-medium mb-1" style="color: var(--color-text);">Message</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  rows="5" 
-                  class="w-full px-4 py-2 border" 
-                  style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                  required
-                ></textarea>
-              </div>
-              
-              <div class="flex items-start">
-                <input 
-                  type="checkbox" 
-                  id="consent" 
-                  name="consent" 
-                  class="mt-1 h-4 w-4" 
-                  style="color: var(--color-primary); border-color: var(--color-text-lighter);"
-                  required
-                />
-                <label for="consent" class="ml-2 block text-sm" style="color: var(--color-text);">
-                  I consent to having this website store my submitted information so they can respond to my inquiry.
-                </label>
-              </div>
-              
-              <div>
-                <button 
-                  type="submit" 
-                  class="btn btn-primary inline-flex justify-center w-full md:w-auto px-6 py-3 text-base font-medium text-white"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   </section>
 
   <!-- Map Section -->
-  <section class="section-padding" style="background-color: var(--color-background-alt);">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">Our Location</h2>
-        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-          We're conveniently located in the heart of {companyConfig.contact.address.city}. Feel free to visit us during business hours.
-        </p>
-      </div>
-      
-      <div class="overflow-hidden h-96" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-        <!-- Placeholder for an actual map integration -->
-        <div class="w-full h-full flex items-center justify-center" style="background-color: rgba(0,0,0,0.05);">
-          <div class="text-center p-6">
-            <Icon name="mdi:map" class="h-16 w-16 mx-auto mb-4" style="color: var(--color-text-lighter);" />
-            <h3 class="text-xl font-semibold mb-2">Map Placeholder</h3>
-            <p style="color: var(--color-text-light);" class="mb-4">In a real implementation, an interactive map would be displayed here.</p>
-            <a
-              href={`https://maps.google.com/?q=${encodeURIComponent(
-                `${companyConfig.contact.address.street}, ${companyConfig.contact.address.city}, ${companyConfig.contact.address.state} ${companyConfig.contact.address.zip}`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center font-medium" 
-              style="color: var(--color-primary); transition: all var(--transition-normal);"
-            >
-              View on Google Maps
-              <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Business Hours -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-4">Business Hours</h2>
-          <p style="color: var(--color-text-light);">
-            Our team is available during the following hours to assist you.
+  {mapSection && (
+    <section class="section-padding" style="background-color: var(--color-background-alt);">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">{mapSection.title}</h2>
+          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+            {mapSection.subtitle}
           </p>
         </div>
         
-        <div class="overflow-hidden" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-          <table class="w-full border-collapse">
-            <tbody>
-              <tr class="border-b" style="border-color: var(--color-text-lighter);">
-                <td class="py-4 px-6 font-medium">Monday - Friday</td>
-                <td class="py-4 px-6 text-right">9:00 AM - 5:00 PM</td>
-              </tr>
-              <tr class="border-b" style="border-color: var(--color-text-lighter);">
-                <td class="py-4 px-6 font-medium">Saturday</td>
-                <td class="py-4 px-6 text-right">10:00 AM - 2:00 PM</td>
-              </tr>
-              <tr>
-                <td class="py-4 px-6 font-medium">Sunday</td>
-                <td class="py-4 px-6 text-right">Closed</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="overflow-hidden h-96" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+          <!-- Placeholder for an actual map integration -->
+          <div class="w-full h-full flex items-center justify-center" style="background-color: rgba(0,0,0,0.05);">
+            <div class="text-center p-6">
+              <Icon name="mdi:map" class="h-16 w-16 mx-auto mb-4" style="color: var(--color-text-lighter);" />
+              <h3 class="text-xl font-semibold mb-2">Map Placeholder</h3>
+              <p style="color: var(--color-text-light);" class="mb-4">In a real implementation, an interactive map would be displayed here.</p>
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(mapSection.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center font-medium" 
+                style="color: var(--color-primary); transition: all var(--transition-normal);"
+              >
+                View on Google Maps
+                <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
+              </a>
+            </div>
+          </div>
         </div>
-        
-        <p style="color: var(--color-text-light);" class="text-center mt-6">
-          Need assistance outside of business hours? Send us an email, and we'll get back to you as soon as possible.
-        </p>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
+
+  <!-- Business Hours -->
+  {hoursSection && (
+    <section class="section-padding">
+      <div class="container">
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">{hoursSection.title}</h2>
+            <p style="color: var(--color-text-light);">
+              {hoursSection.subtitle}
+            </p>
+          </div>
+          
+          <div class="overflow-hidden" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
+            <table class="w-full border-collapse">
+              <tbody>
+                {hoursSection.hours.map((item, index, array) => (
+                  <tr class={index < array.length - 1 ? "border-b" : ""} style="border-color: var(--color-text-lighter);">
+                    <td class="py-4 px-6 font-medium">{item.days}</td>
+                    <td class="py-4 px-6 text-right">{item.hours}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          <p style="color: var(--color-text-light);" class="text-center mt-6">
+            {hoursSection.note}
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
 </Layout>
