@@ -11,20 +11,24 @@ export interface NavConfig {
     resources: NavItem[];
     legal: NavItem[];
   };
+  ctaButton?: {
+    text: string;
+    href: string;
+  };
 }
 
 export const navConfig: NavConfig = {
   mainNav: [
     {
-      title: "Home",
+      title: "Acasă",
       href: "/",
     },
     {
-      title: "About",
+      title: "Despre",
       href: "/about",
     },
     {
-      title: "Services",
+      title: "Servicii",
       href: "/services",
     },
     {
@@ -32,18 +36,22 @@ export const navConfig: NavConfig = {
       href: "/contact",
     },
   ],
+  ctaButton: {
+    text: "Contactează-ne",
+    href: "/contact",
+  },
   footerNav: {
     company: [
       {
-        title: "About Us",
+        title: "Despre Noi",
         href: "/about",
       },
       {
-        title: "Team",
+        title: "Echipa",
         href: "/team",
       },
       {
-        title: "Careers",
+        title: "Cariere",
         href: "/careers",
       },
       {
@@ -53,7 +61,7 @@ export const navConfig: NavConfig = {
     ],
     resources: [
       {
-        title: "Services",
+        title: "Servicii",
         href: "/services",
       },
       {
@@ -61,25 +69,25 @@ export const navConfig: NavConfig = {
         href: "/blog",
       },
       {
-        title: "FAQ",
+        title: "Întrebări Frecvente",
         href: "/faq",
       },
       {
-        title: "Resources",
+        title: "Resurse",
         href: "/resources",
       },
     ],
     legal: [
       {
-        title: "Privacy Policy",
+        title: "Politica de Confidențialitate",
         href: "/privacy",
       },
       {
-        title: "Terms of Service",
+        title: "Termeni și Condiții",
         href: "/terms",
       },
       {
-        title: "Cookie Policy",
+        title: "Politica de Cookie-uri",
         href: "/cookies",
       },
     ],

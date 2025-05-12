@@ -21,7 +21,15 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
     type: 'localBusiness',
     data: {
       name: companyConfig.name,
-      description: companyConfig.description
+      description: companyConfig.description,
+      address: {
+        streetAddress: companyConfig.contact.address.street,
+        addressLocality: companyConfig.contact.address.city,
+        addressRegion: companyConfig.contact.address.state,
+        addressCountry: companyConfig.contact.address.country
+      },
+      email: companyConfig.contact.email,
+      telephone: companyConfig.contact.phone
     }
   }}
 >
@@ -30,9 +38,17 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
     <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
       <div class="container text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">{heroSection.title}</h1>
-        <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
+        <p class="text-xl max-w-3xl mx-auto mb-8" style="color: var(--color-text-light);">
           {heroSection.subtitle}
         </p>
+        <a 
+          href="#contact-form" 
+          class="btn btn-primary inline-flex h-12 items-center justify-center px-6 font-medium text-white"
+          style="background-color: var(--color-primary); border-radius: var(--radius-lg); transition: all var(--transition-normal);"
+        >
+          {heroSection.buttonText || "Get in Touch"}
+          <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
+        </a>
       </div>
     </section>
   )}
@@ -64,7 +80,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
             </div>
             
             <div class="mt-8">
-              <h3 class="font-semibold text-lg mb-4">Connect With Us</h3>
+              <h3 class="font-semibold text-lg mb-4">{contactInfoSection.sectionTitle || "Connect With Us"}</h3>
               <div class="flex space-x-4">
                 {companyConfig.socialMedia.map((social) => (
                   <a 
@@ -83,7 +99,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
         
         <!-- Contact Form -->
         {formSection && (
-          <div class="lg:col-span-2">
+          <div id="contact-form" class="lg:col-span-2">
             <div class="p-8" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
               <h2 class="text-2xl font-bold mb-6">{formSection.title}</h2>
               <form class="space-y-6">
@@ -123,7 +139,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                         style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
                         required={field.required}
                       >
-                        <option value="" disabled selected>Please select</option>
+                        <option value="" disabled selected>Vă rugăm să selectați</option>
                         {field.options?.map(option => (
                           <option value={option.value}>{option.label}</option>
                         ))}
@@ -177,7 +193,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
   {mapSection && (
     <section class="section-padding" style="background-color: var(--color-background-alt);">
       <div class="container">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16" id="our-location">
           <h2 class="text-3xl font-bold mb-4">{mapSection.title}</h2>
           <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
             {mapSection.subtitle}
@@ -189,8 +205,8 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
           <div class="w-full h-full flex items-center justify-center" style="background-color: rgba(0,0,0,0.05);">
             <div class="text-center p-6">
               <Icon name="mdi:map" class="h-16 w-16 mx-auto mb-4" style="color: var(--color-text-lighter);" />
-              <h3 class="text-xl font-semibold mb-2">Map Placeholder</h3>
-              <p style="color: var(--color-text-light);" class="mb-4">In a real implementation, an interactive map would be displayed here.</p>
+              <h3 class="text-xl font-semibold mb-2">Hartă</h3>
+              <p style="color: var(--color-text-light);" class="mb-4">Într-o implementare reală, aici ar fi afișată o hartă interactivă.</p>
               <a
                 href={`https://maps.google.com/?q=${encodeURIComponent(mapSection.address)}`}
                 target="_blank"
@@ -198,7 +214,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                 class="inline-flex items-center font-medium" 
                 style="color: var(--color-primary); transition: all var(--transition-normal);"
               >
-                View on Google Maps
+                Vezi pe Google Maps
                 <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
               </a>
             </div>
@@ -250,6 +266,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
       ctaLink={ctaSection.ctaPrimary.link}
       secondaryText={ctaSection.ctaSecondary?.text}
       secondaryLink={ctaSection.ctaSecondary?.link}
+      trustedBy={ctaSection.trustedBy}
     />
   )}
 </Layout>

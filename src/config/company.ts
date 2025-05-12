@@ -28,43 +28,38 @@ export interface CompanyConfig {
 }
 
 export const companyConfig: CompanyConfig = {
-  name: "Business Template",
-  tagline: "Elevate your business with our professional services",
-  description: "We provide comprehensive solutions to help your business grow and succeed in today's competitive market.",
+  name: "BITDOZE WEB CONS S.R.L",
+  tagline: "Soluții profesionale pentru afacerea ta online",
+  description: "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
   logo: {
-    text: "YourBrand",
+    text: "BitDoze",
     icon: "mdi:lightning-bolt",
   },
   contact: {
-    email: "contact@yourbusiness.com",
-    phone: "+1 (555) 123-4567",
+    email: "office@bitdoze.ro",
+    phone: "",
     address: {
-      street: "123 Business Street",
-      city: "Enterprise City",
-      state: "State",
-      zip: "12345",
-      country: "Country",
+      street: "Sat Ciocăneşti Com. Călineşti, Nr.81",
+      city: "Călineşti",
+      state: "Argeş",
+      zip: "",
+      country: "România",
     },
   },
   socialMedia: [
     {
-      platform: "Twitter",
-      url: "https://twitter.com/yourbusiness",
-      icon: "mdi:twitter",
-    },
-    {
-      platform: "LinkedIn",
-      url: "https://linkedin.com/company/yourbusiness",
-      icon: "mdi:linkedin",
-    },
-    {
       platform: "Facebook",
-      url: "https://facebook.com/yourbusiness",
+      url: "https://facebook.com/bitdoze",
       icon: "mdi:facebook",
     },
     {
+      platform: "LinkedIn",
+      url: "https://linkedin.com/company/bitdoze",
+      icon: "mdi:linkedin",
+    },
+    {
       platform: "Instagram",
-      url: "https://instagram.com/yourbusiness",
+      url: "https://instagram.com/bitdoze",
       icon: "mdi:instagram",
     },
   ],

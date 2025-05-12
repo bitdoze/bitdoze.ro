@@ -12,14 +12,12 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Business Name",
-  description: "A professional business template for your company website.",
-  url: "https://yourdomain.com",
+  name: "BitDoze",
+  description: "Servicii profesionale de web design, hosting și consultanță IT pentru afacerea ta.",
+  url: "https://bitdoze.ro",
   ogImage: "/images/og-image.jpg",
   links: {
-    twitter: "https://twitter.com/yourbusiness",
-    github: "https://github.com/yourbusiness",
-    linkedin: "https://linkedin.com/company/yourbusiness",
-    facebook: "https://facebook.com/yourbusiness",
+    linkedin: "https://linkedin.com/company/bitdoze",
+    facebook: "https://facebook.com/bitdoze",
   },
 };

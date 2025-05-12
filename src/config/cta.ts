@@ -9,18 +9,19 @@ export interface CTAConfig {
     text: string;
     href: string;
   };
+  trustedBy?: string;
 }
 
 // This is the shared CTA configuration used across all pages
 export const ctaConfig: CTAConfig = {
-  title: "Ready to transform your business?",
-  description: "Get started today and see the difference our services can make for your business growth and success.",
+  title: "Pregătit să îți transformi afacerea?",
+  description: "Începe astăzi și descoperă diferența pe care serviciile noastre o pot face pentru creșterea și succesul afacerii tale.",
   primaryAction: {
-    text: "Get Started",
+    text: "Începe Acum",
     href: "/contact",
   },
   secondaryAction: {
-    text: "Learn More",
+    text: "Află Mai Multe",
     href: "/services",
   },
 };
@@ -38,4 +39,5 @@ export const getCtaSection = () => ({
     text: ctaConfig.secondaryAction.text,
     link: ctaConfig.secondaryAction.href,
   } : undefined,
+  trustedBy: "De încredere pentru companii de top din România",
 });
