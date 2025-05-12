@@ -3,21 +3,60 @@
 :root {
   /* Colors */
   --color-primary: #4f46e5; /* Indigo 600 */
+  --color-primary-rgb: 79, 70, 229;
   --color-primary-dark: #4338ca; /* Indigo 700 */
+  --color-primary-dark-rgb: 67, 56, 202;
   --color-primary-light: #6366f1; /* Indigo 500 */
+  --color-primary-light-rgb: 99, 102, 241;
   --color-secondary: #0ea5e9; /* Sky 500 */
+  --color-secondary-rgb: 14, 165, 233;
   --color-secondary-dark: #0284c7; /* Sky 600 */
+  --color-secondary-dark-rgb: 2, 132, 199;
   --color-secondary-light: #38bdf8; /* Sky 400 */
+  --color-secondary-light-rgb: 56, 189, 248;
   --color-accent: #f97316; /* Orange 500 */
+  --color-accent-rgb: 249, 115, 22;
   --color-accent-dark: #ea580c; /* Orange 600 */
+  --color-accent-dark-rgb: 234, 88, 12;
   --color-accent-light: #fb923c; /* Orange 400 */
+  --color-accent-light-rgb: 251, 146, 60;
   
   /* Neutrals */
   --color-text: #1e293b; /* Slate 800 */
+  --color-text-rgb: 30, 41, 59;
   --color-text-light: #64748b; /* Slate 500 */
+  --color-text-light-rgb: 100, 116, 139;
   --color-text-lighter: #94a3b8; /* Slate 400 */
+  --color-text-lighter-rgb: 148, 163, 184;
   --color-background: #ffffff;
+  --color-background-rgb: 255, 255, 255;
   --color-background-alt: #f8fafc; /* Slate 50 */
+  --color-background-alt-rgb: 248, 250, 252;
+  --color-success: #10b981; /* Emerald 500 */
+  --color-success-rgb: 16, 185, 129;
+  --color-warning: #f59e0b; /* Amber 500 */
+  --color-warning-rgb: 245, 158, 11;
+  --color-error: #ef4444; /* Red 500 */
+  --color-error-rgb: 239, 68, 68;
+  --color-info: #3b82f6; /* Blue 500 */
+  --color-info-rgb: 59, 130, 246;
+  
+  /* Dark mode colors - will be applied when .dark class is on html */
+    --color-dark-background: #0f172a; /* Slate 900 */
+    --color-dark-background-rgb: 15, 23, 42;
+    --color-dark-background-alt: #1e293b; /* Slate 800 */
+    --color-dark-background-alt-rgb: 30, 41, 59;
+    --color-dark-text: #f8fafc; /* Slate 50 */
+    --color-dark-text-rgb: 248, 250, 252;
+    --color-dark-text-light: #cbd5e1; /* Slate 300 */
+    --color-dark-text-light-rgb: 203, 213, 225;
+    --color-dark-text-lighter: #94a3b8; /* Slate 400 */
+    --color-dark-text-lighter-rgb: 148, 163, 184;
+  
+    /* Dark mode shadows */
+    --color-dark-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --color-dark-shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+    --color-dark-shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.6), 0 4px 8px -4px rgba(0, 0, 0, 0.4);
   
   /* Spacing */
   --space-1: 0.25rem;
@@ -68,6 +107,17 @@ body {
   font-family: var(--font-sans);
   color: var(--color-text);
   background-color: var(--color-background);
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* Dark mode styles */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  color: var(--color-dark-text);
+  background-color: var(--color-dark-background);
 }
 
 /* Utility classes */
@@ -79,29 +129,95 @@ body {
   padding: var(--space-2) var(--space-4);
   font-weight: var(--font-weight-medium);
   transition: all var(--transition-normal);
+  cursor: pointer;
 }
 
 .btn-primary {
   background-color: var(--color-primary);
   color: white;
+  box-shadow: 0 1px 2px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.dark .btn-primary {
+  background-color: var(--color-primary);
+  box-shadow: 0 1px 3px rgba(var(--color-primary-rgb), 0.5);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(var(--color-primary-rgb), 0.25);
 }
 
 .btn-secondary {
   background-color: white;
   color: var(--color-primary);
-  border: 1px solid var(--color-primary-light);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .btn-secondary {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary-light);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary:hover {
   background-color: var(--color-background-alt);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-color: var(--color-primary);
+}
+
+.dark .btn-secondary:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: white;
+  box-shadow: 0 1px 2px rgba(var(--color-accent-rgb), 0.3);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(var(--color-accent-rgb), 0.25);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-text-lighter);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-text);
+  background-color: rgba(var(--color-text-rgb), 0.05);
+}
+
+.btn-sm {
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.btn-lg {
+  font-size: 1.125rem;
+  padding: 0.75rem 1.5rem;
 }
 
 .section-padding {
   padding: var(--space-16) var(--space-4);
+}
+
+.section-padding-sm {
+  padding: var(--space-8) var(--space-4);
+}
+
+.section-padding-lg {
+  padding: var(--space-24) var(--space-4);
 }
 
 .container {
@@ -112,10 +228,124 @@ body {
   padding-right: var(--space-4);
 }
 
+.container-sm {
+  max-width: 640px;
+}
+
+.container-md {
+  max-width: 768px;
+}
+
+.container-lg {
+  max-width: 1024px;
+}
+
+.container-xl {
+  max-width: 1280px;
+}
+
+/* Card styles */
+.card {
+  background-color: var(--color-background);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.dark .card {
+  background-color: var(--color-dark-background-alt);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--color-dark-shadow-sm);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(var(--color-primary-rgb), 0.3);
+}
+
+.dark .card:hover {
+  box-shadow: var(--color-dark-shadow-lg);
+  border-color: rgba(var(--color-primary-rgb), 0.4);
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.badge-primary {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary);
+}
+
+.badge-secondary {
+  background-color: rgba(var(--color-secondary-rgb), 0.1);
+  color: var(--color-secondary);
+}
+
+.badge-accent {
+  background-color: rgba(var(--color-accent-rgb), 0.1);
+  color: var(--color-accent);
+}
+
+.badge-success {
+  background-color: rgba(var(--color-success-rgb), 0.1);
+  color: var(--color-success);
+}
+
+.badge-warning {
+  background-color: rgba(var(--color-warning-rgb), 0.1);
+  color: var(--color-warning);
+}
+
+.badge-error {
+  background-color: rgba(var(--color-error-rgb), 0.1);
+  color: var(--color-error);
+}
+
 /* Prose styling for markdown content */
 .prose {
   max-width: 65ch;
   color: var(--color-text);
+}
+
+.dark .prose {
+  color: var(--color-dark-text);
+}
+
+.dark .badge {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .badge-primary {
+  background-color: rgba(var(--color-primary-rgb), 0.2);
+}
+
+.dark .badge-secondary {
+  background-color: rgba(var(--color-secondary-rgb), 0.2);
+}
+
+.dark .badge-accent {
+  background-color: rgba(var(--color-accent-rgb), 0.2);
+}
+
+.dark .badge-success {
+  background-color: rgba(var(--color-success-rgb), 0.2);
+}
+
+.dark .badge-warning {
+  background-color: rgba(var(--color-warning-rgb), 0.2);
+}
+
+.dark .badge-error {
+  background-color: rgba(var(--color-error-rgb), 0.2);
 }
 
 .prose h1 {
@@ -145,6 +375,10 @@ body {
   color: var(--color-text-light);
 }
 
+.dark .prose p {
+  color: var(--color-dark-text-light);
+}
+
 .prose ul {
   padding-left: 1.5rem;
   margin-bottom: 1.25rem;
@@ -162,6 +396,10 @@ body {
   color: var(--color-text-light);
 }
 
+.dark .prose li {
+  color: var(--color-dark-text-light);
+}
+
 .prose img {
   border-radius: var(--radius-lg);
   margin: 1.5rem 0;
@@ -172,6 +410,11 @@ body {
 .prose a {
   color: var(--color-primary);
   text-decoration: none;
+}
+
+.dark .prose a {
+  color: var(--color-primary-light);
+  transition: all var(--transition-normal);
 }
 
 .prose a:hover {

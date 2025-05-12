@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { companyConfig } from '../config/company';
+import WelcomeIllustration from './svg/WelcomeIllustration.astro';
 
 interface Props {
   title?: string;
@@ -113,13 +114,8 @@ const {
           <div class="absolute -top-4 -left-4 w-24 h-24 rounded-full" style="background-color: var(--color-primary); opacity: 0.1;"></div>
           <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-full" style="background-color: var(--color-secondary); opacity: 0.1;"></div>
           
-          <div class="rounded-2xl overflow-hidden shadow-xl relative" style="border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl);">
-            <img 
-              src={image}
-              alt="Professional team working together" 
-              class="w-full h-auto"
-              style="aspect-ratio: 4/3; object-fit: cover;"
-            />
+          <div class="rounded-2xl overflow-hidden shadow-xl relative" style="border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); background-color: var(--color-background-alt);">
+            <WelcomeIllustration />
             <div class="absolute inset-0" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);"></div>
           </div>
           

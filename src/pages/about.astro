@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { aboutPageConfig } from '../config/pages';
 import CTA from '../components/CTA.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 // Extract sections from config
 const aboutHeroSection = aboutPageConfig.sections.find(section => section.type === "aboutHero");
@@ -19,14 +20,14 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
 >
   <!-- Hero Section -->
   {aboutHeroSection && (
-    <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-      <div class="container text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">{aboutHeroSection.title}</h1>
-        <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
-          {aboutHeroSection.subtitle}
-        </p>
-      </div>
-    </section>
+    <PageHeader
+      title={aboutHeroSection.title}
+      subtitle={aboutHeroSection.subtitle}
+      align="center"
+      withBlobs={true}
+      withGrid={true}
+      icon="mdi:account-group"
+    />
   )}
 
   <!-- Our Story -->

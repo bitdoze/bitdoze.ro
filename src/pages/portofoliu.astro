@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 import PortofolioCard from '../components/PortofolioCard.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 // Get all non-draft portfolio entries
 const portofoliu = await getCollection('portofoliu', ({ data }) => {
@@ -20,20 +21,14 @@ const sortedProjects = portofoliu.sort((a, b) => b.data.data.getTime() - a.data.
   ogType="website"
 >
   <!-- Hero Section -->
-  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
-    <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
-    
-    <div class="container text-center relative z-10">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 portfolio-heading">
-        Portofoliu
-      </h1>
-      <p class="text-xl max-w-3xl mx-auto mt-8" style="color: var(--color-text-light);">
-        Explorați colecția noastră de proiecte și descoperiți diversitatea soluțiilor digitale pe care le oferim.
-      </p>
-    </div>
-  </section>
+  <PageHeader
+    title="Portofoliu"
+    subtitle="Explorați colecția noastră de proiecte și descoperiți diversitatea soluțiilor digitale pe care le oferim."
+    align="center"
+    withBlobs={true}
+    withGrid={true}
+    icon="mdi:folder-multiple-image"
+  />
 
   <!-- Portfolio Section -->
   <section class="section-padding">

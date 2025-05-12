@@ -1,0 +1,145 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  alignment?: 'left' | 'center' | 'right';
+  textSize?: 'sm' | 'md' | 'lg';
+  decorative?: boolean;
+  badge?: {
+    text: string;
+    type?: 'primary' | 'secondary' | 'accent' | 'success';
+  };
+  className?: string;
+}
+
+const {
+  title,
+  subtitle,
+  alignment = 'center',
+  textSize = 'md',
+  decorative = true,
+  badge,
+  className = '',
+} = Astro.props;
+
+const alignmentClasses = {
+  left: 'text-left',
+  center: 'text-center mx-auto',
+  right: 'text-right ml-auto',
+};
+
+const titleSizeClasses = {
+  sm: 'text-2xl md:text-3xl',
+  md: 'text-3xl md:text-4xl',
+  lg: 'text-4xl md:text-5xl',
+};
+
+const subtitleSizeClasses = {
+  sm: 'text-base',
+  md: 'text-lg',
+  lg: 'text-xl',
+};
+
+const widthClasses = {
+  left: 'max-w-2xl',
+  center: 'max-w-2xl mx-auto',
+  right: 'max-w-2xl ml-auto',
+};
+---
+
+<div class={`section-header mb-16 ${alignmentClasses[alignment]} ${className}`}>
+  {badge && (
+    <div class={`inline-flex items-center px-3 py-1 mb-4 rounded-full text-sm font-medium badge-${badge.type || 'primary'}`}>
+      {badge.text}
+    </div>
+  )}
+  
+  <h2 class={`font-bold mb-4 relative inline-block ${titleSizeClasses[textSize]}`}>
+    {title}
+    {decorative && (
+      <span class="absolute -bottom-2 left-0 w-16 h-1 rounded-full" style="background-color: var(--color-primary);"></span>
+    )}
+  </h2>
+  
+  {subtitle && (
+    <p class={`${widthClasses[alignment]} ${subtitleSizeClasses[textSize]}`}>
+      {subtitle}
+    </p>
+  )}
+</div>
+
+<style>
+  .section-header {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-play-state: paused;
+  }
+  
+  .section-header h2 {
+    color: var(--color-text);
+  }
+  
+  .section-header p {
+    color: var(--color-text-light);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .badge-primary {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+  }
+  
+  .badge-secondary {
+    background-color: rgba(var(--color-secondary-rgb), 0.1);
+    color: var(--color-secondary);
+  }
+  
+  .badge-accent {
+    background-color: rgba(var(--color-accent-rgb), 0.1);
+    color: var(--color-accent);
+  }
+  
+  .badge-success {
+    background-color: rgba(var(--color-success-rgb), 0.1);
+    color: var(--color-success);
+  }
+  
+  :global(.dark) .section-header h2 {
+    color: var(--color-text);
+  }
+  
+  :global(.dark) .section-header p {
+    color: var(--color-text-light);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const headerElements = document.querySelectorAll('.section-header');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    headerElements.forEach(element => {
+      observer.observe(element);
+    });
+  });
+</script>

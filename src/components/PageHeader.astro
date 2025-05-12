@@ -1,0 +1,186 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center' | 'right';
+  withBlobs?: boolean;
+  withGrid?: boolean;
+  backgroundStyle?: 'primary' | 'secondary' | 'accent' | 'neutral';
+  decoration?: 'pattern1' | 'pattern2' | 'none';
+  contentMaxWidth?: string;
+  icon?: string;
+}
+
+const { 
+  title, 
+  subtitle, 
+  align = 'center',
+  withBlobs = true,
+  withGrid = true,
+  backgroundStyle = 'primary',
+  decoration = 'pattern1',
+  contentMaxWidth = '3xl',
+  icon
+} = Astro.props;
+
+// Classes based on alignment
+const alignClasses = {
+  left: 'text-left',
+  center: 'text-center mx-auto',
+  right: 'text-right ml-auto'
+};
+
+// Background styles
+const bgStyles = {
+  primary: 'var(--color-primary)',
+  secondary: 'var(--color-secondary)',
+  accent: 'var(--color-accent)',
+  neutral: 'var(--color-text)'
+};
+
+// Decoration patterns
+const patterns = {
+  pattern1: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)',
+  pattern2: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
+  none: 'none'
+};
+
+const maxWidthClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '2xl': 'max-w-2xl',
+  '3xl': 'max-w-3xl',
+  '4xl': 'max-w-4xl',
+  '5xl': 'max-w-5xl',
+  '6xl': 'max-w-6xl',
+  full: 'max-w-full'
+};
+---
+
+<section class="page-header relative overflow-hidden section-padding">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-header-gradient opacity-50 dark:opacity-20 transition-opacity duration-300"></div>
+  
+  <!-- Background pattern overlay -->
+  {withGrid && (
+    <div class="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10"></div>
+  )}
+  
+  <!-- Decorative elements -->
+  {withBlobs && (
+    <>
+      <div class="absolute top-0 right-0 w-96 h-96 -mt-24 -mr-24 rounded-full opacity-10 dark:opacity-5 blob-1" style={`background: ${patterns[decoration]}`}></div>
+      <div class="absolute -left-20 bottom-0 w-64 h-64 -mb-20 rounded-full opacity-10 dark:opacity-5 blob-2" style={`background: ${patterns[decoration === 'pattern1' ? 'pattern2' : 'pattern1']}`}></div>
+      <div class="absolute top-1/2 left-1/4 w-20 h-20 -ml-10 -mt-10 rounded-full opacity-5 blob-3" style={`background: ${patterns[decoration === 'pattern1' ? 'pattern2' : 'pattern1']}`}></div>
+    </>
+  )}
+  
+  <!-- Content -->
+  <div class="container relative z-10">
+    <div class={`${alignClasses[align]} ${maxWidthClasses[contentMaxWidth]}`}>
+      {icon && (
+        <div class="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-lg transform rotate-3 shadow-md" style={`background-color: rgba(var(--color-primary-rgb), 0.1); color: ${bgStyles[backgroundStyle]};`}>
+          <Icon name={icon} class="h-8 w-8" />
+        </div>
+      )}
+      
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 fade-in">{title}</h1>
+      
+      {subtitle && (
+        <p class="text-lg md:text-xl text-text-light dark:text-dark-text-light mb-8 fade-in-delayed max-w-3xl mx-auto">
+          {subtitle}
+        </p>
+      )}
+      
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-header {
+    min-height: 30vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .bg-header-gradient {
+    background: linear-gradient(to bottom right, 
+      rgba(var(--color-primary-rgb), 0.2),
+      rgba(var(--color-background-rgb), 1),
+      rgba(var(--color-secondary-rgb), 0.1)
+    );
+  }
+  
+  :global(.dark) .bg-header-gradient {
+    background: linear-gradient(to bottom right, 
+      rgba(var(--color-primary-rgb), 0.3),
+      rgba(var(--color-dark-background-rgb), 1),
+      rgba(var(--color-secondary-rgb), 0.2)
+    );
+  }
+  
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(var(--color-text-rgb), 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--color-text-rgb), 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+  }
+  
+  :global(.dark) .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+  
+  /* Blob animations */
+  .blob-1 {
+    animation: float-slow 15s ease-in-out infinite alternate;
+  }
+  
+  .blob-2 {
+    animation: float-slow 20s ease-in-out infinite alternate-reverse;
+  }
+  
+  .blob-3 {
+    animation: float-medium 8s ease-in-out infinite;
+  }
+  
+  @keyframes float-slow {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -20px) scale(1.05); }
+    100% { transform: translate(-10px, 10px) scale(0.95); }
+  }
+  
+  @keyframes float-medium {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+  
+  /* Content animations */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .fade-in-delayed {
+    animation: fadeIn 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .page-header {
+      min-height: 25vh;
+    }
+  }
+</style>

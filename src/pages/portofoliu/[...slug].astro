@@ -34,10 +34,21 @@ const formattedDate = dateFormatter.format(entry.data.data);
   ogType="article"
 >
   <!-- Hero Section -->
-  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
-    <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+  <section class="section-padding relative overflow-hidden" style="background-color: var(--color-background-alt);">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 opacity-50 dark:opacity-20" style="background: linear-gradient(to bottom right, rgba(79, 70, 229, 0.1), var(--color-background), rgba(14, 165, 233, 0.1));"></div>
+    
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="grid-pattern"></div>
+    </div>
     
     <div class="container max-w-4xl relative z-10">
       <div class="mb-6">
@@ -83,7 +94,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
                 <h4 class="text-sm font-semibold mb-3" style="color: var(--color-text);">Stack</h4>
                 <div class="flex flex-wrap gap-2">
                   {entry.data.stack.map(tech => (
-                    <span class="stack-tag">
+                    <span class="stack-tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1 mb-1" style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);">
                       {tech}
                     </span>
                   ))}
@@ -95,7 +106,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
                 <h4 class="text-sm font-semibold mb-3" style="color: var(--color-text);">Servicii</h4>
                 <div class="flex flex-wrap gap-2">
                   {entry.data.servicii.map(serviciu => (
-                    <span class="service-tag">
+                    <span class="service-tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1 mb-1" style="background-color: rgba(var(--color-secondary-rgb), 0.1); color: var(--color-secondary);">
                       {serviciu}
                     </span>
                   ))}
@@ -209,6 +220,64 @@ const formattedDate = dateFormatter.format(entry.data.data);
     margin-bottom: 0.5rem;
   }
   
+  /* Grid pattern */
+  .grid-pattern {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Background blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+  
+  .blob-1 {
+    width: 600px;
+    height: 600px;
+    left: -100px;
+    top: -100px;
+    background: rgba(124, 58, 237, 0.05);
+    animation: blob-move 25s infinite alternate;
+  }
+  
+  .blob-2 {
+    width: 400px;
+    height: 400px;
+    right: -50px;
+    top: 30%;
+    background: rgba(56, 189, 248, 0.05);
+    animation: blob-move 18s infinite alternate-reverse;
+  }
+  
+  .blob-3 {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    left: 20%;
+    background: rgba(251, 113, 133, 0.05);
+    animation: blob-move 15s infinite alternate;
+  }
+  
+  @keyframes blob-move {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(20px, -20px) scale(1.05);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.95);
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+  }
+  
   /* Animations */
   @keyframes animate-blob {
     0% {
@@ -227,5 +296,31 @@ const formattedDate = dateFormatter.format(entry.data.data);
   
   .animate-blob {
     animation: animate-blob 7s ease-in-out infinite;
+  }
+  
+  /* Dark mode adjustments */
+  :global(.dark) .grid-pattern {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+  
+  .portfolio-cta:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+    background-color: var(--color-primary-dark) !important;
+  }
+  
+  .stack-tag, .service-tag {
+    transition: all 0.3s ease;
+  }
+  
+  .stack-tag:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.2) !important;
+    transform: translateY(-1px);
+  }
+  
+  .service-tag:hover {
+    background-color: rgba(var(--color-secondary-rgb), 0.2) !important;
+    transform: translateY(-1px);
   }
 </style>

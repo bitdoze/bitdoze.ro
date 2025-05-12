@@ -35,7 +35,7 @@ const {
 
 <section class="overflow-hidden section-padding relative" style="background-color: var(--color-background-alt);">
   <!-- Background gradient -->
-  <div class="absolute inset-0 opacity-50" style="background: linear-gradient(to bottom right, rgba(79, 70, 229, 0.1), white, rgba(14, 165, 233, 0.1));"></div>
+  <div class="absolute inset-0 opacity-50 dark:opacity-20" style="background: linear-gradient(to bottom right, rgba(79, 70, 229, 0.1), var(--color-background), rgba(14, 165, 233, 0.1));"></div>
   
   <!-- Animated background elements -->
   <div class="absolute inset-0 overflow-hidden">
@@ -54,10 +54,10 @@ const {
       
       <!-- Left column (text content) -->
       <div class="fade-in-slide-up">
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+        <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl" style="color: var(--color-text);">
           {title}
         </h1>
-        <p class="mt-6 max-w-xl text-lg text-gray-600">
+        <p class="mt-6 max-w-xl text-lg" style="color: var(--color-text-light);">
           {subtitle}
         </p>
         
@@ -66,13 +66,13 @@ const {
             {ctaPrimary}
             <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
           </a>
-          <a href={ctaSecondaryLink} class="button-pulse inline-flex h-12 items-center justify-center px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid var(--color-text-lighter); background-color: white; color: var(--color-text); transition: all var(--transition-normal);">
+          <a href={ctaSecondaryLink} class="button-pulse inline-flex h-12 items-center justify-center px-6 font-medium" style="border-radius: var(--radius-lg); border: 1px solid var(--color-text-lighter); background-color: var(--color-background); color: var(--color-text); transition: all var(--transition-normal);">
             {ctaSecondary}
           </a>
         </div>
         
         <!-- Stats -->
-        <div class="mt-12 flex flex-wrap gap-x-8 gap-y-4 opacity-75">
+        <div class="mt-12 flex flex-wrap gap-x-8 gap-y-4 opacity-75 dark:opacity-90">
           {stats.map((stat, index) => (
             <div class="stat-item">
               <p class="text-3xl font-bold" style="color: var(--color-primary);">{stat.value}</p>
@@ -84,7 +84,7 @@ const {
       
       <!-- Right column (dashboard mockup) -->
       <div class="dashboard-mockup relative flex justify-center">
-        <div class="relative w-full max-w-xl overflow-hidden float-in" style="box-shadow: var(--shadow-xl); border-radius: var(--radius-xl); border: 1px solid var(--color-text-lighter);">
+        <div class="relative w-full max-w-xl overflow-hidden float-in" style="box-shadow: var(--shadow-xl); border-radius: var(--radius-xl); border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);">
           <img 
             src={imageUrl}
             alt="Business Solutions" 
@@ -293,5 +293,15 @@ const {
     background-size: 25px 25px;
     height: 100%;
     width: 100%;
+  }
+  
+  /* Dark mode adjustments */
+  :global(.dark) .grid-pattern {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+  
+  :global(.dark) .button-pulse:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
   }
 </style>

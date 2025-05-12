@@ -46,6 +46,17 @@ const {
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         
+        <!-- Script to prevent flash of light mode -->
+        <script is:inline>
+            // Apply dark mode immediately if needed
+            const darkModeOn = localStorage.getItem('theme') === 'dark' || 
+                              (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            
+            if (darkModeOn) {
+                document.documentElement.classList.add('dark');
+            }
+        </script>
+        
         <!-- SEO Meta Tags -->
         <MetaTags 
           title={title}

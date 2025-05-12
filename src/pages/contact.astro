@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import { contactPageConfig } from '../config/pages';
 import { companyConfig } from '../config/company';
 import CTA from '../components/CTA.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 // Extract sections from config
 const heroSection = contactPageConfig.sections.find(section => section.type === "contactHero");
@@ -35,22 +36,23 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
 >
   <!-- Hero Section -->
   {heroSection && (
-    <section class="section-padding" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-      <div class="container text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">{heroSection.title}</h1>
-        <p class="text-xl max-w-3xl mx-auto mb-8" style="color: var(--color-text-light);">
-          {heroSection.subtitle}
-        </p>
-        <a 
-          href="#contact-form" 
-          class="btn btn-primary inline-flex h-12 items-center justify-center px-6 font-medium text-white"
-          style="background-color: var(--color-primary); border-radius: var(--radius-lg); transition: all var(--transition-normal);"
-        >
-          {heroSection.buttonText || "Get in Touch"}
-          <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
-        </a>
-      </div>
-    </section>
+    <PageHeader
+      title={heroSection.title}
+      subtitle={heroSection.subtitle}
+      align="center"
+      withBlobs={true}
+      withGrid={true}
+      icon="mdi:email-edit"
+    >
+      <a 
+        href="#contact-form" 
+        class="btn btn-primary inline-flex h-12 items-center justify-center px-6 font-medium text-white"
+        style="background-color: var(--color-primary); border-radius: var(--radius-lg); transition: all var(--transition-normal);"
+      >
+        {heroSection.buttonText || "Get in Touch"}
+        <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
+      </a>
+    </PageHeader>
   )}
 
   <!-- Contact Info & Form -->

@@ -1,0 +1,351 @@
+<svg width="100%" height="100%" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" class="consultanta-it-illustration">
+  <!-- Background and decorative elements -->
+  <defs>
+    <linearGradient id="it-bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="var(--color-secondary)" stop-opacity="0.05" />
+    </linearGradient>
+    
+    <filter id="it-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.2" />
+    </filter>
+    
+    <linearGradient id="tech-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0.7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background for the illustration -->
+  <rect width="500" height="400" rx="16" fill="url(#it-bg-gradient)" class="bg" />
+  
+  <!-- Abstract decorative shapes -->
+  <circle cx="70" cy="60" r="30" fill="var(--color-primary)" fill-opacity="0.1" class="shape shape-1" />
+  <circle cx="430" cy="340" r="40" fill="var(--color-secondary)" fill-opacity="0.1" class="shape shape-2" />
+  <path d="M380,80 Q420,40 460,80 T540,80" stroke="var(--color-accent)" stroke-width="2" fill="none" class="shape shape-3" />
+  
+  <!-- Main IT Consultant Elements -->
+  <g class="it-consultant" transform="translate(250, 200)" filter="url(#it-shadow)">
+    <!-- Laptop -->
+    <g class="laptop" transform="translate(-100, -20)">
+      <rect x="-60" y="-40" width="120" height="80" rx="5" fill="var(--color-background)" stroke="var(--color-text)" stroke-width="2" stroke-opacity="0.3" class="laptop-screen" />
+      <path d="M-70,-40 L-65,-45 L65,-45 L70,-40" stroke="var(--color-text)" stroke-width="2" stroke-opacity="0.3" fill="none" class="laptop-top" />
+      <rect x="-70" y="40" width="140" height="10" rx="3" fill="var(--color-text)" fill-opacity="0.2" class="laptop-base" />
+      
+      <!-- Screen Content -->
+      <rect x="-55" y="-35" width="110" height="70" rx="2" fill="var(--color-text)" fill-opacity="0.05" class="screen-content" />
+      <rect x="-50" y="-30" width="100" height="8" rx="2" fill="var(--color-primary)" fill-opacity="0.3" class="screen-ui" />
+      <rect x="-50" y="-18" width="40" height="5" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="screen-ui" />
+      <rect x="-50" y="-10" width="60" height="5" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="screen-ui" />
+      
+      <rect x="-50" y="0" width="30" height="25" rx="2" fill="var(--color-accent)" fill-opacity="0.2" class="screen-chart" />
+      <rect x="-15" y="5" width="30" height="20" rx="2" fill="var(--color-primary)" fill-opacity="0.2" class="screen-chart" />
+      <rect x="20" y="-5" width="30" height="30" rx="2" fill="var(--color-secondary)" fill-opacity="0.2" class="screen-chart" />
+    </g>
+    
+    <!-- Server/Network -->
+    <g class="server" transform="translate(80, 0)">
+      <rect x="-40" y="-60" width="80" height="120" rx="5" fill="var(--color-background)" stroke="var(--color-text)" stroke-width="2" stroke-opacity="0.3" class="server-rack" />
+      
+      <!-- Server Units -->
+      <rect x="-35" y="-55" width="70" height="15" rx="2" fill="var(--color-text)" fill-opacity="0.1" class="server-unit" />
+      <circle cx="-25" cy="-47.5" r="2" fill="var(--color-accent)" class="server-light" />
+      <circle cx="-15" cy="-47.5" r="2" fill="var(--color-primary)" class="server-light blink" />
+      <rect x="-5" y="-52" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      <rect x="-5" y="-46" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      
+      <rect x="-35" y="-35" width="70" height="15" rx="2" fill="var(--color-text)" fill-opacity="0.1" class="server-unit" />
+      <circle cx="-25" cy="-27.5" r="2" fill="var(--color-accent)" class="server-light" />
+      <circle cx="-15" cy="-27.5" r="2" fill="var(--color-primary)" class="server-light blink" />
+      <rect x="-5" y="-32" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      <rect x="-5" y="-26" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      
+      <rect x="-35" y="-15" width="70" height="15" rx="2" fill="var(--color-text)" fill-opacity="0.1" class="server-unit" />
+      <circle cx="-25" cy="-7.5" r="2" fill="var(--color-accent)" class="server-light" />
+      <circle cx="-15" cy="-7.5" r="2" fill="var(--color-primary)" class="server-light blink" />
+      <rect x="-5" y="-12" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      <rect x="-5" y="-6" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      
+      <rect x="-35" y="5" width="70" height="15" rx="2" fill="var(--color-text)" fill-opacity="0.1" class="server-unit" />
+      <circle cx="-25" cy="12.5" r="2" fill="var(--color-accent)" class="server-light" />
+      <circle cx="-15" cy="12.5" r="2" fill="var(--color-primary)" class="server-light blink" />
+      <rect x="-5" y="8" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      <rect x="-5" y="14" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      
+      <rect x="-35" y="25" width="70" height="15" rx="2" fill="var(--color-text)" fill-opacity="0.1" class="server-unit" />
+      <circle cx="-25" cy="32.5" r="2" fill="var(--color-accent)" class="server-light" />
+      <circle cx="-15" cy="32.5" r="2" fill="var(--color-primary)" class="server-light blink" />
+      <rect x="-5" y="28" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      <rect x="-5" y="34" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      
+      <rect x="-35" y="45" width="70" height="15" rx="2" fill="var(--color-text)" fill-opacity="0.1" class="server-unit" />
+      <rect x="-5" y="48" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+      <rect x="-5" y="54" width="35" height="4" rx="1" fill="var(--color-text)" fill-opacity="0.2" class="server-vent" />
+    </g>
+    
+    <!-- Connection Lines -->
+    <g class="connections">
+      <path d="M-20,0 C30,0 30,-30 80,-30" stroke="var(--color-primary)" stroke-width="2" fill="none" stroke-dasharray="5,5" class="connection-line" />
+      <path d="M-20,-10 C20,-10 30,10 80,0" stroke="var(--color-secondary)" stroke-width="2" fill="none" stroke-dasharray="5,5" class="connection-line" />
+      <path d="M-20,10 C0,10 60,30 80,30" stroke="var(--color-accent)" stroke-width="2" fill="none" stroke-dasharray="5,5" class="connection-line" />
+    </g>
+
+    <!-- Data Flow Animation -->
+    <g class="data-flow">
+      <circle cx="-10" cy="0" r="3" fill="var(--color-primary)" class="data-packet packet-1" />
+      <circle cx="20" cy="-10" r="3" fill="var(--color-secondary)" class="data-packet packet-2" />
+      <circle cx="40" cy="15" r="3" fill="var(--color-accent)" class="data-packet packet-3" />
+    </g>
+  </g>
+  
+  <!-- Gear Symbols for IT -->
+  <g class="gears" transform="translate(100, 100)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="var(--color-primary)" stroke-width="3" stroke-opacity="0.6" class="gear gear-1" />
+    <path d="M0,-25 L0,-35 M25,0 L35,0 M0,25 L0,35 M-25,0 L-35,0 M18,-18 L25,-25 M18,18 L25,25 M-18,18 L-25,25 M-18,-18 L-25,-25" stroke="var(--color-primary)" stroke-width="3" stroke-opacity="0.6" class="gear-teeth" />
+    
+    <circle cx="70" cy="30" r="20" fill="none" stroke="var(--color-secondary)" stroke-width="3" stroke-opacity="0.6" class="gear gear-2" />
+    <path d="M70,10 L70,0 M90,30 L100,30 M70,50 L70,60 M50,30 L40,30 M84,16 L91,9 M84,44 L91,51 M56,44 L49,51 M56,16 L49,9" stroke="var(--color-secondary)" stroke-width="3" stroke-opacity="0.6" class="gear-teeth" />
+  </g>
+  
+  <!-- Tech icons -->
+  <g class="tech-icons" transform="translate(400, 120)">
+    <rect x="-30" y="-30" width="60" height="60" rx="10" fill="var(--color-background)" stroke="url(#tech-gradient)" stroke-width="2" class="tech-icon-bg" />
+    <text x="0" y="0" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="url(#tech-gradient)" class="tech-icon-text">IT</text>
+    
+    <rect x="-20" y="40" width="40" height="40" rx="8" fill="var(--color-background)" stroke="url(#tech-gradient)" stroke-width="2" class="tech-icon-bg" />
+    <text x="0" y="60" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="url(#tech-gradient)" class="tech-icon-text">API</text>
+    
+    <rect x="-50" y="10" width="30" height="30" rx="6" fill="var(--color-background)" stroke="url(#tech-gradient)" stroke-width="2" class="tech-icon-bg" />
+    <text x="-35" y="25" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="url(#tech-gradient)" class="tech-icon-text">SQL</text>
+  </g>
+  
+  <!-- Solution Diagram -->
+  <g class="solution-diagram" transform="translate(100, 320)">
+    <rect x="0" y="0" width="40" height="20" rx="5" fill="var(--color-primary)" fill-opacity="0.3" class="diagram-box" />
+    <rect x="70" y="0" width="40" height="20" rx="5" fill="var(--color-secondary)" fill-opacity="0.3" class="diagram-box" />
+    <rect x="140" y="0" width="40" height="20" rx="5" fill="var(--color-accent)" fill-opacity="0.3" class="diagram-box" />
+    <rect x="210" y="0" width="40" height="20" rx="5" fill="var(--color-text)" fill-opacity="0.2" class="diagram-box" />
+    <rect x="280" y="0" width="40" height="20" rx="5" fill="var(--color-primary)" fill-opacity="0.3" class="diagram-box" />
+    
+    <line x1="40" y1="10" x2="70" y2="10" stroke="var(--color-text)" stroke-width="1" stroke-opacity="0.5" marker-end="url(#arrow)" class="diagram-line" />
+    <line x1="110" y1="10" x2="140" y2="10" stroke="var(--color-text)" stroke-width="1" stroke-opacity="0.5" marker-end="url(#arrow)" class="diagram-line" />
+    <line x1="180" y1="10" x2="210" y2="10" stroke="var(--color-text)" stroke-width="1" stroke-opacity="0.5" marker-end="url(#arrow)" class="diagram-line" />
+    <line x1="250" y1="10" x2="280" y2="10" stroke="var(--color-text)" stroke-width="1" stroke-opacity="0.5" marker-end="url(#arrow)" class="diagram-line" />
+  </g>
+  
+  <!-- Arrow Marker -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="var(--color-text)" fill-opacity="0.5" />
+    </marker>
+  </defs>
+</svg>
+
+<style>
+  .consultanta-it-illustration {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  
+  .bg {
+    opacity: 0.7;
+  }
+  
+  /* Animations for decorative elements */
+  .shape {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+  }
+  
+  .shape-1 {
+    animation-delay: 0.1s;
+    transform-origin: center;
+    animation: fadeIn 0.8s ease forwards, float 6s ease-in-out infinite;
+  }
+  
+  .shape-2 {
+    animation-delay: 0.2s;
+    animation: fadeIn 0.8s ease forwards, float 8s ease-in-out infinite reverse;
+  }
+  
+  .shape-3 {
+    animation-delay: 0.3s;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: dashDraw 2s ease forwards;
+  }
+  
+  /* IT Consultant animations */
+  .it-consultant {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFadeIn 1s ease forwards 0.4s;
+  }
+  
+  .laptop, .server {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .laptop { animation-delay: 0.6s; }
+  .server { animation-delay: 0.8s; }
+  
+  .server-light {
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  .server-light:nth-of-type(odd) { animation-delay: 1.1s; }
+  .server-light:nth-of-type(even) { animation-delay: 1.2s; }
+  
+  .blink {
+    animation: blink 2s infinite;
+  }
+  
+  .server-unit {
+    opacity: 0;
+    transform: translateX(10px);
+    animation: slideInLeft 0.4s ease forwards;
+  }
+  
+  .server-unit:nth-of-type(1) { animation-delay: 0.9s; }
+  .server-unit:nth-of-type(2) { animation-delay: 1.0s; }
+  .server-unit:nth-of-type(3) { animation-delay: 1.1s; }
+  .server-unit:nth-of-type(4) { animation-delay: 1.2s; }
+  .server-unit:nth-of-type(5) { animation-delay: 1.3s; }
+  
+  .connection-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: dashDraw 1.5s ease forwards;
+  }
+  
+  .connection-line:nth-of-type(1) { animation-delay: 1.4s; }
+  .connection-line:nth-of-type(2) { animation-delay: 1.6s; }
+  .connection-line:nth-of-type(3) { animation-delay: 1.8s; }
+  
+  .data-packet {
+    opacity: 0;
+    animation: movePacket 3s infinite;
+  }
+  
+  .packet-1 { animation-delay: 2.0s; }
+  .packet-2 { animation-delay: 2.2s; }
+  .packet-3 { animation-delay: 2.4s; }
+  
+  /* Gears animation */
+  .gear {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: dashDraw 1.5s ease forwards, rotate 20s linear infinite;
+    transform-origin: center;
+  }
+  
+  .gear-1 { animation-delay: 2.0s, 3s; }
+  .gear-2 { animation-delay: 2.2s, 3s; animation-direction: reverse; }
+  
+  .gear-teeth {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: dashDraw 1.5s ease forwards;
+  }
+  
+  .gear-teeth:nth-of-type(2) { animation-delay: 2.1s; }
+  .gear-teeth:nth-of-type(4) { animation-delay: 2.3s; }
+  
+  /* Tech icons animation */
+  .tech-icon-bg {
+    opacity: 0;
+    transform: scale(0);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  
+  .tech-icon-bg:nth-of-type(1) { animation-delay: 2.5s; }
+  .tech-icon-bg:nth-of-type(3) { animation-delay: 2.7s; }
+  .tech-icon-bg:nth-of-type(5) { animation-delay: 2.9s; }
+  
+  .tech-icon-text {
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  .tech-icon-text:nth-of-type(2) { animation-delay: 2.6s; }
+  .tech-icon-text:nth-of-type(4) { animation-delay: 2.8s; }
+  .tech-icon-text:nth-of-type(6) { animation-delay: 3.0s; }
+  
+  /* Solution diagram animation */
+  .diagram-box {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideUpFadeIn 0.4s ease forwards;
+  }
+  
+  .diagram-box:nth-of-type(1) { animation-delay: 3.1s; }
+  .diagram-box:nth-of-type(2) { animation-delay: 3.2s; }
+  .diagram-box:nth-of-type(3) { animation-delay: 3.3s; }
+  .diagram-box:nth-of-type(4) { animation-delay: 3.4s; }
+  .diagram-box:nth-of-type(5) { animation-delay: 3.5s; }
+  
+  .diagram-line {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: dashDraw 0.5s ease forwards;
+  }
+  
+  .diagram-line:nth-of-type(6) { animation-delay: 3.25s; }
+  .diagram-line:nth-of-type(7) { animation-delay: 3.35s; }
+  .diagram-line:nth-of-type(8) { animation-delay: 3.45s; }
+  .diagram-line:nth-of-type(9) { animation-delay: 3.55s; }
+  
+  /* Animation Keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUpFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes dashDraw {
+    to { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.5; }
+  }
+  
+  @keyframes movePacket {
+    0% { opacity: 0; transform: translate(0, 0); }
+    50% { opacity: 1; transform: translate(45px, -5px); }
+    100% { opacity: 0; transform: translate(90px, -10px); }
+  }
+  
+  /* Dark mode adjustments */
+  :global(.dark) .consultanta-it-illustration {
+    --shadow-color: rgba(0, 0, 0, 0.5);
+  }
+</style>

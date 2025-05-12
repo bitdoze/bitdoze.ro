@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import { getCollection } from 'astro:content';
 import CTA from '../components/CTA.astro';
+import Testimonials from '../components/Testimonials.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 // Get all non-draft services entries and sort by order
 const servicii = await getCollection('servicii', ({ data }) => {
@@ -23,18 +25,14 @@ const description = "Explorează gama noastră completă de servicii digitale pe
   ogType="website"
 >
   <!-- Hero Section -->
-  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
-    <div class="absolute -left-20 bottom-0 w-64 h-64 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
-    
-    <div class="container text-center relative z-10">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">Serviciile Noastre</h1>
-      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
-        Soluții digitale complete și personalizate pentru a-ți transforma afacerea și a o duce la următorul nivel.
-      </p>
-    </div>
-  </section>
+  <PageHeader
+    title="Serviciile Noastre"
+    subtitle="Soluții digitale complete și personalizate pentru a-ți transforma afacerea și a o duce la următorul nivel."
+    align="center"
+    withBlobs={true}
+    withGrid={true}
+    icon="mdi:briefcase-check"
+  />
 
   <!-- Services Grid Section -->
   <section class="section-padding">
@@ -150,84 +148,33 @@ const description = "Explorează gama noastră completă de servicii digitale pe
   </section>
 
   <!-- Testimonials Section -->
-  <section class="section-padding" style="background-color: var(--color-background-alt);">
-    <div class="container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-4">Ce Spun Clienții Noștri</h2>
-        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-          Suntem mândri de feedbackul pozitiv primit de la clienții cu care am colaborat.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="testimonial-card p-6 rounded-lg" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
-          <div class="flex items-center mb-4">
-            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-              <img src="https://xsgames.co/randomusers/assets/avatars/male/32.jpg" alt="Client" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h4 class="font-bold">Andrei Ionescu</h4>
-              <p class="text-sm" style="color: var(--color-text-light);">CEO, TechSolutions SRL</p>
-            </div>
-          </div>
-          <div class="mb-4">
-            <div class="flex">
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-            </div>
-          </div>
-          <p style="color: var(--color-text-light);">"BitDoze a transformat complet prezența noastră online. De la un site invechit la o platformă modernă și optimizată care ne aduce clienți noi în fiecare zi. Recomand cu încredere!"</p>
-        </div>
-
-        <div class="testimonial-card p-6 rounded-lg" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
-          <div class="flex items-center mb-4">
-            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-              <img src="https://xsgames.co/randomusers/assets/avatars/female/32.jpg" alt="Client" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h4 class="font-bold">Maria Popescu</h4>
-              <p class="text-sm" style="color: var(--color-text-light);">Fondator, Boutique Floral</p>
-            </div>
-          </div>
-          <div class="mb-4">
-            <div class="flex">
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-            </div>
-          </div>
-          <p style="color: var(--color-text-light);">"Colaborarea cu echipa BitDoze a fost o experiență excelentă. Au înțeles perfect nevoile afacerii mele și au creat un magazin online care ne-a ajutat să ne extindem la nivel național. Rezultatele au depășit așteptările!"</p>
-        </div>
-
-        <div class="testimonial-card p-6 rounded-lg" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
-          <div class="flex items-center mb-4">
-            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-              <img src="https://xsgames.co/randomusers/assets/avatars/male/45.jpg" alt="Client" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h4 class="font-bold">Mihai Dumitrescu</h4>
-              <p class="text-sm" style="color: var(--color-text-light);">Director Marketing, InvestRO</p>
-            </div>
-          </div>
-          <div class="mb-4">
-            <div class="flex">
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
-              <Icon name="mdi:star-half" class="h-5 w-5 text-yellow-500" />
-            </div>
-          </div>
-          <p style="color: var(--color-text-light);">"Serviciile de SEO și marketing digital oferite de BitDoze au dus la o creștere semnificativă a traficului și a lead-urilor pentru compania noastră. Apreciez profesionalismul, comunicarea excelentă și rezultatele constante."</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Testimonials
+    title="Ce Spun Clienții Noștri"
+    subtitle="Suntem mândri de feedbackul pozitiv primit de la clienții cu care am colaborat."
+    testimonials={[
+      {
+        content: "BitDoze a transformat complet prezența noastră online. De la un site invechit la o platformă modernă și optimizată care ne aduce clienți noi în fiecare zi. Recomand cu încredere!",
+        author: "Andrei Ionescu",
+        role: "CEO",
+        company: "TechSolutions SRL",
+        avatar: "https://xsgames.co/randomusers/assets/avatars/male/32.jpg"
+      },
+      {
+        content: "Colaborarea cu echipa BitDoze a fost o experiență excelentă. Au înțeles perfect nevoile afacerii mele și au creat un magazin online care ne-a ajutat să ne extindem la nivel național. Rezultatele au depășit așteptările!",
+        author: "Maria Popescu",
+        role: "Fondator",
+        company: "Boutique Floral",
+        avatar: "https://xsgames.co/randomusers/assets/avatars/female/32.jpg"
+      },
+      {
+        content: "Serviciile de SEO și marketing digital oferite de BitDoze au dus la o creștere semnificativă a traficului și a lead-urilor pentru compania noastră. Apreciez profesionalismul, comunicarea excelentă și rezultatele constante.",
+        author: "Mihai Dumitrescu",
+        role: "Director Marketing",
+        company: "InvestRO",
+        avatar: "https://xsgames.co/randomusers/assets/avatars/male/45.jpg"
+      }
+    ]}
+  />
 
   <!-- CTA Section -->
   <CTA 

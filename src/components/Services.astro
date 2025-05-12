@@ -1,6 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { services } from "../config/services";
+import ServiceCard from "./ServiceCard.astro";
+import SectionHeader from "./SectionHeader.astro";
 
 interface Props {
   sectionTitle?: string;
@@ -11,6 +13,7 @@ interface Props {
     text: string;
     link: string;
   };
+  showBadges?: boolean;
 }
 
 const {
@@ -21,41 +24,44 @@ const {
   cta = {
     text: "Learn More",
     link: "/servicii"
-  }
+  },
+  showBadges = false
 } = Astro.props;
 
 // Limit services if necessary
 const displayedServices = showAllServices ? services : services.slice(0, limit);
 ---
 
-<section class="section-padding" style="background-color: var(--color-background);">
+<section class="section-padding relative overflow-hidden" style="background-color: var(--color-background);">
+  <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-5" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+  <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full opacity-5" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
   <div class="container">
     <!-- Section header -->
-    <div class="text-center mb-20 feature-header">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-text);">{sectionTitle}</h2>
-      <p class="max-w-2xl mx-auto text-lg" style="color: var(--color-text-light);">{sectionSubtitle}</p>
-    </div>
+    <SectionHeader
+      title={sectionTitle}
+      subtitle={sectionSubtitle}
+      alignment="center"
+      textSize="md"
+      decorative={true}
+      className="mb-20"
+    />
     
     <!-- Services grid -->
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {displayedServices.map((service, index) => (
-        <div class="service-card p-8 transition-all duration-300" style="border-radius: var(--radius-xl); background-color: var(--color-background); border: 1px solid var(--color-text-lighter); box-shadow: var(--shadow-sm);" data-index={index}>
-          <div class="icon-container mb-5 inline-flex items-center justify-center w-12 h-12 rounded-lg" style="background-color: rgba(79, 70, 229, 0.1); color: var(--color-primary);">
-            <Icon name={service.icon} class="h-6 w-6" />
-          </div>
-          <h3 class="text-xl font-semibold mb-3" style="color: var(--color-text);">{service.title}</h3>
-          <p style="color: var(--color-text-light);">{service.description}</p>
-          {service.link && (
-            <div class="mt-4">
-              <a href={service.link} class="font-medium inline-flex items-center" style="color: var(--color-primary); transition: all var(--transition-normal);">
-                {cta.text}
-                <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
-              </a>
-            </div>
-          )}
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {displayedServices.map((service, index) => (
+            <ServiceCard 
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
+              link={service.link}
+              ctaText={cta.text}
+              index={index}
+              badge={showBadges && index === 0 ? {text: "Popular", type: "primary"} : 
+                     showBadges && index === 1 ? {text: "Recomandat", type: "accent"} : 
+                     showBadges && index === 2 ? {text: "Nou", type: "success"} : undefined}
+            />
+          ))}
         </div>
-      ))}
-    </div>
 
     {!showAllServices && services.length > limit && (
       <div class="text-center mt-12">
@@ -83,55 +89,10 @@ const displayedServices = showAllServices ? services : services.slice(0, limit);
   </div>
 </section>
 
-<style>
-  /* Animation for section header */
-  .feature-header {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-    animation-play-state: paused;
-  }
-  
-  /* Animation for service cards */
-  .service-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s ease-out forwards;
-    animation-play-state: paused;
-  }
-  
-  /* Stagger the animations based on index */
-  .service-card[data-index="0"] { animation-delay: 0.1s; }
-  .service-card[data-index="1"] { animation-delay: 0.2s; }
-  .service-card[data-index="2"] { animation-delay: 0.3s; }
-  .service-card[data-index="3"] { animation-delay: 0.4s; }
-  .service-card[data-index="4"] { animation-delay: 0.5s; }
-  .service-card[data-index="5"] { animation-delay: 0.6s; }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Icon hover animation */
-  .icon-container {
-    transition: transform 0.3s ease;
-  }
-  
-  .service-card:hover .icon-container {
-    transform: scale(1.1);
-  }
-</style>
-
 <script>
   // Intersection Observer to trigger animations when elements enter viewport
   document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.feature-header, .service-card');
+    const serviceCards = document.querySelectorAll('.service-card');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -145,7 +106,7 @@ const displayedServices = showAllServices ? services : services.slice(0, limit);
       threshold: 0.1
     });
     
-    animatedElements.forEach(element => {
+    serviceCards.forEach(element => {
       observer.observe(element);
     });
   });

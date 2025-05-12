@@ -1,0 +1,146 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  link: string;
+  ctaText?: string;
+  index?: number;
+  badge?: {
+    text: string;
+    type?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'error';
+  };
+}
+
+const { 
+  title, 
+  description, 
+  icon, 
+  link, 
+  ctaText = "Află Mai Multe", 
+  index = 0,
+  badge
+} = Astro.props;
+---
+
+<a href={link} class="service-card group relative overflow-hidden h-full transition-all duration-300 no-underline" data-index={index}>
+  <div class="card-inner p-8 h-full flex flex-col justify-between z-10 relative transition-all duration-500 group-hover:translate-y-[-8px]" style="border-radius: var(--radius-xl); background-color: var(--color-background); border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2); box-shadow: var(--shadow-sm);">
+    <div>
+      {badge && (
+        <div class={`badge badge-${badge.type || 'primary'} mb-4`}>
+          {badge.text}
+        </div>
+      )}
+      <div class="icon-container mb-5 inline-flex items-center justify-center w-14 h-14 rounded-lg transition-all duration-300 group-hover:scale-110" style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);">
+        <Icon name={icon} class="h-7 w-7" />
+      </div>
+      <h3 class="text-xl font-semibold mb-3 transition-colors duration-300 group-hover:text-primary text-card-title">{title}</h3>
+      <p class="mb-4 text-card-description">{description}</p>
+    </div>
+    <div class="flex-none">
+      <div class="inline-flex items-center font-medium transition-all duration-300 group-hover:translate-x-2 text-primary">
+        {ctaText}
+        <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+      </div>
+    </div>
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-5" style="from-color: var(--color-primary); to-color: var(--color-secondary);"></div>
+</a>
+
+<style>
+  .service-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-play-state: paused;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Card hover effects */
+  .service-card .card-inner {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
+  }
+
+  .service-card:hover .card-inner {
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Text color classes for dark mode compatibility */
+  .text-card-title {
+    color: var(--color-text);
+  }
+  
+  .text-card-description {
+    color: var(--color-text-light);
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  :global(.dark) .text-card-title {
+    color: var(--color-text);
+  }
+  
+  :global(.dark) .text-card-description {
+    color: var(--color-text-light);
+  }
+  
+  :global(.dark) .service-card .card-inner {
+    background-color: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  :global(.dark) .service-card:hover .card-inner {
+    border-color: rgba(var(--color-primary-rgb), 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Add subtle pulse animation on hover */
+  @keyframes subtle-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(var(--color-primary-rgb), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0); }
+  }
+
+  .service-card:hover .icon-container {
+    transform: scale(1.1);
+    animation: subtle-pulse 2s infinite;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const serviceCard = document.querySelector('.service-card');
+    if (serviceCard) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).style.animationPlayState = 'running';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      observer.observe(serviceCard);
+    }
+  });
+</script>

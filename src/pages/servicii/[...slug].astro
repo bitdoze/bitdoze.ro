@@ -3,6 +3,13 @@ import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 import CTA from '../../components/CTA.astro';
+import WebDesignIllustration from '../../components/svg/services/WebDesignIllustration.astro';
+import HostingIllustration from '../../components/svg/services/HostingIllustration.astro';
+import SeoIllustration from '../../components/svg/services/SeoIllustration.astro';
+import MentenantaIllustration from '../../components/svg/services/MentenantaIllustration.astro';
+import ConsultantaITIllustration from '../../components/svg/services/ConsultantaITIllustration.astro';
+import MarketingIllustration from '../../components/svg/services/MarketingIllustration.astro';
+import ConsultantaAIIllustration from '../../components/svg/services/ConsultantaAIIllustration.astro';
 
 export async function getStaticPaths() {
   const serviciiEntries = await getCollection('servicii');
@@ -37,77 +44,125 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
   ogType="article"
 >
   <!-- Hero Section -->
-  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
-    <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
-    <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+    <section class="section-padding relative overflow-hidden" style="background-color: var(--color-background-alt);">
+      <!-- Background gradient -->
+      <div class="absolute inset-0 opacity-50 dark:opacity-20" style="background: linear-gradient(to bottom right, rgba(79, 70, 229, 0.1), var(--color-background), rgba(14, 165, 233, 0.1));"></div>
+      
+      <!-- Animated background elements -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+      </div>
+      
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="grid-pattern"></div>
+      </div>
     
-    <div class="container max-w-6xl relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <a href="/servicii" class="inline-flex items-center text-sm font-medium transition-all hover:-translate-x-1 mb-4" style="color: var(--color-primary);">
-            <Icon name="mdi:arrow-left" class="mr-1.5 h-4 w-4" />
-            Înapoi la servicii
-          </a>
-          <div class="flex items-center mb-4">
-            <div class="inline-flex items-center justify-center w-14 h-14 mr-4 rounded-full" style="background-color: rgba(79, 70, 229, 0.1);">
-              <Icon name={icon} class="h-7 w-7" style="color: var(--color-primary);" />
+      <div class="container max-w-6xl relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="animate-slide-right">
+            <a href="/servicii" class="inline-flex items-center text-sm font-medium transition-all hover:-translate-x-1 mb-4 badge badge-primary py-1 px-3">
+              <Icon name="mdi:arrow-left" class="mr-1.5 h-4 w-4" />
+              Înapoi la servicii
+            </a>
+            <div class="flex items-start mb-4">
+              <div class="inline-flex items-center justify-center w-16 h-16 mr-4 rounded-lg transform -rotate-3 shadow-md" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
+                <Icon name={icon} class="h-8 w-8" style="color: var(--color-primary);" />
+              </div>
+              <h1 class="text-4xl md:text-5xl font-bold relative">
+                {title}
+                <span class="absolute -bottom-2 left-0 w-16 h-1 rounded-full" style="background-color: var(--color-primary);"></span>
+              </h1>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold">{title}</h1>
+            <p class="text-xl mb-8 leading-relaxed" style="color: var(--color-text-light);">
+              {descriere}
+            </p>
+            <div class="flex flex-wrap gap-4 mt-6">
+              {pret && (
+                <div class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium shadow-sm" style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.2);">
+                  <Icon name="mdi:currency-usd" class="mr-1.5 h-5 w-5" />
+                  {pret}
+                </div>
+              )}
+              {durata && (
+                <div class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium shadow-sm" style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.2);">
+                  <Icon name="mdi:clock-outline" class="mr-1.5 h-5 w-5" />
+                  {durata}
+                </div>
+              )}
+            </div>
           </div>
-          <p class="text-xl mb-6" style="color: var(--color-text-light);">
-            {descriere}
-          </p>
-          <div class="flex flex-wrap gap-4 mt-6">
-            {pret && (
-              <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium" style="background-color: rgba(79, 70, 229, 0.1); color: var(--color-primary);">
-                <Icon name="mdi:currency-usd" class="mr-1.5 h-4 w-4" />
-                {pret}
+          <div class="service-image-container animate-slide-left">
+            <div class="relative p-2 rounded-xl bg-gradient-to-br shadow-xl" style="background: linear-gradient(to bottom right, rgba(var(--color-primary-rgb), 0.8), rgba(var(--color-secondary-rgb), 0.8));">
+              {entry.slug === 'web-design' ? (
+                <WebDesignIllustration />
+              ) : entry.slug === 'hosting' ? (
+                <HostingIllustration />
+              ) : entry.slug === 'seo' ? (
+                <SeoIllustration />
+              ) : entry.slug === 'mentenanta' ? (
+                <MentenantaIllustration />
+              ) : entry.slug === 'consultanta-it' ? (
+                <ConsultantaITIllustration />
+              ) : entry.slug === 'marketing' ? (
+                <MarketingIllustration />
+              ) : entry.slug === 'consultanta-ai' ? (
+                <ConsultantaAIIllustration />
+              ) : (
+                <img 
+                  src={imagine} 
+                  alt={title} 
+                  class="w-full h-auto object-cover rounded-lg shadow-inner transform hover:scale-102 transition-transform duration-500"
+                />
+              )}
+              <div class="absolute -bottom-3 -right-3 w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold z-10" style="background-color: var(--color-accent);">
+                <Icon name="mdi:star" class="h-8 w-8" />
               </div>
-            )}
-            {durata && (
-              <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium" style="background-color: rgba(79, 70, 229, 0.1); color: var(--color-primary);">
-                <Icon name="mdi:clock-outline" class="mr-1.5 h-4 w-4" />
-                {durata}
-              </div>
-            )}
+            </div>
           </div>
-        </div>
-        <div class="service-image-container">
-          {imagine ? (
-            <img 
-              src={imagine} 
-              alt={title} 
-              class="w-full h-auto object-cover rounded-xl shadow-xl transform hover:scale-105 transition-transform duration-500"
-              style="border-radius: var(--radius-xl);"
-            />
-          ) : (
-            <div class="w-full aspect-video bg-gradient-to-r rounded-xl shadow-xl" style="background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark)); border-radius: var(--radius-xl);"></div>
-          )}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   <!-- Main Content Section -->
   <section class="section-padding">
     <div class="container max-w-6xl">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <!-- Main Content -->
         <div class="lg:col-span-2">
-          <article class="prose prose-lg max-w-none" style="color: var(--color-text);">
-            <Content />
-          </article>
+          <div class="sticky top-0 z-10 py-4 bg-white bg-opacity-90 backdrop-blur-sm mb-8 flex overflow-x-auto gap-4 -mx-4 px-4 no-scrollbar">
+            <a href="#continut" class="flex-none px-4 py-2 rounded-full text-sm font-medium bg-primary text-white">Conținut</a>
+            {caracteristici && caracteristici.length > 0 && (
+              <a href="#caracteristici" class="flex-none px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200 transition-colors">Caracteristici</a>
+            )}
+            {beneficii && beneficii.length > 0 && (
+              <a href="#beneficii" class="flex-none px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200 transition-colors">Beneficii</a>
+            )}
+            {intrebari_frecvente && intrebari_frecvente.length > 0 && (
+              <a href="#intrebari" class="flex-none px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-gray-200 transition-colors">FAQ</a>
+            )}
+          </div>
+          
+          <div id="continut" class="scroll-mt-20">
+            <article class="prose prose-lg max-w-none" style="color: var(--color-text);">
+              <Content />
+            </article>
+          </div>
 
           <!-- FAQ Section -->
           {intrebari_frecvente && intrebari_frecvente.length > 0 && (
-            <div class="mt-16">
+            <div id="intrebari" class="mt-16 scroll-mt-20">
               <h2 class="text-2xl font-bold mb-8 service-heading">Întrebări Frecvente</h2>
               <div class="space-y-6">
                 {intrebari_frecvente.map((item, index) => (
-                  <div class="faq-item p-6 rounded-lg" style="background-color: var(--color-background-alt); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg);">
-                    <h3 class="text-lg font-semibold mb-3">{item.intrebare}</h3>
-                    <p style="color: var(--color-text-light);">{item.raspuns}</p>
+                  <div class="faq-item p-6 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer" style="background-color: var(--color-background-alt); box-shadow: var(--shadow-sm); border: 1px solid rgba(var(--color-primary-rgb), 0.1); border-radius: var(--radius-lg);">
+                    <h3 class="text-lg font-semibold mb-3 flex items-start">
+                      <span class="text-primary mr-2 font-bold">Q.</span>
+                      {item.intrebare}
+                    </h3>
+                    <p style="color: var(--color-text-light);" class="pl-6">{item.raspuns}</p>
                   </div>
                 ))}
               </div>
@@ -120,15 +175,17 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
           <div class="sticky top-8 space-y-8">
             <!-- Características -->
             {caracteristici && caracteristici.length > 0 && (
-              <div class="p-6 rounded-lg" style="background-color: var(--color-background-alt); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg);">
+              <div id="caracteristici" class="p-6 rounded-lg shadow-md border-t-4 transition-all duration-300 hover:shadow-lg scroll-mt-20" style="background-color: var(--color-background); border-top-color: var(--color-primary); border-radius: var(--radius-lg);">
                 <h3 class="text-xl font-bold mb-4 flex items-center">
-                  <Icon name="mdi:check-circle" class="mr-2 h-5 w-5" style="color: var(--color-primary);" />
+                  <Icon name="mdi:check-circle" class="mr-2 h-6 w-6" style="color: var(--color-primary);" />
                   Caracteristici
                 </h3>
-                <ul class="space-y-3">
+                <ul class="space-y-4">
                   {caracteristici.map(item => (
-                    <li class="flex items-start">
-                      <span class="inline-block mt-1 mr-2 text-sm" style="color: var(--color-primary);">●</span>
+                    <li class="flex items-start p-2 hover:bg-gray-50 rounded-md transition-colors">
+                      <span class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-light flex items-center justify-center mr-3 mt-0.5">
+                        <Icon name="mdi:check" class="h-4 w-4 text-primary" />
+                      </span>
                       <span style="color: var(--color-text-light);">{item}</span>
                     </li>
                   ))}
@@ -138,15 +195,17 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
 
             <!-- Beneficios -->
             {beneficii && beneficii.length > 0 && (
-              <div class="p-6 rounded-lg" style="background-color: var(--color-background-alt); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg);">
+              <div id="beneficii" class="p-6 rounded-lg shadow-md border-t-4 transition-all duration-300 hover:shadow-lg scroll-mt-20" style="background-color: var(--color-background); border-top-color: var(--color-accent); border-radius: var(--radius-lg);">
                 <h3 class="text-xl font-bold mb-4 flex items-center">
-                  <Icon name="mdi:star" class="mr-2 h-5 w-5" style="color: var(--color-primary);" />
+                  <Icon name="mdi:star" class="mr-2 h-6 w-6" style="color: var(--color-accent);" />
                   Beneficii
                 </h3>
-                <ul class="space-y-3">
+                <ul class="space-y-4">
                   {beneficii.map(item => (
-                    <li class="flex items-start">
-                      <span class="inline-block mt-1 mr-2 text-sm" style="color: var(--color-accent);">●</span>
+                    <li class="flex items-start p-2 hover:bg-gray-50 rounded-md transition-colors">
+                      <span class="flex-shrink-0 h-6 w-6 rounded-full bg-accent-light flex items-center justify-center mr-3 mt-0.5">
+                        <Icon name="mdi:arrow-right" class="h-4 w-4 text-accent" />
+                      </span>
                       <span style="color: var(--color-text-light);">{item}</span>
                     </li>
                   ))}
@@ -180,16 +239,38 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
             </div>
             
             <!-- Contact Box -->
-            <div class="p-6 rounded-lg" style="background: linear-gradient(to bottom right, var(--color-primary), var(--color-primary-dark)); box-shadow: var(--shadow-lg); color: white; border-radius: var(--radius-lg);">
-              <h3 class="text-xl font-bold mb-4">Ai nevoie de acest serviciu?</h3>
-              <p class="mb-6 text-white text-opacity-90">Contactează-ne acum pentru o consultație gratuită și o ofertă personalizată pentru afacerea ta.</p>
-              <a 
-                href="/contact" 
-                class="block w-full py-3 px-4 text-center font-medium rounded-lg transition-transform hover:scale-105"
-                style="background-color: white; color: var(--color-primary); border-radius: var(--radius-lg);"
-              >
-                Contactează-ne
-              </a>
+            <div class="p-6 rounded-lg relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary), var(--color-secondary-dark)); box-shadow: var(--shadow-lg); color: white; border-radius: var(--radius-lg);">
+              <!-- Add an overlay for dark mode to ensure contrast -->
+              <div class="absolute inset-0 bg-black opacity-0 dark:opacity-20"></div>
+              <div class="absolute top-0 right-0 -mt-10 -mr-10">
+                <div class="w-40 h-40 rounded-full opacity-10" style="background: radial-gradient(circle, white 0%, transparent 70%);"></div>
+              </div>
+              <div class="absolute bottom-0 left-0 -mb-8 -ml-8">
+                <div class="w-24 h-24 rounded-full opacity-10" style="background: radial-gradient(circle, white 0%, transparent 70%);"></div>
+              </div>
+              <h3 class="text-xl font-bold mb-4 flex items-center relative z-10">
+                <Icon name="mdi:message-text" class="mr-2 h-6 w-6" />
+                Ai nevoie de acest serviciu?
+              </h3>
+              <p class="mb-6 text-white text-opacity-90 relative z-10">Contactează-ne acum pentru o consultație gratuită și o ofertă personalizată pentru afacerea ta.</p>
+              <div class="flex flex-col space-y-3 relative z-10">
+                <a 
+                  href="/contact" 
+                  class="block w-full py-3 px-4 text-center font-medium rounded-lg transition-all hover:shadow-lg hover:-translate-y-1"
+                  style="background-color: white; color: var(--color-primary); border-radius: var(--radius-lg);"
+                >
+                  <Icon name="mdi:send" class="mr-2 h-5 w-5 inline-block" />
+                  Contactează-ne
+                </a>
+                <a 
+                  href="tel:+40123456789" 
+                  class="block w-full py-3 px-4 text-center font-medium rounded-lg transition-all hover:bg-white/20"
+                  style="background-color: rgba(255,255,255,0.15); color: white; border-radius: var(--radius-lg);"
+                >
+                  <Icon name="mdi:phone" class="mr-2 h-5 w-5 inline-block" />
+                  Sună acum
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -198,46 +279,53 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
   </section>
   
   <!-- Related Services -->
-  <section class="section-padding" style="background-color: var(--color-background-alt);">
+  <section class="section-padding relative overflow-hidden" style="background-color: var(--color-background-alt);">
+    <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-5" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full opacity-5" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+    
     <div class="container max-w-6xl">
-      <h2 class="text-3xl font-bold mb-8 text-center service-heading">Alte servicii care te-ar putea interesa</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {relatedServices.map(service => (
-          <a href={`/servicii/${service.slug}`} class="service-card group">
-            <div class="p-6 h-full flex flex-col rounded-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-lg" style="background-color: var(--color-background); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg);">
-              <div class="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-full" style="background-color: rgba(79, 70, 229, 0.1);">
-                <Icon name={service.data.icon} class="h-6 w-6" style="color: var(--color-primary);" />
+      <div class="text-center mb-16">
+        <span class="inline-block px-3 py-1 bg-primary-light/10 text-primary rounded-full text-sm font-medium mb-4">
+          Explorează mai mult
+        </span>
+        <h2 class="text-3xl font-bold mb-4 relative inline-block">
+          Alte servicii care te-ar putea interesa
+          <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary rounded-full"></span>
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {relatedServices.map((service, index) => (
+          <a href={`/servicii/${service.slug}`} class="service-card group h-full rounded-xl shadow-sm overflow-hidden" style="background-color: var(--color-background);">
+            <div class="p-6 h-full flex flex-col relative z-10">
+              <div class="inline-flex items-center justify-center w-14 h-14 mb-5 rounded-lg transition-all duration-300 group-hover:scale-110" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
+                <Icon name={service.data.icon} class="h-7 w-7" style="color: var(--color-primary);" />
               </div>
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{service.data.title}</h3>
-              <p class="mb-4 flex-grow" style="color: var(--color-text-light);">{service.data.descriere}</p>
-              <span class="inline-flex items-center text-sm font-medium transition-all group-hover:translate-x-1" style="color: var(--color-primary);">
+              <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{service.data.title}</h3>
+              <p class="mb-5 flex-grow" style="color: var(--color-text-light);">{service.data.descriere}</p>
+              <div class="inline-flex items-center font-medium transition-all duration-300 group-hover:translate-x-2" style="color: var(--color-primary);">
                 Află mai multe
-                <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4" />
-              </span>
+                <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
             </div>
+            <div class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-5" style="from-color: var(--color-primary); to-color: var(--color-secondary);"></div>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA Section with background decoration -->
-  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom right, var(--color-primary), var(--color-secondary-dark))">
-    <div class="absolute inset-0 bg-grid opacity-20"></div>
-    <div class="absolute -right-64 -top-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" style="background-color: var(--color-secondary);"></div>
-    <div class="absolute -left-64 -bottom-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30" style="background-color: var(--color-primary-light);"></div>
-    
-    <div class="container relative z-10">
-      <CTA 
-        title="Pregătit să începem colaborarea?"
-        subtitle="Contactează-ne astăzi pentru a discuta despre nevoile tale și a vedea cum serviciile noastre pot ajuta afacerea ta să crească."
-        ctaText="Contactează-ne"
-        ctaLink="/contact"
-        secondaryText="Vezi toate serviciile"
-        secondaryLink="/servicii"
-      />
-    </div>
-  </section>
+  <!-- CTA Section -->
+  <div class="mt-20">
+    <CTA 
+      title="Pregătit să începem colaborarea?"
+      subtitle="Contactează-ne astăzi pentru a discuta despre nevoile tale și a vedea cum serviciile noastre pot ajuta afacerea ta să crească."
+      ctaText="Contactează-ne"
+      ctaLink="/contact"
+      secondaryText="Vezi toate serviciile"
+      secondaryLink="/servicii"
+    />
+  </div>
 </Layout>
 
 <style is:global>
@@ -262,6 +350,10 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
     border-radius: 2px;
   }
   
+  :global(.dark) .prose h2 {
+    color: var(--color-text);
+  }
+  
   .prose h3 {
     color: var(--color-text);
     font-weight: 600;
@@ -270,10 +362,18 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
     margin-bottom: 1rem;
   }
   
+  :global(.dark) .prose h3 {
+    color: var(--color-text);
+  }
+  
   .prose p {
     color: var(--color-text-light);
     margin-bottom: 1.25rem;
     line-height: 1.7;
+  }
+  
+  :global(.dark) .prose p {
+    color: var(--color-text-light);
   }
   
   .prose ul {
@@ -282,17 +382,26 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
     padding-left: 1.5rem;
   }
   
+  :global(.dark) .prose ul {
+    color: var(--color-text-light);
+  }
+  
   .prose li {
     margin-bottom: 0.5rem;
   }
-
+  
+  :global(.dark) .prose li {
+    color: var(--color-text-light);
+  }
+  
   .service-heading {
     position: relative;
     display: inline-block;
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
+    color: var(--color-text);
   }
-
+  
   .service-heading::after {
     content: '';
     position: absolute;
@@ -304,6 +413,10 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
     border-radius: 3px;
   }
   
+  :global(.dark) .service-heading {
+    color: var(--color-text);
+  }
+  
   .faq-item {
     transition: all 0.3s ease;
   }
@@ -313,8 +426,13 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
     box-shadow: var(--shadow-md);
   }
   
-  .service-card {
-    transition: all 0.3s ease;
+  :global(.dark) .faq-item {
+    background-color: var(--color-dark-background-alt) !important;
+    border-color: rgba(var(--color-primary-rgb), 0.2) !important;
+  }
+  
+  :global(.dark) .faq-item:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
   
   /* Background grid */
@@ -325,26 +443,138 @@ const { title, descriere, icon, imagine, pret, durata, caracteristici, beneficii
       linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   }
   
-  /* Blob animation */
-  @keyframes animate-blob {
+  /* Grid pattern */
+  .grid-pattern {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Background blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+  
+  .blob-1 {
+    width: 600px;
+    height: 600px;
+    left: -100px;
+    top: -100px;
+    background: rgba(124, 58, 237, 0.05);
+    animation: blob-move 25s infinite alternate;
+  }
+  
+  .blob-2 {
+    width: 400px;
+    height: 400px;
+    right: -50px;
+    top: 30%;
+    background: rgba(56, 189, 248, 0.05);
+    animation: blob-move 18s infinite alternate-reverse;
+  }
+  
+  .blob-3 {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    left: 20%;
+    background: rgba(251, 113, 133, 0.05);
+    animation: blob-move 15s infinite alternate;
+  }
+  
+  @keyframes blob-move {
     0% {
-      transform: translate(0px, 0px) scale(1);
+      transform: translate(0, 0) scale(1);
     }
     33% {
-      transform: translate(30px, -50px) scale(1.1);
+      transform: translate(20px, -20px) scale(1.05);
     }
     66% {
-      transform: translate(-20px, 20px) scale(0.9);
+      transform: translate(-20px, 20px) scale(0.95);
     }
     100% {
-      transform: translate(0px, 0px) scale(1);
+      transform: translate(0, 0) scale(1);
     }
+  }
+  
+  /* Animations */
+  @keyframes animate-blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
   }
   
   .animate-blob {
     animation: animate-blob 7s ease-in-out infinite;
   }
-
+  
+  @keyframes animate-float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .animate-float {
+    animation: animate-float 6s ease-in-out infinite;
+  }
+  
+  .animate-slide-right {
+    animation: slide-in-right 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-left {
+    animation: slide-in-left 0.8s ease-out forwards;
+  }
+  
+  @keyframes slide-in-right {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes slide-in-left {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  
+  /* No scrollbar utility */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Dark mode specific styles */
+  :global(.dark) .prose a {
+    color: var(--color-primary-light);
+  }
+  
+  :global(.dark) .prose a:hover {
+    text-decoration: underline;
+  }
+  
+  :global(.dark) .prose h2::before {
+    background-color: var(--color-primary);
+  }
+  
+  :global(.dark) .prose blockquote {
+    border-left-color: var(--color-primary);
+    background-color: rgba(var(--color-background-alt-rgb), 0.3);
+  }
+  
+  /* Dark mode adjustments */
+  :global(.dark) .grid-pattern {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+  
   @media (max-width: 768px) {
     .prose h2 {
       font-size: 1.5rem;

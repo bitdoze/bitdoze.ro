@@ -1,0 +1,106 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  class?: string;
+  showLabel?: boolean;
+}
+
+const { class: className = "", showLabel = false } = Astro.props;
+---
+
+<button id="theme-toggle" class={`theme-toggle inline-flex items-center justify-center p-2 rounded-full ${className}`} aria-label="Schimbă tema">
+  <Icon name="mdi:white-balance-sunny" class="h-5 w-5 dark:hidden" />
+  <Icon name="mdi:weather-night" class="h-5 w-5 hidden dark:block" />
+  {showLabel && (
+    <span class="ml-2 text-sm font-medium dark:hidden">Mod întunecat</span>
+    <span class="ml-2 text-sm font-medium hidden dark:block">Mod luminos</span>
+  )}
+</button>
+
+<script is:inline>
+  // This script runs immediately on the client side without waiting for DOMContentLoaded
+  // to prevent flash of light mode during page navigation
+  function applyTheme() {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeOn = localStorage.getItem('theme') === 'dark' || 
+                     (!localStorage.getItem('theme') && darkModeMediaQuery.matches);
+    
+    if (darkModeOn) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+  
+  // Apply theme immediately
+  applyTheme();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Toggle function
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    
+    // Event listener
+    themeToggle?.addEventListener('click', toggleDarkMode);
+    
+    // Handle system preference change
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkModeMediaQuery.addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .theme-toggle {
+    transition: all 0.25s ease;
+    color: var(--color-text);
+    background-color: rgba(var(--color-text-rgb), 0.1);
+  }
+  
+  .theme-toggle:hover {
+    background-color: rgba(var(--color-text-rgb), 0.15);
+    transform: scale(1.05);
+  }
+  
+  .theme-toggle:active {
+    transform: scale(0.95);
+  }
+  
+  :global(.dark) {
+    color-scheme: dark;
+    --color-background: #0f172a; /* slate-900 */
+    --color-background-rgb: 15, 23, 42;
+    --color-background-alt: #1e293b; /* slate-800 */
+    --color-background-alt-rgb: 30, 41, 59;
+    --color-text: #f8fafc; /* slate-50 */
+    --color-text-rgb: 248, 250, 252;
+    --color-text-light: #cbd5e1; /* slate-300 */
+    --color-text-light-rgb: 203, 213, 225;
+    --color-text-lighter: #94a3b8; /* slate-400 */
+    --color-text-lighter-rgb: 148, 163, 184;
+    
+    /* Adjust shadow variables for dark mode */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  }
+</style>
