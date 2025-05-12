@@ -1,0 +1,277 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import { getCollection } from 'astro:content';
+import CTA from '../components/CTA.astro';
+
+// Get all non-draft services entries and sort by order
+const servicii = await getCollection('servicii', ({ data }) => {
+  return !data.draft;
+});
+
+// Sort by order field
+const sortedServices = servicii.sort((a, b) => a.data.ordine - b.data.ordine);
+
+// Metadata for the page
+const title = "Serviciile Noastre - BitDoze";
+const description = "Explorează gama noastră completă de servicii digitale pentru afacerea ta. Web design, hosting, mentenanță, SEO, marketing și consultanță IT.";
+---
+
+<Layout 
+  title={title}
+  description={description}
+  ogType="website"
+>
+  <!-- Hero Section -->
+  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+    <div class="absolute -left-20 bottom-0 w-64 h-64 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+    
+    <div class="container text-center relative z-10">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Serviciile Noastre</h1>
+      <p class="text-xl max-w-3xl mx-auto" style="color: var(--color-text-light);">
+        Soluții digitale complete și personalizate pentru a-ți transforma afacerea și a o duce la următorul nivel.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedServices.map(service => (
+          <a href={`/servicii/${service.slug}`} class="service-card group">
+            <div class="h-full p-6 flex flex-col rounded-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-lg" style="background-color: var(--color-background); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg);">
+              <div class="inline-flex items-center justify-center w-14 h-14 mb-5 rounded-full" style="background-color: rgba(79, 70, 229, 0.1);">
+                <Icon name={service.data.icon} class="h-7 w-7" style="color: var(--color-primary);" />
+              </div>
+              <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{service.data.title}</h3>
+              <p class="mb-5 flex-grow" style="color: var(--color-text-light);">{service.data.descriere}</p>
+              
+              {service.data.pret && (
+                <div class="inline-flex items-center px-3 py-1 mb-4 rounded-full text-sm font-medium" style="background-color: rgba(79, 70, 229, 0.1); color: var(--color-primary);">
+                  <Icon name="mdi:currency-usd" class="mr-1 h-4 w-4" />
+                  {service.data.pret}
+                </div>
+              )}
+              
+              <span class="inline-flex items-center text-sm font-medium transition-all group-hover:translate-x-1" style="color: var(--color-primary);">
+                Află mai multe
+                <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4" />
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="section-padding" style="background-color: var(--color-background-alt);">
+    <div class="container">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">Procesul Nostru de Lucru</h2>
+        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+          Indiferent de serviciul ales, urmăm un proces structurat și eficient pentru a obține rezultate excelente pentru clienții noștri.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="process-step p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
+            1
+          </div>
+          <Icon name="mdi:lightbulb" class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-2">Consultare</h3>
+          <p style="color: var(--color-text-light);">Începem prin a înțelege nevoile și obiectivele tale specifice pentru a dezvolta o strategie personalizată.</p>
+        </div>
+
+        <div class="process-step p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
+            2
+          </div>
+          <Icon name="mdi:chart-timeline-variant" class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-2">Planificare</h3>
+          <p style="color: var(--color-text-light);">Dezvoltăm un plan detaliat cu timeline, livrabile și metrici de succes pentru proiectul tău.</p>
+        </div>
+
+        <div class="process-step p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
+            3
+          </div>
+          <Icon name="mdi:rocket-launch" class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-2">Implementare</h3>
+          <p style="color: var(--color-text-light);">Executăm cu atenție planul, utilizând cele mai bune practici și tehnologii pentru rezultate optime.</p>
+        </div>
+
+        <div class="process-step p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="w-12 h-12 rounded-full text-white flex items-center justify-center mb-4 text-xl font-bold" style="background-color: var(--color-primary);">
+            4
+          </div>
+          <Icon name="mdi:chart-line" class="h-10 w-10 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-2">Optimizare</h3>
+          <p style="color: var(--color-text-light);">Monitorizăm, analizăm și optimizăm continuu pentru a asigura cele mai bune rezultate pe termen lung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">De Ce Să Ne Alegi Pe Noi</h2>
+        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+          Suntem mai mult decât un furnizor de servicii - suntem partenerul tău de încredere pentru creșterea și succesul afacerii tale digitale.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="benefit-card p-6 rounded-lg" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <Icon name="mdi:account-group" class="h-12 w-12 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-3">Expertiză Dovedită</h3>
+          <p style="color: var(--color-text-light);">Echipa noastră reunește specialiști cu peste 10 ani de experiență în diverse domenii ale tehnologiei și marketingului digital.</p>
+        </div>
+
+        <div class="benefit-card p-6 rounded-lg" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <Icon name="mdi:cube-scan" class="h-12 w-12 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-3">Soluții Personalizate</h3>
+          <p style="color: var(--color-text-light);">Nu oferim soluții universale. Fiecare proiect este tratat unic, cu strategii și implementări adaptate specific nevoilor tale.</p>
+        </div>
+
+        <div class="benefit-card p-6 rounded-lg" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05);">
+          <Icon name="mdi:chart-areaspline" class="h-12 w-12 mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-bold mb-3">Rezultate Măsurabile</h3>
+          <p style="color: var(--color-text-light);">Ne concentrăm pe livrarea unor rezultate concrete și măsurabile, cu raportare transparentă și focus pe ROI pentru investiția ta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="section-padding" style="background-color: var(--color-background-alt);">
+    <div class="container">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">Ce Spun Clienții Noștri</h2>
+        <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+          Suntem mândri de feedbackul pozitiv primit de la clienții cu care am colaborat.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="testimonial-card p-6 rounded-lg" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+              <img src="https://xsgames.co/randomusers/assets/avatars/male/32.jpg" alt="Client" class="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h4 class="font-bold">Andrei Ionescu</h4>
+              <p class="text-sm" style="color: var(--color-text-light);">CEO, TechSolutions SRL</p>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="flex">
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+            </div>
+          </div>
+          <p style="color: var(--color-text-light);">"BitDoze a transformat complet prezența noastră online. De la un site invechit la o platformă modernă și optimizată care ne aduce clienți noi în fiecare zi. Recomand cu încredere!"</p>
+        </div>
+
+        <div class="testimonial-card p-6 rounded-lg" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+              <img src="https://xsgames.co/randomusers/assets/avatars/female/32.jpg" alt="Client" class="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h4 class="font-bold">Maria Popescu</h4>
+              <p class="text-sm" style="color: var(--color-text-light);">Fondator, Boutique Floral</p>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="flex">
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+            </div>
+          </div>
+          <p style="color: var(--color-text-light);">"Colaborarea cu echipa BitDoze a fost o experiență excelentă. Au înțeles perfect nevoile afacerii mele și au creat un magazin online care ne-a ajutat să ne extindem la nivel național. Rezultatele au depășit așteptările!"</p>
+        </div>
+
+        <div class="testimonial-card p-6 rounded-lg" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+              <img src="https://xsgames.co/randomusers/assets/avatars/male/45.jpg" alt="Client" class="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h4 class="font-bold">Mihai Dumitrescu</h4>
+              <p class="text-sm" style="color: var(--color-text-light);">Director Marketing, InvestRO</p>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="flex">
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star" class="h-5 w-5 text-yellow-500" />
+              <Icon name="mdi:star-half" class="h-5 w-5 text-yellow-500" />
+            </div>
+          </div>
+          <p style="color: var(--color-text-light);">"Serviciile de SEO și marketing digital oferite de BitDoze au dus la o creștere semnificativă a traficului și a lead-urilor pentru compania noastră. Apreciez profesionalismul, comunicarea excelentă și rezultatele constante."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA 
+    title="Pregătit să duci afacerea ta la următorul nivel?"
+    subtitle="Contactează-ne astăzi pentru o consultație gratuită și descoperă cum serviciile noastre pot accelera creșterea afacerii tale."
+    ctaText="Contactează-ne acum"
+    ctaLink="/contact"
+    secondaryText="Află mai multe"
+    secondaryLink="/about"
+    trustedBy="De încredere pentru companii de top din România"
+  />
+</Layout>
+
+<style>
+  .process-step {
+    transition: all 0.3s ease;
+  }
+  
+  .process-step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .benefit-card {
+    transition: all 0.3s ease;
+  }
+  
+  .benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .testimonial-card {
+    transition: all 0.3s ease;
+  }
+  
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .service-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
