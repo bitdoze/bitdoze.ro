@@ -285,7 +285,7 @@ export const homePageConfig: PageConfig = {
       },
       ctaSecondary: {
         text: "Află Mai Multe",
-        link: "/services",
+        link: "/servicii",
       },
       imageUrl: imageAssets.hero.main,
       stats: [
@@ -327,7 +327,7 @@ export const homePageConfig: PageConfig = {
       ctas: {
         primary: {
           text: "Serviciile Noastre",
-          link: "/services",
+          link: "/servicii",
         },
         secondary: {
           text: "Despre Noi",
@@ -336,7 +336,7 @@ export const homePageConfig: PageConfig = {
         welcome: [
           {
             text: "Servicii de Încredere",
-            link: "/services",
+            link: "/servicii",
           },
           {
             text: "Soluții Inovatoare",
@@ -356,7 +356,7 @@ export const homePageConfig: PageConfig = {
       limit: 3,
       cta: {
         text: "Află Mai Multe",
-        link: "/services",
+        link: "/servicii",
       },
     },
     {
@@ -579,7 +579,7 @@ export const servicesPageConfig: PageConfig = {
       showAllServices: true,
       cta: {
         text: "Află Mai Multe",
-        link: "/services"
+        link: "/servicii"
       },
     },
     {

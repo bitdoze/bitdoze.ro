@@ -22,7 +22,7 @@ export const ctaConfig: CTAConfig = {
   },
   secondaryAction: {
     text: "Află Mai Multe",
-    href: "/services",
+    href: "/servicii",
   },
 };
 

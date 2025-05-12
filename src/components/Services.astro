@@ -20,7 +20,7 @@ const {
   limit = 6,
   cta = {
     text: "Learn More",
-    link: "/services"
+    link: "/servicii"
   }
 } = Astro.props;
 
@@ -60,7 +60,7 @@ const displayedServices = showAllServices ? services : services.slice(0, limit);
     {!showAllServices && services.length > limit && (
       <div class="text-center mt-12">
         <a 
-          href="/services" 
+          href="/servicii" 
           class="btn btn-primary inline-flex items-center justify-center h-12 px-6 font-medium"
         >
           View All Services

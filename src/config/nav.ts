@@ -29,7 +29,7 @@ export const navConfig: NavConfig = {
     },
     {
       title: "Servicii",
-      href: "/services",
+      href: "/servicii",
     },
     {
       title: "Portofoliu",
@@ -66,7 +66,7 @@ export const navConfig: NavConfig = {
     resources: [
       {
         title: "Servicii",
-        href: "/services",
+        href: "/servicii",
       },
       {
         title: "Portofoliu",

@@ -173,6 +173,57 @@ declare module 'astro:content' {
   data: InferEntrySchema<"portofoliu">
 } & { render(): Render[".md"] };
 };
+"servicii": {
+"consultanta-ai.md": {
+	id: "consultanta-ai.md";
+  slug: "consultanta-ai";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+"consultanta-it.md": {
+	id: "consultanta-it.md";
+  slug: "consultanta-it";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+"hosting.md": {
+	id: "hosting.md";
+  slug: "hosting";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+"marketing.md": {
+	id: "marketing.md";
+  slug: "marketing";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+"mentenanta.md": {
+	id: "mentenanta.md";
+  slug: "mentenanta";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+"seo.md": {
+	id: "seo.md";
+  slug: "seo";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+"web-design.md": {
+	id: "web-design.md";
+  slug: "web-design";
+  body: string;
+  collection: "servicii";
+  data: InferEntrySchema<"servicii">
+} & { render(): Render[".md"] };
+};
 
 	};
 
