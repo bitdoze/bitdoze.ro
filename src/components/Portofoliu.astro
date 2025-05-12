@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import PortofolioCard from './PortofolioCard.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const { 
+  title = "Portofoliu", 
+  subtitle = "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.", 
+  ctaText = "Vezi toate proiectele",
+  ctaLink = "/portofoliu"
+} = Astro.props;
+
+const portofoliu = await getCollection('portofoliu', ({ data }) => {
+  return !data.draft;
+});
+
+// Sort by date in descending order and get the latest 3 entries
+const latestProjects = portofoliu
+  .sort((a, b) => b.data.data.getTime() - a.data.data.getTime())
+  .slice(0, 3);
+---
+
+<section class="section-padding" style="background-color: var(--color-background-alt);">
+  <div class="container">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 portfolio-heading">
+        {title}
+      </h2>
+      <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto mt-8 text-lg">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-16">
+      {latestProjects.map(project => (
+        <PortofolioCard
+          title={project.data.title}
+          descriere={project.data.descriere}
+          imagine={project.data.imagine}
+          url={project.data.url}
+          stack={project.data.stack}
+          servicii={project.data.servicii}
+          slug={project.slug}
+        />
+      ))}
+    </div>
+    
+    <div class="mt-16 text-center">
+      <a 
+        href={ctaLink} 
+        class="btn btn-primary portfolio-cta inline-flex h-12 items-center justify-center px-8 font-medium text-white"
+      >
+        {ctaText}
+        <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
+      </a>
+    </div>
+  </div>
+</section>

@@ -230,6 +230,7 @@ type Section =
   | ServicesSection
   | TestimonialsSection
   | CTASection
+  | PortfolioSection
   | AboutHeroSection
   | StorySection
   | ValuesSection
@@ -244,11 +245,35 @@ type Section =
   | BusinessHoursSection;
 
 // Home page configuration
+// Define portfolio section type
+interface PortfolioSection {
+  type: "portfolio";
+  title: string;
+  subtitle: string;
+  showLatestProjects: boolean;
+  limit: number;
+  cta?: {
+    text: string;
+    link: string;
+  };
+}
+
 export const homePageConfig: PageConfig = {
   title: siteConfig.name,
   description: siteConfig.description,
   ogImage: siteConfig.ogImage,
   sections: [
+    {
+      type: "portfolio",
+      title: "Portofoliu",
+      subtitle: "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.",
+      showLatestProjects: true,
+      limit: 3,
+      cta: {
+        text: "Vezi toate proiectele",
+        link: "/portofoliu",
+      },
+    },
     {
       type: "hero",
       title: "Dezvoltă-ți Afacerea cu Soluții Profesionale Web",

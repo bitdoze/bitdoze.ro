@@ -9,6 +9,10 @@ export interface SiteConfig {
     linkedin?: string;
     facebook?: string;
   };
+  portfolio?: {
+    title: string;
+    description: string;
+  };
 }
 
 export const siteConfig: SiteConfig = {
@@ -19,5 +23,9 @@ export const siteConfig: SiteConfig = {
   links: {
     linkedin: "https://linkedin.com/company/bitdoze",
     facebook: "https://facebook.com/bitdoze",
+  },
+  portfolio: {
+    title: "Portofoliu",
+    description: "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.",
   },
 };

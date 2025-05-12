@@ -1,0 +1,95 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  descriere: string;
+  imagine: string;
+  url: string;
+  stack: string[];
+  servicii: string[];
+  slug?: string;
+}
+
+const { title, descriere, imagine, url, stack, servicii, slug } = Astro.props;
+---
+
+<div class="portofolio-card overflow-hidden" style="background-color: var(--color-background); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-0 overflow-hidden">
+    <!-- Image Section -->
+    <div class="image-container">
+      <img 
+        src={imagine} 
+        alt={title} 
+        class="w-full h-full object-cover"
+      />
+    </div>
+    
+    <!-- Content Section -->
+    <div class="p-8 flex flex-col justify-between">
+      <div>
+        <h3 class="text-2xl font-bold mb-3">
+          {slug ? (
+            <a href={`/portofoliu/${slug}`} class="hover:text-primary transition-colors relative group">
+              {title}
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" style="background-color: var(--color-primary);"></span>
+            </a>
+          ) : (
+            title
+          )}
+        </h3>
+        <p class="mb-5 text-base leading-relaxed" style="color: var(--color-text-light);">
+          {descriere}
+        </p>
+        
+        <!-- Stack Section -->
+        <div class="mb-5">
+          <h4 class="text-sm font-semibold mb-3" style="color: var(--color-text);">Stack</h4>
+          <div class="flex flex-wrap gap-2">
+            {stack.map(tech => (
+              <span class="stack-tag">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Servicii Section -->
+        <div>
+          <h4 class="text-sm font-semibold mb-3" style="color: var(--color-text);">Servicii</h4>
+          <div class="flex flex-wrap gap-2 mb-6">
+            {servicii.map(serviciu => (
+              <span class="service-tag">
+                {serviciu}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="flex items-center space-x-4 mt-2">
+        {slug && (
+          <a 
+            href={`/portofoliu/${slug}`}
+            class="inline-flex items-center justify-center text-sm font-medium transition-all hover:translate-x-1" 
+            style="color: var(--color-primary);"
+          >
+            Detalii proiect
+            <Icon name="mdi:information-outline" class="ml-1.5 h-4 w-4" />
+          </a>
+        )}
+        <a 
+          href={url} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="inline-flex items-center justify-center text-sm font-medium transition-all hover:translate-x-1" 
+          style="color: var(--color-primary);"
+        >
+          Vezi proiect
+          <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

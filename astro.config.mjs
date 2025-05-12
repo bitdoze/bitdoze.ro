@@ -11,5 +11,12 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [icon()]
+  integrations: [icon()],
+  
+  // Enable content collections
+  content: {
+    collections: {
+      enabled: true,
+    }
+  }
 });

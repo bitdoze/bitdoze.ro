@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import Welcome from "../components/Welcome.astro";
 import Services from "../components/Services.astro";
 import Testimonials from "../components/Testimonials.astro";
+import Portofoliu from "../components/Portofoliu.astro";
 import CTA from "../components/CTA.astro";
 
 import { homePageConfig } from "../config/pages";
@@ -13,6 +14,7 @@ const heroSection = homePageConfig.sections.find(section => section.type === "he
 const welcomeSection = homePageConfig.sections.find(section => section.type === "welcome");
 const servicesSection = homePageConfig.sections.find(section => section.type === "services");
 const testimonialsSection = homePageConfig.sections.find(section => section.type === "testimonials");
+const portfolioSection = homePageConfig.sections.find(section => section.type === "portfolio");
 const ctaSection = homePageConfig.sections.find(section => section.type === "cta");
 ---
 
@@ -61,6 +63,15 @@ const ctaSection = homePageConfig.sections.find(section => section.type === "cta
       title={testimonialsSection.title}
       subtitle={testimonialsSection.subtitle}
       testimonials={testimonialsSection.testimonials}
+    />
+  )}
+  
+  {portfolioSection && (
+    <Portofoliu 
+      title={portfolioSection.title}
+      subtitle={portfolioSection.subtitle}
+      ctaText={portfolioSection.cta?.text}
+      ctaLink={portfolioSection.cta?.link}
     />
   )}
   

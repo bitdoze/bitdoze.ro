@@ -32,6 +32,10 @@ export const navConfig: NavConfig = {
       href: "/services",
     },
     {
+      title: "Portofoliu",
+      href: "/portofoliu",
+    },
+    {
       title: "Contact",
       href: "/contact",
     },
@@ -63,6 +67,10 @@ export const navConfig: NavConfig = {
       {
         title: "Servicii",
         href: "/services",
+      },
+      {
+        title: "Portofoliu",
+        href: "/portofoliu",
       },
       {
         title: "Blog",

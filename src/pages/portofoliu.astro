@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import { getCollection } from 'astro:content';
+import PortofolioCard from '../components/PortofolioCard.astro';
+
+// Get all non-draft portfolio entries
+const portofoliu = await getCollection('portofoliu', ({ data }) => {
+  return !data.draft;
+});
+
+// Sort by date in descending order
+const sortedProjects = portofoliu.sort((a, b) => b.data.data.getTime() - a.data.data.getTime());
+
+---
+
+<Layout 
+  title="Portofoliu - BitDoze"
+  description="Explorați portofoliul nostru de proiecte web și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri."
+  ogType="website"
+>
+  <!-- Hero Section -->
+  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+    
+    <div class="container text-center relative z-10">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 portfolio-heading">
+        Portofoliu
+      </h1>
+      <p class="text-xl max-w-3xl mx-auto mt-8" style="color: var(--color-text-light);">
+        Explorați colecția noastră de proiecte și descoperiți diversitatea soluțiilor digitale pe care le oferim.
+      </p>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="grid grid-cols-1 gap-16">
+        {sortedProjects.map(project => (
+          <div class="portfolio-item">
+            <PortofolioCard
+                title={project.data.title}
+                descriere={project.data.descriere}
+                imagine={project.data.imagine}
+                url={project.data.url}
+                stack={project.data.stack}
+                servicii={project.data.servicii}
+                slug={project.slug}
+              />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      {sortedProjects.length === 0 && (
+        <div class="text-center py-20 px-6 rounded-2xl bg-white" style="box-shadow: var(--shadow-md);">
+          <Icon name="mdi:folder-open-outline" class="h-20 w-20 mx-auto mb-6" style="color: var(--color-text-lighter);" />
+          <h3 class="text-2xl font-semibold mb-3">Niciun proiect disponibil</h3>
+          <p style="color: var(--color-text-light);" class="max-w-md mx-auto">Proiectele vor fi adăugate în curând. Reveniți mai târziu pentru a vedea portofoliul nostru.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Portfolio CTA -->
+  <section class="section-padding relative overflow-hidden" style="background-color: var(--color-background-alt);">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 bg-grid opacity-10"></div>
+    <div class="absolute -right-32 -bottom-32 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-10" style="background-color: var(--color-primary);"></div>
+    
+    <div class="container text-center relative z-10">
+      <h2 class="text-4xl font-bold mb-6">Gata să începem proiectul tău?</h2>
+      <p class="text-xl max-w-3xl mx-auto mb-10" style="color: var(--color-text-light);">
+        Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum te putem ajuta să o transformi în realitate.
+      </p>
+      <a 
+        href="/contact" 
+        class="btn btn-primary portfolio-cta inline-flex h-12 items-center justify-center px-8 font-medium text-white"
+      >
+        Contactează-ne
+        <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
+      </a>
+    </div>
+  </section>
+</Layout>

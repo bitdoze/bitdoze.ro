@@ -111,3 +111,77 @@ body {
   padding-left: var(--space-4);
   padding-right: var(--space-4);
 }
+
+/* Prose styling for markdown content */
+.prose {
+  max-width: 65ch;
+  color: var(--color-text);
+}
+
+.prose h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.prose h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  color: var(--color-text-light);
+}
+
+.prose ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  list-style-type: disc;
+}
+
+.prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text-light);
+}
+
+.prose img {
+  border-radius: var(--radius-lg);
+  margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+}
+
+.prose-lg {
+  font-size: 1.125rem;
+}
+
+.prose-xl {
+  font-size: 1.25rem;
+}
