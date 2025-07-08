@@ -1,21 +1,22 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Icon } from 'astro-icon/components';
-import { getCollection } from 'astro:content';
-import PortofolioCard from '../components/PortofolioCard.astro';
-import PageHeader from '../components/PageHeader.astro';
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import PortofolioCard from "../components/PortofolioCard.astro";
+import PageHeader from "../components/PageHeader.astro";
 
 // Get all non-draft portfolio entries
-const portofoliu = await getCollection('portofoliu', ({ data }) => {
+const portofoliu = await getCollection("portofoliu", ({ data }) => {
   return !data.draft;
 });
 
 // Sort by date in descending order
-const sortedProjects = portofoliu.sort((a, b) => b.data.data.getTime() - a.data.data.getTime());
-
+const sortedProjects = portofoliu.sort(
+  (a, b) => b.data.data.getTime() - a.data.data.getTime()
+);
 ---
 
-<Layout 
+<Layout
   title="Portofoliu - BitDoze"
   description="Explorați portofoliul nostru de proiecte web și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri."
   ogType="website"
@@ -33,10 +34,11 @@ const sortedProjects = portofoliu.sort((a, b) => b.data.data.getTime() - a.data.
   <!-- Portfolio Section -->
   <section class="section-padding">
     <div class="container">
-      <div class="grid grid-cols-1 gap-16">
-        {sortedProjects.map(project => (
-          <div class="portfolio-item">
-            <PortofolioCard
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          sortedProjects.map((project) => (
+            <div class="portfolio-item">
+              <PortofolioCard
                 title={project.data.title}
                 descriere={project.data.descriere}
                 imagine={project.data.imagine}
@@ -45,34 +47,60 @@ const sortedProjects = portofoliu.sort((a, b) => b.data.data.getTime() - a.data.
                 servicii={project.data.servicii}
                 slug={project.slug}
               />
-          </div>
-        ))}
+            </div>
+          ))
+        }
       </div>
 
       <!-- Empty State -->
-      {sortedProjects.length === 0 && (
-        <div class="text-center py-20 px-6 rounded-2xl bg-white" style="box-shadow: var(--shadow-md);">
-          <Icon name="mdi:folder-open-outline" class="h-20 w-20 mx-auto mb-6" style="color: var(--color-text-lighter);" />
-          <h3 class="text-2xl font-semibold mb-3">Niciun proiect disponibil</h3>
-          <p style="color: var(--color-text-light);" class="max-w-md mx-auto">Proiectele vor fi adăugate în curând. Reveniți mai târziu pentru a vedea portofoliul nostru.</p>
-        </div>
-      )}
+      {
+        sortedProjects.length === 0 && (
+          <div
+            class="text-center py-20 px-6 rounded-2xl bg-white"
+            style="box-shadow: var(--shadow-md);"
+          >
+            <Icon
+              name="mdi:folder-open-outline"
+              class="h-20 w-20 mx-auto mb-6"
+              style="color: var(--color-text-lighter);"
+            />
+            <h3 class="text-2xl font-semibold mb-3">
+              Niciun proiect disponibil
+            </h3>
+            <p style="color: var(--color-text-light);" class="max-w-md mx-auto">
+              Proiectele vor fi adăugate în curând. Reveniți mai târziu pentru a
+              vedea portofoliul nostru.
+            </p>
+          </div>
+        )
+      }
     </div>
   </section>
 
   <!-- Portfolio CTA -->
-  <section class="section-padding relative overflow-hidden" style="background-color: var(--color-background-alt);">
+  <section
+    class="section-padding relative overflow-hidden"
+    style="background-color: var(--color-background-alt);"
+  >
     <!-- Background decoration -->
     <div class="absolute inset-0 bg-grid opacity-10"></div>
-    <div class="absolute -right-32 -bottom-32 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-10" style="background-color: var(--color-primary);"></div>
-    
+    <div
+      class="absolute -right-32 -bottom-32 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+      style="background-color: var(--color-primary);"
+    >
+    </div>
+
     <div class="container text-center relative z-10">
       <h2 class="text-4xl font-bold mb-6">Gata să începem proiectul tău?</h2>
-      <p class="text-xl max-w-3xl mx-auto mb-10" style="color: var(--color-text-light);">
-        Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum te putem ajuta să o transformi în realitate.
+      <p
+        class="text-xl max-w-3xl mx-auto mb-10"
+        style="color: var(--color-text-light);"
+      >
+        Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum
+        te putem ajuta să o transformi în realitate.
       </p>
-      <a 
-        href="/contact" 
+      <a
+        href="/contact"
         class="btn btn-primary portfolio-cta inline-flex h-12 items-center justify-center px-8 font-medium text-white"
       >
         Contactează-ne
