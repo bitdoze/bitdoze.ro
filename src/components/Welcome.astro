@@ -1,7 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { companyConfig } from '../config/company';
-import WelcomeIllustration from './svg/WelcomeIllustration.astro';
+import { Icon } from "astro-icon/components";
+import { companyConfig } from "../config/company";
 
 interface Props {
   title?: string;
@@ -41,86 +40,198 @@ const {
     {
       icon: "mdi:shield-check",
       title: "Trusted Service",
-      description: "We pride ourselves on reliability and excellence in every project we undertake.",
-      iconColor: "var(--color-primary)"
+      description:
+        "We pride ourselves on reliability and excellence in every project we undertake.",
+      iconColor: "var(--color-primary)",
     },
     {
       icon: "mdi:lightbulb",
       title: "Innovative Solutions",
-      description: "We bring creative thinking and modern approaches to solve your business challenges.",
-      iconColor: "var(--color-secondary)"
-    }
+      description:
+        "We bring creative thinking and modern approaches to solve your business challenges.",
+      iconColor: "var(--color-secondary)",
+    },
   ],
   ctas = {
     primary: {
       text: "Our Services",
-      link: "/servicii"
+      link: "/servicii",
     },
     secondary: {
       text: "About Us",
-      link: "/about"
-    }
+      link: "/about",
+    },
   },
   image = "/images/welcome-image.jpg",
   badge = "15+ Years Experience",
-  welcomeButtons = []
+  welcomeButtons = [],
 } = Astro.props;
 ---
 
-<section class="section-padding" style="background-color: var(--color-background);">
+<section class="welcome-section">
+  <!-- Background elements -->
+  <div class="section-background">
+    <div class="animated-gradient"></div>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+    <div class="grid-overlay"></div>
+  </div>
+
   <div class="container">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div class="welcome-content">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color: var(--color-text);">{title}</h2>
-        <p class="text-lg mb-8" style="color: var(--color-text-light);">{subtitle}</p>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-          {features.map(feature => (
-            <div class="p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg);">
-              <div class="mb-4" style={`color: ${feature.iconColor || "var(--color-primary)"}`}>
-                <Icon name={feature.icon} class="h-8 w-8" />
+    <div class="welcome-grid">
+      <!-- Content Column -->
+      <div class="content-column">
+        <!-- Title Section -->
+        <div class="title-section">
+          <div class="title-badge">
+            <Icon name="mdi:star" class="badge-icon" />
+            <span>Despre Noi</span>
+          </div>
+          <h2 class="section-title">
+            <span class="title-line-1"
+              >{title.split(" ").slice(0, 3).join(" ")}</span
+            >
+            <span class="title-line-2 gradient-text"
+              >{title.split(" ").slice(3).join(" ")}</span
+            >
+          </h2>
+          <p class="section-subtitle">
+            {subtitle}
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+          {
+            features.map((feature, index) => (
+              <div class="feature-card" data-index={index}>
+                <div class="feature-icon-wrapper">
+                  <div
+                    class="feature-icon-container"
+                    style={`color: ${
+                      feature.iconColor || "var(--color-primary)"
+                    }`}
+                  >
+                    <Icon name={feature.icon} class="feature-icon" />
+                  </div>
+                  <div
+                    class="icon-glow"
+                    style={`background: ${
+                      feature.iconColor || "var(--color-primary)"
+                    }`}
+                  />
+                </div>
+                <div class="feature-content">
+                  <h3 class="feature-title">{feature.title}</h3>
+                  <p class="feature-description">{feature.description}</p>
+                </div>
               </div>
-              <h3 class="text-xl font-semibold mb-2" style="color: var(--color-text);">{feature.title}</h3>
-              <p style="color: var(--color-text-light);">{feature.description}</p>
-            </div>
-          ))}
+            ))
+          }
         </div>
-        
-        <div class="mt-10 flex flex-wrap gap-4">
-          <a href={ctas.primary.link} class="btn btn-primary inline-flex items-center">
-            {ctas.primary.text}
-            <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
-          </a>
-          {ctas.secondary && (
-            <a href={ctas.secondary.link} class="btn btn-secondary inline-flex items-center">
-              {ctas.secondary.text}
+
+        <!-- CTAs Section -->
+        <div class="ctas-section">
+          <div class="primary-ctas">
+            <a href={ctas.primary.link} class="modern-btn primary-btn">
+              <span class="btn-text">{ctas.primary.text}</span>
+              <div class="btn-icon-wrapper">
+                <Icon name="mdi:arrow-right" class="btn-icon" />
+              </div>
             </a>
-          )}
+            {
+              ctas.secondary && (
+                <a href={ctas.secondary.link} class="modern-btn secondary-btn">
+                  <span class="btn-text">{ctas.secondary.text}</span>
+                  <div class="btn-icon-wrapper">
+                    <Icon name="mdi:information-outline" class="btn-icon" />
+                  </div>
+                </a>
+              )
+            }
+          </div>
+
+          {
+            (welcomeButtons.length > 0 || ctas.welcome) && (
+              <div class="tag-buttons">
+                {(ctas.welcome || welcomeButtons).map((button) => (
+                  <a href={button.link} class="tag-button">
+                    <span>{button.text}</span>
+                  </a>
+                ))}
+              </div>
+            )
+          }
         </div>
-        
-        {(welcomeButtons.length > 0 || ctas.welcome) && (
-          <div class="mt-6 flex flex-wrap gap-3">
-            {(ctas.welcome || welcomeButtons).map(button => (
-              <a href={button.link} class="px-4 py-2 rounded-full text-sm font-medium" style="background-color: var(--color-background-alt); color: var(--color-text);">
-                {button.text}
-              </a>
-            ))}
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+          <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Proiecte Finalizate</div>
           </div>
-        )}
+          <div class="stat-item">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Clienți Mulțumiți</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Suport Tehnic</div>
+          </div>
+        </div>
       </div>
-      
-      <div class="welcome-image-container">
-        <div class="relative">
-          <div class="absolute -top-4 -left-4 w-24 h-24 rounded-full" style="background-color: var(--color-primary); opacity: 0.1;"></div>
-          <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-full" style="background-color: var(--color-secondary); opacity: 0.1;"></div>
-          
-          <div class="rounded-2xl overflow-hidden shadow-xl relative" style="border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); background-color: var(--color-background-alt);">
-            <WelcomeIllustration />
-            <div class="absolute inset-0" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);"></div>
+
+      <!-- Visual Column -->
+      <div class="visual-column">
+        <div class="image-container">
+          <!-- Floating badge -->
+          <div class="floating-badge">
+            <Icon name="mdi:award" class="badge-icon" />
+            <span class="badge-text">{badge}</span>
           </div>
-          
-          <div class="absolute -bottom-6 right-8 px-6 py-3" style="background-color: var(--color-accent); color: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
-            <p class="font-bold">{badge}</p>
+
+          <!-- Main image -->
+          <div class="illustration-wrapper">
+            <div class="illustration-bg"></div>
+            <div class="illustration-content">
+              <img
+                src={image}
+                alt="Business Solutions"
+                class="welcome-image"
+                width="800"
+                height="600"
+              />
+            </div>
+            <div class="illustration-overlay"></div>
+          </div>
+
+          <!-- Floating elements -->
+          <div class="floating-element element-1">
+            <Icon name="mdi:trending-up" class="element-icon" />
+            <div class="element-text">
+              <div class="element-title">Creștere</div>
+              <div class="element-value">+150%</div>
+            </div>
+          </div>
+
+          <div class="floating-element element-2">
+            <Icon name="mdi:security" class="element-icon" />
+            <div class="element-text">
+              <div class="element-title">Securitate</div>
+              <div class="element-value">SSL</div>
+            </div>
+          </div>
+
+          <div class="floating-element element-3">
+            <Icon name="mdi:speedometer" class="element-icon" />
+            <div class="element-text">
+              <div class="element-title">Viteză</div>
+              <div class="element-value">99.9%</div>
+            </div>
           </div>
         </div>
       </div>
@@ -129,33 +240,756 @@ const {
 </section>
 
 <style>
-  .welcome-content {
-    animation: fadeIn 1s ease-out forwards;
+  .welcome-section {
+    position: relative;
+    padding: 6rem 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-background) 0%,
+      var(--color-background-alt) 100%
+    );
+    overflow: hidden;
   }
-  
-  .welcome-image-container {
-    animation: fadeInRight 1s ease-out forwards;
+
+  /* Background elements */
+  .section-background {
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+
+  .animated-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 20% 30%,
+        rgba(var(--color-primary-rgb), 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        rgba(var(--color-secondary-rgb), 0.1) 0%,
+        transparent 50%
+      );
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
     }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+      opacity: 0.8;
+    }
+  }
+
+  .floating-shapes {
+    position: absolute;
+    inset: 0;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.3;
+  }
+
+  .shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+    background: var(--color-primary);
+    animation: float 15s ease-in-out infinite;
+  }
+
+  .shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 70%;
+    right: 20%;
+    background: var(--color-secondary);
+    animation: float 12s ease-in-out infinite reverse;
+  }
+
+  .shape-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 30%;
+    left: 60%;
+    background: var(--color-accent);
+    animation: float 18s ease-in-out infinite;
+  }
+
+  .shape-4 {
+    width: 80px;
+    height: 80px;
+    top: 40%;
+    right: 10%;
+    background: var(--color-success);
+    animation: float 20s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(20px, -20px) rotate(120deg);
+    }
+    66% {
+      transform: translate(-15px, 15px) rotate(240deg);
+    }
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        rgba(var(--color-text-rgb), 0.02) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(var(--color-text-rgb), 0.02) 1px,
+        transparent 1px
+      );
+    background-size: 50px 50px;
+    animation: gridMove 30s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(50px, 50px);
+    }
+  }
+
+  /* Layout */
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Content Column */
+  .content-column {
+    space-y: 2rem;
+  }
+
+  .title-section {
+    margin-bottom: 2rem;
+  }
+
+  .title-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease-out 0.1s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .badge-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .title-line-1 {
+    display: block;
+    color: var(--color-text);
+  }
+
+  .title-line-2 {
+    display: block;
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-secondary),
+      var(--color-accent)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientTextShine 3s ease-in-out infinite;
+  }
+
+  @keyframes gradientTextShine {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  /* Features */
+  .features-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(var(--color-background-rgb), 0.8);
+    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: calc(0.4s + var(--index) * 0.1s);
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    border-color: rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .feature-icon-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .feature-icon-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .feature-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .icon-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-card:hover .feature-icon-container {
+    transform: scale(1.1);
+    background: rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .feature-card:hover .icon-glow {
+    opacity: 0.3;
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: scale(1.1);
+  }
+
+  .feature-content {
+    flex: 1;
+  }
+
+  .feature-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-description {
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+
+  /* CTAs */
+  .ctas-section {
+    margin-bottom: 2rem;
+  }
+
+  .primary-ctas {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .modern-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .primary-btn {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-primary-dark)
+    );
+    color: white;
+    box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  .primary-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .primary-btn:hover::before {
+    left: 100%;
+  }
+
+  .primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.4);
+  }
+
+  .secondary-btn {
+    background: rgba(var(--color-text-rgb), 0.05);
+    color: var(--color-text);
+    border: 1px solid rgba(var(--color-text-rgb), 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .secondary-btn:hover {
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border-color: rgba(var(--color-primary-rgb), 0.2);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .btn-icon-wrapper {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .modern-btn:hover .btn-icon-wrapper {
+    transform: translateX(2px);
+  }
+
+  .btn-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tag-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    animation: fadeInUp 0.8s ease-out 0.7s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .tag-button {
+    padding: 0.5rem 1rem;
+    background: rgba(var(--color-background-alt-rgb), 0.8);
+    color: var(--color-text);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .tag-button:hover {
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Stats */
+  .stats-section {
+    display: flex;
+    gap: 2rem;
+    animation: fadeInUp 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  /* Visual Column */
+  .visual-column {
+    position: relative;
+  }
+
+  .image-container {
+    position: relative;
+    animation: fadeInRight 1s ease-out 0.4s forwards;
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  .floating-badge {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(var(--color-accent-rgb), 0.3);
+    animation: floatBadge 3s ease-in-out infinite;
+  }
+
+  @keyframes floatBadge {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .badge-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .illustration-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--color-background-alt);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
+  }
+
+  .illustration-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--color-primary-rgb), 0.05),
+      rgba(var(--color-secondary-rgb), 0.05)
+    );
+  }
+
+  .illustration-content {
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .welcome-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .illustration-wrapper:hover .welcome-image {
+    transform: scale(1.05);
+  }
+
+  .illustration-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(var(--color-primary-rgb), 0.1),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .illustration-wrapper:hover .illustration-overlay {
+    opacity: 1;
+  }
+
+  /* Floating elements */
+  .floating-element {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: floatElement 6s ease-in-out infinite;
+  }
+
+  .element-1 {
+    top: 20%;
+    left: -20px;
+    animation-delay: 0s;
+  }
+
+  .element-2 {
+    top: 60%;
+    right: -30px;
+    animation-delay: 2s;
+  }
+
+  .element-3 {
+    bottom: 20%;
+    left: -10px;
+    animation-delay: 4s;
+  }
+
+  .element-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+  }
+
+  .element-title {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .element-value {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  @keyframes floatElement {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  @keyframes fadeInUp {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
+
   @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
     to {
       opacity: 1;
       transform: translateX(0);
     }
   }
+
+  /* Dark mode */
+  :global(.dark) .title-line-1 {
+    color: var(--color-dark-text);
+  }
+
+  :global(.dark) .section-subtitle {
+    color: var(--color-dark-text-light);
+  }
+
+  :global(.dark) .feature-title {
+    color: var(--color-dark-text);
+  }
+
+  :global(.dark) .feature-description {
+    color: var(--color-dark-text-light);
+  }
+
+  :global(.dark) .feature-card {
+    background: rgba(var(--color-dark-background-alt-rgb), 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .secondary-btn {
+    background: rgba(var(--color-dark-text-rgb), 0.05);
+    color: var(--color-dark-text);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .tag-button {
+    background: rgba(var(--color-dark-background-alt-rgb), 0.8);
+    color: var(--color-dark-text);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .stat-label {
+    color: var(--color-dark-text-light);
+  }
+
+  :global(.dark) .floating-element {
+    background: rgba(var(--color-dark-background-alt-rgb), 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .element-title {
+    color: var(--color-dark-text-light);
+  }
+
+  :global(.dark) .element-value {
+    color: var(--color-dark-text);
+  }
+
+  :global(.dark) .illustration-wrapper {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .welcome-section {
+      padding: 4rem 0;
+    }
+
+    .welcome-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .visual-column {
+      order: -1;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .primary-ctas {
+      flex-direction: column;
+    }
+
+    .stats-section {
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .floating-element {
+      display: none;
+    }
+
+    .floating-badge {
+      position: static;
+      align-self: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .shape-1,
+    .shape-2,
+    .shape-3,
+    .shape-4 {
+      display: none;
+    }
+  }
 </style>
+
+<script>
+  // Add CSS custom properties for stagger animation
+  document.addEventListener("DOMContentLoaded", () => {
+    const featureCards = document.querySelectorAll(".feature-card");
+    featureCards.forEach((card, index) => {
+      (card as HTMLElement).style.setProperty("--index", index.toString());
+    });
+  });
+</script>

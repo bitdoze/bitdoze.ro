@@ -18,7 +18,13 @@ interface Props {
   noindex?: boolean;
   nofollow?: boolean;
   structuredData?: {
-    type: 'website' | 'organization' | 'localBusiness' | 'article' | 'faq' | 'service';
+    type:
+      | "website"
+      | "organization"
+      | "localBusiness"
+      | "article"
+      | "faq"
+      | "service";
     data: Record<string, any>;
   };
 }
@@ -33,53 +39,83 @@ const {
   noindex = false,
   nofollow = false,
   structuredData = {
-    type: 'organization',
-    data: { name: companyConfig.name }
-  }
+    type: "organization",
+    data: { name: companyConfig.name },
+  },
 } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        
-        <!-- Script to prevent flash of light mode -->
-        <script is:inline>
-            // Apply dark mode immediately if needed
-            const darkModeOn = localStorage.getItem('theme') === 'dark' || 
-                              (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            
-            if (darkModeOn) {
-                document.documentElement.classList.add('dark');
-            }
-        </script>
-        
-        <!-- SEO Meta Tags -->
-        <MetaTags 
-          title={title}
-          description={description}
-          canonical={canonical}
-          image={image}
-          ogType={ogType}
-          twitterCard={twitterCard}
-          noindex={noindex}
-          nofollow={nofollow}
-        />
-        
-        <!-- Structured Data -->
-        <StructuredData type={structuredData.type} data={structuredData.data} />
-    </head>
-    <body>
-        <Header />
-        <main>
-            <slot />
-        </main>
-        <Footer />
-        <script src="../scripts/animations.js"></script>
-    </body>
-    </html>
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
 
-    <!-- styles are now in global.css -->
+    <!-- Script to prevent flash of light mode -->
+    <script is:inline>
+      // Apply dark mode immediately if needed
+      const darkModeOn =
+        localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+      if (darkModeOn) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <MetaTags
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      ogType={ogType}
+      twitterCard={twitterCard}
+      noindex={noindex}
+      nofollow={nofollow}
+    />
+
+    <!-- Structured Data -->
+    <StructuredData type={structuredData.type} data={structuredData.data} />
+  </head>
+  <body>
+    <div class="layout-wrapper">
+      <Header />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <script src="../scripts/animations.js"></script>
+    <style>
+      /* Reset and base layout */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .layout-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+
+      footer {
+        flex-shrink: 0;
+      }
+
+      /* Ensure proper spacing and overflow handling */
+      body {
+        overflow-x: hidden;
+      }
+    </style>
+  </body>
+</html>

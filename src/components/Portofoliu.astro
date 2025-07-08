@@ -1,7 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-import PortofolioCard from './PortofolioCard.astro';
-import { Icon } from 'astro-icon/components';
+import { getCollection } from "astro:content";
+import PortofolioCard from "./PortofolioCard.astro";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   title?: string;
@@ -10,14 +10,14 @@ interface Props {
   ctaLink?: string;
 }
 
-const { 
-  title = "Portofoliu", 
-  subtitle = "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.", 
+const {
+  title = "Portofoliu",
+  subtitle = "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.",
   ctaText = "Vezi toate proiectele",
-  ctaLink = "/portofoliu"
+  ctaLink = "/portofoliu",
 } = Astro.props;
 
-const portofoliu = await getCollection('portofoliu', ({ data }) => {
+const portofoliu = await getCollection("portofoliu", ({ data }) => {
   return !data.draft;
 });
 
@@ -27,39 +27,392 @@ const latestProjects = portofoliu
   .slice(0, 3);
 ---
 
-<section class="section-padding" style="background-color: var(--color-background-alt);">
+<section class="portfolio-section">
   <div class="container">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4 portfolio-heading">
-        {title}
-      </h2>
-      <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto mt-8 text-lg">
-        {subtitle}
-      </p>
+    <!-- Compact header -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="header-badge">
+          <Icon name="mdi:briefcase" class="badge-icon" />
+          <span>Proiectele Noastre</span>
+        </div>
+        <h2 class="section-title">
+          <span class="title-highlight">{title}</span>
+        </h2>
+        <p class="section-subtitle">
+          {subtitle}
+        </p>
+      </div>
+      <div class="header-cta">
+        <a href={ctaLink} class="compact-cta-btn">
+          <span class="btn-text">{ctaText}</span>
+          <Icon name="mdi:arrow-right" class="btn-icon" />
+        </a>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-16">
-      {latestProjects.map(project => (
-        <PortofolioCard
-          title={project.data.title}
-          descriere={project.data.descriere}
-          imagine={project.data.imagine}
-          url={project.data.url}
-          stack={project.data.stack}
-          servicii={project.data.servicii}
-          slug={project.slug}
-        />
-      ))}
-    </div>
-    
-    <div class="mt-16 text-center">
-      <a 
-        href={ctaLink} 
-        class="btn btn-primary portfolio-cta inline-flex h-12 items-center justify-center px-8 font-medium text-white"
-      >
-        {ctaText}
-        <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
-      </a>
+    <!-- Compact projects showcase -->
+    <div class="projects-showcase">
+      {
+        latestProjects.map((project, index) => (
+          <div class="project-preview" data-index={index}>
+            <div class="preview-image">
+              <img
+                src={project.data.imagine}
+                alt={project.data.title}
+                loading="lazy"
+              />
+              <div class="preview-overlay">
+                <div class="overlay-content">
+                  <h3 class="project-title">{project.data.title}</h3>
+                  <div class="project-actions">
+                    <a
+                      href={project.data.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="action-btn view-btn"
+                    >
+                      <Icon name="mdi:eye" class="action-icon" />
+                    </a>
+                    {project.slug && (
+                      <a
+                        href={`/portofoliu/${project.slug}`}
+                        class="action-btn details-btn"
+                      >
+                        <Icon
+                          name="mdi:information-outline"
+                          class="action-icon"
+                        />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-content">
+              <div class="tech-stack">
+                {project.data.stack.slice(0, 3).map((tech) => (
+                  <span class="tech-pill">{tech}</span>
+                ))}
+                {project.data.stack.length > 3 && (
+                  <span class="tech-pill more">
+                    +{project.data.stack.length - 3}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
+
+<style>
+  .portfolio-section {
+    position: relative;
+    padding: 4rem 0;
+    background: var(--color-background-alt);
+    overflow: hidden;
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
+
+  .header-content {
+    flex: 1;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .badge-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .title-highlight {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-secondary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    max-width: 400px;
+    line-height: 1.5;
+  }
+
+  .header-cta {
+    flex-shrink: 0;
+  }
+
+  .compact-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  .compact-cta-btn:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(var(--color-primary-rgb), 0.4);
+  }
+
+  .compact-cta-btn .btn-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .compact-cta-btn:hover .btn-icon {
+    transform: translateX(2px);
+  }
+
+  /* Projects showcase */
+  .projects-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-preview {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease-out forwards;
+    animation-delay: calc(var(--index) * 0.1s);
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .preview-image {
+    position: relative;
+    aspect-ratio: 16/10;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-background);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    margin-bottom: 1rem;
+  }
+
+  .preview-image:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  }
+
+  .preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .preview-image:hover img {
+    transform: scale(1.05);
+  }
+
+  .preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(var(--color-primary-rgb), 0.9),
+      rgba(var(--color-secondary-rgb), 0.9)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .preview-image:hover .preview-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    text-align: center;
+    color: white;
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .action-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .action-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .preview-content {
+    padding: 0.5rem 0;
+  }
+
+  .tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tech-pill {
+    padding: 0.25rem 0.75rem;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .tech-pill.more {
+    background: rgba(var(--color-text-rgb), 0.1);
+    color: var(--color-text-light);
+    border-color: rgba(var(--color-text-rgb), 0.2);
+  }
+
+  /* Dark mode adjustments */
+  :global(.dark) .section-title {
+    color: var(--color-dark-text);
+  }
+
+  :global(.dark) .section-subtitle {
+    color: var(--color-dark-text-light);
+  }
+
+  :global(.dark) .portfolio-section {
+    background: var(--color-dark-background-alt);
+  }
+
+  :global(.dark) .preview-image {
+    background: var(--color-dark-background);
+  }
+
+  :global(.dark) .tech-pill {
+    background: rgba(var(--color-primary-rgb), 0.2);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  :global(.dark) .tech-pill.more {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-dark-text-light);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .portfolio-section {
+      padding: 3rem 0;
+    }
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.875rem;
+      max-width: none;
+    }
+
+    .projects-showcase {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .compact-cta-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  // Add CSS custom properties for stagger animation
+  document.addEventListener("DOMContentLoaded", () => {
+    const projectItems = document.querySelectorAll(".project-item");
+    projectItems.forEach((item, index) => {
+      (item as HTMLElement).style.setProperty("--index", index.toString());
+    });
+  });
+</script>
