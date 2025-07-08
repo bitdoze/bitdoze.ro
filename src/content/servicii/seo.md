@@ -30,7 +30,7 @@ intrebari_frecvente:
   - intrebare: 'Pentru ce tipuri de afaceri sunt potrivite serviciile voastre de SEO?'
     raspuns: 'Serviciile noastre SEO sunt potrivite pentru o gamă largă de afaceri, de la IMM-uri locale la companii mijlocii cu prezență națională sau internațională. Avem experiență în diverse industrii, inclusiv e-commerce, servicii profesionale, sănătate, educație, turism și multe altele. Adaptăm strategia SEO în funcție de specificul industriei, obiectivele afacerii și publicul țintă.'
 seo:
-  title: 'Servicii SEO profesionale pentru creșterea vizibilității online | BitDoze'
+  title: 'Servicii SEO profesionale pentru creșterea vizibilității online'
   description: 'Optimizare SEO profesională pentru afacerea ta. Creștem traficul organic, pozițiile în Google și conversiile prin strategii personalizate și etice.'
   keywords:
     - 'servicii SEO'

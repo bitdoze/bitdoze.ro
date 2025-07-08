@@ -1,98 +1,96 @@
 ---
 title: 'Hosting'
-descriere: 'Oferim soluții de găzduire web de înaltă performanță, fiabile și sigure pentru site-ul tău, cu asistență tehnică permanentă.'
+descriere: 'Soluții de găzduire VPS și hosting pentru aplicații self-hosted prin Docker, optimizate pentru performanță, flexibilitate și securitate, cu suport tehnic 24/7.'
 icon: 'mdi:server'
 imagine: '/images/services/hosting.jpg'
-pret: 'De la 150 RON/an'
+pret: 'De la 500 RON/lună'
 durata: 'Activare în 24h'
 caracteristici:
-  - 'Servere de ultimă generație cu SSD NVMe'
+  - 'Servere VPS cu SSD NVMe și resurse dedicate'
+  - 'Suport pentru Docker și aplicații self-hosted'
   - 'Uptime garantat de 99.9%'
   - 'Backup-uri automate zilnice'
   - 'Certificate SSL gratuite'
-  - 'Panou de control intuitiv (cPanel/Plesk)'
+  - 'Panou de control intuitiv pentru gestionare'
   - 'Suport tehnic 24/7'
   - 'Protecție împotriva atacurilor DDoS'
 beneficii:
-  - 'Viteză de încărcare superioară pentru site-ul tău'
+  - 'Flexibilitate pentru configurarea aplicațiilor tale'
+  - 'Performanță ridicată pentru aplicații critice'
   - 'Securitate avansată pentru protecția datelor'
-  - 'Scalabilitate în funcție de nevoile afacerii tale'
-  - 'Asistență tehnică promptă pentru orice problemă'
-  - 'Economisirea timpului prin gestionarea infrastructurii tehnice'
+  - 'Scalabilitate pentru proiecte în creștere'
+  - 'Asistență tehnică promptă pentru orice nevoie'
 intrebari_frecvente:
   - intrebare: 'Ce tipuri de hosting oferiți?'
-    raspuns: 'Oferim diverse tipuri de hosting: Shared Hosting pentru site-uri mici și medii, VPS (Virtual Private Server) pentru proiecte care necesită mai multe resurse, Hosting WordPress optimizat special pentru site-uri WordPress, și soluții Dedicated Server pentru proiecte mari care necesită resurse exclusive.'
-  - intrebare: 'Cât de ușor pot migra site-ul meu existent către serviciile voastre de hosting?'
-    raspuns: 'Migrarea este simplă și, în majoritatea cazurilor, gratuită. Echipa noastră tehnică se ocupă de întregul proces de migrare, asigurându-se că site-ul tău este transferat fără întreruperi sau pierderi de date.'
-  - intrebare: 'Ce se întâmplă dacă am nevoie de mai multe resurse pe măsură ce afacerea mea crește?'
-    raspuns: 'Pachetele noastre sunt complet scalabile. Poți începe cu un plan de bază și apoi upgrada ușor, pe măsură ce necesitățile tale cresc, fără întreruperi sau complicații tehnice.'
-  - intrebare: 'Cât durează activarea serviciului de hosting după efectuarea plății?'
-    raspuns: 'În majoritatea cazurilor, serviciile de hosting sunt activate în maxim 24 de ore după confirmarea plății. Pentru situații urgente, oferim și opțiunea de activare prioritară.'
+    raspuns: 'Oferim VPS Hosting pentru proiecte care necesită resurse dedicate și control total, precum și soluții de hosting optimizate pentru aplicații self-hosted prin Docker, cum ar fi NextCRM, NocoDB sau platforme de email marketing.'
+  - intrebare: 'Pot instala aplicații self-hosted precum NextCRM sau NocoDB?'
+    raspuns: 'Da, serverele noastre VPS și soluțiile Docker sunt configurate pentru a suporta aplicații self-hosted. Oferim asistență pentru instalarea și configurarea aplicațiilor precum NextCRM, NocoDB, sau platforme de email marketing.'
+  - intrebare: 'Ce se întâmplă dacă am nevoie de mai multe resurse pe măsură ce proiectul meu crește?'
+    raspuns: 'Pachetele noastre VPS sunt scalabile. Poți upgrada resursele (CPU, RAM, stocare) fără întreruperi, în funcție de nevoile aplicațiilor tale.'
+  - intrebare: 'Cât durează activarea serviciului de hosting?'
+    raspuns: 'Serviciile sunt activate în maxim 24 de ore după confirmarea plății. Pentru urgențe, oferim activare prioritară.'
 seo:
-  title: 'Servicii de Hosting performant și fiabil | BitDoze'
-  description: 'Soluții de găzduire web rapide, sigure și fiabile. Servere SSD, uptime 99.9%, backup-uri automate și suport tehnic 24/7 pentru site-ul tău.'
+  title: 'Servicii de Hosting VPS și Docker pentru aplicații self-hosted'
+  description: 'Găzduire VPS și Docker pentru aplicații self-hosted precum NextCRM, NocoDB sau email marketing. Servere SSD NVMe, uptime 99.9%, suport 24/7.'
   keywords:
-    - 'hosting web'
-    - 'gazduire site'
+    - 'hosting VPS'
+    - 'hosting Docker'
+    - 'self-hosting aplicații'
+    - 'NextCRM hosting'
+    - 'NocoDB hosting'
+    - 'email marketing hosting'
     - 'servere SSD'
-    - 'hosting romania'
-    - 'hosting wordpress'
-    - 'VPS hosting'
-    - 'cloud hosting'
-    - 'servere dedicate'
+    - 'hosting Romania'
 draft: false
 ordine: 2
 ---
 
-## Soluții de Hosting profesional pentru afacerea ta
+## Soluții de Hosting VPS și Docker pentru aplicații self-hosted
 
-Infrastructura tehnică pe care este găzduit site-ul tău are un impact direct asupra performanței, securității și experienței utilizatorilor. La BitDoze, oferim soluții de hosting de înaltă calitate, proiectate să asigure funcționarea optimă a prezenței tale online.
+La BitDoze, oferim soluții de hosting optimizate pentru proiecte care necesită control, flexibilitate și performanță. Fie că ai nevoie de un server privat virtual (VPS) pentru resurse dedicate sau de un mediu Docker pentru aplicații self-hosted precum NextCRM, NocoDB sau platforme de email marketing, infrastructura noastră asigură performanța și securitatea de care ai nevoie.
 
-Cu o combinație de tehnologie de ultimă generație, securitate avansată și suport tehnic dedicat, serviciile noastre de hosting reprezintă fundația solidă de care afacerea ta online are nevoie pentru a prospera.
+Cu tehnologie de ultimă generație, suport tehnic dedicat și configurări scalabile, îți oferim fundația perfectă pentru a-ți dezvolta proiectele online.
 
 ## Pachete de Hosting adaptate nevoilor tale
 
-### Shared Hosting
-
-Soluția ideală pentru site-uri mici și medii, bloguri, sau afaceri la început de drum. Beneficiezi de resurse suficiente la un cost accesibil, împărțind serverul cu alte site-uri într-un mediu securizat și optimizat.
-
 ### VPS Hosting
 
-Pentru proiecte care necesită mai multe resurse și configurare personalizată. Cu un server virtual privat (VPS), obții resurse dedicate și control deplin asupra mediului tău de hosting, fără costul unui server fizic dedicat.
+Ideal pentru proiecte care necesită resurse dedicate și configurare personalizată. Cu un server virtual privat (VPS), beneficiezi de CPU, RAM și stocare dedicate, plus control total asupra mediului de hosting. Perfect pentru aplicații complexe sau site-uri cu cerințe specifice.
 
-### WordPress Hosting
+### Hosting pentru aplicații prin Docker
 
-Soluții optimizate special pentru WordPress, cu configurări pre-instalate pentru performanță maximă, actualizări automate și instrumente specifice pentru gestionarea site-urilor WordPress.
-
-### Dedicated Server
-
-Pentru aplicații complexe și site-uri cu trafic intens, oferim servere dedicate cu hardware performant și configurare personalizată completă, asigurând cele mai înalte niveluri de performanță și securitate.
+Oferim medii optimizate pentru găzduirea aplicațiilor self-hosted prin Docker. Poți implementa rapid și ușor aplicații precum:
+- **NextCRM**: Pentru gestionarea relațiilor cu clienții.
+- **NocoDB**: Alternativă open-source la Airtable, pentru baze de date și fluxuri de lucru.
+- **Platforme de email marketing**: Soluții precum Mautic sau alte aplicații pentru campanii automate.
+Cu suport pentru containere Docker, îți oferim flexibilitate maximă și posibilitatea de a personaliza stack-ul tehnologic.
 
 ## De ce să alegi serviciile noastre de Hosting?
 
 ### Performanță superioară
 
-Utilizăm exclusiv servere cu unități SSD NVMe și procesoare de ultimă generație, asigurând încărcarea rapidă a site-ului tău și o experiență fluidă pentru vizitatori.
+Utilizăm servere cu SSD NVMe și procesoare de ultimă generație pentru a asigura performanța optimă a aplicațiilor tale, fie că rulează pe VPS sau în containere Docker.
 
-### Fiabilitate garantată
+### Flexibilitate și control
 
-Cu o infrastructură redundantă și monitorizare 24/7, garantăm un uptime de 99.9%, asigurându-ne că site-ul tău este întotdeauna disponibil pentru vizitatori și clienți.
+Cu VPS și Docker, ai libertatea de a configura mediul exact așa cum ai nevoie, instalând și gestionând aplicațiile preferate fără restricții.
 
 ### Securitate avansată
 
-Implementăm multiple niveluri de securitate, inclusiv firewall-uri avansate, protecție DDoS, scanări regulate de malware și certificate SSL gratuite pentru toate site-urile.
+Oferim protecție DDoS, firewall-uri avansate, scanări regulate de malware și certificate SSL gratuite pentru a-ți securiza aplicațiile și datele.
 
 ### Suport tehnic dedicat
 
-Echipa noastră de specialiști în hosting este disponibilă 24/7 pentru a răspunde la întrebări, a rezolva probleme tehnice și a oferi asistență pentru optimizarea site-ului tău.
+Echipa noastră este disponibilă 24/7 pentru a te ajuta cu configurarea, optimizarea și rezolvarea oricăror probleme legate de VPS sau aplicațiile Docker.
 
 ## Tehnologii și infrastructură
 
 * Servere Intel Xeon cu 32+ nuclee și minim 64GB RAM
-* Stocare exclusiv pe SSD-uri NVMe în configurație RAID
-* Rețea de 10 Gbps pentru transfer de date ultra-rapid
-* Datacentere Tier III+ cu redundanță N+1 pentru energie și răcire
-* Backupuri automate zilnice, păstrate pentru 30 de zile
-* Panou de control intuitiv (cPanel/Plesk) pentru administrare ușoară
+* Stocare SSD NVMe în configurație RAID
+* Rețea de 10 Gbps pentru transfer rapid
+* Datacentere Tier III+ cu redundanță N+1
+* Backupuri automate zilnice, păstrate 30 de zile
+* Suport pentru Docker și panouri de control intuitive
+* Asistență pentru configurarea aplicațiilor self-hosted
 
-Indiferent de dimensiunea proiectului tău sau de cerințele tehnice specifice, avem soluția de hosting perfectă pentru a asigura performanța, securitatea și scalabilitatea de care ai nevoie pentru succesul online.
+Indiferent de complexitatea proiectului tău, soluțiile noastre de VPS și hosting Docker îți oferă performanța, flexibilitatea și securitatea necesare pentru a rula aplicații self-hosted cu succes.

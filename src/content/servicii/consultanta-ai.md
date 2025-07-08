@@ -29,7 +29,7 @@ intrebari_frecvente:
   - intrebare: 'Cum măsurăm succesul și ROI-ul implementării soluțiilor AI?'
     raspuns: 'Definim împreună KPI specifici în funcție de obiectivele proiectului: reducerea timpului pentru anumite procese, îmbunătățirea satisfacției clienților, creșterea ratei de conversie, reducerea costurilor operaționale, etc. Implementăm sisteme de măsurare pentru a urmări acești indicatori și a calcula ROI-ul real. De asemenea, realizăm evaluări regulate pentru a optimiza continuu soluțiile implementate.'
 seo:
-  title: 'Consultanță AI pentru business - soluții inteligente personalizate | BitDoze'
+  title: 'Consultanță AI pentru business - soluții inteligente personalizate'
   description: 'Implementează inteligența artificială în afacerea ta cu serviciile noastre de consultanță AI. Automatizare inteligentă, chatboți personalizați și soluții AI adaptate nevoilor tale.'
   keywords:
     - 'consultanta AI'

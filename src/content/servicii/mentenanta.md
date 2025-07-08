@@ -29,7 +29,7 @@ intrebari_frecvente:
   - intrebare: 'Ce se întâmplă dacă site-ul meu are o problemă în afara orelor de program?'
     raspuns: 'Pachetele noastre premium includ suport de urgență 24/7 pentru situații critice. Pentru pachetele standard, oferim asistență în timpul programului de lucru, iar problemele raportate în afara acestuia sunt tratate cu prioritate în următoarea zi lucrătoare.'
 seo:
-  title: 'Servicii de Mentenanță Website | BitDoze'
+  title: 'Servicii de Mentenanță Website'
   description: 'Mentenanță completă pentru site-ul tău web. Actualizări, backup-uri, monitorizare, securitate și asistență tehnică pentru funcționare optimă.'
   keywords:
     - 'mentenanta website'

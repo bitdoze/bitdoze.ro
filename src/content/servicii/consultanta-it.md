@@ -29,7 +29,7 @@ intrebari_frecvente:
   - intrebare: 'Pentru ce dimensiune de companii oferiți servicii de consultanță IT?'
     raspuns: 'Serviciile noastre de consultanță IT sunt adaptate pentru toate dimensiunile de afaceri - de la startup-uri și IMM-uri până la companii mari. Abordarea, soluțiile și pachetele sunt personalizate în funcție de dimensiunea, complexitatea și nevoile specifice ale fiecărei organizații.'
 seo:
-  title: 'Consultanță IT profesională pentru afaceri | BitDoze'
+  title: 'Consultanță IT profesională pentru afaceri'
   description: 'Servicii specializate de consultanță IT pentru optimizarea infrastructurii, reducerea costurilor și alinierea tehnologiei cu obiectivele afacerii tale.'
   keywords:
     - 'consultanta IT'

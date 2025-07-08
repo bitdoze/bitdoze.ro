@@ -29,7 +29,7 @@ intrebari_frecvente:
   - intrebare: 'Cât de des voi primi rapoarte despre performanța campaniilor?'
     raspuns: 'Oferim rapoarte săptămânale concise pentru monitorizarea progresului și rapoarte lunare detaliate cu analize aprofundate, insights și recomandări. În plus, pentru campaniile active, monitorizăm performanța zilnic și facem ajustări în timp real pentru a maximiza rezultatele. Ai acces permanent la dashboard-uri live care îți permit să urmărești performanța în orice moment.'
 seo:
-  title: 'Servicii de Marketing Digital pentru creșterea afacerii tale | BitDoze'
+  title: 'Servicii de Marketing Digital pentru creșterea afacerii tale'
   description: 'Strategii personalizate de marketing digital care cresc vizibilitatea, atrag clienți noi și maximizează ROI-ul. PPC, social media, email marketing și multe altele.'
   keywords:
     - 'marketing digital'

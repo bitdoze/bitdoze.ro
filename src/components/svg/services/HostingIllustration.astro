@@ -1,3 +1,4 @@
+<div class="svg-container">
 <svg width="100%" height="100%" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" class="hosting-illustration">
   <!-- Background and decorative elements -->
   <defs>
@@ -199,12 +200,20 @@
     <text x="0" y="5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="var(--color-accent)" font-weight="bold" class="badge-text">99.9% UPTIME</text>
   </g>
 </svg>
+</div>
 
 <style>
+  .svg-container {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+  }
+  
   .hosting-illustration {
     width: 100%;
     height: auto;
-    overflow: visible;
+    display: block;
   }
   
   .bg {

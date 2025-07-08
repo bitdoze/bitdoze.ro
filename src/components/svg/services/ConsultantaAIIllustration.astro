@@ -1,3 +1,4 @@
+<div class="svg-container">
 <svg width="100%" height="100%" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" class="consultanta-ai-illustration">
   <!-- Background and decorative elements -->
   <defs>
@@ -184,12 +185,19 @@
     <rect x="11" y="-15" width="10" height="35" rx="2" fill="var(--color-accent)" fill-opacity="0.7" class="bar bar-3" />
   </g>
 </svg>
+</div>
 
 <style>
+  .svg-container {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+  }
   .consultanta-ai-illustration {
     width: 100%;
     height: auto;
-    overflow: visible;
+    display: block;
   }
   
   .bg, .grid {

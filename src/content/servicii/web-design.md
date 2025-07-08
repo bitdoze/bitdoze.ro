@@ -27,7 +27,7 @@ intrebari_frecvente:
   - intrebare: 'Includeți și optimizare SEO în serviciile de web design?'
     raspuns: 'Da, toate site-urile noastre includ optimizare SEO de bază. Oferim și servicii specializate de SEO pentru rezultate mai avansate și o vizibilitate mai bună în motoarele de căutare.'
 seo:
-  title: 'Servicii profesionale de Web Design | BitDoze'
+  title: 'Servicii profesionale de Web Design'
   description: 'Creăm site-uri web atractive, responsive și optimizate pentru afacerea ta. Pachete personalizate, design modern și expertiză tehnică pentru rezultate excelente.'
   keywords:
     - 'web design'
