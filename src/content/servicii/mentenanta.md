@@ -1,107 +1,73 @@
 ---
-title: 'Mentenanță Website-uri'
-descriere: 'Asigurăm funcționarea optimă și actualizarea continuă a site-ului tău prin servicii complete de mentenanță tehnică și administrare conținut.'
+title: 'Mentenanță Website'
+descriere: 'Păstrăm site-ul tău securizat, actualizat și rapid, pentru ca tu să te poți concentra pe afacerea ta.'
 icon: 'mdi:tools'
 imagine: '/images/services/mentenanta.jpg'
 pret: 'De la 300 RON/lună'
 durata: 'Servicii continue'
 caracteristici:
-  - 'Actualizări regulate ale platformei și plugin-urilor'
-  - 'Monitorizare permanentă a funcționării site-ului'
-  - 'Backup-uri periodice și restaurare în caz de nevoie'
-  - 'Verificări de securitate și remediere vulnerabilități'
-  - 'Optimizări de performanță și viteză'
-  - 'Adăugare și actualizare conținut la cerere'
+  - 'Actualizări de platformă și plugin-uri'
+  - 'Monitorizare uptime 24/7'
+  - 'Backup-uri zilnice sau săptămânale'
+  - 'Verificări de securitate'
+  - 'Optimizări de viteză'
+  - 'Actualizări de conținut la cerere'
   - 'Asistență tehnică prioritară'
 beneficii:
-  - 'Prevenirea problemelor tehnice și a întreruperilor de funcționare'
-  - 'Protecție crescută împotriva atacurilor și a breșelor de securitate'
-  - 'Performanță optimă și viteză de încărcare îmbunătățită'
-  - 'Conținut actualizat pentru vizitatori și motoarele de căutare'
-  - 'Economisirea timpului și resurselor interne'
+  - 'Prevenirea problemelor tehnice'
+  - 'Protecție împotriva atacurilor'
+  - 'Performanță și viteză îmbunătățite'
+  - 'Conținut mereu actual'
+  - 'Economie de timp și resurse'
 intrebari_frecvente:
-  - intrebare: 'De ce este necesară mentenanța regulată a unui website?'
-    raspuns: 'Un website necesită mentenanță regulată pentru a asigura securitatea, performanța și funcționalitatea optimă. Platformele și plugin-urile trebuie actualizate constant pentru a preveni vulnerabilitățile de securitate, iar conținutul trebuie să fie actualizat pentru a păstra interesul vizitatorilor și relevanța în motoarele de căutare.'
-  - intrebare: 'Ce include un pachet standard de mentenanță website?'
-    raspuns: 'Pachetul standard include actualizări regulate ale platformei și plugin-urilor, monitorizare a funcționării, backup-uri săptămânale, verificări de securitate de bază, optimizări minore de performanță și un număr limitat de actualizări de conținut lunar.'
-  - intrebare: 'Cât de des faceți backup-uri și cât timp sunt păstrate?'
-    raspuns: 'În funcție de pachetul ales, realizăm backup-uri zilnice, săptămânale sau lunare. Acestea sunt păstrate între 30 și 90 de zile, asigurând posibilitatea de a reveni la versiuni anterioare în caz de necesitate.'
-  - intrebare: 'Ce se întâmplă dacă site-ul meu are o problemă în afara orelor de program?'
-    raspuns: 'Pachetele noastre premium includ suport de urgență 24/7 pentru situații critice. Pentru pachetele standard, oferim asistență în timpul programului de lucru, iar problemele raportate în afara acestuia sunt tratate cu prioritate în următoarea zi lucrătoare.'
+  - intrebare: 'De ce am nevoie de mentenanță pentru site?'
+    raspuns: 'Pentru a-l menține securizat, rapid și funcțional. Tehnologia web se schimbă rapid, iar actualizările constante previn problemele de securitate și asigură o experiență bună pentru vizitatori.'
+  - intrebare: 'Ce include un pachet standard?'
+    raspuns: 'Include actualizări regulate, monitorizare, backup-uri săptămânale, verificări de securitate și un număr de ore pentru actualizări de conținut.'
+  - intrebare: 'Cât de des faceți backup-uri?'
+    raspuns: 'În funcție de pachet, facem backup-uri zilnice sau săptămânale. Le păstrăm timp de 30 de zile, pentru a putea restaura o versiune anterioară oricând este nevoie.'
+  - intrebare: 'Ce se întâmplă dacă site-ul meu are o problemă?'
+    raspuns: 'Pachetele noastre includ suport tehnic prioritar. Pentru urgențe, oferim și suport 24/7. Intervenim rapid pentru a rezolva orice problemă.'
 seo:
-  title: 'Servicii de Mentenanță Website'
-  description: 'Mentenanță completă pentru site-ul tău web. Actualizări, backup-uri, monitorizare, securitate și asistență tehnică pentru funcționare optimă.'
+  title: 'Servicii de Mentenanță Website Profesionale'
+  description: 'Mentenanță completă pentru site-ul tău: actualizări, backup, securitate și suport tehnic. Asigurăm funcționarea optimă a prezenței tale online.'
   keywords:
     - 'mentenanta website'
     - 'administrare site'
     - 'actualizare website'
     - 'backup site'
     - 'securitate website'
-    - 'optimizare performanta'
     - 'suport tehnic website'
-    - 'intretinere site web'
 draft: false
 ordine: 3
 ---
 
-## Servicii profesionale de Mentenanță Website
+## Mentenanță Website pentru Liniștea Ta
 
-Asigurarea funcționării optime a unui website nu se încheie odată cu lansarea acestuia. La BitDoze, oferim servicii complete de mentenanță tehnică și administrare conținut care mențin site-ul tău actualizat, securizat și performant pe termen lung.
+Un site web performant are nevoie de îngrijire constantă. Ne ocupăm noi de toate aspectele tehnice – actualizări, securitate, backup-uri – pentru ca site-ul tău să funcționeze perfect, iar tu să te poți concentra pe ceea ce contează mai mult: afacerea ta.
 
-Prin serviciile noastre de mentenanță, preluăm responsabilitatea aspectelor tehnice ale prezenței tale online, permițându-ți să te concentrezi pe dezvoltarea afacerii tale, în timp ce site-ul funcționează impecabil.
+Abordarea noastră este proactivă: prevenim problemele înainte ca ele să apară.
 
-## Pachete de Mentenanță adaptate nevoilor tale
+### Ce facem concret
 
-### Pachet Basic
+*   **Actualizări Tehnice:** Menținem platforma (WordPress, etc.), temele și plugin-urile la zi pentru a preveni vulnerabilitățile.
+*   **Monitorizare Uptime:** Verificăm constant dacă site-ul tău este online și funcționează corect. Intervenim imediat dacă apar probleme.
+*   **Backup-uri și Securitate:** Facem backup-uri regulate și implementăm măsuri de securitate pentru a-ți proteja datele.
+*   **Optimizări de Performanță:** Analizăm și îmbunătățim viteza de încărcare a site-ului pentru o experiență mai bună a utilizatorilor.
+*   **Administrare Conținut:** La cerere, adăugăm sau modificăm texte, imagini sau produse pe site-ul tău.
 
-Soluția ideală pentru site-uri mici și bloguri personale. Include actualizări lunare ale platformei și plugin-urilor, backup-uri săptămânale, verificări de securitate de bază și asistență tehnică prin email.
+### Pachete de Mentenanță
 
-### Pachet Business
+*   **Basic:** Ideal pentru site-uri mici și bloguri. Include actualizări lunare și backup-uri săptămânale.
+*   **Business:** Pentru site-uri de afaceri și magazine online. Include actualizări săptămânale, backup-uri zilnice și suport prioritar.
+*   **Premium:** Pentru site-uri critice. Include totul din pachetul Business, plus monitorizare avansată și suport 24/7.
 
-Pentru site-uri de afaceri și magazine online de dimensiuni medii. Include actualizări săptămânale, backup-uri zilnice, monitorizare continuă, verificări de securitate avansate, optimizări de performanță și asistență tehnică prioritară prin email și telefon.
+### De ce să lucrezi cu noi?
 
-### Pachet Premium
+*   **Expertiză:** Cunoaștem în detaliu diverse platforme web.
+*   **Proactivitate:** Identificăm și rezolvăm problemele înainte să te afecteze.
+*   **Rapoarte Clare:** Primești rapoarte lunare cu tot ce am lucrat.
+*   **Asistență Personalizată:** Adaptăm serviciile la nevoile specifice ale site-ului tău.
 
-Pentru site-uri complexe cu trafic intens și cerințe critice de funcționare. Include toate serviciile din pachetul Business, plus actualizări imediate când sunt disponibile, backup-uri în timp real, audit de securitate lunar, optimizări avansate de performanță și asistență tehnică 24/7.
+Investiția în mentenanță este o asigurare pentru prezența ta online. Lasă-ne pe noi să ne ocupăm de partea tehnică.
 
-## Ce include serviciul nostru de Mentenanță Website?
-
-### Actualizări tehnice regulate
-
-Menținem platforma, temele și plugin-urile site-ului tău la zi, implementând cele mai recente versiuni și patch-uri de securitate pentru a preveni vulnerabilitățile și a asigura compatibilitatea cu tehnologiile moderne.
-
-### Monitorizare și uptime
-
-Monitorizăm constant disponibilitatea și funcționalitatea site-ului tău, detectând și rezolvând rapid orice întreruperi sau erori care ar putea afecta experiența utilizatorilor sau business-ul tău.
-
-### Backup-uri și securitate
-
-Realizăm backup-uri regulate ale site-ului tău, asigurându-ne că datele tale sunt protejate și pot fi recuperate rapid în caz de pierdere. Implementăm măsuri de securitate proactive pentru a proteja site-ul împotriva atacurilor.
-
-### Optimizări de performanță
-
-Analizăm și îmbunătățim constant viteza de încărcare și performanța generală a site-ului tău, asigurând o experiență fluidă pentru utilizatori și un impact pozitiv asupra SEO.
-
-### Administrare conținut
-
-La cerere, gestionăm conținutul site-ului tău - adăugând actualizări, articole, produse sau modificări de text și imagine pentru a menține site-ul relevant și atractiv pentru vizitatori.
-
-## De ce să alegi serviciile noastre de Mentenanță?
-
-### Expertiză tehnică
-
-Echipa noastră deține cunoștințe avansate în diverse platforme web (WordPress, Shopify, Wix, etc.) și tehnologii de dezvoltare, oferind soluții profesionale pentru orice problemă tehnică.
-
-### Abordare proactivă
-
-Nu așteptăm ca problemele să apară - le identificăm și le rezolvăm înainte să afecteze funcționarea site-ului tău sau experiența utilizatorilor.
-
-### Rapoarte regulate
-
-Primești rapoarte lunare detaliate despre actualizările efectuate, performanța site-ului, probleme rezolvate și recomandări pentru îmbunătățiri viitoare.
-
-### Asistență personalizată
-
-Înțelegem că fiecare website este unic. Adaptăm serviciile noastre de mentenanță la specificul site-ului tău și la obiectivele afacerii tale.
-
-Investiția într-un serviciu profesional de mentenanță website este o decizie inteligentă pentru orice afacere care își dorește o prezență online stabilă, sigură și performantă. La BitDoze, suntem partenerii de încredere care veghează asupra sănătății și performanței site-ului tău, 24/7.

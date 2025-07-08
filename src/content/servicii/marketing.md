@@ -1,146 +1,73 @@
 ---
-title: 'Marketing'
-descriere: 'Strategii de marketing digital personalizate pentru a crește vizibilitatea brandului tău, a atrage clienți noi și a îmbunătăți vânzările.'
+title: 'Marketing Digital'
+descriere: 'Creștem vizibilitatea brandului tău și atragem clienți noi prin strategii de marketing digital personalizate.'
 icon: 'mdi:bullhorn'
 imagine: '/images/services/marketing.jpg'
 pret: 'De la 1200 RON/lună'
-durata: 'Contracte de minim 3 luni'
+durata: 'Minim 3 luni'
 caracteristici:
-  - 'Strategii de marketing digital personalizate'
+  - 'Strategii de marketing personalizate'
   - 'Campanii Google Ads și Facebook Ads'
   - 'Email marketing și automatizări'
-  - 'Marketing de conținut și blogging strategic'
-  - 'Social media management'
-  - 'Analiză și raportare detaliată a performanței'
-  - 'Optimizare continuă bazată pe date concrete'
+  - 'Marketing de conținut (blogging)'
+  - 'Management social media'
+  - 'Rapoarte de performanță clare'
 beneficii:
-  - 'Creșterea vizibilității online a brandului tău'
-  - 'Atragerea publicului țintă specific pentru afacerea ta'
-  - 'Îmbunătățirea ratelor de conversie și a ROI-ului'
-  - 'Consolidarea relației cu clienții existenți'
-  - 'Decizii de marketing bazate pe date concrete'
+  - 'Creșterea vizibilității online'
+  - 'Atragerea publicului țintă potrivit'
+  - 'Îmbunătățirea vânzărilor și a ROI-ului'
+  - 'Consolidarea relației cu clienții'
+  - 'Decizii bazate pe date'
 intrebari_frecvente:
-  - intrebare: 'Ce canale de marketing digital sunt cele mai potrivite pentru afacerea mea?'
-    raspuns: 'Canalele potrivite depind de specificul afacerii tale, publicul țintă și obiectivele de business. Realizăm o analiză detaliată a acestor factori pentru a determina mix-ul optim de canale (Google Ads, Facebook, Instagram, LinkedIn, Email, Content Marketing etc.) care va aduce cele mai bune rezultate pentru situația ta specifică.'
-  - intrebare: 'Cum măsurați succesul campaniilor de marketing?'
-    raspuns: 'Măsurăm succesul prin KPI personalizați în funcție de obiectivele tale - de la metrici de awareness (impresii, reach) și engagement (click-uri, interacțiuni), până la conversii concrete (lead-uri, vânzări) și ROI. Folosim instrumente avansate de analytics pentru a urmări întreg parcursul clientului și a atribui corect rezultatele fiecărui canal și campanii.'
-  - intrebare: 'Care este bugetul minim recomandat pentru campaniile de marketing digital?'
-    raspuns: 'Bugetul minim recomandat depinde de competitivitatea industriei, obiectivele tale și canalele selectate. Pentru a obține rezultate semnificative, recomandăm un buget minim de 1500-2000 RON/lună pentru advertising (separat de costul serviciilor de management). Începem întotdeauna cu teste la scală mică pentru a identifica tactici eficiente înainte de a scala bugetele.'
-  - intrebare: 'Cât de des voi primi rapoarte despre performanța campaniilor?'
-    raspuns: 'Oferim rapoarte săptămânale concise pentru monitorizarea progresului și rapoarte lunare detaliate cu analize aprofundate, insights și recomandări. În plus, pentru campaniile active, monitorizăm performanța zilnic și facem ajustări în timp real pentru a maximiza rezultatele. Ai acces permanent la dashboard-uri live care îți permit să urmărești performanța în orice moment.'
+  - intrebare: 'Ce canale de marketing sunt potrivite pentru mine?'
+    raspuns: 'Depinde de afacerea și publicul tău. Analizăm acești factori și recomandăm mix-ul optim de canale (Google Ads, Facebook, Instagram, Email, etc.) pentru a obține cele mai bune rezultate.'
+  - intrebare: 'Cum măsurați succesul?'
+    raspuns: 'Prin indicatori de performanță (KPI) clari, stabiliți împreună: de la vizibilitate și interacțiuni, la clienți potențiali (lead-uri), vânzări și rentabilitatea investiției (ROI).'
+  - intrebare: 'Care este bugetul minim recomandat?'
+    raspuns: 'Depinde de industrie și obiective. Recomandăm un buget de publicitate de cel puțin 1500-2000 RON/lună (separat de costul serviciilor) pentru a putea obține date și rezultate relevante.'
+  - intrebare: 'Cât de des primesc rapoarte?'
+    raspuns: 'Primești rapoarte săptămânale pe scurt și rapoarte lunare detaliate, cu analize și recomandări. Monitorizăm campaniile zilnic și le optimizăm în timp real.'
 seo:
-  title: 'Servicii de Marketing Digital pentru creșterea afacerii tale'
-  description: 'Strategii personalizate de marketing digital care cresc vizibilitatea, atrag clienți noi și maximizează ROI-ul. PPC, social media, email marketing și multe altele.'
+  title: 'Servicii de Marketing Digital pentru Creșterea Afacerii'
+  description: 'Strategii personalizate de marketing digital: PPC, social media, email marketing. Creștem vizibilitatea, atragem clienți și maximizăm ROI-ul.'
   keywords:
     - 'marketing digital'
     - 'google ads'
     - 'facebook ads'
     - 'social media marketing'
     - 'email marketing'
-    - 'content marketing'
-    - 'strategie marketing online'
     - 'publicitate online'
-    - 'campanii PPC'
 draft: false
 ordine: 6
 ---
 
-## Servicii complete de Marketing Digital
+## Marketing Digital care aduce rezultate
 
-În peisajul digital competitiv de astăzi, o prezență online puternică este esențială pentru succesul oricărei afaceri. La BitDoze, oferim servicii complete de marketing digital care îți permit să te conectezi cu publicul tău țintă, să construiești relații de durată cu clienții și să generezi rezultate măsurabile pentru afacerea ta.
+O prezență online puternică este vitală. Oferim servicii de marketing digital care te conectează cu publicul tău, construiesc relații și generează rezultate măsurabile.
 
-Abordarea noastră este strategică, bazată pe date și personalizată pentru nevoile specifice ale afacerii tale. Nu credem în soluții generice - fiecare strategie pe care o dezvoltăm este unică, focalizată pe obiectivele tale de business și adaptată continuu pentru performanță maximă.
+Abordarea noastră este strategică și bazată pe date. Creăm strategii unice, concentrate pe obiectivele tale de business.
 
-## Servicii de Marketing Digital
+### Ce facem concret
 
-### Google Ads & PPC
+*   **Google Ads & PPC:** Creăm și gestionăm campanii de publicitate (Search, Display, Shopping) care atrag trafic de calitate și generează conversii.
+*   **Social Media Marketing:** Implementăm strategii pentru Facebook, Instagram, LinkedIn etc., pentru a crește vizibilitatea și a crea o comunitate în jurul brandului tău.
+*   **Email Marketing:** Creăm campanii de email și automatizări care transformă abonații în clienți fideli.
+*   **Content Marketing:** Dezvoltăm conținut (articole de blog, ghiduri) care educă audiența, construiește autoritate și atrage clienți.
+*   **Analiză și Raportare:** Folosim date pentru a măsura performanța și a lua decizii informate. Primești rapoarte clare și la obiect.
 
-Dezvoltăm și gestionăm campanii de publicitate pay-per-click care atrag trafic de calitate și generează conversii:
+### De ce să lucrezi cu noi?
 
-- Campanii Search pentru captarea intenției de căutare active
-- Campanii Display pentru awareness și remarketing
-- Campanii Shopping pentru promovarea produselor
-- Campanii Video pentru engagement și branding
-- Optimizare continuă pentru maximizarea ROAS (Return on Ad Spend)
+*   **Abordare Integrată:** Creăm o strategie coerentă pe toate canalele de marketing.
+*   **Orientare spre Rezultate:** Ne concentrăm pe rezultate măsurabile și pe maximizarea ROI-ului.
+*   **Expertiză:** Suntem la curent cu cele mai noi tendințe și instrumente din industrie.
+*   **Transparență:** Oferim rapoarte clare care îți arată exact cum performează campaniile.
 
-### Social Media Marketing
+### Cum lucrăm
 
-Construim și implementăm strategii eficiente de social media care cresc vizibilitatea brandului tău și creează comunități angajate:
+1.  **Analiză și Strategie:** Înțelegem afacerea ta și creăm o strategie personalizată.
+2.  **Implementare:** Lansăm campaniile și dezvoltăm conținutul.
+3.  **Optimizare:** Monitorizăm constant și facem ajustări pentru a maximiza rezultatele.
+4.  **Raportare:** Primești rapoarte regulate cu performanța și pașii următori.
 
-- Crearea și managementul conturilor de social media
-- Dezvoltarea calendarului editorial și crearea de conținut relevant
-- Campanii de advertising targetate pe Facebook, Instagram, LinkedIn, TikTok
-- Monitorizarea conversațiilor despre brand și gestionarea reputației online
-- Analiză și raportare detaliată a performanței
+Fie că ești la început de drum sau vrei să optimizezi strategia existentă, te ajutăm să atingi următorul nivel de creștere.
 
-### Email Marketing
-
-Implementăm strategii de email marketing care convertesc abonaților în clienți fideli:
-
-- Crearea și segmentarea bazelor de date
-- Designul și dezvoltarea de template-uri personalizate
-- Campanii de newsletter și automatizări avansate
-- Testare A/B pentru optimizarea ratelor de deschidere și click
-- Analiză comportamentală și optimizare continuă pentru conversii
-
-### Content Marketing
-
-Dezvoltăm strategii de conținut care educă audiența, construiesc autoritate și generează leads:
-
-- Cercetare și planificare strategică de conținut
-- Creare de articole de blog, ghiduri, infografice și alte formate relevante
-- Optimizare SEO pentru conținut
-- Distribuire cross-platform pentru maximizarea reach-ului
-- Măsurarea performanței și ajustarea strategiei în funcție de rezultate
-
-### Marketing Analytic
-
-Folosim date și analize avansate pentru a măsura performanța și a lua decizii informate:
-
-- Implementare și configurare sisteme de tracking (Google Analytics, Meta Pixel etc.)
-- Dashboard-uri personalizate pentru monitorizarea KPI-urilor relevanți
-- Analiză comportamentală a utilizatorilor și optimizare funnel
-- Raportare detaliată cu insights și recomandări acționabile
-- Atribuire multi-canal pentru înțelegerea corectă a contribuției fiecărui canal
-
-## De ce să alegi serviciile noastre de Marketing?
-
-### Abordare integrată
-
-Nu tratăm canalele de marketing în izolare. Dezvoltăm strategii integrate care asigură un mesaj coerent și o experiență unitară pe toate punctele de contact cu clienții tăi.
-
-### Orientare spre rezultate
-
-Suntem obsedați de rezultate măsurabile. Fiecare strategie și tactică implementată este evaluată în funcție de contribuția la obiectivele tale de business, cu focus pe maximizarea ROI-ului.
-
-### Expertiză specializată
-
-Echipa noastră reunește specialiști cu expertiză în fiecare canal de marketing digital, actualizați constant cu cele mai recente tendințe, instrumente și best practices din industrie.
-
-### Transparență completă
-
-Oferim transparență totală asupra strategiei, implementării și rezultatelor. Rapoartele noastre detailate îți arată exact cum performează fiecare element al strategiei de marketing.
-
-## Procesul nostru de Marketing Digital
-
-### 1. Analiză și Strategie
-
-Începem cu o analiză detaliată a afacerii tale, a pieței, a competiției și a publicului țintă. Pe baza acestor informații, dezvoltăm o strategie personalizată cu obiective clare și KPI măsurabili.
-
-### 2. Implementare
-
-Implementăm strategia de marketing digital, configurând campanii, dezvoltând conținut și stabilind sistemele de tracking pentru măsurarea performanței.
-
-### 3. Optimizare
-
-Monitorizăm constant performanța și facem ajustări în timp real pentru a maximiza rezultatele. Testăm continuu noi abordări și tactici pentru a identifica cele mai eficiente canale de creștere.
-
-### 4. Raportare și Analiză
-
-Oferim rapoarte regulate, ușor de înțeles, care prezintă performanța campaniilor, insights-uri valoroase și recomandări pentru îmbunătățire continuă.
-
-### 5. Scalare
-
-Pe măsură ce identificăm tacticile cu cea mai bună performanță, alocăm resursele strategic pentru a scala rezultatele și a maximiza creșterea afacerii tale.
-
-Indiferent dacă ești o afacere la început de drum care caută să-și construiască prezența online sau o companie stabilită care dorește să-și optimizeze strategia de marketing digital, serviciile noastre sunt concepute pentru a te ajuta să atingi următorul nivel de creștere.
