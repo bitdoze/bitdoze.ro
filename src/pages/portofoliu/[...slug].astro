@@ -1,58 +1,69 @@
 ---
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import { Icon } from 'astro-icon/components';
-import CTA from '../../components/CTA.astro';
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import CTA from "../../components/CTA.astro";
 
 export async function getStaticPaths() {
-  const portofoliuEntries = await getCollection('portofoliu');
-  return portofoliuEntries.map(entry => ({
+  const portofoliuEntries = await getCollection("portofoliu");
+  return portofoliuEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
 interface Props {
-  entry: CollectionEntry<'portofoliu'>;
+  entry: CollectionEntry<"portofoliu">;
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Format date
-const dateFormatter = new Intl.DateTimeFormat('ro-RO', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
+const dateFormatter = new Intl.DateTimeFormat("ro-RO", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 const formattedDate = dateFormatter.format(entry.data.data);
 ---
 
-<Layout 
+<Layout
   title={`${entry.data.title} | Portofoliu BitDoze`}
   description={entry.data.descriere}
   ogType="article"
 >
   <!-- Hero Section -->
-  <section class="section-padding relative overflow-hidden" style="background-color: var(--color-background-alt);">
+  <section
+    class="section-padding relative overflow-hidden"
+    style="background-color: var(--color-background-alt);"
+  >
     <!-- Background gradient -->
-    <div class="absolute inset-0 opacity-50 dark:opacity-20" style="background: linear-gradient(to bottom right, rgba(79, 70, 229, 0.1), var(--color-background), rgba(14, 165, 233, 0.1));"></div>
-    
+    <div
+      class="absolute inset-0 opacity-50 dark:opacity-20"
+      style="background: linear-gradient(to bottom right, rgba(79, 70, 229, 0.1), var(--color-background), rgba(14, 165, 233, 0.1));"
+    >
+    </div>
+
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden">
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
       <div class="blob blob-3"></div>
     </div>
-    
+
     <!-- Grid pattern -->
     <div class="absolute inset-0 opacity-5">
       <div class="grid-pattern"></div>
     </div>
-    
+
     <div class="container max-w-4xl relative z-10">
       <div class="mb-6">
-        <a href="/portofoliu" class="inline-flex items-center text-sm font-medium transition-all hover:-translate-x-1 mb-4" style="color: var(--color-primary);">
+        <a
+          href="/portofoliu"
+          class="inline-flex items-center text-sm font-medium transition-all hover:-translate-x-1 mb-4"
+          style="color: var(--color-primary);"
+        >
           <Icon name="mdi:arrow-left" class="mr-1.5 h-4 w-4" />
           Înapoi la portofoliu
         </a>
@@ -61,116 +72,169 @@ const formattedDate = dateFormatter.format(entry.data.data);
           {entry.data.descriere}
         </p>
         <div class="mt-4 flex flex-wrap gap-2">
-          <span class="text-sm px-3 py-1 rounded-full bg-opacity-10" style="background-color: rgba(79, 70, 229, 0.1); color: var(--color-primary);">
+          <span
+            class="text-sm px-3 py-1 rounded-full bg-opacity-10"
+            style="background-color: rgba(79, 70, 229, 0.1); color: var(--color-primary);"
+          >
             Publicat: {formattedDate}
           </span>
         </div>
       </div>
-      
-      <!-- Featured Image -->
-      <div class="project-image mb-8">
-        <img 
-          src={entry.data.imagine} 
-          alt={entry.data.title} 
-          class="w-full h-auto object-cover"
-        />
-      </div>
     </div>
   </section>
-  
+
   <!-- Project Details -->
   <section class="section-padding">
-    <div class="container max-w-4xl">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Sidebar -->
-        <div class="md:col-span-1 order-2 md:order-1">
-          <div class="project-sidebar space-y-8">
-            <!-- Project Info Box -->
-            <div class="p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
-              <h3 class="text-lg font-semibold mb-4">Detalii Proiect</h3>
-              
-              <!-- Stack Section -->
-              <div class="mb-6">
-                <h4 class="text-sm font-semibold mb-3" style="color: var(--color-text);">Stack</h4>
-                <div class="flex flex-wrap gap-2">
-                  {entry.data.stack.map(tech => (
-                    <span class="stack-tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1 mb-1" style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <!-- Servicii Section -->
-              <div class="mb-6">
-                <h4 class="text-sm font-semibold mb-3" style="color: var(--color-text);">Servicii</h4>
-                <div class="flex flex-wrap gap-2">
-                  {entry.data.servicii.map(serviciu => (
-                    <span class="service-tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1 mb-1" style="background-color: rgba(var(--color-secondary-rgb), 0.1); color: var(--color-secondary);">
-                      {serviciu}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <!-- CTA Button -->
-              <a 
-                href={entry.data.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="portfolio-cta inline-flex items-center justify-center w-full py-2 px-4 font-medium text-white" 
-                style="background-color: var(--color-primary); border-radius: var(--radius-lg);"
-              >
-                Vezi proiect live
-                <Icon name="mdi:external-link" class="ml-1.5 h-4 w-4" />
-              </a>
-            </div>
-            
-            <!-- Navigation Box -->
-            <div class="p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);">
-              <h3 class="text-lg font-semibold mb-4">Explorează</h3>
-              <ul class="space-y-3">
-                <li>
-                  <a href="/portofoliu" class="inline-flex items-center text-sm transition-all hover:translate-x-1" style="color: var(--color-primary);">
-                    <Icon name="mdi:folder-multiple" class="mr-1.5 h-4 w-4" />
-                    Toate proiectele
-                  </a>
-                </li>
-                <li>
-                  <a href="/services" class="inline-flex items-center text-sm transition-all hover:translate-x-1" style="color: var(--color-primary);">
-                    <Icon name="mdi:cog" class="mr-1.5 h-4 w-4" />
-                    Serviciile noastre
-                  </a>
-                </li>
-                <li>
-                  <a href="/contact" class="inline-flex items-center text-sm transition-all hover:translate-x-1" style="color: var(--color-primary);">
-                    <Icon name="mdi:email" class="mr-1.5 h-4 w-4" />
-                    Contactează-ne
-                  </a>
-                </li>
-              </ul>
-            </div>
+    <div class="container max-w-6xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Left Column - Featured Image -->
+        <div class="order-1">
+          <div class="project-image sticky top-8">
+            <img
+              src={entry.data.imagine}
+              alt={entry.data.title}
+              class="w-full h-auto object-cover rounded-lg shadow-lg"
+            />
           </div>
         </div>
-        
-        <!-- Main Content -->
-        <div class="md:col-span-2 order-1 md:order-2">
-          <article class="prose prose-lg max-w-none" style="color: var(--color-text);">
+
+        <!-- Right Column - Details and Content -->
+        <div class="order-2 space-y-8">
+          <!-- Project Info Box -->
+          <div
+            class="p-6"
+            style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);"
+          >
+            <h3 class="text-lg font-semibold mb-4">Detalii Proiect</h3>
+
+            <!-- Stack Section -->
+            <div class="mb-6">
+              <h4
+                class="text-sm font-semibold mb-3"
+                style="color: var(--color-text);"
+              >
+                Stack
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                {
+                  entry.data.stack.map((tech) => (
+                    <span
+                      class="stack-tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1 mb-1"
+                      style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
+                    >
+                      {tech}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+
+            <!-- Servicii Section -->
+            <div class="mb-6">
+              <h4
+                class="text-sm font-semibold mb-3"
+                style="color: var(--color-text);"
+              >
+                Servicii
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                {
+                  entry.data.servicii.map((serviciu) => (
+                    <span
+                      class="service-tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1 mb-1"
+                      style="background-color: rgba(var(--color-secondary-rgb), 0.1); color: var(--color-secondary);"
+                    >
+                      {serviciu}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <a
+              href={entry.data.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="portfolio-cta inline-flex items-center justify-center w-full py-2 px-4 font-medium text-white"
+              style="background-color: var(--color-primary); border-radius: var(--radius-lg);"
+            >
+              Vezi proiect live
+              <Icon name="mdi:external-link" class="ml-1.5 h-4 w-4" />
+            </a>
+          </div>
+
+          <!-- Navigation Box -->
+          <div
+            class="p-6"
+            style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05);"
+          >
+            <h3 class="text-lg font-semibold mb-4">Explorează</h3>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="/portofoliu"
+                  class="inline-flex items-center text-sm transition-all hover:translate-x-1"
+                  style="color: var(--color-primary);"
+                >
+                  <Icon name="mdi:folder-multiple" class="mr-1.5 h-4 w-4" />
+                  Toate proiectele
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/services"
+                  class="inline-flex items-center text-sm transition-all hover:translate-x-1"
+                  style="color: var(--color-primary);"
+                >
+                  <Icon name="mdi:cog" class="mr-1.5 h-4 w-4" />
+                  Serviciile noastre
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/contact"
+                  class="inline-flex items-center text-sm transition-all hover:translate-x-1"
+                  style="color: var(--color-primary);"
+                >
+                  <Icon name="mdi:email" class="mr-1.5 h-4 w-4" />
+                  Contactează-ne
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Main Content -->
+          <div
+            class="prose prose-lg max-w-none"
+            style="color: var(--color-text);"
+          >
             <Content />
-          </article>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- CTA Section with background decoration -->
-  <section class="section-padding relative overflow-hidden" style="background: linear-gradient(to bottom right, var(--color-primary), var(--color-secondary-dark))">
+  <section
+    class="section-padding relative overflow-hidden"
+    style="background: linear-gradient(to bottom right, var(--color-primary), var(--color-secondary-dark))"
+  >
     <div class="absolute inset-0 bg-grid opacity-20"></div>
-    <div class="absolute -right-64 -top-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" style="background-color: var(--color-secondary);"></div>
-    <div class="absolute -left-64 -bottom-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30" style="background-color: var(--color-primary-light);"></div>
-    
+    <div
+      class="absolute -right-64 -top-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"
+      style="background-color: var(--color-secondary);"
+    >
+    </div>
+    <div
+      class="absolute -left-64 -bottom-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+      style="background-color: var(--color-primary-light);"
+    >
+    </div>
+
     <div class="container relative z-10">
-      <CTA 
+      <CTA
         title="Pregătit să începi propriul tău proiect?"
         subtitle="Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum te putem ajuta să o transformi în realitate."
         ctaText="Contactează-ne"
@@ -192,9 +256,9 @@ const formattedDate = dateFormatter.format(entry.data.data);
     position: relative;
     padding-left: 1rem;
   }
-  
+
   .prose h2::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0.25rem;
@@ -203,39 +267,39 @@ const formattedDate = dateFormatter.format(entry.data.data);
     background-color: var(--color-primary);
     border-radius: 2px;
   }
-  
+
   .prose p {
     color: var(--color-text-light);
     margin-bottom: 1.25rem;
     line-height: 1.7;
   }
-  
+
   .prose ul {
     color: var(--color-text-light);
     margin-bottom: 1.25rem;
     padding-left: 1.5rem;
   }
-  
+
   .prose li {
     margin-bottom: 0.5rem;
   }
-  
+
   /* Grid pattern */
   .grid-pattern {
     background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 25px 25px;
     height: 100%;
     width: 100%;
   }
-  
+
   /* Background blobs */
   .blob {
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
   }
-  
+
   .blob-1 {
     width: 600px;
     height: 600px;
@@ -244,7 +308,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
     background: rgba(124, 58, 237, 0.05);
     animation: blob-move 25s infinite alternate;
   }
-  
+
   .blob-2 {
     width: 400px;
     height: 400px;
@@ -253,7 +317,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
     background: rgba(56, 189, 248, 0.05);
     animation: blob-move 18s infinite alternate-reverse;
   }
-  
+
   .blob-3 {
     width: 300px;
     height: 300px;
@@ -262,7 +326,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
     background: rgba(251, 113, 133, 0.05);
     animation: blob-move 15s infinite alternate;
   }
-  
+
   @keyframes blob-move {
     0% {
       transform: translate(0, 0) scale(1);
@@ -277,7 +341,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
       transform: translate(0, 0) scale(1);
     }
   }
-  
+
   /* Animations */
   @keyframes animate-blob {
     0% {
@@ -293,32 +357,36 @@ const formattedDate = dateFormatter.format(entry.data.data);
       transform: translate(0px, 0px) scale(1);
     }
   }
-  
+
   .animate-blob {
     animation: animate-blob 7s ease-in-out infinite;
   }
-  
+
   /* Dark mode adjustments */
   :global(.dark) .grid-pattern {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   }
-  
+
   .portfolio-cta:hover {
     transform: translateY(-2px);
     transition: all 0.3s ease;
     background-color: var(--color-primary-dark) !important;
   }
-  
-  .stack-tag, .service-tag {
+
+  .stack-tag,
+  .service-tag {
     transition: all 0.3s ease;
   }
-  
+
   .stack-tag:hover {
     background-color: rgba(var(--color-primary-rgb), 0.2) !important;
     transform: translateY(-1px);
   }
-  
+
   .service-tag:hover {
     background-color: rgba(var(--color-secondary-rgb), 0.2) !important;
     transform: translateY(-1px);
