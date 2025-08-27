@@ -12,98 +12,147 @@ interface Props {
   };
 }
 
-const { 
-  logoText = companyConfig.logo.text,
-  ctaButton = navConfig.ctaButton
-} = Astro.props;
+const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
+  Astro.props;
 ---
 
-<header class="sticky top-0 z-40 w-full backdrop-blur transition-colors duration-300" style="background-color: rgba(var(--color-background-rgb), 0.8);">
+<header
+  class="sticky top-0 z-40 w-full backdrop-blur transition-colors duration-300"
+  style="background-color: rgba(var(--color-background-rgb), 0.8);"
+>
   <div class="container mx-auto flex h-16 items-center justify-between">
     <!-- Logo -->
     <div class="flex shrink-0 items-center">
       <a href="/" class="flex items-center gap-2">
-        <Icon name={companyConfig.logo.icon} class="h-8 w-8" style="color: var(--color-primary);" />
-        <span class="font-semibold text-xl">{logoText}</span>
+        <img src="/bitdoze_logo_better.svg" alt="BitDoze" class="h-8 w-auto" />
       </a>
     </div>
 
     <!-- Navigation -->
     <nav class="hidden md:flex space-x-8">
-      {navConfig.mainNav.map((item) => (
-        <a 
-          href={item.href} 
-          class="text-sm font-medium transition-colors" style="hover:color: var(--color-primary); transition: all var(--transition-normal);"
-          aria-disabled={item.disabled}
-        >
-          {item.title}
-        </a>
-      ))}
+      {
+        navConfig.mainNav.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-medium transition-colors"
+            style="hover:color: var(--color-primary); transition: all var(--transition-normal);"
+            aria-disabled={item.disabled}
+          >
+            {item.title}
+          </a>
+        ))
+      }
     </nav>
 
     <!-- Primary Action Button -->
     <div class="hidden md:flex items-center space-x-4">
       <ThemeToggle />
-      {ctaButton && (
-        <a 
-          href={ctaButton.href} 
-          class="btn btn-primary inline-flex h-9 items-center justify-center px-4 py-2 text-sm font-medium text-white shadow"
-        >
-          {ctaButton.text}
-        </a>
-      )}
+      {
+        ctaButton && (
+          <a
+            href={ctaButton.href}
+            class="btn btn-primary inline-flex h-9 items-center justify-center px-4 py-2 text-sm font-medium text-white shadow"
+          >
+            {ctaButton.text}
+          </a>
+        )
+      }
     </div>
 
     <!-- Mobile menu button -->
-    <div class="flex md:hidden">
-      <button type="button" id="mobile-menu-button" aria-expanded="false" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-indigo-600 focus:outline-none">
+    <div class="flex md:hidden items-center gap-2">
+      <ThemeToggle />
+      <button
+        type="button"
+        id="mobile-menu-button"
+        aria-expanded="false"
+        class="inline-flex items-center justify-center p-3 rounded-md min-h-[48px] min-w-[48px] transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary"
+      >
         <span class="sr-only">Open main menu</span>
-        <Icon name="mdi:menu" class="w-6 h-6" style="color: var(--color-text);" />
+        <Icon
+          name="mdi:menu"
+          class="w-6 h-6"
+          style="color: var(--color-text);"
+        />
       </button>
     </div>
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div id="mobile-menu" class="hidden md:hidden p-4 transition-colors duration-300" style="background-color: var(--color-background); box-shadow: var(--shadow-md);">
-    <div class="space-y-1 pb-3">
-      {navConfig.mainNav.map((item) => (
-        <a 
-          href={item.href} 
-          class="block py-2 text-base font-medium transition-colors" style="transition: all var(--transition-normal); hover:color: var(--color-primary);"
-          aria-disabled={item.disabled}
-        >
-          {item.title}
-        </a>
-      ))}
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden transition-all duration-300 mobile-menu-container"
+    style="background-color: var(--color-background); box-shadow: var(--shadow-md);"
+  >
+    <div class="space-y-2 p-4">
+      {
+        navConfig.mainNav.map((item) => (
+          <a
+            href={item.href}
+            class="mobile-menu-item block px-4 py-4 text-base font-medium rounded-lg transition-all min-h-[48px] flex items-center"
+            style="transition: all var(--transition-normal);"
+            aria-disabled={item.disabled}
+          >
+            {item.title}
+          </a>
+        ))
+      }
     </div>
-    <div class="border-t pt-4 pb-3" style="border-color: var(--color-text-lighter);">
-      <div class="flex items-center gap-4">
-        <ThemeToggle showLabel={true} class="flex-1 justify-start" />
-        {ctaButton && (
-          <a 
-            href={ctaButton.href} 
-            class="btn btn-primary flex-1 px-4 py-2 text-center text-sm font-medium text-white"
+    <div class="border-t p-4" style="border-color: var(--color-text-lighter);">
+      {
+        ctaButton && (
+          <a
+            href={ctaButton.href}
+            class="btn btn-primary block w-full px-4 py-3 text-center text-base font-medium text-white min-h-[48px]"
           >
             {ctaButton.text}
           </a>
-        )}
-      </div>
+        )
+      }
     </div>
   </div>
 </header>
 
 <script>
   // Mobile menu toggle functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
 
     if (menuButton && mobileMenu) {
-      menuButton.addEventListener('click', () => {
-        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
-        menuButton.setAttribute('aria-expanded', (!expanded).toString());
-        mobileMenu.classList.toggle('hidden');
+      menuButton.addEventListener("click", () => {
+        const expanded = menuButton.getAttribute("aria-expanded") === "true";
+        menuButton.setAttribute("aria-expanded", (!expanded).toString());
+        mobileMenu.classList.toggle("hidden");
       });
     }
   });
 </script>
+
+<style>
+  /* Mobile menu improvements */
+  .mobile-menu-container {
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+
+  .mobile-menu-item:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.05);
+    color: var(--color-primary);
+  }
+
+  .mobile-menu-item:active {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  :global(.dark) .mobile-menu-item:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  /* Ensure proper spacing on mobile */
+  @media (max-width: 768px) {
+    header {
+      padding: 0 1rem;
+    }
+  }
+</style>

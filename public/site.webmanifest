@@ -1,0 +1,27 @@
+{
+  "name": "BitDoze - Soluții Web Profesionale",
+  "short_name": "BitDoze",
+  "description": "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#009cef",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "lang": "ro",
+  "dir": "ltr",
+  "scope": "/",
+  "screenshots": []
+}

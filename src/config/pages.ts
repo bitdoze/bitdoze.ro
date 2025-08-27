@@ -259,14 +259,17 @@ interface PortfolioSection {
 }
 
 export const homePageConfig: PageConfig = {
-  title: siteConfig.name,
-  description: siteConfig.description,
+  title:
+    "BitDoze - Agenție Web Profesională | Creare Site-uri & Marketing Digital România",
+  description:
+    "Agenție web profesională din România. Creare site-uri, magazine online, SEO și marketing digital. Consultare gratuită. ✓10+ ani experiență ✓50+ proiecte",
   ogImage: siteConfig.ogImage,
   sections: [
     {
       type: "portfolio",
       title: "Portofoliu",
-      subtitle: "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.",
+      subtitle:
+        "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.",
       showLatestProjects: true,
       limit: 3,
       cta: {
@@ -276,38 +279,39 @@ export const homePageConfig: PageConfig = {
     },
     {
       type: "hero",
-      title: "Dezvoltă-ți Afacerea cu Soluții Profesionale Web",
+      title:
+        "Transformăm Ideile Tale în Succese Digitale Care Generează Profit",
       subtitle:
-        "Oferim servicii complete de web design și consultanță IT pentru a ajuta compania ta să crească și să aibă succes în piața competitivă de astăzi.",
+        "Creăm site-uri profesionale și strategii de marketing care aduc clienți noi și cresc veniturile. Răspuns garantat în 24 ore.",
       ctaPrimary: {
-        text: "Începe Acum",
+        text: "Obține Consultare Gratuită",
         link: "/contact",
       },
       ctaSecondary: {
-        text: "Află Mai Multe",
-        link: "/servicii",
+        text: "Vezi Portofoliul Nostru",
+        link: "/portofoliu",
       },
       imageUrl: imageAssets.hero.main,
       stats: [
         {
-          value: "98%",
-          label: "Satisfacția clienților",
+          value: "50+",
+          label: "Proiecte Finalizate",
         },
         {
           value: "10+",
-          label: "Ani de experiență",
+          label: "Ani Experiență",
         },
         {
-          value: "100+",
-          label: "Clienți deserviți",
+          value: "24/7",
+          label: "Suport Clienți",
         },
       ],
     },
     {
       type: "welcome",
-      title: "Bine ați venit la " + companyConfig.name,
+      title: "Partenerul Tău de Încredere pentru Creștere Digitală",
       subtitle:
-        "Oferim soluții profesionale pentru nevoile afacerii tale. Echipa noastră cu experiență este dedicată să ajute compania ta să crească și să aibă succes în piața competitivă de astăzi.",
+        "De peste 10 ani, ajutăm afacerile din România să crească online. 100% Satisfacție Garantată sau Banii Înapoi.",
       features: [
         {
           icon: "mdi:shield-check",
@@ -326,36 +330,36 @@ export const homePageConfig: PageConfig = {
       ],
       ctas: {
         primary: {
-          text: "Serviciile Noastre",
-          link: "/servicii",
+          text: "Începe Proiectul Tău",
+          link: "/contact",
         },
         secondary: {
-          text: "Despre Noi",
-          link: "/about",
+          text: "Vezi Servicii & Prețuri",
+          link: "/servicii",
         },
         welcome: [
           {
-            text: "Servicii de Încredere",
-            link: "/servicii",
+            text: "Consultare Gratuită",
+            link: "/contact",
           },
           {
-            text: "Soluții Inovatoare",
-            link: "/about",
+            text: "Vezi Prețurile",
+            link: "/servicii",
           },
         ],
       },
       image: "/images/welcome-image.jpg",
-      badge: "10+ Ani de Experiență",
+      badge: "Răspuns în 24 Ore Garantat",
     },
     {
       type: "services",
-      title: "Serviciile Noastre",
+      title: "Servicii Complete cu Prețuri Transparente",
       subtitle:
-        "Oferim soluții complete pentru a ajuta afacerea ta să prospere în piața competitivă de astăzi.",
+        "Soluții digitale dovedite care aduc rezultate măsurabile. Prețuri de la 2500 RON. Fără costuri ascunse.",
       showAllServices: false,
       limit: 3,
       cta: {
-        text: "Află Mai Multe",
+        text: "Vezi Toate Serviciile →",
         link: "/servicii",
       },
     },
@@ -579,7 +583,7 @@ export const servicesPageConfig: PageConfig = {
       showAllServices: true,
       cta: {
         text: "Află Mai Multe",
-        link: "/servicii"
+        link: "/servicii",
       },
     },
     {
@@ -620,7 +624,8 @@ export const servicesPageConfig: PageConfig = {
     {
       type: "faq",
       title: "Întrebări Frecvente",
-      subtitle: "Găsește răspunsuri la întrebările comune despre serviciile noastre",
+      subtitle:
+        "Găsește răspunsuri la întrebările comune despre serviciile noastre",
       questions: [
         {
           question: "Ce industrii deserviți?",

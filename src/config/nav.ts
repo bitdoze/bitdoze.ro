@@ -38,6 +38,12 @@ export const navConfig: NavConfig = {
     {
       title: "Contact",
       href: "/contact",
+      disabled: false,
+    },
+    {
+      title: "FAQ",
+      href: "/faq",
+      disabled: false,
     },
   ],
   ctaButton: {
@@ -61,6 +67,10 @@ export const navConfig: NavConfig = {
       {
         title: "Contact",
         href: "/contact",
+      },
+      {
+        title: "FAQ",
+        href: "/faq",
       },
     ],
     resources: [
@@ -88,15 +98,15 @@ export const navConfig: NavConfig = {
     legal: [
       {
         title: "Politica de Confidențialitate",
-        href: "/privacy",
+        href: "/politica-de-confidentialitate",
       },
       {
         title: "Termeni și Condiții",
-        href: "/terms",
+        href: "/termeni-si-conditii",
       },
       {
         title: "Politica de Cookie-uri",
-        href: "/cookies",
+        href: "/politica-de-cookies",
       },
     ],
   },

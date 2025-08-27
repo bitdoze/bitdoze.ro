@@ -1,0 +1,417 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Badge {
+  icon: string;
+  value: string;
+  label: string;
+  color?: string;
+}
+
+interface Props {
+  badges?: Badge[];
+  variant?: "default" | "compact" | "inline";
+  className?: string;
+}
+
+const defaultBadges: Badge[] = [
+  {
+    icon: "mdi:shield-check",
+    value: "10+",
+    label: "Ani Experiență",
+    color: "var(--color-primary)",
+  },
+  {
+    icon: "mdi:briefcase-check",
+    value: "50+",
+    label: "Proiecte Finalizate",
+    color: "var(--color-success)",
+  },
+  {
+    icon: "mdi:headset",
+    value: "24/7",
+    label: "Suport Tehnic",
+    color: "var(--color-secondary)",
+  },
+  {
+    icon: "mdi:star",
+    value: "100%",
+    label: "Satisfacție Garantată",
+    color: "var(--color-accent)",
+  },
+];
+
+const {
+  badges = defaultBadges,
+  variant = "default",
+  className = "",
+} = Astro.props;
+---
+
+<div class={`trust-badges trust-badges--${variant} ${className}`}>
+  <div class="trust-badges__container">
+    {
+      badges.map((badge, index) => (
+        <div
+          class="trust-badge"
+          data-stagger-item
+          style={`--stagger-delay: ${index * 100}ms`}
+        >
+          <div class="trust-badge__icon-wrapper">
+            <div
+              class="trust-badge__icon-bg"
+              style={`background-color: ${
+                badge.color
+                  ? `rgba(${badge.color
+                      .replace("rgb(", "")
+                      .replace(")", "")}, 0.1)`
+                  : "rgba(var(--color-primary-rgb), 0.1)"
+              };`}
+            >
+              <Icon
+                name={badge.icon}
+                class="trust-badge__icon"
+                style={`color: ${badge.color || "var(--color-primary)"};`}
+              />
+            </div>
+          </div>
+          <div class="trust-badge__content">
+            <div class="trust-badge__value">{badge.value}</div>
+            <div class="trust-badge__label">{badge.label}</div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .trust-badges {
+    position: relative;
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .trust-badges__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Default variant */
+  .trust-badges--default .trust-badge {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--color-background);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
+    transition: all var(--transition-normal);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+  }
+
+  .trust-badges--default .trust-badge:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  /* Compact variant */
+  .trust-badges--compact .trust-badges__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+  }
+
+  .trust-badges--compact .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--color-background);
+    border-radius: var(--radius-full);
+    border: 2px solid rgba(var(--color-primary-rgb), 0.15);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleIn 0.5s ease-out forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+  }
+
+  .trust-badges--compact .trust-badge:hover {
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Inline variant */
+  .trust-badges--inline .trust-badges__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .trust-badges--inline .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+  }
+
+  /* Badge components */
+  .trust-badge__icon-wrapper {
+    flex-shrink: 0;
+  }
+
+  .trust-badge__icon-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-normal);
+  }
+
+  .trust-badges--compact .trust-badge__icon-bg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .trust-badges--inline .trust-badge__icon-bg {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent !important;
+  }
+
+  .trust-badge__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .trust-badges--compact .trust-badge__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .trust-badge__content {
+    margin-left: 1rem;
+  }
+
+  .trust-badges--compact .trust-badge__content {
+    margin-left: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .trust-badge__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  .trust-badges--compact .trust-badge__value {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .trust-badges--inline .trust-badge__value {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+  }
+
+  .trust-badge__label {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-top: 0.25rem;
+  }
+
+  .trust-badges--compact .trust-badge__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .trust-badges--inline .trust-badge__label {
+    font-size: 0.875rem;
+    margin-top: 0;
+    font-weight: 500;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Dark mode adjustments */
+  :global(.dark) .trust-badges--default .trust-badge {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .trust-badges--compact .trust-badge {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .trust-badges--default .trust-badge:hover {
+    border-color: rgba(var(--color-primary-rgb), 0.5);
+  }
+
+  :global(.dark) .trust-badges--compact .trust-badge:hover {
+    background: rgba(var(--color-primary-rgb), 0.15);
+    border-color: rgba(var(--color-primary-rgb), 0.5);
+  }
+
+  :global(.dark) .trust-badge__value {
+    color: var(--color-dark-text);
+  }
+
+  :global(.dark) .trust-badge__label {
+    color: var(--color-dark-text-light);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .trust-badges__container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .trust-badges--inline .trust-badges__container {
+      gap: 1.5rem;
+    }
+
+    .trust-badge__value {
+      font-size: 1.25rem;
+    }
+
+    .trust-badge__label {
+      font-size: 0.75rem;
+    }
+
+    .trust-badges--default .trust-badge {
+      padding: 1rem;
+    }
+
+    .trust-badge__icon-bg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .trust-badge__icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .trust-badges--default .trust-badge {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .trust-badge__content {
+      margin-left: 0;
+      margin-top: 0.75rem;
+    }
+
+    .trust-badges--compact .trust-badges__container {
+      gap: 0.5rem;
+    }
+
+    .trust-badges--inline .trust-badges__container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  /* Hover effects */
+  .trust-badge {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trust-badge::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--color-primary-rgb), 0.05),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .trust-badge:hover::before {
+    left: 100%;
+  }
+
+  /* Pulse animation for icons on hover */
+  .trust-badge:hover .trust-badge__icon-bg {
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+</style>

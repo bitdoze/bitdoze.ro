@@ -8,6 +8,7 @@ import Portofoliu from "../components/Portofoliu.astro";
 import CTA from "../components/CTA.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import TrustBadges from "../components/TrustBadges.astro";
 import { Icon } from "astro-icon/components";
 
 import { homePageConfig } from "../config/pages";
@@ -51,15 +52,25 @@ const featuredServices = servicii
 >
   {
     welcomeSection && (
-      <Welcome
-        title={welcomeSection.title}
-        subtitle={welcomeSection.subtitle}
-        features={welcomeSection.features}
-        ctas={welcomeSection.ctas}
-        image={heroSection?.imageUrl || welcomeSection.image}
-        badge={welcomeSection.badge}
-        welcomeButtons={welcomeSection.ctas.welcome}
-      />
+      <>
+        <Welcome
+          title={welcomeSection.title}
+          subtitle={welcomeSection.subtitle}
+          features={welcomeSection.features}
+          ctas={welcomeSection.ctas}
+          image={heroSection?.imageUrl || welcomeSection.image}
+          badge={welcomeSection.badge}
+          welcomeButtons={welcomeSection.ctas.welcome}
+        />
+        <div
+          class="trust-badges-hero-section"
+          style="background-color: var(--color-background-alt); padding: 3rem 0; margin-top: -2rem; border-bottom: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);"
+        >
+          <div class="container">
+            <TrustBadges variant="compact" />
+          </div>
+        </div>
+      </>
     )
   }
   {
@@ -80,43 +91,37 @@ const featuredServices = servicii
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredServices.map((service, index) => (
-              <div class="service-card group relative">
+              <div class="service-card-wrapper group relative">
                 {/* Badge */}
                 {index === 0 && (
-                  <div class="absolute -top-3 -right-3 z-10">
-                    <div
-                      class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white shadow-md"
-                      style="background-color: var(--color-primary);"
-                    >
-                      <Icon name="mdi:star" class="mr-1 h-4 w-4" />
-                      Popular
+                  <div class="service-badge-container">
+                    <div class="service-badge service-badge-popular">
+                      <Icon name="mdi:star" class="badge-icon" />
+                      <span class="badge-text">Popular</span>
                     </div>
                   </div>
                 )}
                 {index === 1 && (
-                  <div class="absolute -top-3 -right-3 z-10">
-                    <div
-                      class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white shadow-md"
-                      style="background-color: var(--color-accent);"
-                    >
-                      <Icon name="mdi:thumb-up" class="mr-1 h-4 w-4" />
-                      Recomandat
+                  <div class="service-badge-container">
+                    <div class="service-badge service-badge-recommended">
+                      <Icon name="mdi:thumb-up" class="badge-icon" />
+                      <span class="badge-text">Recomandat</span>
                     </div>
                   </div>
                 )}
                 {index === 2 && (
-                  <div class="absolute -top-3 -right-3 z-10">
-                    <div
-                      class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white shadow-md"
-                      style="background-color: var(--color-success);"
-                    >
-                      <Icon name="mdi:new-box" class="mr-1 h-4 w-4" />
-                      Nou
+                  <div class="service-badge-container">
+                    <div class="service-badge service-badge-new">
+                      <Icon name="mdi:new-box" class="badge-icon" />
+                      <span class="badge-text">Nou</span>
                     </div>
                   </div>
                 )}
 
-                <a href={`/servicii/${service.slug}`} class="block h-full">
+                <a
+                  href={`/servicii/${service.slug}`}
+                  class="service-card-link block h-full"
+                >
                   <div
                     class="h-full p-6 flex flex-col rounded-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-lg"
                     style="background-color: var(--color-background); box-shadow: var(--shadow-sm); border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1); border-radius: var(--radius-lg);"
@@ -215,17 +220,98 @@ const featuredServices = servicii
 </Layout>
 
 <style>
-  .service-card {
+  .trust-badges-hero-section {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--color-background-alt-rgb), 0.5),
+      var(--color-background-alt)
+    );
+  }
+
+  :global(.dark) .trust-badges-hero-section {
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--color-dark-background-alt-rgb), 0.5),
+      var(--color-dark-background-alt)
+    );
+  }
+
+  /* Service card wrapper and badge positioning */
+  .service-card-wrapper {
     position: relative;
     transition: all 0.3s ease;
   }
 
-  .service-card:hover {
+  .service-badge-container {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    z-index: 20;
+  }
+
+  .service-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    animation: pulse 2s infinite;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .badge-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .badge-text {
+    line-height: 1;
+  }
+
+  /* Service badge color variants */
+  .service-badge-popular {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-primary-dark)
+    );
+    box-shadow: 0 4px 14px rgba(var(--color-primary-rgb), 0.5);
+  }
+
+  .service-badge-recommended {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent),
+      var(--color-accent-dark)
+    );
+    box-shadow: 0 4px 14px rgba(var(--color-accent-rgb), 0.5);
+  }
+
+  .service-badge-new {
+    background: linear-gradient(135deg, var(--color-success), #0ea570);
+    box-shadow: 0 4px 14px rgba(var(--color-success-rgb), 0.5);
+  }
+
+  /* Service card styles */
+  .service-card-link {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .service-card-wrapper:hover {
     transform: translateY(-5px);
   }
 
-  .service-card .badge {
-    animation: pulse 2s infinite;
+  .service-card-wrapper:hover .service-badge {
+    animation: none;
+    transform: scale(1.1);
   }
 
   @keyframes pulse {
@@ -238,11 +324,6 @@ const featuredServices = servicii
     100% {
       transform: scale(1);
     }
-  }
-
-  .service-card:hover .badge {
-    animation: none;
-    transform: scale(1.1);
   }
 
   .btn-primary {

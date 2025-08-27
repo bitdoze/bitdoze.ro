@@ -1,0 +1,390 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import PageHeader from "../components/PageHeader.astro";
+import CTA from "../components/CTA.astro";
+
+// FAQ data organized by category
+const faqCategories = [
+  {
+    category: "General",
+    icon: "mdi:information",
+    questions: [
+      {
+        question: "Ce servicii oferă BitDoze?",
+        answer: "Oferim servicii complete de dezvoltare web, hosting, mentenanță site-uri, optimizare SEO, marketing digital și consultanță IT. Suntem specializați în crearea de site-uri profesionale, magazine online și aplicații web personalizate pentru afaceri din România."
+      },
+      {
+        question: "Cât durează să primiți un răspuns la cererea mea?",
+        answer: "Garantăm răspuns în maximum 24 de ore lucrătoare. De obicei, răspundem în câteva ore în timpul programului de lucru (Luni-Vineri, 9:00-18:00). Pentru urgențe, suntem disponibili și prin WhatsApp."
+      },
+      {
+        question: "Unde sunteți localizați?",
+        answer: "Suntem o companie românească, înregistrată în județul Argeș. Lucrăm cu clienți din toată România și oferim servicii atât online, cât și întâlniri față în față pentru clienții din zonă."
+      },
+      {
+        question: "De cât timp activați pe piață?",
+        answer: "Avem peste 10 ani de experiență în domeniul serviciilor digitale. În acest timp, am finalizat peste 50 de proiecte și am ajutat zeci de afaceri să crească online."
+      }
+    ]
+  },
+  {
+    category: "Web Design & Dezvoltare",
+    icon: "mdi:web",
+    questions: [
+      {
+        question: "Cât costă un site web profesional?",
+        answer: "Prețurile noastre pentru un site de prezentare încep de la 2500 RON. Un magazin online pornește de la 5000 RON. Prețul final depinde de complexitate, numărul de pagini, funcționalități speciale și integrări necesare. Oferim consultare gratuită pentru o ofertă personalizată."
+      },
+      {
+        question: "Cât durează dezvoltarea unui site web?",
+        answer: "Un site de prezentare standard durează 2-4 săptămâni. Un magazin online necesită 4-8 săptămâni, în funcție de complexitate. Proiectele enterprise sau cu funcționalități complexe pot dura 2-3 luni. Termenul exact îl stabilim împreună după analiza cerințelor."
+      },
+      {
+        question: "Ce tehnologii folosiți pentru dezvoltare?",
+        answer: "Folosim tehnologii moderne precum React, Astro, Next.js pentru site-uri performante. Pentru magazine online recomandăm WooCommerce sau Shopify. Pentru site-uri simple, WordPress rămâne o opțiune excelentă. Alegem tehnologia potrivită pentru nevoile și bugetul fiecărui client."
+      },
+      {
+        question: "Site-ul va fi optimizat pentru mobil?",
+        answer: "Absolut! Toate site-urile noastre sunt 100% responsive, adică se adaptează perfect pe orice dispozitiv - desktop, tabletă sau telefon mobil. Având în vedere că peste 60% din trafic vine de pe mobil, această optimizare este esențială."
+      },
+      {
+        question: "Pot face modificări singur după lansare?",
+        answer: "Da! Toate site-urile vin cu un sistem de administrare ușor de folosit (CMS). Oferim training gratuit și documentație pentru a vă învăța cum să actualizați conținutul, să adăugați produse sau articole noi. Pentru modificări complexe, suntem mereu aici să ajutăm."
+      }
+    ]
+  },
+  {
+    category: "SEO & Marketing",
+    icon: "mdi:trending-up",
+    questions: [
+      {
+        question: "Ce include optimizarea SEO de bază?",
+        answer: "Optimizarea SEO de bază include: cercetare cuvinte cheie, optimizare meta tags (title, description), structură URL-uri, sitemap XML, robots.txt, optimizare imagini, viteză de încărcare, schema markup și configurare Google Analytics/Search Console."
+      },
+      {
+        question: "Cât durează până văd rezultate din SEO?",
+        answer: "SEO este o strategie pe termen lung. Primele îmbunătățiri pot fi vizibile în 2-3 luni, dar rezultate semnificative apar de obicei după 6-12 luni de optimizare constantă. Depinde mult de competiție și de starea actuală a site-ului."
+      },
+      {
+        question: "Oferiți servicii de marketing pe social media?",
+        answer: "Da, oferim pachete complete de social media marketing incluzând: strategie de conținut, creare postări, management comunitate, campanii publicitare pe Facebook/Instagram, raportare lunară. Prețurile încep de la 1500 RON/lună."
+      },
+      {
+        question: "Garantați prima poziție în Google?",
+        answer: "Nimeni nu poate garanta prima poziție în Google în mod etic. Ceea ce garantăm sunt îmbunătățiri semnificative ale vizibilității, trafic organic crescut și strategii white-hat conforme cu ghidurile Google. Succesul depinde de mulți factori, inclusiv competiția din nișa dvs."
+      }
+    ]
+  },
+  {
+    category: "Hosting & Mentenanță",
+    icon: "mdi:server",
+    questions: [
+      {
+        question: "Ce include serviciul de hosting?",
+        answer: "Pachetele noastre de hosting includ: spațiu SSD rapid, certificat SSL gratuit, backup-uri automate zilnice, protecție anti-malware, email profesional, suport tehnic 24/7, uptime garantat 99.9%. Prețurile încep de la 25 RON/lună."
+      },
+      {
+        question: "Ce include mentenanța lunară?",
+        answer: "Mentenanța include: actualizări de securitate, backup-uri regulate, monitorizare uptime, optimizare performanță, rezolvare probleme tehnice, actualizări conținut (în limita pachetului ales), raport lunar de activitate. Prețuri de la 200 RON/lună."
+      },
+      {
+        question: "Ce se întâmplă dacă site-ul meu este atacat?",
+        answer: "Avem măsuri proactive de securitate pentru a preveni atacurile. În caz de incident, intervenim imediat pentru a restaura site-ul din backup-uri și a elimina amenințarea. Serviciul este inclus în pachetele de mentenanță."
+      },
+      {
+        question: "Pot să-mi mut site-ul existent la voi?",
+        answer: "Desigur! Oferim migrare gratuită pentru clienții noi. Ne ocupăm de tot procesul tehnic, asigurându-ne că site-ul funcționează perfect pe noua infrastructură, fără timp de nefuncționare."
+      }
+    ]
+  },
+  {
+    category: "Prețuri & Plăți",
+    icon: "mdi:cash",
+    questions: [
+      {
+        question: "Care sunt modalitățile de plată acceptate?",
+        answer: "Acceptăm plăți prin transfer bancar, card online, PayPal și cash (pentru întâlniri față în față). Pentru proiecte mari, oferim posibilitatea plății în rate: 50% avans și 50% la finalizare."
+      },
+      {
+        question: "Oferiți factură și contract?",
+        answer: "Da, suntem o firmă înregistrată legal (CUI: 28708326) și oferim factură fiscală pentru toate serviciile. Încheiem contract de prestări servicii care detaliază clar termenii colaborării, livrabile și termene."
+      },
+      {
+        question: "Există costuri ascunse?",
+        answer: "Nu! Prețurile noastre sunt transparente și includ tot ce am agreat în ofertă. Orice serviciu adițional solicitat pe parcurs va fi discutat și aprobat înainte de implementare."
+      },
+      {
+        question: "Oferiți reduceri pentru proiecte multiple?",
+        answer: "Da, oferim reduceri pentru clienții fideli și pentru proiecte multiple. De asemenea, avem oferte speciale pentru ONG-uri și startup-uri. Contactați-ne pentru o ofertă personalizată."
+      }
+    ]
+  }
+];
+
+// Structured data for FAQ
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqCategories.flatMap(category =>
+    category.questions.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  )
+};
+---
+
+<Layout
+  title="Întrebări Frecvente - BitDoze"
+  description="Găsiți răspunsuri la întrebările frecvente despre serviciile noastre de web design, hosting, SEO și marketing digital. Suport 24/7 disponibil."
+  structuredData={{
+    type: "faq",
+    data: structuredData
+  }}
+>
+  <!-- Hero Section -->
+  <PageHeader
+    title="Întrebări Frecvente"
+    subtitle="Găsiți rapid răspunsuri la cele mai comune întrebări despre serviciile noastre"
+    align="center"
+    withBlobs={true}
+    withGrid={true}
+    icon="mdi:help-circle"
+  />
+
+  <!-- FAQ Content -->
+  <section class="section-padding">
+    <div class="container max-w-5xl mx-auto">
+      <!-- Quick Links -->
+      <div class="quick-links mb-12">
+        <h2 class="text-xl font-semibold mb-4 text-center">Navigare Rapidă</h2>
+        <div class="flex flex-wrap justify-center gap-2">
+          {faqCategories.map((cat) => (
+            <a
+              href={`#${cat.category.toLowerCase().replace(/\s+/g, '-')}`}
+              class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all"
+              style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.2);"
+            >
+              <Icon name={cat.icon} class="mr-2 h-4 w-4" />
+              {cat.category}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Categories -->
+      {faqCategories.map((category, categoryIndex) => (
+        <div
+          id={category.category.toLowerCase().replace(/\s+/g, '-')}
+          class="faq-category mb-12"
+          style={`animation-delay: ${categoryIndex * 100}ms`}
+        >
+          <div class="category-header mb-6">
+            <div class="flex items-center gap-3">
+              <div
+                class="icon-wrapper"
+                style="background-color: rgba(var(--color-primary-rgb), 0.1); padding: 0.75rem; border-radius: var(--radius-lg);"
+              >
+                <Icon name={category.icon} class="h-6 w-6" style="color: var(--color-primary);" />
+              </div>
+              <h2 class="text-2xl font-bold">{category.category}</h2>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            {category.questions.map((item, index) => (
+              <div
+                class="faq-item"
+                style={`animation-delay: ${(categoryIndex * 100) + (index * 50)}ms`}
+              >
+                <button
+                  class="faq-question w-full text-left p-5 rounded-lg transition-all"
+                  style="background-color: var(--color-background); border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);"
+                  onclick={`this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');`}
+                >
+                  <div class="flex justify-between items-center">
+                    <h3 class="font-semibold text-lg pr-4">{item.question}</h3>
+                    <Icon name="mdi:chevron-down" class="faq-icon h-5 w-5 flex-shrink-0 transition-transform" style="color: var(--color-primary);" />
+                  </div>
+                </button>
+                <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+                  <div class="p-5 pt-0">
+                    <p style="color: var(--color-text-light); line-height: 1.6;">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- Contact Support -->
+      <div class="contact-support text-center p-8 rounded-2xl" style="background-color: var(--color-background-alt); border: 1px solid rgba(var(--color-primary-rgb), 0.2);">
+        <Icon name="mdi:headset" class="h-12 w-12 mx-auto mb-4" style="color: var(--color-primary);" />
+        <h2 class="text-2xl font-bold mb-3">Nu ai găsit răspunsul?</h2>
+        <p style="color: var(--color-text-light);" class="mb-6 max-w-2xl mx-auto">
+          Echipa noastră de suport este aici pentru tine. Contactează-ne și îți vom răspunde în maximum 24 de ore.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/contact"
+            class="btn btn-primary inline-flex items-center justify-center px-6 py-3"
+          >
+            <Icon name="mdi:email" class="mr-2 h-5 w-5" />
+            Trimite-ne un mesaj
+          </a>
+          <a
+            href="https://wa.me/40XXXXXXXXX"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary inline-flex items-center justify-center px-6 py-3"
+          >
+            <Icon name="mdi:whatsapp" class="mr-2 h-5 w-5" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTA
+    title="Începe proiectul tău astăzi"
+    subtitle="Transformă-ți ideile în realitate cu ajutorul echipei noastre de experți"
+    ctaText="Obține Consultare Gratuită"
+    ctaLink="/contact"
+    secondaryText="Vezi Serviciile"
+    secondaryLink="/servicii"
+  />
+</Layout>
+
+<style>
+  /* FAQ Animations */
+  .faq-category {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .faq-item {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* FAQ Interaction Styles */
+  .faq-question {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .faq-question:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.02) !important;
+    border-color: rgba(var(--color-primary-rgb), 0.3) !important;
+  }
+
+  .faq-question.active {
+    background-color: rgba(var(--color-primary-rgb), 0.05) !important;
+    border-color: var(--color-primary) !important;
+  }
+
+  .faq-question.active .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    background-color: var(--color-background);
+    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    margin-top: -1px;
+  }
+
+  .faq-answer.show {
+    max-height: 500px;
+  }
+
+  /* Quick Links Hover */
+  .quick-links a:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.2) !important;
+    transform: translateY(-2px);
+  }
+
+  /* Contact Support Card */
+  .contact-support {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-support::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+    animation: gradientMove 3s ease-in-out infinite;
+  }
+
+  @keyframes gradientMove {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Dark mode adjustments */
+  :global(.dark) .faq-question {
+    background-color: var(--color-dark-background-alt) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  :global(.dark) .faq-question:hover {
+    background-color: rgba(var(--color-primary-rgb), 0.1) !important;
+  }
+
+  :global(.dark) .faq-answer {
+    background-color: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .contact-support {
+    background-color: var(--color-dark-background-alt) !important;
+    border-color: rgba(var(--color-primary-rgb), 0.3) !important;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .faq-question h3 {
+      font-size: 1rem;
+    }
+
+    .quick-links a {
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .contact-support {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

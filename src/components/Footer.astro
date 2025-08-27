@@ -26,12 +26,11 @@ const currentYear = new Date().getFullYear();
       <!-- Company info -->
       <div class="col-span-1 md:col-span-1 lg:col-span-2">
         <a href="/" class="flex items-center gap-2">
-          <Icon
-            name={companyConfig.logo.icon}
-            class="h-8 w-8"
-            style="color: var(--color-primary);"
+          <img
+            src="/bitdoze_logo_better.svg"
+            alt="BitDoze"
+            class="h-8 w-auto"
           />
-          <span class="font-semibold text-xl">{companyName}</span>
         </a>
         <p
           class="mt-4 text-sm max-w-xs"
@@ -127,7 +126,7 @@ const currentYear = new Date().getFullYear();
     >
       <p class="text-sm" style="color: var(--color-text-lighter);">
         &copy; {currentYear}
-        {companyName}. Toate drepturile rezervate.
+        {companyName}. Toate drepturile rezervate. CUI: 28708326
       </p>
       <div class="mt-4 md:mt-0">
         <a
