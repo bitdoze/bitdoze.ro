@@ -1,6 +1,3 @@
-// CTA config is now imported from cta.ts
-import { CTAConfig, ctaConfig } from './cta';
-
 export interface CompanyConfig {
   name: string;
   tagline: string;
@@ -30,7 +27,8 @@ export interface CompanyConfig {
 export const companyConfig: CompanyConfig = {
   name: "BITDOZE WEB CONS S.R.L",
   tagline: "Soluții profesionale pentru afacerea ta online",
-  description: "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
+  description:
+    "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
   logo: {
     text: "BitDoze",
     icon: "mdi:lightning-bolt",
@@ -64,5 +62,3 @@ export const companyConfig: CompanyConfig = {
     },
   ],
 };
-
-// The CTA config is now imported at the top of the file
