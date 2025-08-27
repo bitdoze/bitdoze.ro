@@ -17,11 +17,4 @@ export default defineConfig({
   },
 
   integrations: [icon()],
-
-  // Enable content collections
-  content: {
-    collections: {
-      enabled: true,
-    },
-  },
 });

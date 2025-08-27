@@ -48,7 +48,7 @@ const featuredServices = servicii
 <Layout
   title={homePageConfig.title}
   description={homePageConfig.description}
-  ogImage={homePageConfig.ogImage}
+  image={homePageConfig.ogImage}
 >
   {
     welcomeSection && (
@@ -160,7 +160,7 @@ const featuredServices = servicii
                       class="inline-flex items-center text-sm font-medium transition-all group-hover:translate-x-1"
                       style="color: var(--color-primary);"
                     >
-                      {servicesSection.cta.text}
+                      {servicesSection?.cta?.text || "Vezi Detalii"}
                       <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4" />
                     </span>
                   </div>

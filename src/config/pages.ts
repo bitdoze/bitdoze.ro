@@ -8,7 +8,7 @@ import { ctaConfig, getCtaSection } from "./cta";
 export interface PageConfig {
   title: string;
   description: string;
-  ogType?: string;
+  ogType?: "website" | "article";
   ogImage?: string;
   sections: Section[];
 }
@@ -198,7 +198,7 @@ export interface ContactFormSection {
   title: string;
   subtitle: string;
   fields: {
-    type: string;
+    type: "text" | "email" | "tel" | "select" | "textarea" | "checkbox";
     id: string;
     name: string;
     label: string;

@@ -1,237 +1,254 @@
 /// <reference types="astro/client" />
 
-declare module 'astro:content' {
-	interface Render {
-		'.md': Promise<{
-			Content: import('astro').MarkdownInstance<{}>['Content'];
-			headings: import('astro').MarkdownHeading[];
-			remarkPluginFrontmatter: Record<string, any>;
-		}>;
-	}
+declare module "@tailwindcss/vite" {
+  const plugin: any;
+  export default plugin;
 }
 
-declare module 'astro:content' {
-	export { z } from 'astro/zod';
+declare module "astro-icon" {
+  const integration: any;
+  export default integration;
+}
 
-	type Flatten<T> = T extends { [K: string]: infer U } ? U : never;
+declare module "astro-icon/components" {
+  export const Icon: any;
+}
 
-	export type CollectionKey = keyof AnyEntryMap;
-	export type CollectionEntry<C extends CollectionKey> = Flatten<AnyEntryMap[C]>;
+declare module "astro:content" {
+  interface Render {
+    ".md": Promise<{
+      Content: import("astro").MarkdownInstance<{}>["Content"];
+      headings: import("astro").MarkdownHeading[];
+      remarkPluginFrontmatter: Record<string, any>;
+    }>;
+  }
+}
 
-	export type ContentCollectionKey = keyof ContentEntryMap;
-	export type DataCollectionKey = keyof DataEntryMap;
+declare module "astro:content" {
+  export { z } from "astro/zod";
 
-	type AllValuesOf<T> = T extends any ? T[keyof T] : never;
-	type ValidContentEntrySlug<C extends keyof ContentEntryMap> = AllValuesOf<
-		ContentEntryMap[C]
-	>['slug'];
+  type Flatten<T> = T extends { [K: string]: infer U } ? U : never;
 
-	export function getEntryBySlug<
-		C extends keyof ContentEntryMap,
-		E extends ValidContentEntrySlug<C> | (string & {}),
-	>(
-		collection: C,
-		// Note that this has to accept a regular string too, for SSR
-		entrySlug: E
-	): E extends ValidContentEntrySlug<C>
-		? Promise<CollectionEntry<C>>
-		: Promise<CollectionEntry<C> | undefined>;
+  export type CollectionKey = keyof AnyEntryMap;
+  export type CollectionEntry<C extends CollectionKey> = Flatten<
+    AnyEntryMap[C]
+  >;
 
-	export function getDataEntryById<C extends keyof DataEntryMap, E extends keyof DataEntryMap[C]>(
-		collection: C,
-		entryId: E
-	): Promise<CollectionEntry<C>>;
+  export type ContentCollectionKey = keyof ContentEntryMap;
+  export type DataCollectionKey = keyof DataEntryMap;
 
-	export function getCollection<C extends keyof AnyEntryMap, E extends CollectionEntry<C>>(
-		collection: C,
-		filter?: (entry: CollectionEntry<C>) => entry is E
-	): Promise<E[]>;
-	export function getCollection<C extends keyof AnyEntryMap>(
-		collection: C,
-		filter?: (entry: CollectionEntry<C>) => boolean
-	): Promise<CollectionEntry<C>[]>;
+  type AllValuesOf<T> = T extends any ? T[keyof T] : never;
+  type ValidContentEntrySlug<C extends keyof ContentEntryMap> = AllValuesOf<
+    ContentEntryMap[C]
+  >["slug"];
 
-	export function getEntry<
-		C extends keyof ContentEntryMap,
-		E extends ValidContentEntrySlug<C> | (string & {}),
-	>(entry: {
-		collection: C;
-		slug: E;
-	}): E extends ValidContentEntrySlug<C>
-		? Promise<CollectionEntry<C>>
-		: Promise<CollectionEntry<C> | undefined>;
-	export function getEntry<
-		C extends keyof DataEntryMap,
-		E extends keyof DataEntryMap[C] | (string & {}),
-	>(entry: {
-		collection: C;
-		id: E;
-	}): E extends keyof DataEntryMap[C]
-		? Promise<DataEntryMap[C][E]>
-		: Promise<CollectionEntry<C> | undefined>;
-	export function getEntry<
-		C extends keyof ContentEntryMap,
-		E extends ValidContentEntrySlug<C> | (string & {}),
-	>(
-		collection: C,
-		slug: E
-	): E extends ValidContentEntrySlug<C>
-		? Promise<CollectionEntry<C>>
-		: Promise<CollectionEntry<C> | undefined>;
-	export function getEntry<
-		C extends keyof DataEntryMap,
-		E extends keyof DataEntryMap[C] | (string & {}),
-	>(
-		collection: C,
-		id: E
-	): E extends keyof DataEntryMap[C]
-		? Promise<DataEntryMap[C][E]>
-		: Promise<CollectionEntry<C> | undefined>;
+  export function getEntryBySlug<
+    C extends keyof ContentEntryMap,
+    E extends ValidContentEntrySlug<C> | (string & {})
+  >(
+    collection: C,
+    // Note that this has to accept a regular string too, for SSR
+    entrySlug: E
+  ): E extends ValidContentEntrySlug<C>
+    ? Promise<CollectionEntry<C>>
+    : Promise<CollectionEntry<C> | undefined>;
 
-	/** Resolve an array of entry references from the same collection */
-	export function getEntries<C extends keyof ContentEntryMap>(
-		entries: {
-			collection: C;
-			slug: ValidContentEntrySlug<C>;
-		}[]
-	): Promise<CollectionEntry<C>[]>;
-	export function getEntries<C extends keyof DataEntryMap>(
-		entries: {
-			collection: C;
-			id: keyof DataEntryMap[C];
-		}[]
-	): Promise<CollectionEntry<C>[]>;
+  export function getDataEntryById<
+    C extends keyof DataEntryMap,
+    E extends keyof DataEntryMap[C]
+  >(collection: C, entryId: E): Promise<CollectionEntry<C>>;
 
-	export function reference<C extends keyof AnyEntryMap>(
-		collection: C
-	): import('astro/zod').ZodEffects<
-		import('astro/zod').ZodString,
-		C extends keyof ContentEntryMap
-			? {
-					collection: C;
-					slug: ValidContentEntrySlug<C>;
-				}
-			: {
-					collection: C;
-					id: keyof DataEntryMap[C];
-				}
-	>;
-	// Allow generic `string` to avoid excessive type errors in the config
-	// if `dev` is not running to update as you edit.
-	// Invalid collection names will be caught at build time.
-	export function reference<C extends string>(
-		collection: C
-	): import('astro/zod').ZodEffects<import('astro/zod').ZodString, never>;
+  export function getCollection<
+    C extends keyof AnyEntryMap,
+    E extends CollectionEntry<C>
+  >(
+    collection: C,
+    filter?: (entry: CollectionEntry<C>) => entry is E
+  ): Promise<E[]>;
+  export function getCollection<C extends keyof AnyEntryMap>(
+    collection: C,
+    filter?: (entry: CollectionEntry<C>) => boolean
+  ): Promise<CollectionEntry<C>[]>;
 
-	type ReturnTypeOrOriginal<T> = T extends (...args: any[]) => infer R ? R : T;
-	type InferEntrySchema<C extends keyof AnyEntryMap> = import('astro/zod').infer<
-		ReturnTypeOrOriginal<Required<ContentConfig['collections'][C]>['schema']>
-	>;
+  export function getEntry<
+    C extends keyof ContentEntryMap,
+    E extends ValidContentEntrySlug<C> | (string & {})
+  >(entry: {
+    collection: C;
+    slug: E;
+  }): E extends ValidContentEntrySlug<C>
+    ? Promise<CollectionEntry<C>>
+    : Promise<CollectionEntry<C> | undefined>;
+  export function getEntry<
+    C extends keyof DataEntryMap,
+    E extends keyof DataEntryMap[C] | (string & {})
+  >(entry: {
+    collection: C;
+    id: E;
+  }): E extends keyof DataEntryMap[C]
+    ? Promise<DataEntryMap[C][E]>
+    : Promise<CollectionEntry<C> | undefined>;
+  export function getEntry<
+    C extends keyof ContentEntryMap,
+    E extends ValidContentEntrySlug<C> | (string & {})
+  >(
+    collection: C,
+    slug: E
+  ): E extends ValidContentEntrySlug<C>
+    ? Promise<CollectionEntry<C>>
+    : Promise<CollectionEntry<C> | undefined>;
+  export function getEntry<
+    C extends keyof DataEntryMap,
+    E extends keyof DataEntryMap[C] | (string & {})
+  >(
+    collection: C,
+    id: E
+  ): E extends keyof DataEntryMap[C]
+    ? Promise<DataEntryMap[C][E]>
+    : Promise<CollectionEntry<C> | undefined>;
 
-	type ContentEntryMap = {
-		"portofoliu": {
-"bigsales.md": {
-	id: "bigsales.md";
-  slug: "bigsales";
-  body: string;
-  collection: "portofoliu";
-  data: InferEntrySchema<"portofoliu">
-} & { render(): Render[".md"] };
-"cabinetconta.md": {
-	id: "cabinetconta.md";
-  slug: "cabinetconta";
-  body: string;
-  collection: "portofoliu";
-  data: InferEntrySchema<"portofoliu">
-} & { render(): Render[".md"] };
-"diverness.md": {
-	id: "diverness.md";
-  slug: "diverness";
-  body: string;
-  collection: "portofoliu";
-  data: InferEntrySchema<"portofoliu">
-} & { render(): Render[".md"] };
-"greentech.md": {
-	id: "greentech.md";
-  slug: "greentech";
-  body: string;
-  collection: "portofoliu";
-  data: InferEntrySchema<"portofoliu">
-} & { render(): Render[".md"] };
-"testeap.md": {
-	id: "testeap.md";
-  slug: "testeap";
-  body: string;
-  collection: "portofoliu";
-  data: InferEntrySchema<"portofoliu">
-} & { render(): Render[".md"] };
-"webdoze.md": {
-	id: "webdoze.md";
-  slug: "webdoze";
-  body: string;
-  collection: "portofoliu";
-  data: InferEntrySchema<"portofoliu">
-} & { render(): Render[".md"] };
-};
-"servicii": {
-"consultanta-ai.md": {
-	id: "consultanta-ai.md";
-  slug: "consultanta-ai";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-"consultanta-it.md": {
-	id: "consultanta-it.md";
-  slug: "consultanta-it";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-"hosting.md": {
-	id: "hosting.md";
-  slug: "hosting";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-"marketing.md": {
-	id: "marketing.md";
-  slug: "marketing";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-"mentenanta.md": {
-	id: "mentenanta.md";
-  slug: "mentenanta";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-"seo.md": {
-	id: "seo.md";
-  slug: "seo";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-"web-design.md": {
-	id: "web-design.md";
-  slug: "web-design";
-  body: string;
-  collection: "servicii";
-  data: InferEntrySchema<"servicii">
-} & { render(): Render[".md"] };
-};
+  /** Resolve an array of entry references from the same collection */
+  export function getEntries<C extends keyof ContentEntryMap>(
+    entries: {
+      collection: C;
+      slug: ValidContentEntrySlug<C>;
+    }[]
+  ): Promise<CollectionEntry<C>[]>;
+  export function getEntries<C extends keyof DataEntryMap>(
+    entries: {
+      collection: C;
+      id: keyof DataEntryMap[C];
+    }[]
+  ): Promise<CollectionEntry<C>[]>;
 
-	};
+  export function reference<C extends keyof AnyEntryMap>(
+    collection: C
+  ): import("astro/zod").ZodEffects<
+    import("astro/zod").ZodString,
+    C extends keyof ContentEntryMap
+      ? {
+          collection: C;
+          slug: ValidContentEntrySlug<C>;
+        }
+      : {
+          collection: C;
+          id: keyof DataEntryMap[C];
+        }
+  >;
+  // Allow generic `string` to avoid excessive type errors in the config
+  // if `dev` is not running to update as you edit.
+  // Invalid collection names will be caught at build time.
+  export function reference<C extends string>(
+    collection: C
+  ): import("astro/zod").ZodEffects<import("astro/zod").ZodString, never>;
 
-	type DataEntryMap = {
-		
-	};
+  type ReturnTypeOrOriginal<T> = T extends (...args: any[]) => infer R ? R : T;
+  type InferEntrySchema<C extends keyof AnyEntryMap> =
+    import("astro/zod").infer<
+      ReturnTypeOrOriginal<Required<ContentConfig["collections"][C]>["schema"]>
+    >;
 
-	type AnyEntryMap = ContentEntryMap & DataEntryMap;
+  type ContentEntryMap = {
+    portofoliu: {
+      "bigsales.md": {
+        id: "bigsales.md";
+        slug: "bigsales";
+        body: string;
+        collection: "portofoliu";
+        data: InferEntrySchema<"portofoliu">;
+      } & { render(): Render[".md"] };
+      "cabinetconta.md": {
+        id: "cabinetconta.md";
+        slug: "cabinetconta";
+        body: string;
+        collection: "portofoliu";
+        data: InferEntrySchema<"portofoliu">;
+      } & { render(): Render[".md"] };
+      "diverness.md": {
+        id: "diverness.md";
+        slug: "diverness";
+        body: string;
+        collection: "portofoliu";
+        data: InferEntrySchema<"portofoliu">;
+      } & { render(): Render[".md"] };
+      "greentech.md": {
+        id: "greentech.md";
+        slug: "greentech";
+        body: string;
+        collection: "portofoliu";
+        data: InferEntrySchema<"portofoliu">;
+      } & { render(): Render[".md"] };
+      "testeap.md": {
+        id: "testeap.md";
+        slug: "testeap";
+        body: string;
+        collection: "portofoliu";
+        data: InferEntrySchema<"portofoliu">;
+      } & { render(): Render[".md"] };
+      "webdoze.md": {
+        id: "webdoze.md";
+        slug: "webdoze";
+        body: string;
+        collection: "portofoliu";
+        data: InferEntrySchema<"portofoliu">;
+      } & { render(): Render[".md"] };
+    };
+    servicii: {
+      "consultanta-ai.md": {
+        id: "consultanta-ai.md";
+        slug: "consultanta-ai";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+      "consultanta-it.md": {
+        id: "consultanta-it.md";
+        slug: "consultanta-it";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+      "hosting.md": {
+        id: "hosting.md";
+        slug: "hosting";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+      "marketing.md": {
+        id: "marketing.md";
+        slug: "marketing";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+      "mentenanta.md": {
+        id: "mentenanta.md";
+        slug: "mentenanta";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+      "seo.md": {
+        id: "seo.md";
+        slug: "seo";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+      "web-design.md": {
+        id: "web-design.md";
+        slug: "web-design";
+        body: string;
+        collection: "servicii";
+        data: InferEntrySchema<"servicii">;
+      } & { render(): Render[".md"] };
+    };
+  };
 
-	export type ContentConfig = typeof import("../src/content/config");
+  type DataEntryMap = {};
+
+  type AnyEntryMap = ContentEntryMap & DataEntryMap;
+
+  export type ContentConfig = typeof import("../src/content/config");
 }
