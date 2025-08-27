@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import PortofolioCard from "../components/PortofolioCard.astro";
 import PageHeader from "../components/PageHeader.astro";
+import CTA from "../components/CTA.astro";
 
 // Get all non-draft portfolio entries
 const portofoliu = await getCollection("portofoliu", ({ data }) => {
@@ -77,35 +78,14 @@ const sortedProjects = portofoliu.sort(
     </div>
   </section>
 
-  <!-- Portfolio CTA -->
-  <section
-    class="section-padding relative overflow-hidden"
-    style="background-color: var(--color-background-alt);"
-  >
-    <!-- Background decoration -->
-    <div class="absolute inset-0 bg-grid opacity-10"></div>
-    <div
-      class="absolute -right-32 -bottom-32 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
-      style="background-color: var(--color-primary);"
-    >
-    </div>
-
-    <div class="container text-center relative z-10">
-      <h2 class="text-4xl font-bold mb-6">Gata să începem proiectul tău?</h2>
-      <p
-        class="text-xl max-w-3xl mx-auto mb-10"
-        style="color: var(--color-text-light);"
-      >
-        Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum
-        te putem ajuta să o transformi în realitate.
-      </p>
-      <a
-        href="/contact"
-        class="btn btn-primary portfolio-cta inline-flex h-12 items-center justify-center px-8 font-medium text-white"
-      >
-        Contactează-ne
-        <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
-      </a>
-    </div>
-  </section>
+  <!-- CTA Section -->
+  <CTA
+    title="Pregătit să duci afacerea ta la următorul nivel?"
+    subtitle="Contactează-ne astăzi pentru o consultație gratuită și descoperă cum serviciile noastre pot accelera creșterea afacerii tale."
+    ctaText="Contactează-ne acum"
+    ctaLink="/contact"
+    secondaryText="Află mai multe"
+    secondaryLink="/about"
+    trustedBy="De încredere pentru companii de top din România"
+  />
 </Layout>

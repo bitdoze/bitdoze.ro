@@ -500,7 +500,7 @@ export const aboutPageConfig: PageConfig = {
           ],
         },
         {
-          name: "Maria Popescu",
+          name: "Ioana",
           role: "Specialist Web Design",
           bio: "Maria creează interfețe elegante și intuitive care îmbină estetica cu funcționalitatea, asigurând experiențe de utilizator memorabile.",
           image: "https://xsgames.co/randomusers/assets/avatars/female/1.jpg",
@@ -514,42 +514,6 @@ export const aboutPageConfig: PageConfig = {
               platform: "Instagram",
               url: "https://instagram.com/",
               icon: "mdi:instagram",
-            },
-          ],
-        },
-        {
-          name: "Andrei Ionescu",
-          role: "Specialist SEO & Marketing",
-          bio: "Andrei dezvoltă strategii eficiente de marketing digital și SEO, ajutând afacerile să obțină vizibilitate și să atragă clienți valoroși.",
-          image: "https://xsgames.co/randomusers/assets/avatars/male/2.jpg",
-          socialMedia: [
-            {
-              platform: "LinkedIn",
-              url: "https://linkedin.com/",
-              icon: "mdi:linkedin",
-            },
-            {
-              platform: "Facebook",
-              url: "https://facebook.com/",
-              icon: "mdi:facebook",
-            },
-          ],
-        },
-        {
-          name: "Elena Dumitrescu",
-          role: "Specialist Consultanță AI",
-          bio: "Elena ajută companiile să implementeze soluții bazate pe inteligență artificială pentru automatizare și îmbunătățirea proceselor de afaceri.",
-          image: "https://xsgames.co/randomusers/assets/avatars/female/2.jpg",
-          socialMedia: [
-            {
-              platform: "LinkedIn",
-              url: "https://linkedin.com/",
-              icon: "mdi:linkedin",
-            },
-            {
-              platform: "Facebook",
-              url: "https://facebook.com/",
-              icon: "mdi:facebook",
             },
           ],
         },
