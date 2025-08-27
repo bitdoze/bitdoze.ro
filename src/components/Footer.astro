@@ -18,36 +18,51 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer
-  class="footer-main border-t"
-  style="background-color: var(--color-background-alt); border-color: var(--color-text-lighter);"
+  class="footer-main relative overflow-hidden"
+  style="background: linear-gradient(135deg, rgba(var(--color-background-alt-rgb), 0.95), rgba(var(--color-background-rgb), 0.8)); border-top: 1px solid rgba(var(--color-text-rgb), 0.1); backdrop-filter: blur(10px);"
 >
-  <div class="container mx-auto">
-    <div class="grid grid-cols-1 gap-8 py-12 md:grid-cols-3 lg:grid-cols-5">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 opacity-30 dark:opacity-20">
+    <div
+      class="absolute top-0 left-0 w-96 h-96 -ml-48 -mt-48 rounded-full bg-gradient-to-r from-primary/10 to-secondary/5 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 right-0 w-80 h-80 -mr-40 -mb-40 rounded-full bg-gradient-to-l from-secondary/10 to-accent/5 blur-3xl"
+    >
+    </div>
+  </div>
+  <div class="container mx-auto relative z-10">
+    <div class="grid grid-cols-1 gap-8 py-16 md:grid-cols-3 lg:grid-cols-5">
       <!-- Company info -->
       <div class="col-span-1 md:col-span-1 lg:col-span-2">
-        <a href="/" class="flex items-center gap-2">
+        <a href="/" class="logo-footer group inline-flex items-center gap-2">
           <img
             src="/bitdoze_logo_better.svg"
             alt="BitDoze"
-            class="h-8 w-auto"
+            class="h-10 w-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
           />
         </a>
         <p
-          class="mt-4 text-sm max-w-xs"
+          class="mt-6 text-base leading-relaxed max-w-sm"
           style="color: var(--color-text-light);"
         >
           {companyTagline}
         </p>
-        <div class="mt-6 flex space-x-4">
+        <div class="mt-8 flex space-x-4">
           {
             companyConfig.socialMedia.map((social) => (
               <a
                 href={social.url}
-                class="transition-colors"
-                style="color: var(--color-text-lighter); transition: all var(--transition-normal);"
+                class="social-link group relative p-3 rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+                style="background: rgba(var(--color-text-rgb), 0.05); backdrop-filter: blur(8px); color: var(--color-text-lighter);"
                 aria-label={social.platform}
               >
-                <Icon name={social.icon} class="h-5 w-5" />
+                <Icon
+                  name={social.icon}
+                  class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
+                />
+                <div class="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </a>
             ))
           }
@@ -55,20 +70,31 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Navigation -->
-      <div>
-        <h3 class="text-sm font-semibold" style="color: var(--color-text);">
-          Resurse
+      <div class="footer-section">
+        <h3 class="footer-heading text-base font-bold mb-6 relative">
+          <span style="color: var(--color-text);">Resurse</span>
+          <div
+            class="absolute bottom-0 left-0 h-0.5 w-8 rounded-full"
+            style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"
+          >
+          </div>
         </h3>
-        <ul class="mt-4 space-y-3">
+        <ul class="space-y-4">
           {
             navConfig.footerNav.resources.map((item) => (
               <li>
                 <a
                   href={item.href}
-                  class="text-sm transition-colors"
-                  style="color: var(--color-text-light); transition: all var(--transition-normal);"
+                  class="footer-link group inline-flex items-center text-sm transition-all duration-300 hover:translate-x-2"
+                  style="color: var(--color-text-light);"
                 >
-                  {item.title}
+                  <span class="transition-colors duration-300 group-hover:text-primary">
+                    {item.title}
+                  </span>
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="ml-1 h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
+                  />
                 </a>
               </li>
             ))
@@ -76,20 +102,31 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
-      <div>
-        <h3 class="text-sm font-semibold" style="color: var(--color-text);">
-          Companie
+      <div class="footer-section">
+        <h3 class="footer-heading text-base font-bold mb-6 relative">
+          <span style="color: var(--color-text);">Companie</span>
+          <div
+            class="absolute bottom-0 left-0 h-0.5 w-8 rounded-full"
+            style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"
+          >
+          </div>
         </h3>
-        <ul class="mt-4 space-y-3">
+        <ul class="space-y-4">
           {
             navConfig.footerNav.company.map((item) => (
               <li>
                 <a
                   href={item.href}
-                  class="text-sm transition-colors"
-                  style="color: var(--color-text-light); transition: all var(--transition-normal);"
+                  class="footer-link group inline-flex items-center text-sm transition-all duration-300 hover:translate-x-2"
+                  style="color: var(--color-text-light);"
                 >
-                  {item.title}
+                  <span class="transition-colors duration-300 group-hover:text-primary">
+                    {item.title}
+                  </span>
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="ml-1 h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
+                  />
                 </a>
               </li>
             ))
@@ -97,20 +134,31 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
 
-      <div>
-        <h3 class="text-sm font-semibold" style="color: var(--color-text);">
-          Legal
+      <div class="footer-section">
+        <h3 class="footer-heading text-base font-bold mb-6 relative">
+          <span style="color: var(--color-text);">Legal</span>
+          <div
+            class="absolute bottom-0 left-0 h-0.5 w-8 rounded-full"
+            style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"
+          >
+          </div>
         </h3>
-        <ul class="mt-4 space-y-3">
+        <ul class="space-y-4">
           {
             navConfig.footerNav.legal.map((item) => (
               <li>
                 <a
                   href={item.href}
-                  class="text-sm transition-colors"
-                  style="color: var(--color-text-light); transition: all var(--transition-normal);"
+                  class="footer-link group inline-flex items-center text-sm transition-all duration-300 hover:translate-x-2"
+                  style="color: var(--color-text-light);"
                 >
-                  {item.title}
+                  <span class="transition-colors duration-300 group-hover:text-primary">
+                    {item.title}
+                  </span>
+                  <Icon
+                    name="mdi:arrow-right"
+                    class="ml-1 h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
+                  />
                 </a>
               </li>
             ))
@@ -121,19 +169,44 @@ const currentYear = new Date().getFullYear();
 
     <!-- Bottom section with copyright -->
     <div
-      class="flex flex-col md:flex-row justify-between py-6 border-t"
-      style="border-color: var(--color-text-lighter);"
+      class="footer-bottom flex flex-col md:flex-row justify-between items-center py-8 mt-8 border-t backdrop-blur-sm"
+      style="border-color: rgba(var(--color-text-rgb), 0.1); background: rgba(var(--color-background-rgb), 0.3);"
     >
-      <p class="text-sm" style="color: var(--color-text-lighter);">
-        &copy; {currentYear}
-        {companyName}. Toate drepturile rezervate. CUI: 28708326
-      </p>
-      <div class="mt-4 md:mt-0">
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <p
+          class="text-sm font-medium"
+          style="color: var(--color-text-lighter);"
+        >
+          &copy; {currentYear}
+          {companyName}. Toate drepturile rezervate.
+        </p>
+        <div
+          class="flex items-center gap-2 text-xs px-3 py-1 rounded-full"
+          style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
+        >
+          <Icon name="mdi:shield-check" class="h-3 w-3" />
+          CUI: 28708326
+        </div>
+      </div>
+      <div class="mt-6 md:mt-0">
         <a
           href={ctaConfig.primaryAction.href}
-          class="btn btn-primary inline-flex h-9 items-center justify-center px-4 py-2 text-sm font-medium text-white shadow"
+          class="footer-cta group relative inline-flex h-12 items-center justify-center px-8 py-3 text-sm font-semibold text-white overflow-hidden rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+          style="background: linear-gradient(135deg, var(--color-primary), rgba(var(--color-primary-rgb), 0.8)); box-shadow: 0 4px 20px rgba(var(--color-primary-rgb), 0.25);"
         >
-          {ctaConfig.primaryAction.text}
+          <span
+            class="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5"
+          >
+            {ctaConfig.primaryAction.text}
+          </span>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full transition-transform duration-700 group-hover:translate-x-full"
+          >
+          </div>
+          <Icon
+            name="mdi:rocket-launch"
+            class="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
         </a>
       </div>
     </div>
@@ -146,6 +219,8 @@ const currentYear = new Date().getFullYear();
     z-index: 10;
     width: 100%;
     margin-top: auto;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .footer-main .container {
@@ -156,28 +231,153 @@ const currentYear = new Date().getFullYear();
     padding-right: 1rem;
   }
 
-  /* Ensure footer is always visible */
-  .footer-main {
-    flex-shrink: 0;
-    min-height: auto;
+  /* Logo hover effects */
+  .logo-footer {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Footer hover effects */
-  .footer-main a:hover {
-    color: var(--color-primary) !important;
-    transform: translateY(-1px);
-    transition: all 0.2s ease;
+  .logo-footer:hover {
+    filter: drop-shadow(0 4px 12px rgba(var(--color-primary-rgb), 0.4));
   }
 
-  .footer-main .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
+  /* Social links */
+  .social-link {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-link:hover {
+    color: var(--color-primary);
+    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.25);
+  }
+
+  /* Footer sections */
+  .footer-section {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .footer-section:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .footer-section:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .footer-section:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  .footer-section:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+
+  /* Footer headings */
+  .footer-heading {
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-heading::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-secondary)
+    );
+    transition: width 0.3s ease;
+  }
+
+  .footer-heading:hover::before {
+    width: 2rem;
+  }
+
+  /* Footer links */
+  .footer-link {
+    position: relative;
+    padding: 0.25rem 0;
+  }
+
+  .footer-link::before {
+    content: "";
+    position: absolute;
+    left: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 0;
+    background-color: var(--color-primary);
+    transition: height 0.3s ease;
+  }
+
+  .footer-link:hover::before {
+    height: 1rem;
+  }
+
+  /* Footer CTA */
+  .footer-cta {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      rgba(var(--color-primary-rgb), 0.8)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .footer-cta:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 8px 30px rgba(var(--color-primary-rgb), 0.4);
+  }
+
+  .footer-cta:active {
+    transform: scale(0.95);
+  }
+
+  /* Footer bottom section */
+  .footer-bottom {
+    border-radius: 1rem 1rem 0 0;
+    margin: 0 -1rem -1rem -1rem;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Dark mode adjustments */
   :global(.dark) .footer-main {
-    background-color: var(--color-dark-background-alt);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      135deg,
+      rgba(var(--color-dark-background-alt-rgb), 0.95),
+      rgba(var(--color-dark-background-rgb), 0.8)
+    );
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  :global(.dark) .social-link {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  :global(.dark) .social-link:hover {
+    background: rgba(var(--color-primary-rgb), 0.1);
+    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  :global(.dark) .footer-bottom {
+    background: rgba(var(--color-dark-background-rgb), 0.4);
   }
 
   /* Responsive adjustments */
@@ -186,5 +386,38 @@ const currentYear = new Date().getFullYear();
       padding-left: 1rem;
       padding-right: 1rem;
     }
+
+    .footer-bottom {
+      margin: 0 -1rem -1rem -1rem;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .footer-section {
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .footer-section,
+    .footer-link,
+    .footer-cta,
+    .social-link,
+    .logo-footer {
+      animation: none;
+      transition: none;
+    }
+  }
+
+  /* Focus states for accessibility */
+  .footer-link:focus-visible,
+  .social-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .footer-cta:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
   }
 </style>
