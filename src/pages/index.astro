@@ -6,7 +6,7 @@ import Services from "../components/Services.astro";
 import Testimonials from "../components/Testimonials.astro";
 import Portofoliu from "../components/Portofoliu.astro";
 import CTA from "../components/CTA.astro";
-import ServiceCard from "../components/ServiceCard.astro";
+import ServiceCardV2 from "../components/ServiceCardV2.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import TrustBadges from "../components/TrustBadges.astro";
 import { Icon } from "astro-icon/components";
@@ -76,106 +76,48 @@ const featuredServices = servicii
   {
     servicesSection && (
       <section
-        class="section-padding"
-        style="background-color: var(--color-background-alt);"
+        class="section-padding services-section"
+        style="background: linear-gradient(180deg, var(--color-background-alt) 0%, var(--color-background) 100%);"
       >
         <div class="container">
-          <SectionHeader
-            title={servicesSection.title}
-            subtitle={servicesSection.subtitle}
-            alignment="center"
-            textSize="md"
-            decorative={true}
-            className="mb-20"
-          />
+          <div class="section-header-wrapper">
+            <h2 class="section-title">
+              <span class="title-gradient">Transformăm Ideile</span>
+              <span class="title-text"> în Realitate Digitală</span>
+            </h2>
+            <p class="section-subtitle">
+              Soluții profesionale complete, de la concept la implementare.
+              <span class="highlight">
+                Fără costuri ascunse, doar rezultate măsurabile.
+              </span>
+            </p>
+          </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="services-grid">
             {featuredServices.map((service, index) => (
-              <div class="service-card-wrapper group relative">
-                {/* Badge */}
-                {index === 0 && (
-                  <div class="service-badge-container">
-                    <div class="service-badge service-badge-popular">
-                      <Icon name="mdi:star" class="badge-icon" />
-                      <span class="badge-text">Popular</span>
-                    </div>
-                  </div>
-                )}
-                {index === 1 && (
-                  <div class="service-badge-container">
-                    <div class="service-badge service-badge-recommended">
-                      <Icon name="mdi:thumb-up" class="badge-icon" />
-                      <span class="badge-text">Recomandat</span>
-                    </div>
-                  </div>
-                )}
-                {index === 2 && (
-                  <div class="service-badge-container">
-                    <div class="service-badge service-badge-new">
-                      <Icon name="mdi:new-box" class="badge-icon" />
-                      <span class="badge-text">Nou</span>
-                    </div>
-                  </div>
-                )}
-
-                <a
-                  href={`/servicii/${service.slug}`}
-                  class="service-card-link block h-full"
-                >
-                  <div
-                    class="h-full p-6 flex flex-col rounded-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-lg"
-                    style="background-color: var(--color-background); box-shadow: var(--shadow-sm); border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1); border-radius: var(--radius-lg);"
-                  >
-                    <div
-                      class="inline-flex items-center justify-center w-14 h-14 mb-5 rounded-full"
-                      style="background-color: rgba(var(--color-primary-rgb), 0.1);"
-                    >
-                      <Icon
-                        name={service.data.icon}
-                        class="h-7 w-7"
-                        style="color: var(--color-primary);"
-                      />
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {service.data.title}
-                    </h3>
-                    <p
-                      class="mb-5 flex-grow"
-                      style="color: var(--color-text-light);"
-                    >
-                      {service.data.descriere}
-                    </p>
-
-                    {service.data.pret && (
-                      <div
-                        class="inline-flex items-center px-3 py-1 mb-4 rounded-full text-sm font-medium w-fit"
-                        style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
-                      >
-                        <Icon name="mdi:currency-usd" class="mr-1 h-4 w-4" />
-                        {service.data.pret}
-                      </div>
-                    )}
-
-                    <span
-                      class="inline-flex items-center text-sm font-medium transition-all group-hover:translate-x-1"
-                      style="color: var(--color-primary);"
-                    >
-                      {servicesSection?.cta?.text || "Vezi Detalii"}
-                      <Icon name="mdi:arrow-right" class="ml-1.5 h-4 w-4" />
-                    </span>
-                  </div>
-                </a>
-              </div>
+              <ServiceCardV2
+                title={service.data.title}
+                description={service.data.descriere}
+                icon={service.data.icon}
+                link={`/servicii/${service.slug}`}
+                price={service.data.pret}
+                index={index}
+                badge={
+                  index === 0
+                    ? { text: "Popular", type: "popular" }
+                    : index === 1
+                    ? { text: "Recomandat", type: "recommended" }
+                    : { text: "Nou", type: "new" }
+                }
+                ctaText="Află mai multe"
+              />
             ))}
           </div>
 
-          <div class="text-center mt-12">
-            <a
-              href="/servicii"
-              class="btn btn-primary inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
-            >
-              Vezi Toate Serviciile
-              <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
+          <div class="cta-wrapper">
+            <a href="/servicii" class="view-all-btn">
+              <span class="btn-text">Vezi Toate Serviciile</span>
+              <Icon name="mdi:arrow-right" class="btn-icon" />
             </a>
           </div>
         </div>
@@ -238,112 +180,211 @@ const featuredServices = servicii
     );
   }
 
-  /* Service card wrapper and badge positioning */
-  .service-card-wrapper {
+  /* Services Section Styles */
+  .services-section {
     position: relative;
-    transition: all 0.3s ease;
+    overflow: hidden;
   }
 
-  .service-badge-container {
+  .services-section::before {
+    content: "";
     position: absolute;
-    top: -12px;
-    right: -12px;
-    z-index: 20;
-  }
-
-  .service-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    white-space: nowrap;
-    animation: pulse 2s infinite;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  }
-
-  .badge-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
-
-  .badge-text {
-    line-height: 1;
-  }
-
-  /* Service badge color variants */
-  .service-badge-popular {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-primary-dark)
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at 30% 70%,
+      rgba(124, 58, 237, 0.05) 0%,
+      transparent 50%
     );
-    box-shadow: 0 4px 14px rgba(var(--color-primary-rgb), 0.5);
+    animation: float 20s ease-in-out infinite;
   }
 
-  .service-badge-recommended {
-    background: linear-gradient(
-      135deg,
-      var(--color-accent),
-      var(--color-accent-dark)
+  .services-section::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at 70% 30%,
+      rgba(239, 68, 68, 0.05) 0%,
+      transparent 50%
     );
-    box-shadow: 0 4px 14px rgba(var(--color-accent-rgb), 0.5);
+    animation: float 25s ease-in-out infinite reverse;
   }
 
-  .service-badge-new {
-    background: linear-gradient(135deg, var(--color-success), #0ea570);
-    box-shadow: 0 4px 14px rgba(var(--color-success-rgb), 0.5);
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(30px, -30px) rotate(120deg);
+    }
+    66% {
+      transform: translate(-20px, 20px) rotate(240deg);
+    }
   }
 
-  /* Service card styles */
-  .service-card-link {
+  /* Section Header */
+  .section-header-wrapper {
+    text-align: center;
+    margin-bottom: 4rem;
     position: relative;
-    transition: all 0.3s ease;
+    z-index: 1;
   }
 
-  .service-card-wrapper:hover {
-    transform: translateY(-5px);
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
   }
 
-  .service-card-wrapper:hover .service-badge {
-    animation: none;
-    transform: scale(1.1);
+  .title-gradient {
+    background: linear-gradient(135deg, #7c3aed 0%, #ef4444 50%, #22c55e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 8s ease infinite;
   }
 
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
+  @keyframes gradientShift {
+    0%,
+    100% {
+      filter: hue-rotate(0deg);
     }
     50% {
-      transform: scale(1.05);
-    }
-    100% {
-      transform: scale(1);
+      filter: hue-rotate(30deg);
     }
   }
 
-  .btn-primary {
-    background-color: var(--color-primary);
+  .title-text {
+    color: var(--color-text);
+  }
+
+  :global(.dark) .title-text {
+    color: var(--color-dark-text);
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  :global(.dark) .section-subtitle {
+    color: var(--color-dark-text-light);
+  }
+
+  .section-subtitle .highlight {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* CTA Button */
+  .cta-wrapper {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
     color: white;
-    border: none;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    background-color: var(--color-primary-dark);
-    transform: translateY(-2px);
-  }
-
-  .service-card a {
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 16px;
     text-decoration: none;
-    color: inherit;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
   }
 
-  .service-card a:hover {
-    color: inherit;
+  .view-all-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #6d28d9, #5b21b6);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .view-all-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
+  }
+
+  .view-all-btn:hover::before {
+    opacity: 1;
+  }
+
+  .btn-text {
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-icon {
+    position: relative;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .view-all-btn:hover .btn-icon {
+    transform: translateX(4px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .section-header-wrapper {
+      margin-bottom: 3rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+    }
+
+    .services-grid {
+      gap: 1.5rem;
+    }
   }
 </style>
