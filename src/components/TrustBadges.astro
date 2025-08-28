@@ -316,59 +316,130 @@ const {
     color: var(--color-dark-text-light);
   }
 
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
+  /* Medium screens and tablet */
+  @media (max-width: 1024px) {
     .trust-badges__container {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
-    }
-
-    .trust-badges--inline .trust-badges__container {
-      gap: 1.5rem;
-    }
-
-    .trust-badge__value {
-      font-size: 1.25rem;
-    }
-
-    .trust-badge__label {
-      font-size: 0.75rem;
     }
 
     .trust-badges--default .trust-badge {
       padding: 1rem;
     }
 
+    .trust-badge__value {
+      font-size: 1.125rem;
+    }
+
+    .trust-badge__label {
+      font-size: 0.75rem;
+    }
+
     .trust-badge__icon-bg {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2.25rem;
+      height: 2.25rem;
     }
 
     .trust-badge__icon {
-      width: 1.25rem;
-      height: 1.25rem;
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .trust-badges {
+      padding: 1rem 0;
+    }
+
+    .trust-badges__container {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      padding: 0 1rem;
+    }
+
+    .trust-badges--inline .trust-badges__container {
+      gap: 0.75rem;
+    }
+
+    .trust-badges--compact .trust-badges__container {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .trust-badges--default .trust-badge {
+      padding: 0.5rem;
+    }
+
+    .trust-badges--compact .trust-badge {
+      padding: 0.4rem;
+    }
+
+    .trust-badge__value {
+      font-size: 0.875rem;
+    }
+
+    .trust-badge__label {
+      font-size: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .trust-badge__icon-bg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .trust-badge__icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    .trust-badge__content {
+      margin-left: 0.5rem;
     }
   }
 
   @media (max-width: 480px) {
+    .trust-badges__container {
+      gap: 0.4rem;
+    }
+
     .trust-badges--default .trust-badge {
-      flex-direction: column;
-      text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 0.4rem;
+      flex-direction: row;
+      text-align: left;
     }
 
     .trust-badge__content {
-      margin-left: 0;
-      margin-top: 0.75rem;
+      margin-left: 0.4rem;
+      margin-top: 0;
     }
 
     .trust-badges--compact .trust-badges__container {
       gap: 0.5rem;
     }
 
-    .trust-badges--inline .trust-badges__container {
-      flex-direction: column;
-      gap: 1rem;
+    .trust-badges--compact .trust-badge {
+      padding: 0.3rem;
+    }
+
+    .trust-badge__value {
+      font-size: 0.75rem;
+    }
+
+    .trust-badge__label {
+      font-size: 0.5rem;
+    }
+
+    .trust-badge__icon-bg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .trust-badge__icon {
+      width: 0.75rem;
+      height: 0.75rem;
     }
   }
 

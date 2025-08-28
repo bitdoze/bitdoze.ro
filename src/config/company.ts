@@ -2,6 +2,7 @@ export interface CompanyConfig {
   name: string;
   tagline: string;
   description: string;
+  cui: string;
   logo: {
     text: string;
     icon: string;
@@ -29,13 +30,14 @@ export const companyConfig: CompanyConfig = {
   tagline: "Soluții profesionale pentru afacerea ta online",
   description:
     "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
+  cui: "28708326",
   logo: {
     text: "BitDoze",
     icon: "mdi:lightning-bolt",
   },
   contact: {
     email: "office@bitdoze.ro",
-    phone: "",
+    phone: "+40751018879",
     address: {
       street: "Sat Ciocăneşti Com. Călineşti, Nr.81",
       city: "Călineşti",

@@ -104,7 +104,13 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
           <div id="contact-form" class="lg:col-span-2">
             <div class="p-8" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
               <h2 class="text-2xl font-bold mb-6">{formSection.title}</h2>
-              <form class="space-y-6">
+              <form action="https://formsubmit.co/office@bitdoze.com" method="POST" class="space-y-6">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="Nou mesaj de pe site-ul BitDoze">
+                <input type="hidden" name="_next" value="https://bitdoze.ro/multumim">
+                <input type="hidden" name="_replyto" value="">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_autoresponse" value="Mulțumim pentru mesajul dumneavoastră! Vă vom răspunde în cel mai scurt timp posibil.">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {formSection.fields.filter(field => ['text', 'email', 'tel'].includes(field.type)).slice(0, 2).map(field => (
                     <div>
@@ -116,6 +122,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                         class="w-full px-4 py-2 border"
                         style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
                         required={field.required}
+                        onchange={field.type === 'email' ? "document.querySelector('input[name=\"_replyto\"]').value = this.value" : undefined}
                       />
                     </div>
                   ))}
@@ -132,6 +139,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                         class="w-full px-4 py-2 border"
                         style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
                         required={field.required}
+                        placeholder="Descrie-ți proiectul și cum te putem ajuta..."
                       ></textarea>
                     ) : field.type === 'select' ? (
                       <select
@@ -154,6 +162,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                         class="w-full px-4 py-2 border"
                         style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
                         required={field.required}
+                        onchange={field.type === 'email' ? "document.querySelector('input[name=\"_replyto\"]').value = this.value" : undefined}
                       />
                     )}
                   </div>
@@ -179,8 +188,10 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                   <button
                     type="submit"
                     class="btn btn-primary inline-flex justify-center w-full md:w-auto px-6 py-3 text-base font-medium text-white"
+                    id="submit-button"
                   >
-                    {formSection.submitText}
+                    <span id="button-text">{formSection.submitText}</span>
+                    <Icon name="mdi:loading" class="ml-2 h-5 w-5 animate-spin hidden" id="loading-icon" />
                   </button>
                 </div>
               </form>
@@ -225,6 +236,61 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
       </div>
     </section>
   )}
+
+  <!-- Company Details Section -->
+  <section class="section-padding" style="background-color: var(--color-background);">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Detalii Companie</h2>
+          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+            Informații oficiale despre compania noastră pentru transparență și încredere
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Company Name -->
+          <div class="text-center p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.1);">
+            <div class="rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
+              <Icon name="mdi:office-building" class="h-8 w-8" style="color: var(--color-primary);" />
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Companie</h3>
+            <p style="color: var(--color-text-light);" class="font-medium">{companyConfig.name}</p>
+          </div>
+
+          <!-- CUI -->
+          <div class="text-center p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.1);">
+            <div class="rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
+              <Icon name="mdi:card-account-details" class="h-8 w-8" style="color: var(--color-primary);" />
+            </div>
+            <h3 class="font-semibold text-lg mb-2">CUI</h3>
+            <p style="color: var(--color-text-light);" class="font-medium">{companyConfig.cui}</p>
+          </div>
+
+          <!-- Phone -->
+          <div class="text-center p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.1);">
+            <div class="rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
+              <Icon name="mdi:phone" class="h-8 w-8" style="color: var(--color-primary);" />
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Telefon</h3>
+            <a href={`tel:${companyConfig.contact.phone}`} style="color: var(--color-primary);" class="font-medium hover:underline">
+              {companyConfig.contact.phone}
+            </a>
+          </div>
+        </div>
+
+        <!-- Additional Company Info -->
+        <div class="mt-8 text-center p-6" style="background-color: rgba(var(--color-primary-rgb), 0.05); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.2);">
+          <Icon name="mdi:shield-check" class="h-12 w-12 mx-auto mb-4" style="color: var(--color-primary);" />
+          <h3 class="text-xl font-semibold mb-3">Companie Autorizată</h3>
+          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
+            Suntem o societate cu răspundere limitată înregistrată legal în România, oferind servicii profesionale
+            de dezvoltare web și marketing digital cu over 10 ani de experiență pe piață.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Business Hours -->
   {hoursSection && (
@@ -272,3 +338,44 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
     />
   )}
 </Layout>
+
+<script>
+  // Form submission handling with better UX
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form[action*="formsubmit.co"]');
+    const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
+    const buttonText = document.getElementById('button-text') as HTMLElement;
+    const loadingIcon = document.getElementById('loading-icon') as HTMLElement;
+
+    if (form && submitButton && buttonText && loadingIcon) {
+      form.addEventListener('submit', function(e) {
+        // Show loading state
+        submitButton.disabled = true;
+        buttonText.textContent = 'Se trimite...';
+        loadingIcon.classList.remove('hidden');
+
+        // Re-enable button after 3 seconds (in case of issues)
+        setTimeout(() => {
+          if (submitButton.disabled) {
+            submitButton.disabled = false;
+            buttonText.textContent = 'Trimite Mesaj';
+            loadingIcon.classList.add('hidden');
+          }
+        }, 3000);
+      });
+    }
+
+    // Auto-populate _replyto field when email is entered
+    const emailInputs = document.querySelectorAll('input[type="email"]');
+    const replyToField = document.querySelector('input[name="_replyto"]') as HTMLInputElement;
+
+    emailInputs.forEach((input) => {
+      const emailInput = input as HTMLInputElement;
+      emailInput.addEventListener('input', function() {
+        if (replyToField) {
+          replyToField.value = emailInput.value;
+        }
+      });
+    });
+  });
+</script>
