@@ -219,34 +219,15 @@ const formattedDate = dateFormatter.format(entry.data.data);
     </div>
   </section>
 
-  <!-- CTA Section with background decoration -->
-  <section
-    class="section-padding relative overflow-hidden"
-    style="background: linear-gradient(to bottom right, var(--color-primary), var(--color-secondary-dark))"
-  >
-    <div class="absolute inset-0 bg-grid opacity-20"></div>
-    <div
-      class="absolute -right-64 -top-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"
-      style="background-color: var(--color-secondary);"
-    >
-    </div>
-    <div
-      class="absolute -left-64 -bottom-64 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
-      style="background-color: var(--color-primary-light);"
-    >
-    </div>
-
-    <div class="container relative z-10">
-      <CTA
-        title="Pregătit să începi propriul tău proiect?"
-        subtitle="Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum te putem ajuta să o transformi în realitate."
-        ctaText="Contactează-ne"
-        ctaLink="/contact"
-        secondaryText="Vezi serviciile noastre"
-        secondaryLink="/services"
-      />
-    </div>
-  </section>
+  <!-- CTA Section (full-width via component's own layout) -->
+  <CTA
+    title="Pregătit să începi propriul tău proiect?"
+    subtitle="Contactează-ne astăzi pentru a discuta despre viziunea ta și a vedea cum te putem ajuta să o transformi în realitate."
+    ctaText="Contactează-ne"
+    ctaLink="/contact"
+    secondaryText="Vezi serviciile noastre"
+    secondaryLink="/servicii"
+  />
 </Layout>
 
 <style is:global>
