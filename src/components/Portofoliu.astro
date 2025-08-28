@@ -44,9 +44,8 @@ const latestProjects = portofoliu
         </p>
       </div>
       <div class="header-cta">
-        <a href={ctaLink} class="compact-cta-btn">
-          <span class="btn-text">{ctaText}</span>
-          <Icon name="mdi:arrow-right" class="btn-icon" />
+        <a href={ctaLink} class="btn btn-primary">
+          <span class="flex items-center gap-2">{ctaText}<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
         </a>
       </div>
     </div>
@@ -179,36 +178,7 @@ const latestProjects = portofoliu
     flex-shrink: 0;
   }
 
-  .compact-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: var(--color-primary);
-    color: white;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.875rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
-  }
-
-  .compact-cta-btn:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(var(--color-primary-rgb), 0.4);
-  }
-
-  .compact-cta-btn .btn-icon {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .compact-cta-btn:hover .btn-icon {
-    transform: translateX(2px);
-  }
+  /* Using global .btn variants for CTA */
 
   /* Projects showcase */
   .projects-showcase {

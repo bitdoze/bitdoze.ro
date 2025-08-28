@@ -57,14 +57,6 @@ export const navConfig: NavConfig = {
         href: "/about",
       },
       {
-        title: "Echipa",
-        href: "/team",
-      },
-      {
-        title: "Cariere",
-        href: "/careers",
-      },
-      {
         title: "Contact",
         href: "/contact",
       },
@@ -83,16 +75,8 @@ export const navConfig: NavConfig = {
         href: "/portofoliu",
       },
       {
-        title: "Blog",
-        href: "/blog",
-      },
-      {
         title: "Întrebări Frecvente",
         href: "/faq",
-      },
-      {
-        title: "Resurse",
-        href: "/resources",
       },
     ],
     legal: [

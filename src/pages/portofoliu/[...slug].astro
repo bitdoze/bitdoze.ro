@@ -156,11 +156,14 @@ const formattedDate = dateFormatter.format(entry.data.data);
               href={entry.data.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="portfolio-cta inline-flex items-center justify-center w-full py-2 px-4 font-medium text-white"
-              style="background-color: var(--color-primary); border-radius: var(--radius-lg);"
+              class="btn btn-primary w-full h-12 text-base"
             >
-              Vezi proiect live
-              <Icon name="mdi:external-link" class="ml-1.5 h-4 w-4" />
+              <span class="flex items-center justify-center gap-2"
+                >Vezi proiect live<Icon
+                  name="mdi:external-link"
+                  class="h-4 w-4"
+                /></span
+              >
             </a>
           </div>
 
@@ -371,11 +374,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
       linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   }
 
-  .portfolio-cta:hover {
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-    background-color: var(--color-primary-dark) !important;
-  }
+  /* CTA uses global .btn */
 
   .stack-tag,
   .service-tag {

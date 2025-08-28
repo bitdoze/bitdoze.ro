@@ -120,10 +120,7 @@
   transform: scale(1.03);
 }
 
-/* Portfolio CTA button styling */
-.portfolio-cta { transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(var(--color-primary-rgb), 0.2); }
-
-.portfolio-cta:hover { transform: translateY(-2px); box-shadow: 0 15px 20px -3px rgba(var(--color-primary-rgb), 0.3); }
+/* CTA buttons now use global .btn variants from global.css */
 
 @media (max-width: 768px) {
   .portofolio-card .image-container {

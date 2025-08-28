@@ -14,6 +14,7 @@ interface Props {
 
 const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
   Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
 <header
@@ -35,24 +36,32 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
     <!-- Navigation -->
     <nav class="hidden md:flex items-center space-x-2">
       {
-        navConfig.mainNav.map((item) => (
-          <a
-            href={item.href}
-            class="nav-item relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ease-in-out group"
-            style="color: var(--color-text);"
-            aria-disabled={item.disabled}
-          >
-            <span class="relative z-10">{item.title}</span>
-            <div
-              class="nav-bg absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-transparent to-transparent opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
-              style="background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1), rgba(var(--color-secondary-rgb), 0.05));"
-            />
-            <div
-              class="nav-indicator absolute bottom-0 left-1/2 h-0.5 w-0 rounded-full transition-all duration-300 ease-in-out group-hover:w-3/4 group-hover:-translate-x-1/2"
-              style="background-color: var(--color-primary);"
-            />
-          </a>
-        ))
+        navConfig.mainNav.map((item) => {
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== "/" && currentPath.startsWith(item.href + "/")) ||
+            (item.href !== "/" && currentPath === item.href);
+          return (
+            <a
+              href={item.href}
+              class="nav-item relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ease-in-out group"
+              style="color: var(--color-text);"
+              aria-disabled={item.disabled}
+              aria-current={isActive ? "page" : undefined}
+              data-active={isActive ? "true" : "false"}
+            >
+              <span class="relative z-10">{item.title}</span>
+              <div
+                class="nav-bg absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-transparent to-transparent opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
+                style="background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1), rgba(var(--color-secondary-rgb), 0.05));"
+              />
+              <div
+                class="nav-indicator absolute bottom-0 left-1/2 h-0.5 w-0 rounded-full transition-all duration-300 ease-in-out group-hover:w-3/4 group-hover:-translate-x-1/2"
+                style="background-color: var(--color-primary);"
+              />
+            </a>
+          );
+        })
       }
     </nav>
 
@@ -109,27 +118,35 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
   >
     <div class="space-y-1 p-6">
       {
-        navConfig.mainNav.map((item, index) => (
-          <a
-            href={item.href}
-            class="mobile-menu-item group flex px-4 py-4 text-base font-medium rounded-xl transition-all duration-300 min-h-[48px] items-center justify-between relative overflow-hidden"
-            style="transition: all var(--transition-normal); animation-delay: ${index * 50}ms;"
-            aria-disabled={item.disabled}
-          >
-            <span class="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
-              {item.title}
-            </span>
-            <Icon
-              name="mdi:chevron-right"
-              class="w-5 h-5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
-              style="color: var(--color-primary);"
-            />
-            <div
-              class="absolute inset-0 bg-gradient-to-r opacity-0 transition-all duration-300 rounded-xl group-hover:opacity-100"
-              style="background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1), rgba(var(--color-secondary-rgb), 0.05));"
-            />
-          </a>
-        ))
+        navConfig.mainNav.map((item, index) => {
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== "/" && currentPath.startsWith(item.href + "/")) ||
+            (item.href !== "/" && currentPath === item.href);
+          return (
+            <a
+              href={item.href}
+              class="mobile-menu-item group flex px-4 py-4 text-base font-medium rounded-xl transition-all duration-300 min-h-[48px] items-center justify-between relative overflow-hidden"
+              style={`transition: all var(--transition-normal); animation-delay: ${index * 50}ms;`}
+              aria-disabled={item.disabled}
+              aria-current={isActive ? "page" : undefined}
+              data-active={isActive ? "true" : "false"}
+            >
+              <span class="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+                {item.title}
+              </span>
+              <Icon
+                name="mdi:chevron-right"
+                class="w-5 h-5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
+                style="color: var(--color-primary);"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-r opacity-0 transition-all duration-300 rounded-xl group-hover:opacity-100"
+                style="background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1), rgba(var(--color-secondary-rgb), 0.05));"
+              />
+            </a>
+          );
+        })
       }
     </div>
     <div
@@ -270,6 +287,17 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
     transform: translateY(0);
   }
 
+  /* Active state for current page */
+  .nav-item[data-active="true"] {
+    color: var(--color-primary);
+  }
+  .nav-item[data-active="true"] .nav-indicator {
+    width: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+  }
+
   /* CTA Button enhancements */
   /* CTA uses global .btn tokens now */
 
@@ -307,6 +335,11 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
 
   .mobile-menu-item:active {
     transform: translateX(2px) scale(0.98);
+  }
+
+  .mobile-menu-item[data-active="true"] {
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   /* Mobile menu button */
