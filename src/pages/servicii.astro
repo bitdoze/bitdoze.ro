@@ -52,11 +52,11 @@ const description =
               price={service.data.pret}
               badge={
                 index === 0
-                  ? { text: "Popular", type: "primary" }
+                  ? { text: "Popular", type: "popular" }
                   : index === 1
-                  ? { text: "Recomandat", type: "accent" }
+                  ? { text: "Recomandat", type: "recommended" }
                   : index === 2
-                  ? { text: "Nou", type: "success" }
+                  ? { text: "Nou", type: "new" }
                   : undefined
               }
             />
