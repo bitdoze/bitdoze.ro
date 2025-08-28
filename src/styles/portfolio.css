@@ -43,14 +43,12 @@
   font-size: 0.75rem;
   font-weight: 500;
   border-radius: 9999px;
-  background-color: rgba(79, 70, 229, 0.1);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
   color: var(--color-primary);
   transition: all 0.2s ease;
 }
 
-.stack-tag:hover {
-  background-color: rgba(79, 70, 229, 0.2);
-}
+.stack-tag:hover { background-color: rgba(var(--color-primary-rgb), 0.2); }
 
 /* Service tags styling */
 .service-tag {
@@ -123,15 +121,9 @@
 }
 
 /* Portfolio CTA button styling */
-.portfolio-cta {
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2);
-}
+.portfolio-cta { transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(var(--color-primary-rgb), 0.2); }
 
-.portfolio-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 20px -3px rgba(79, 70, 229, 0.3);
-}
+.portfolio-cta:hover { transform: translateY(-2px); box-shadow: 0 15px 20px -3px rgba(var(--color-primary-rgb), 0.3); }
 
 @media (max-width: 768px) {
   .portofolio-card .image-container {

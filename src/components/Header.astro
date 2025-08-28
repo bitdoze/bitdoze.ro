@@ -20,7 +20,7 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
   class="header-nav sticky top-0 z-40 w-full backdrop-blur-lg transition-all duration-500 ease-in-out"
   style="background-color: rgba(var(--color-background-rgb), 0.85); border-bottom: 1px solid rgba(var(--color-text-rgb), 0.1);"
 >
-  <div class="container mx-auto flex h-16 items-center justify-between px-4">
+  <div class="container mx-auto flex h-16 items-center justify-between">
     <!-- Logo -->
     <div class="flex shrink-0 items-center">
       <a href="/" class="logo-link flex items-center gap-2 group">
@@ -63,17 +63,9 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
         ctaButton && (
           <a
             href={ctaButton.href}
-            class="cta-button group relative inline-flex h-10 items-center justify-center px-6 py-2 text-sm font-medium text-white overflow-hidden rounded-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg active:scale-95"
-            style="background: linear-gradient(135deg, var(--color-primary), rgba(var(--color-primary-rgb), 0.8)); box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.25);"
+            class="btn btn-primary btn-sm"
           >
-            <span class="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">
-              {ctaButton.text}
-            </span>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full transition-transform duration-700 group-hover:translate-x-full" />
-            <Icon
-              name="mdi:arrow-right"
-              class="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-            />
+            <span class="flex items-center gap-2">{ctaButton.text}<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
           </a>
         )
       }
@@ -144,18 +136,11 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
       class="border-t px-6 py-4"
       style="border-color: rgba(var(--color-text-rgb), 0.1);"
     >
-      {
-        ctaButton && (
-          <a
-            href={ctaButton.href}
-            class="mobile-cta-button group relative block w-full px-6 py-4 text-center text-base font-medium text-white min-h-[52px] rounded-xl overflow-hidden transition-all duration-300 hover:scale-[0.98] active:scale-95"
-            style="background: linear-gradient(135deg, var(--color-primary), rgba(var(--color-primary-rgb), 0.8)); box-shadow: 0 4px 16px rgba(var(--color-primary-rgb), 0.3);"
-          >
-            <span class="relative z-10">{ctaButton.text}</span>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full transition-transform duration-700 group-hover:translate-x-full" />
-          </a>
-        )
-      }
+      { ctaButton && (
+        <a href={ctaButton.href} class="btn btn-primary w-full h-12 text-base">
+          <span class="flex items-center justify-center gap-2">{ctaButton.text}<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
+        </a>
+      ) }
     </div>
   </div>
 </header>
@@ -286,20 +271,7 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
   }
 
   /* CTA Button enhancements */
-  .cta-button {
-    position: relative;
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      rgba(var(--color-primary-rgb), 0.8)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .cta-button:hover {
-    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.4);
-    filter: brightness(1.1);
-  }
+  /* CTA uses global .btn tokens now */
 
   /* Mobile menu enhancements */
   .mobile-menu {
@@ -390,9 +362,7 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
   /* Smooth scrolling improvements */
   @media (prefers-reduced-motion: no-preference) {
     .nav-item,
-    .mobile-menu-item,
-    .cta-button,
-    .mobile-cta-button {
+    .mobile-menu-item {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
@@ -404,9 +374,5 @@ const { logoText = companyConfig.logo.text, ctaButton = navConfig.ctaButton } =
     outline-offset: 2px;
   }
 
-  .cta-button:focus-visible,
-  .mobile-cta-button:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 2px;
-  }
+  /* CTA focus handled by global .btn */
 </style>

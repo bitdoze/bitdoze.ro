@@ -43,10 +43,7 @@ const ctaSection = servicesPageConfig.sections.find(
   <!-- Hero Section -->
   {
     heroSection && (
-      <section
-        class="section-padding"
-        style="background: linear-gradient(to bottom, rgba(79, 70, 229, 0.1), white);"
-      >
+      <section class="section-padding" style="background: linear-gradient(to bottom, rgba(var(--color-primary-rgb), 0.1), var(--color-background));">
         <div class="container text-center">
           <h1 class="text-4xl md:text-5xl font-bold mb-6">
             {heroSection.title}
@@ -69,7 +66,7 @@ const ctaSection = servicesPageConfig.sections.find(
         <div class="container">
           <div class="section-header">
             <h2 class="section-title">
-              <span class="title-gradient">Servicii Complete</span>
+              <span class="text-gradient-brand">Servicii Complete</span>
               <span class="title-text"> pentru Succesul Tău Digital</span>
             </h2>
             <p class="section-subtitle">{servicesListSection.subtitle}</p>
@@ -208,11 +205,7 @@ const ctaSection = servicesPageConfig.sections.find(
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(
-      circle at 30% 70%,
-      rgba(124, 58, 237, 0.03) 0%,
-      transparent 50%
-    );
+    background: radial-gradient(circle at 30% 70%, rgba(var(--color-primary-rgb), 0.03) 0%, transparent 50%);
     animation: float 25s ease-in-out infinite;
   }
 
@@ -245,13 +238,7 @@ const ctaSection = servicesPageConfig.sections.find(
     letter-spacing: -0.02em;
   }
 
-  .title-gradient {
-    background: linear-gradient(135deg, #7c3aed 0%, #ef4444 50%, #22c55e 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientShift 8s ease infinite;
-  }
+  /* Using global .text-gradient-brand */
 
   @keyframes gradientShift {
     0%,

@@ -189,24 +189,11 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
       <div class="mt-6 md:mt-0">
-        <a
-          href={ctaConfig.primaryAction.href}
-          class="footer-cta group relative inline-flex h-12 items-center justify-center px-8 py-3 text-sm font-semibold text-white overflow-hidden rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
-          style="background: linear-gradient(135deg, var(--color-primary), rgba(var(--color-primary-rgb), 0.8)); box-shadow: 0 4px 20px rgba(var(--color-primary-rgb), 0.25);"
-        >
-          <span
-            class="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5"
-          >
+        <a href={ctaConfig.primaryAction.href} class="btn btn-primary btn-lg">
+          <span class="flex items-center gap-2">
             {ctaConfig.primaryAction.text}
+            <Icon name="mdi:rocket-launch" class="h-4 w-4" />
           </span>
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full transition-transform duration-700 group-hover:translate-x-full"
-          >
-          </div>
-          <Icon
-            name="mdi:rocket-launch"
-            class="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
         </a>
       </div>
     </div>
@@ -318,25 +305,7 @@ const currentYear = new Date().getFullYear();
     height: 1rem;
   }
 
-  /* Footer CTA */
-  .footer-cta {
-    position: relative;
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      rgba(var(--color-primary-rgb), 0.8)
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .footer-cta:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 8px 30px rgba(var(--color-primary-rgb), 0.4);
-  }
-
-  .footer-cta:active {
-    transform: scale(0.95);
-  }
+  /* Footer CTA uses global .btn now */
 
   /* Footer bottom section */
   .footer-bottom {
@@ -416,8 +385,5 @@ const currentYear = new Date().getFullYear();
     outline-offset: 2px;
   }
 
-  .footer-cta:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-    outline-offset: 2px;
-  }
+  /* Focus handled by global .btn */
 </style>

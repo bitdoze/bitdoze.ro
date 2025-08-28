@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="cta-section relative overflow-hidden py-12">
+<section class="cta-section relative overflow-hidden section-padding">
   <!-- Animated background -->
   <div class="absolute inset-0 cta-background">
     <div class="absolute inset-0 bg-mesh-pattern opacity-10"></div>
@@ -48,7 +48,7 @@ const {
   >
   </div>
 
-  <div class="container mx-auto px-4 relative z-20 py-8">
+  <div class="container mx-auto relative z-20 py-8">
     <div class="max-w-4xl mx-auto text-center">
       <!-- Badge -->
       <div
@@ -74,33 +74,12 @@ const {
       </p>
 
       <!-- Action buttons with enhanced design -->
-      <div
-        class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12"
-      >
-        <a
-          href={ctaLink}
-          class="cta-primary group relative overflow-hidden inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-black bg-white rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white/25 active:scale-95"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-white via-yellow-50 to-white translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
-          >
-          </div>
-          <span class="relative z-10 mr-2">{ctaText}</span>
-          <Icon
-            name="mdi:rocket-launch"
-            class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-          />
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+        <a href={ctaLink} class="btn btn-primary btn-lg">
+          <span class="flex items-center gap-2">{ctaText}<Icon name="mdi:rocket-launch" class="w-5 h-5" /></span>
         </a>
-
-        <a
-          href={secondaryLink}
-          class="cta-secondary group inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white/10 hover:scale-105"
-        >
-          <span class="mr-2">{secondaryText}</span>
-          <Icon
-            name="mdi:arrow-right"
-            class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-          />
+        <a href={secondaryLink} class="btn btn-ghost-invert btn-lg">
+          <span class="flex items-center gap-2">{secondaryText}<Icon name="mdi:arrow-right" class="w-5 h-5" /></span>
         </a>
       </div>
 
@@ -288,16 +267,7 @@ const {
     animation: shimmer 2s ease-in-out infinite;
   }
 
-  /* Button enhancements */
-  .cta-primary {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transform: perspective(1000px) rotateX(0deg);
-  }
-
-  .cta-primary:hover {
-    transform: perspective(1000px) rotateX(-5deg);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-  }
+  /* Buttons now use global .btn */
 
   /* Trust section */
   .trust-section {
@@ -502,8 +472,7 @@ const {
       display: none;
     }
 
-    .cta-primary,
-    .cta-secondary {
+    .btn {
       width: 100%;
       max-width: 300px;
     }
@@ -518,7 +487,7 @@ const {
       animation: none;
     }
 
-    .cta-primary:hover {
+    .btn:hover {
       transform: none;
     }
   }

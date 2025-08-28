@@ -34,7 +34,7 @@ const {
 ---
 
 <section
-  class="overflow-hidden relative min-h-[100vh] flex items-center"
+  class="overflow-hidden relative min-h-[100vh] flex items-center section-padding"
   style="background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-alt) 100%);"
 >
   <!-- Enhanced Background Elements -->
@@ -59,7 +59,7 @@ const {
     <div class="particle particle-5"></div>
   </div>
 
-  <div class="relative mx-auto container py-16">
+  <div class="relative mx-auto container">
     <div class="grid items-center gap-16 lg:grid-cols-2">
       <!-- Left column (enhanced text content) -->
       <div class="hero-content space-y-8">
@@ -78,14 +78,9 @@ const {
 
         <!-- Enhanced Title -->
         <div class="space-y-4">
-          <h1
-            class="text-5xl lg:text-7xl font-bold leading-tight tracking-tight"
-            style="color: var(--color-text);"
-          >
+          <h1 class="heading-1">
             <span class="block">{title.split(" ").slice(0, 2).join(" ")}</span>
-            <span class="block text-gradient"
-              >{title.split(" ").slice(2).join(" ")}</span
-            >
+            <span class="block text-gradient-brand">{title.split(" ").slice(2).join(" ")}</span>
           </h1>
           <p
             class="text-xl lg:text-2xl leading-relaxed max-w-2xl"
@@ -97,22 +92,16 @@ const {
 
         <!-- Enhanced CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a href={ctaPrimaryLink} class="modern-btn-primary group">
-            <span class="relative z-10 flex items-center justify-center gap-2">
+          <a href={ctaPrimaryLink} class="btn btn-primary btn-lg">
+            <span class="flex items-center justify-center gap-2">
               {ctaPrimary}
-              <Icon
-                name="mdi:arrow-right"
-                class="h-5 w-5 transition-transform group-hover:translate-x-1"
-              />
+              <Icon name="mdi:arrow-right" class="h-5 w-5" />
             </span>
           </a>
-          <a href={ctaSecondaryLink} class="modern-btn-secondary group">
+          <a href={ctaSecondaryLink} class="btn btn-secondary btn-lg">
             <span class="flex items-center justify-center gap-2">
               {ctaSecondary}
-              <Icon
-                name="mdi:play-circle"
-                class="h-5 w-5 transition-transform group-hover:scale-110"
-              />
+              <Icon name="mdi:play-circle" class="h-5 w-5" />
             </span>
           </a>
         </div>
@@ -406,96 +395,7 @@ const {
     }
   }
 
-  /* Text gradient */
-  .text-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-secondary),
-      var(--color-accent)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientAnimation 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 100% 50%;
-    }
-  }
-
-  /* Modern buttons */
-  .modern-btn-primary {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-primary-dark)
-    );
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-
-  .modern-btn-primary::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s;
-  }
-
-  .modern-btn-primary:hover::before {
-    left: 100%;
-  }
-
-  .modern-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.4);
-  }
-
-  .modern-btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--color-text);
-    background: rgba(var(--color-text-rgb), 0.05);
-    border: 2px solid rgba(var(--color-text-rgb), 0.1);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .modern-btn-secondary:hover {
-    background: rgba(var(--color-primary-rgb), 0.1);
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-    color: var(--color-primary);
-    transform: translateY(-2px);
-  }
+  /* Buttons now use global .btn utilities */
 
   /* Enhanced stats */
   .stat-card {
@@ -664,16 +564,7 @@ const {
     border-color: rgba(var(--color-primary-rgb), 0.3);
   }
 
-  :global(.dark) .modern-btn-secondary {
-    background: rgba(var(--color-dark-text-rgb), 0.05);
-    border-color: rgba(var(--color-dark-text-rgb), 0.1);
-    color: var(--color-dark-text);
-  }
-
-  :global(.dark) .modern-btn-secondary:hover {
-    background: rgba(var(--color-primary-rgb), 0.2);
-    border-color: rgba(var(--color-primary-rgb), 0.4);
-  }
+  /* Buttons now use global .btn (dark mode handled globally) */
 
   /* Responsive adjustments */
   @media (max-width: 768px) {

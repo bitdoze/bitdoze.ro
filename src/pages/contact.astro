@@ -70,7 +70,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
             <div class="space-y-6">
               {contactInfoSection.contactInfo.map((item) => (
                 <a href={item.link} class="flex items-start p-4 transition-colors" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); transition: all var(--transition-normal);">
-                  <div class="rounded-full p-3 mr-4" style="background-color: rgba(79, 70, 229, 0.1);">
+                  <div class="rounded-full p-3 mr-4" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
                     <Icon name={item.icon} class="h-6 w-6" style="color: var(--color-primary);" />
                   </div>
                   <div>

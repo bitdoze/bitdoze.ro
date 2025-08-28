@@ -82,7 +82,7 @@ const featuredServices = servicii
         <div class="container">
           <div class="section-header-wrapper">
             <h2 class="section-title">
-              <span class="title-gradient">Transformăm Ideile</span>
+              <span class="text-gradient-brand">Transformăm Ideile</span>
               <span class="title-text"> în Realitate Digitală</span>
             </h2>
             <p class="section-subtitle">
@@ -115,9 +115,8 @@ const featuredServices = servicii
           </div>
 
           <div class="cta-wrapper">
-            <a href="/servicii" class="view-all-btn">
-              <span class="btn-text">Vezi Toate Serviciile</span>
-              <Icon name="mdi:arrow-right" class="btn-icon" />
+            <a href="/servicii" class="btn btn-primary btn-lg">
+              <span class="flex items-center gap-2">Vezi Toate Serviciile<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
             </a>
           </div>
         </div>
@@ -193,11 +192,7 @@ const featuredServices = servicii
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(
-      circle at 30% 70%,
-      rgba(124, 58, 237, 0.05) 0%,
-      transparent 50%
-    );
+    background: radial-gradient(circle at 30% 70%, rgba(var(--color-primary-rgb), 0.05) 0%, transparent 50%);
     animation: float 20s ease-in-out infinite;
   }
 
@@ -208,11 +203,7 @@ const featuredServices = servicii
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(
-      circle at 70% 30%,
-      rgba(239, 68, 68, 0.05) 0%,
-      transparent 50%
-    );
+    background: radial-gradient(circle at 70% 30%, rgba(var(--color-accent-rgb), 0.05) 0%, transparent 50%);
     animation: float 25s ease-in-out infinite reverse;
   }
 
@@ -245,13 +236,7 @@ const featuredServices = servicii
     letter-spacing: -0.02em;
   }
 
-  .title-gradient {
-    background: linear-gradient(135deg, #7c3aed 0%, #ef4444 50%, #22c55e 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientShift 8s ease infinite;
-  }
+  /* Using global .text-gradient-brand for gradient text */
 
   @keyframes gradientShift {
     0%,
@@ -317,61 +302,7 @@ const featuredServices = servicii
     z-index: 1;
   }
 
-  .view-all-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 32px;
-    background: linear-gradient(135deg, #7c3aed, #6d28d9);
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-    border-radius: 16px;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-  }
-
-  .view-all-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #6d28d9, #5b21b6);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  .view-all-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
-  }
-
-  .view-all-btn:hover::before {
-    opacity: 1;
-  }
-
-  .btn-text {
-    position: relative;
-    z-index: 1;
-    letter-spacing: 0.5px;
-  }
-
-  .btn-icon {
-    position: relative;
-    z-index: 1;
-    width: 20px;
-    height: 20px;
-    transition: transform 0.3s ease;
-  }
-
-  .view-all-btn:hover .btn-icon {
-    transform: translateX(4px);
-  }
+  /* CTA uses global .btn */
 
   /* Responsive adjustments */
   @media (max-width: 640px) {

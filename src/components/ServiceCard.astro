@@ -77,23 +77,15 @@ const {
 
     <!-- Footer with CTA -->
     <div class="card-footer">
-      {
-        link ? (
-          <a href={link} class="service-cta">
-            <span class="cta-text">{ctaText}</span>
-            <div class="cta-arrow">
-              <Icon name="mdi:arrow-right" class="arrow-icon" />
-            </div>
-          </a>
-        ) : (
-          <div class="service-cta">
-            <span class="cta-text">{ctaText}</span>
-            <div class="cta-arrow">
-              <Icon name="mdi:arrow-right" class="arrow-icon" />
-            </div>
-          </div>
-        )
-      }
+      { link ? (
+        <a href={link} class="btn btn-primary">
+          <span class="flex items-center gap-2">{ctaText}<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
+        </a>
+      ) : (
+        <div class="btn btn-primary">
+          <span class="flex items-center gap-2">{ctaText}<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
+        </div>
+      ) }
     </div>
   </div>
 
@@ -360,57 +352,7 @@ const {
     margin-top: auto;
   }
 
-  .service-cta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-    background: rgba(var(--color-primary-rgb), 0.05);
-    border: 1px solid rgba(var(--color-primary-rgb), 0.1);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .service-cta:hover {
-    background: rgba(var(--color-primary-rgb), 0.1);
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-    transform: translateX(4px);
-  }
-
-  .cta-text {
-    font-weight: 600;
-    color: var(--color-primary);
-    transition: color 0.3s ease;
-  }
-
-  .cta-arrow {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-primary);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-  }
-
-  .arrow-icon {
-    width: 16px;
-    height: 16px;
-    color: white;
-    transition: transform 0.3s ease;
-  }
-
-  .service-cta:hover .cta-arrow {
-    transform: translateX(4px);
-    background: var(--color-primary-dark);
-  }
-
-  .service-cta:hover .arrow-icon {
-    transform: translateX(2px);
-  }
+  /* CTA styles provided by global .btn utilities */
 
   /* Hover effects */
   .hover-border {
@@ -496,15 +438,7 @@ const {
     background: var(--color-dark-background-alt);
   }
 
-  :global(.dark) .service-cta {
-    background: rgba(var(--color-primary-rgb), 0.1);
-    border-color: rgba(var(--color-primary-rgb), 0.2);
-  }
-
-  :global(.dark) .service-cta:hover {
-    background: rgba(var(--color-primary-rgb), 0.2);
-    border-color: rgba(var(--color-primary-rgb), 0.4);
-  }
+  /* Dark mode handled by global .btn */
 
   /* Responsive design */
   @media (max-width: 768px) {
