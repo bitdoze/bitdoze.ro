@@ -15,6 +15,20 @@ const {
 } = Astro.props;
 
 const currentYear = new Date().getFullYear();
+const complianceBadges = [
+  {
+    href: "https://reclamatiisal.anpc.ro/",
+    src: "/images/footer-sal.webp",
+    alt: "Solutionarea alternativa a litigiilor",
+    label: "SAL",
+  },
+  {
+    href: "https://europa.eu/youreurope/business/dealing-with-customers/solving-disputes/alternative-dispute-resolution/index_ro.htm",
+    src: "/images/footer-sol.webp",
+    alt: "Solutionarea online a litigiilor",
+    label: "SOL",
+  },
+];
 ---
 
 <footer
@@ -172,20 +186,37 @@ const currentYear = new Date().getFullYear();
       class="footer-bottom flex flex-col md:flex-row justify-between items-center py-8 mt-8 border-t backdrop-blur-sm"
       style="border-color: rgba(var(--color-text-rgb), 0.1); background: rgba(var(--color-background-rgb), 0.3);"
     >
-      <div class="flex flex-col md:flex-row items-center gap-4">
-        <p
-          class="text-sm font-medium"
-          style="color: var(--color-text-lighter);"
-        >
-          &copy; {currentYear}
-          {companyName}. Toate drepturile rezervate.
-        </p>
-        <div
-          class="flex items-center gap-2 text-xs px-3 py-1 rounded-full"
-          style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
-        >
-          <Icon name="mdi:shield-check" class="h-3 w-3" />
-          CUI: 28708326
+      <div class="footer-meta">
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <p
+            class="text-sm font-medium"
+            style="color: var(--color-text-lighter);"
+          >
+            &copy; {currentYear}
+            {companyName}. Toate drepturile rezervate.
+          </p>
+          <div
+            class="flex items-center gap-2 text-xs px-3 py-1 rounded-full"
+            style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
+          >
+            <Icon name="mdi:shield-check" class="h-3 w-3" />
+            CUI: 28708326
+          </div>
+        </div>
+        <div class="footer-compliance" aria-label="Link-uri solutionare litigii">
+          {
+            complianceBadges.map((badge) => (
+              <a
+                href={badge.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="compliance-badge"
+                aria-label={badge.label}
+              >
+                <img src={badge.src} alt={badge.alt} loading="lazy" />
+              </a>
+            ))
+          }
         </div>
       </div>
       <div class="mt-6 md:mt-0">
@@ -314,6 +345,48 @@ const currentYear = new Date().getFullYear();
     padding: 2rem 2rem 1rem 2rem;
   }
 
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-compliance {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .compliance-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(var(--color-text-rgb), 0.08);
+    border-radius: 1rem;
+    background: rgba(var(--color-background-rgb), 0.72);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .compliance-badge:hover {
+    transform: translateY(-2px);
+    border-color: rgba(var(--color-primary-rgb), 0.24);
+    box-shadow: 0 16px 36px rgba(var(--color-primary-rgb), 0.14);
+  }
+
+  .compliance-badge img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 12.9375rem;
+  }
+
   /* Animations */
   @keyframes fadeInUp {
     from {
@@ -349,6 +422,12 @@ const currentYear = new Date().getFullYear();
     background: rgba(var(--color-dark-background-rgb), 0.4);
   }
 
+  :global(.dark) .compliance-badge {
+    background: rgba(var(--color-dark-background-rgb), 0.88);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35);
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .footer-main .container {
@@ -359,6 +438,10 @@ const currentYear = new Date().getFullYear();
     .footer-bottom {
       margin: 0 -1rem -1rem -1rem;
       border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .footer-meta {
+      align-items: center;
     }
 
     .footer-section {
@@ -380,7 +463,8 @@ const currentYear = new Date().getFullYear();
 
   /* Focus states for accessibility */
   .footer-link:focus-visible,
-  .social-link:focus-visible {
+  .social-link:focus-visible,
+  .compliance-badge:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
