@@ -81,6 +81,21 @@ const complianceBadges = [
             ))
           }
         </div>
+        <div class="footer-compliance mt-6" aria-label="Link-uri solutionare litigii">
+          {
+            complianceBadges.map((badge) => (
+              <a
+                href={badge.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="compliance-badge"
+                aria-label={badge.label}
+              >
+                <img src={badge.src} alt={badge.alt} loading="lazy" />
+              </a>
+            ))
+          }
+        </div>
       </div>
 
       <!-- Navigation -->
@@ -186,37 +201,20 @@ const complianceBadges = [
       class="footer-bottom flex flex-col md:flex-row justify-between items-center py-8 mt-8 border-t backdrop-blur-sm"
       style="border-color: rgba(var(--color-text-rgb), 0.1); background: rgba(var(--color-background-rgb), 0.3);"
     >
-      <div class="footer-meta">
-        <div class="flex flex-col md:flex-row items-center gap-4">
-          <p
-            class="text-sm font-medium"
-            style="color: var(--color-text-lighter);"
-          >
-            &copy; {currentYear}
-            {companyName}. Toate drepturile rezervate.
-          </p>
-          <div
-            class="flex items-center gap-2 text-xs px-3 py-1 rounded-full"
-            style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
-          >
-            <Icon name="mdi:shield-check" class="h-3 w-3" />
-            CUI: 28708326
-          </div>
-        </div>
-        <div class="footer-compliance" aria-label="Link-uri solutionare litigii">
-          {
-            complianceBadges.map((badge) => (
-              <a
-                href={badge.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="compliance-badge"
-                aria-label={badge.label}
-              >
-                <img src={badge.src} alt={badge.alt} loading="lazy" />
-              </a>
-            ))
-          }
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <p
+          class="text-sm font-medium"
+          style="color: var(--color-text-lighter);"
+        >
+          &copy; {currentYear}
+          {companyName}. Toate drepturile rezervate.
+        </p>
+        <div
+          class="flex items-center gap-2 text-xs px-3 py-1 rounded-full"
+          style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
+        >
+          <Icon name="mdi:shield-check" class="h-3 w-3" />
+          CUI: 28708326
         </div>
       </div>
       <div class="mt-6 md:mt-0">
@@ -345,16 +343,10 @@ const complianceBadges = [
     padding: 2rem 2rem 1rem 2rem;
   }
 
-  .footer-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   .footer-compliance {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.75rem;
   }
 
@@ -438,10 +430,6 @@ const complianceBadges = [
     .footer-bottom {
       margin: 0 -1rem -1rem -1rem;
       border-radius: 0.5rem 0.5rem 0 0;
-    }
-
-    .footer-meta {
-      align-items: center;
     }
 
     .footer-section {
