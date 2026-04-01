@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import PortofolioCard from "./PortofolioCard.astro";
 import { Icon } from "astro-icon/components";
+import { getCollectionSlug } from "../utils/content";
 
 interface Props {
   title?: string;
@@ -73,9 +74,9 @@ const latestProjects = portofoliu
                     >
                       <Icon name="mdi:eye" class="action-icon" />
                     </a>
-                    {project.slug && (
+                    {getCollectionSlug(project) && (
                       <a
-                        href={`/portofoliu/${project.slug}`}
+                        href={`/portofoliu/${getCollectionSlug(project)}`}
                         class="action-btn details-btn"
                       >
                         <Icon

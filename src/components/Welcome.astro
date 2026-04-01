@@ -5,12 +5,6 @@ import { companyConfig } from "../config/company";
 interface Props {
   title?: string;
   subtitle?: string;
-  features?: {
-    icon: string;
-    title: string;
-    description: string;
-    iconColor?: string;
-  }[];
   ctas?: {
     primary: {
       text: string;
@@ -20,825 +14,146 @@ interface Props {
       text: string;
       link: string;
     };
-    welcome?: {
-      text: string;
-      link: string;
-    }[];
   };
-  image?: string;
-  badge?: string;
-  welcomeButtons?: {
-    text: string;
-    link: string;
-  }[];
 }
 
 const {
-  title = "Welcome to " + companyConfig.name,
-  subtitle = "We provide professional solutions for your business needs. Our experienced team is dedicated to helping your company grow and succeed in today's competitive market.",
-  features = [
-    {
-      icon: "mdi:shield-check",
-      title: "Trusted Service",
-      description:
-        "We pride ourselves on reliability and excellence in every project we undertake.",
-      iconColor: "var(--color-primary)",
-    },
-    {
-      icon: "mdi:lightbulb",
-      title: "Innovative Solutions",
-      description:
-        "We bring creative thinking and modern approaches to solve your business challenges.",
-      iconColor: "var(--color-secondary)",
-    },
-  ],
+  title = "Construim Soluții Digitale pentru Afacerea Ta",
+  subtitle = "Suntem o agenție de dezvoltare web dedicată creării de site-uri rapide, optimizate SEO și aplicații web performante care te ajută să-ți atingi obiectivele de business.",
   ctas = {
-    primary: {
-      text: "Our Services",
-      link: "/servicii",
-    },
-    secondary: {
-      text: "About Us",
-      link: "/about",
-    },
-  },
-  image = "/images/welcome-image.jpg",
-  badge = "15+ Years Experience",
-  welcomeButtons = [],
+    primary: { text: "Vezi Serviciile", link: "/servicii" },
+    secondary: { text: "Contactează-ne", link: "/contact" },
+  }
 } = Astro.props;
 ---
 
-<section class="welcome-section section-padding">
-  <!-- Background elements -->
-  <div class="section-background">
-    <div class="animated-gradient"></div>
-    <div class="grid-overlay"></div>
-    <div class="floating-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-    </div>
-  </div>
-
-  <div class="container mx-auto relative z-10">
-    <div class="container">
-      <div class="welcome-grid">
-        <!-- Content Column -->
-        <div class="content-column">
-          <!-- Title Section -->
-          <div class="title-section">
-            <div class="title-badge">
-              <Icon name="mdi:star" class="badge-icon" />
-              <span>Despre Noi</span>
-            </div>
-            <h2 class="section-title">
-              <span class="title-line-1"
-                >{title.split(" ").slice(0, 3).join(" ")}</span
-              >
-              <span class="title-line-2 text-gradient-brand"
-                >{title.split(" ").slice(3).join(" ")}</span
-              >
-            </h2>
-            <p class="section-subtitle">
-              {subtitle}
-            </p>
-          </div>
-
-          <!-- Features Grid -->
-          <div class="features-grid">
-            {
-              features.map((feature, index) => (
-                <div class="feature-card" data-index={index}>
-                  <div class="feature-icon-wrapper">
-                    <div
-                      class="feature-icon-container"
-                      style={`color: ${
-                        feature.iconColor || "var(--color-primary)"
-                      }`}
-                    >
-                      <Icon name={feature.icon} class="feature-icon" />
-                    </div>
-                    <div
-                      class="icon-glow"
-                      style={`background: ${
-                        feature.iconColor || "var(--color-primary)"
-                      }`}
-                    />
-                  </div>
-                  <div class="feature-content">
-                    <h3 class="feature-title">{feature.title}</h3>
-                    <p class="feature-description">{feature.description}</p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-
-          <!-- CTAs Section -->
-          <div class="ctas-section">
-            <div class="primary-ctas">
-              <a href={ctas.primary.link} class="btn btn-primary btn-lg">
-                <span class="flex items-center gap-2">{ctas.primary.text}<Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
-              </a>
-              {
-                ctas.secondary && (
-                  <a href={ctas.secondary.link} class="btn btn-secondary btn-lg">
-                    <span class="flex items-center gap-2">{ctas.secondary.text}<Icon name="mdi:information-outline" class="h-4 w-4" /></span>
-                  </a>
-                )
-              }
-            </div>
-
-            {
-              (welcomeButtons.length > 0 || ctas.welcome) && (
-                <div class="tag-buttons">
-                  {(ctas.welcome || welcomeButtons).map((button) => (
-                    <a href={button.link} class="tag-button">
-                      <span>{button.text}</span>
-                    </a>
-                  ))}
-                </div>
-              )
-            }
-          </div>
-        </div>
-
-        <!-- Visual Column -->
-        <div class="visual-column">
-          <div class="image-container">
-            <!-- Floating badge -->
-            <div class="floating-badge">
-              <Icon name="mdi:award" class="badge-icon" />
-              <span class="badge-text">{badge}</span>
-            </div>
-
-            <!-- Main image -->
-            <div class="illustration-wrapper">
-              <div class="illustration-bg"></div>
-              <div class="illustration-content">
-                <img
-                  src={image}
-                  alt="Business Solutions"
-                  class="welcome-image"
-                  width="800"
-                  height="600"
-                />
-              </div>
-              <div class="illustration-overlay"></div>
-            </div>
-
-            <!-- Floating elements -->
-            <div class="floating-element element-1">
-              <Icon name="mdi:trending-up" class="element-icon" />
-              <div class="element-text">
-                <div class="element-title">Creștere</div>
-                <div class="element-value">+150%</div>
-              </div>
-            </div>
-
-            <div class="floating-element element-2">
-              <Icon name="mdi:security" class="element-icon" />
-              <div class="element-text">
-                <div class="element-title">Securitate</div>
-                <div class="element-value">SSL</div>
-              </div>
-            </div>
-
-            <div class="floating-element element-3">
-              <Icon name="mdi:speedometer" class="element-icon" />
-              <div class="element-text">
-                <div class="element-title">Viteză</div>
-                <div class="element-value">99.9%</div>
-              </div>
-            </div>
-          </div>
-        </div>
+<section class="welcome-hero section-padding">
+  <div class="container container-lg">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Agenție Web Design & SEO
+      </div>
+      <h1 class="hero-title">
+        {title}
+      </h1>
+      <p class="hero-subtitle">
+        {subtitle}
+      </p>
+      
+      <div class="hero-actions">
+        {ctas.primary && (
+          <a href={ctas.primary.link} class="btn btn-primary btn-lg">
+            {ctas.primary.text}
+          </a>
+        )}
+        {ctas.secondary && (
+          <a href={ctas.secondary.link} class="btn btn-outline btn-lg">
+            {ctas.secondary.text}
+          </a>
+        )}
       </div>
     </div>
   </div>
 
   <style>
-    .welcome-section {
-      position: relative;
-      padding: 6rem 0;
-      background: linear-gradient(
-        135deg,
-        var(--color-background) 0%,
-        var(--color-background-alt) 100%
-      );
-      overflow: hidden;
-    }
-
-    /* Background elements */
-    .section-background {
-      position: absolute;
-      inset: 0;
-      opacity: 0.6;
-    }
-
-    .animated-gradient {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-          circle at 20% 30%,
-          rgba(var(--color-primary-rgb), 0.1) 0%,
-          transparent 50%
-        ),
-        radial-gradient(
-          circle at 80% 70%,
-          rgba(var(--color-secondary-rgb), 0.1) 0%,
-          transparent 50%
-        );
-      animation: gradientShift 8s ease-in-out infinite;
-    }
-
-    @keyframes gradientShift {
-      0%,
-      100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.1) rotate(5deg);
-        opacity: 0.8;
-      }
-    }
-
-    .floating-shapes {
-      position: absolute;
-      inset: 0;
-    }
-
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(30px);
-      opacity: 0.3;
-    }
-
-    .shape-1 {
-      width: 200px;
-      height: 200px;
-      top: 10%;
-      left: 10%;
-      background: var(--color-primary);
-      animation: float 15s ease-in-out infinite;
-    }
-
-    .shape-2 {
-      width: 150px;
-      height: 150px;
-      top: 70%;
-      right: 20%;
-      background: var(--color-secondary);
-      animation: float 12s ease-in-out infinite reverse;
-    }
-
-    .shape-3 {
-      width: 100px;
-      height: 100px;
-      bottom: 30%;
-      left: 60%;
-      background: var(--color-accent);
-      animation: float 18s ease-in-out infinite;
-    }
-
-    .shape-4 {
-      width: 80px;
-      height: 80px;
-      top: 40%;
-      right: 10%;
-      background: var(--color-success);
-      animation: float 20s ease-in-out infinite reverse;
-    }
-
-    @keyframes float {
-      0%,
-      100% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      33% {
-        transform: translate(20px, -20px) rotate(120deg);
-      }
-      66% {
-        transform: translate(-15px, 15px) rotate(240deg);
-      }
-    }
-
-    .grid-overlay {
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(
-          rgba(var(--color-text-rgb), 0.02) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(var(--color-text-rgb), 0.02) 1px,
-          transparent 1px
-        );
-      background-size: 50px 50px;
-      animation: gridMove 30s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(50px, 50px);
-      }
-    }
-
-    /* Layout */
-    .welcome-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Content Column */
-    .content-column {
-      space-y: 2rem;
-    }
-
-    .title-section {
-      margin-bottom: 2rem;
-    }
-
-    .title-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: rgba(var(--color-primary-rgb), 0.1);
-      color: var(--color-primary);
-      border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-      backdrop-filter: blur(10px);
-      animation: fadeInUp 0.8s ease-out 0.1s forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .badge-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.8s ease-out 0.2s forwards;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .title-line-1 {
-      display: block;
-      color: var(--color-text);
-    }
-
-    .title-line-2 {
-      display: block;
-    }
-
-    /* gradient text now uses global .text-gradient-brand */
-
-    .section-subtitle {
-      font-size: 1.25rem;
-      color: var(--color-text-light);
-      line-height: 1.6;
-      margin-bottom: 2rem;
-      animation: fadeInUp 0.8s ease-out 0.3s forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    /* Features */
-    .features-grid {
-      display: grid;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .feature-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.5rem;
-      background: rgba(var(--color-background-rgb), 0.8);
-      border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-      transition: all 0.4s ease;
-      animation: fadeInUp 0.8s ease-out forwards;
-      animation-delay: calc(0.4s + var(--index) * 0.1s);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-      border-color: rgba(var(--color-primary-rgb), 0.2);
-    }
-
-    .feature-icon-wrapper {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .feature-icon-container {
-      width: 50px;
-      height: 50px;
+    .welcome-hero {
+      background-color: var(--color-background);
+      padding-top: 6rem;
+      padding-bottom: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(var(--color-primary-rgb), 0.1);
-      border-radius: 12px;
-      border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
+      text-align: center;
     }
 
-    .feature-icon {
-      width: 24px;
-      height: 24px;
-      transition: transform 0.3s ease;
+    :global(.dark) .welcome-hero {
+      background-color: var(--color-dark-background);
     }
 
-    .icon-glow {
-      position: absolute;
-      inset: -2px;
-      border-radius: 14px;
-      opacity: 0;
-      filter: blur(8px);
-      transition: opacity 0.3s ease;
+    .hero-content {
+      max-width: 56rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
 
-    .feature-card:hover .feature-icon-container {
-      transform: scale(1.1);
-      background: rgba(var(--color-primary-rgb), 0.2);
-    }
-
-    .feature-card:hover .icon-glow {
-      opacity: 0.3;
-    }
-
-    .feature-card:hover .feature-icon {
-      transform: scale(1.1);
-    }
-
-    .feature-content {
-      flex: 1;
-    }
-
-    .feature-title {
-      font-size: 1.125rem;
-      font-weight: 600;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(var(--color-text-rgb), 0.04);
       color: var(--color-text);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(var(--color-text-rgb), 0.08);
       margin-bottom: 0.5rem;
     }
 
-    .feature-description {
+    :global(.dark) .hero-badge {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-dark-text);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    :global(.dark) .hero-title {
+      color: var(--color-dark-text);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.25rem);
       color: var(--color-text-light);
-      line-height: 1.5;
+      line-height: 1.6;
+      max-width: 44rem;
+      margin: 0;
     }
 
-    /* CTAs */
-    .ctas-section {
-      margin-bottom: 2rem;
+    :global(.dark) .hero-subtitle {
+      color: var(--color-dark-text-light);
     }
 
-    .primary-ctas {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.8s ease-out 0.6s forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    /* Buttons now use global .btn */
-
-    .tag-buttons {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      animation: fadeInUp 0.8s ease-out 0.7s forwards;
-      opacity: 0;
-      transform: translateY(20px);
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
     }
 
-    .tag-button {
-      padding: 0.5rem 1rem;
-      background: rgba(var(--color-background-alt-rgb), 0.8);
-      color: var(--color-text);
-      border-radius: 20px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      text-decoration: none;
-      border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .tag-button:hover {
-      background: rgba(var(--color-primary-rgb), 0.1);
-      border-color: rgba(var(--color-primary-rgb), 0.3);
-      color: var(--color-primary);
-      transform: translateY(-1px);
-    }
-
-    /* Visual Column */
-    .visual-column {
-      position: relative;
-    }
-
-    .image-container {
-      position: relative;
-      animation: fadeInRight 1s ease-out 0.4s forwards;
-      opacity: 0;
-      transform: translateX(30px);
-    }
-
-    .floating-badge {
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      background: var(--color-accent);
-      color: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(var(--color-accent-rgb), 0.3);
-      animation: floatBadge 3s ease-in-out infinite;
-    }
-
-    @keyframes floatBadge {
-      0%,
-      100% {
-        transform: translateY(0);
+    @media (max-width: 640px) {
+      .welcome-hero {
+        padding-top: 4rem;
       }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .badge-text {
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-
-    .illustration-wrapper {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      background: var(--color-background-alt);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
-    }
-
-    .illustration-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(var(--color-primary-rgb), 0.05),
-        rgba(var(--color-secondary-rgb), 0.05)
-      );
-    }
-
-    .illustration-content {
-      position: relative;
-      z-index: 2;
-      padding: 0;
-      border-radius: 24px;
-      overflow: hidden;
-    }
-
-    .welcome-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .illustration-wrapper:hover .welcome-image {
-      transform: scale(1.05);
-    }
-
-    .illustration-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        45deg,
-        rgba(var(--color-primary-rgb), 0.1),
-        transparent
-      );
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .illustration-wrapper:hover .illustration-overlay {
-      opacity: 1;
-    }
-
-    /* Floating elements */
-    .floating-element {
-      position: absolute;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      animation: floatElement 6s ease-in-out infinite;
-    }
-
-    .element-1 {
-      top: 20%;
-      left: -20px;
-      animation-delay: 0s;
-    }
-
-    .element-2 {
-      top: 60%;
-      right: -30px;
-      animation-delay: 2s;
-    }
-
-    .element-3 {
-      bottom: 20%;
-      left: -10px;
-      animation-delay: 4s;
-    }
-
-    .element-icon {
-      width: 20px;
-      height: 20px;
-      color: var(--color-primary);
-    }
-
-    .element-title {
-      font-size: 0.75rem;
-      color: var(--color-text-light);
-      font-weight: 500;
-    }
-
-    .element-value {
-      font-size: 0.875rem;
-      color: var(--color-text);
-      font-weight: 600;
-    }
-
-    @keyframes floatElement {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInRight {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Dark mode */
-    :global(.dark) .title-line-1 {
-      color: var(--color-dark-text);
-    }
-
-    :global(.dark) .section-subtitle {
-      color: var(--color-dark-text-light);
-    }
-
-    :global(.dark) .feature-title {
-      color: var(--color-dark-text);
-    }
-
-    :global(.dark) .feature-description {
-      color: var(--color-dark-text-light);
-    }
-
-    :global(.dark) .feature-card {
-      background: rgba(var(--color-dark-background-alt-rgb), 0.8);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    :global(.dark) .secondary-btn {
-      background: rgba(var(--color-dark-text-rgb), 0.05);
-      color: var(--color-dark-text);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    :global(.dark) .tag-button {
-      background: rgba(var(--color-dark-background-alt-rgb), 0.8);
-      color: var(--color-dark-text);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    :global(.dark) .stat-label {
-      color: var(--color-dark-text-light);
-    }
-
-    :global(.dark) .floating-element {
-      background: rgba(var(--color-dark-background-alt-rgb), 0.95);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    :global(.dark) .element-title {
-      color: var(--color-dark-text-light);
-    }
-
-    :global(.dark) .element-value {
-      color: var(--color-dark-text);
-    }
-
-    :global(.dark) .illustration-wrapper {
-      background: var(--color-dark-background-alt);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .welcome-section {
-        padding: 4rem 0;
-      }
-
-      .welcome-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .visual-column {
-        order: -1;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .primary-ctas {
+      
+      .hero-actions {
         flex-direction: column;
+        width: 100%;
+        max-width: 20rem;
       }
-
-      .floating-element {
-        display: none;
-      }
-
-      .floating-badge {
-        position: static;
-        align-self: flex-start;
-        margin-bottom: 1rem;
-      }
-
-      .shape-1,
-      .shape-2,
-      .shape-3,
-      .shape-4 {
-        display: none;
+      
+      .hero-actions .btn {
+        width: 100%;
       }
     }
   </style>
-
-  <script>
-    // Add CSS custom properties for stagger animation
-    document.addEventListener("DOMContentLoaded", () => {
-      const featureCards = document.querySelectorAll(".feature-card");
-      featureCards.forEach((card, index) => {
-        (card as HTMLElement).style.setProperty("--index", index.toString());
-      });
-    });
-  </script>
 </section>

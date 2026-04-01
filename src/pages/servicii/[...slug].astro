@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import CTA from "../../components/CTA.astro";
@@ -10,27 +10,35 @@ import MentenantaIllustration from "../../components/svg/services/MentenantaIllu
 import ConsultantaITIllustration from "../../components/svg/services/ConsultantaITIllustration.astro";
 import MarketingIllustration from "../../components/svg/services/MarketingIllustration.astro";
 import ConsultantaAIIllustration from "../../components/svg/services/ConsultantaAIIllustration.astro";
+import { getCollectionSlug } from "../../utils/content";
 
 export async function getStaticPaths() {
   const serviciiEntries = await getCollection("servicii");
   return serviciiEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
+    params: { slug: getCollectionSlug(entry) },
+    props: { entryId: entry.id },
   }));
 }
 
 interface Props {
-  entry: CollectionEntry<"servicii">;
+  entryId: CollectionEntry<"servicii">["id"];
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entryId } = Astro.props;
+const entry = await getEntry("servicii", entryId);
+
+if (!entry) {
+  throw new Error(`Service entry not found: ${entryId}`);
+}
+
+const { Content } = await render(entry);
+const serviceSlug = getCollectionSlug(entry);
 
 // Get all services for related services section
 const allServices = await getCollection("servicii", ({ data }) => !data.draft);
 // Filter out current service and get 3 random ones
 const relatedServices = allServices
-  .filter((service) => service.slug !== entry.slug)
+  .filter((service) => getCollectionSlug(service) !== serviceSlug)
   .sort(() => Math.random() - 0.5)
   .slice(0, 3);
 
@@ -139,19 +147,19 @@ const {
             style="background: linear-gradient(to bottom right, rgba(var(--color-primary-rgb), 0.8), rgba(var(--color-secondary-rgb), 0.8));"
           >
             {
-              entry.slug === "web-design" ? (
+              serviceSlug === "web-design" ? (
                 <WebDesignIllustration />
-              ) : entry.slug === "hosting" ? (
+              ) : serviceSlug === "hosting" ? (
                 <HostingIllustration />
-              ) : entry.slug === "seo" ? (
+              ) : serviceSlug === "seo" ? (
                 <SeoIllustration />
-              ) : entry.slug === "mentenanta" ? (
+              ) : serviceSlug === "mentenanta" ? (
                 <MentenantaIllustration />
-              ) : entry.slug === "consultanta-it" ? (
+              ) : serviceSlug === "consultanta-it" ? (
                 <ConsultantaITIllustration />
-              ) : entry.slug === "marketing" ? (
+              ) : serviceSlug === "marketing" ? (
                 <MarketingIllustration />
-              ) : entry.slug === "consultanta-ai" ? (
+              ) : serviceSlug === "consultanta-ai" ? (
                 <ConsultantaAIIllustration />
               ) : (
                 <img
@@ -459,7 +467,7 @@ const {
         {
           relatedServices.map((service, index) => (
             <a
-              href={`/servicii/${service.slug}`}
+              href={`/servicii/${getCollectionSlug(service)}`}
               class="service-card group h-full rounded-xl shadow-sm overflow-hidden"
               style="background-color: var(--color-background);"
             >

@@ -439,6 +439,10 @@ body {
   text-decoration: none;
 }
 
+.prose a.not-prose {
+  color: inherit;
+}
+
 .dark .prose a {
   color: var(--color-primary-light);
   transition: all var(--transition-normal);

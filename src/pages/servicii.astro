@@ -7,6 +7,7 @@ import Testimonials from "../components/Testimonials.astro";
 import PageHeader from "../components/PageHeader.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import ServiceCardV2 from "../components/ServiceCardV2.astro";
+import { getCollectionSlug } from "../utils/content";
 
 // Get all non-draft services entries and sort by order
 const servicii = await getCollection("servicii", ({ data }) => {
@@ -46,7 +47,7 @@ const description =
               title={service.data.title}
               description={service.data.descriere}
               icon={service.data.icon}
-              link={`/servicii/${service.slug}`}
+              link={`/servicii/${getCollectionSlug(service)}`}
               ctaText="Află mai multe"
               index={index}
               price={service.data.pret}

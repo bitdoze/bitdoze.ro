@@ -1,23 +1,30 @@
 ---
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import CTA from "../../components/CTA.astro";
+import { getCollectionSlug } from "../../utils/content";
 
 export async function getStaticPaths() {
   const portofoliuEntries = await getCollection("portofoliu");
   return portofoliuEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
+    params: { slug: getCollectionSlug(entry) },
+    props: { entryId: entry.id },
   }));
 }
 
 interface Props {
-  entry: CollectionEntry<"portofoliu">;
+  entryId: CollectionEntry<"portofoliu">["id"];
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entryId } = Astro.props;
+const entry = await getEntry("portofoliu", entryId);
+
+if (!entry) {
+  throw new Error(`Portfolio entry not found: ${entryId}`);
+}
+
+const { Content } = await render(entry);
 
 // Format date
 const dateFormatter = new Intl.DateTimeFormat("ro-RO", {

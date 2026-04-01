@@ -40,58 +40,73 @@ const sortedPosts = getSortedPosts(posts);
 
 <style>
   .blog-index {
-    background:
-      radial-gradient(circle at top left, rgba(var(--color-primary-rgb), 0.09), transparent 38%),
-      radial-gradient(circle at bottom right, rgba(var(--color-secondary-rgb), 0.08), transparent 35%),
-      linear-gradient(180deg, rgba(var(--color-background-alt-rgb), 0.72), rgba(var(--color-background-rgb), 1));
+    background-color: var(--color-background-alt);
+  }
+
+  :global(.dark) .blog-index {
+    background-color: var(--color-dark-background-alt);
   }
 
   .blog-index__hero {
     max-width: 54rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
   }
 
   .blog-index__eyebrow {
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.75rem;
     color: var(--color-primary);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     font-size: 0.85rem;
   }
 
   .blog-index h1 {
     margin: 0;
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    line-height: 1.03;
-    letter-spacing: -0.035em;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     color: var(--color-text);
   }
 
+  :global(.dark) .blog-index h1 {
+    color: var(--color-dark-text);
+  }
+
   .blog-index__description {
-    margin: 1.25rem 0 0;
+    margin: 1.5rem 0 0;
     max-width: 48rem;
     color: var(--color-text-light);
     line-height: 1.8;
-    font-size: 1.1rem;
+    font-size: 1.125rem;
+  }
+
+  :global(.dark) .blog-index__description {
+    color: var(--color-dark-text-light);
   }
 
   .blog-index__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 
   .blog-index__count {
     color: var(--color-text-light);
     font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  :global(.dark) .blog-index__count {
+    color: var(--color-dark-text-light);
   }
 
   .blog-index__grid {
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 </style>

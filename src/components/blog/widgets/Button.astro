@@ -43,6 +43,7 @@ const buttonLink = link || url || "#";
 const hasIcon = !!icon;
 const showIconOnly = iconOnly && hasIcon;
 const accessibleLabel = ariaLabel || buttonText;
+const hasText = !showIconOnly && buttonText.trim().length > 0;
 
 // Size classes mapping
 const sizeClasses = {
@@ -61,21 +62,6 @@ const iconSizes = {
   lg: "w-6 h-6",
   xl: "w-7 h-7",
 };
-
-// Spacing between icon and text
-const iconSpacing = {
-  xs: "mr-1",
-  sm: "mr-1.5",
-  md: "mr-2",
-  lg: "mr-2.5",
-  xl: "mr-3",
-};
-
-// For right-positioned icons, we need to flip the margin
-const iconMargin =
-  iconPosition === "left"
-    ? iconSpacing[size]
-    : `ml-${iconSpacing[size].split("-")[1]}`;
 
 // For icon-only buttons, we need different padding
 const iconOnlyPadding = {
@@ -125,11 +111,12 @@ const buttonClasses = `mt-2 mb-2 not-prose inline-flex items-center justify-cent
 	${colorClasses[color][variant]}
 	${showIconOnly ? iconOnlyPadding[size] : sizeClasses[size]}
 	${showIconOnly ? "aspect-square" : ""}
+	${hasText ? "gap-2" : ""}
 `;
 ---
 
 <a
-  class={buttonClasses}
+  class:list={[buttonClasses, "blog-widget-button"]}
   href={buttonLink}
   {...external ? { target: "_blank", rel: "noopener noreferrer" } : {}}
   {...showIconOnly ? { "aria-label": accessibleLabel } : {}}
@@ -137,21 +124,38 @@ const buttonClasses = `mt-2 mb-2 not-prose inline-flex items-center justify-cent
   {/* Icon on the left side */}
   {
     hasIcon && iconPosition === "left" && (
-      <span class={`inline-flex ${!showIconOnly ? iconMargin : ""}`}>
+      <span class="inline-flex shrink-0">
         <Icon name={`mdi:${icon}`} class={iconSizes[size]} aria-hidden="true" />
       </span>
     )
   }
 
   {/* Button text (hidden if icon-only) */}
-  {!showIconOnly && buttonText}
+  {!showIconOnly && <span class="blog-widget-button__label">{buttonText}</span>}
 
   {/* Icon on the right side */}
   {
     hasIcon && iconPosition === "right" && (
-      <span class={`inline-flex ${!showIconOnly ? iconMargin : ""}`}>
+      <span class="inline-flex shrink-0">
         <Icon name={`mdi:${icon}`} class={iconSizes[size]} aria-hidden="true" />
       </span>
     )
   }
 </a>
+
+<style>
+  .blog-widget-button {
+    line-height: 1.2;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+
+  .blog-widget-button:hover {
+    text-decoration: none;
+  }
+
+  .blog-widget-button__label {
+    display: inline-block;
+    line-height: 1.2;
+  }
+</style>
