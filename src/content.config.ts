@@ -1,7 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { glob } from "astro/loaders";
+import { defineCollection, z } from "astro:content";
 
 export const collections = {
-  'portofoliu': defineCollection({
+  portofoliu: defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/portofoliu" }),
     schema: z.object({
       title: z.string(),
       descriere: z.string(),
@@ -13,7 +15,8 @@ export const collections = {
       draft: z.boolean().default(false),
     }),
   }),
-  'servicii': defineCollection({
+  servicii: defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/servicii" }),
     schema: z.object({
       title: z.string(),
       descriere: z.string(),
@@ -23,10 +26,14 @@ export const collections = {
       durata: z.string().optional(),
       caracteristici: z.array(z.string()).optional(),
       beneficii: z.array(z.string()).optional(),
-      intrebari_frecvente: z.array(z.object({
-        intrebare: z.string(),
-        raspuns: z.string(),
-      })).optional(),
+      intrebari_frecvente: z
+        .array(
+          z.object({
+            intrebare: z.string(),
+            raspuns: z.string(),
+          })
+        )
+        .optional(),
       seo: z.object({
         title: z.string(),
         description: z.string(),
