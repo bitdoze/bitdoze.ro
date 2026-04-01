@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import LatestArticles from "../components/blog/LatestArticles.astro";
 import Hero from "../components/Hero.astro";
 import Welcome from "../components/Welcome.astro";
 import Services from "../components/Services.astro";
@@ -132,6 +133,10 @@ const featuredServices = servicii
     //     testimonials={testimonialsSection.testimonials}
     //   />
     // )
+  }
+
+  {
+    <LatestArticles />
   }
 
   {

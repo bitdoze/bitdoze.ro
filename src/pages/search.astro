@@ -1,0 +1,208 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Caută în blog | BitDoze"
+  description="Caută articole și ghiduri publicate pe blogul BitDoze."
+  canonical="/search"
+  noindex={true}
+>
+  <section class="search-page section-padding">
+    <div class="container search-page__container">
+      <div class="search-page__hero">
+        <p class="search-page__eyebrow">Căutare</p>
+        <h1>Găsește articolul potrivit mai repede</h1>
+        <p>
+          Caută după titlu, subiect, tag sau expresii din conținutul articolelor.
+        </p>
+      </div>
+
+      <label class="search-page__label" for="search-input">Caută articole</label>
+      <div class="search-page__input-wrap">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Ex: SEO local, hosting administrat, site de prezentare"
+          class="search-page__input"
+          autocomplete="off"
+        />
+      </div>
+
+      <div id="search-info" class="search-page__info"></div>
+      <div id="search-results" class="search-page__results hidden"></div>
+      <div id="no-results" class="search-page__empty hidden">
+        Nu am găsit rezultate pentru căutarea ta. Încearcă termeni mai simpli sau
+        un alt subiect.
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import "../scripts/blog-search.js";
+</script>
+
+<style>
+  .search-page {
+    background:
+      radial-gradient(circle at top left, rgba(var(--color-primary-rgb), 0.08), transparent 35%),
+      linear-gradient(180deg, rgba(var(--color-background-alt-rgb), 0.65), rgba(var(--color-background-rgb), 1));
+  }
+
+  .search-page__container {
+    max-width: 64rem;
+  }
+
+  .search-page__hero {
+    max-width: 46rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .search-page__eyebrow {
+    margin: 0 0 0.6rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .search-page h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    color: var(--color-text);
+  }
+
+  .search-page__hero p {
+    margin: 1rem 0 0;
+    color: var(--color-text-light);
+    line-height: 1.75;
+  }
+
+  .search-page__label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .search-page__input-wrap {
+    margin-bottom: 1rem;
+  }
+
+  .search-page__input {
+    width: 100%;
+    min-height: 3.75rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid rgba(var(--color-text-rgb), 0.12);
+    border-radius: 1rem;
+    background: rgba(var(--color-background-rgb), 0.96);
+    color: var(--color-text);
+    box-shadow: 0 16px 40px rgba(var(--color-text-rgb), 0.08);
+  }
+
+  .search-page__info {
+    min-height: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+  }
+
+  .search-page__results {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .search-page__empty {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    color: var(--color-text);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  :global(.search-result-card__link) {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(var(--color-text-rgb), 0.08);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(var(--color-background-rgb), 0.98),
+        rgba(var(--color-background-alt-rgb), 0.94)
+      );
+    box-shadow: 0 18px 40px rgba(var(--color-text-rgb), 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  :global(.search-result-card__link:hover) {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(var(--color-text-rgb), 0.12);
+  }
+
+  :global(.search-result-card__image-wrap) {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  :global(.search-result-card__image) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  :global(.search-result-card__body) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.35rem;
+  }
+
+  :global(.search-result-card__meta) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+  }
+
+  :global(.search-result-card__body h3) {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  :global(.search-result-card__body p) {
+    margin: 0;
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+
+  :global(.search-result-card__tags) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  :global(.search-result-card__tag) {
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,482 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "./Layout.astro";
+import RelatedPosts from "../components/blog/RelatedPosts.astro";
+import { formatDate } from "../utils/date";
+import { buildPostPath, getPostSlug, getRelatedPosts } from "../utils/blog";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+  headings?: { depth: number; slug: string; text: string }[];
+}
+
+const { post, headings = [] } = Astro.props;
+const { title, description, image, date, author, tags, categories, canonical } =
+  post.data;
+const postSlug = getPostSlug(post);
+const canonicalPath = canonical || `/blog/${postSlug}/`;
+const shareUrl = Astro.site
+  ? new URL(canonicalPath, Astro.site).toString()
+  : canonicalPath;
+const visibleHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const encodedTitle = encodeURIComponent(title);
+const encodedShareUrl = encodeURIComponent(shareUrl);
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+const sidebarRelatedPosts = getRelatedPosts(
+  post,
+  allPosts.filter((entry) => getPostSlug(entry) !== postSlug),
+  3,
+);
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={image}
+  canonical={canonicalPath}
+  ogType="article"
+  structuredData={{
+    type: "article",
+    data: {
+      headline: title,
+      description,
+      image,
+      datePublished: date?.toISOString(),
+      author,
+    },
+  }}
+>
+  <section class="blog-post shell section-padding">
+    <div class="container">
+      <div class="blog-post__intro">
+        <a href="/blog" class="blog-post__back">Toate articolele</a>
+
+        <div class="blog-post__meta">
+          {date && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
+          {author && <span>{author}</span>}
+          {categories.length > 0 && <span>{categories.join(" · ")}</span>}
+        </div>
+
+        <h1>{title}</h1>
+        {description && <p class="blog-post__description">{description}</p>}
+
+        {
+          tags.length > 0 && (
+            <div class="blog-post__tags">
+              {tags.map((tag) => (
+                <span class="blog-post__tag">#{tag}</span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      {
+        image && (
+          <div class="blog-post__image-wrap">
+            <img src={image} alt={title} class="blog-post__image" />
+          </div>
+        )
+      }
+
+      <div class="blog-post__body">
+        <aside class="blog-post__sidebar">
+          {
+            visibleHeadings.length > 0 && (
+              <nav class="blog-post__panel" aria-label="Cuprins">
+                <div class="blog-post__panel-head">
+                  <p class="blog-post__panel-label">Cuprins</p>
+                </div>
+                <ul class="blog-post__toc">
+                  {visibleHeadings.map((heading) => (
+                    <li class:list={["blog-post__toc-item", heading.depth === 3 && "is-sub"]}>
+                      <a href={`#${heading.slug}`}>{heading.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )
+          }
+
+          {
+            sidebarRelatedPosts.length > 0 && (
+              <div class="blog-post__panel">
+                <div class="blog-post__panel-head">
+                  <p class="blog-post__panel-label">Articole similare</p>
+                </div>
+                <div class="blog-post__sidebar-related">
+                  {sidebarRelatedPosts.map((entry) => (
+                    <a
+                      href={buildPostPath(getPostSlug(entry))}
+                      class="blog-post__sidebar-related-item"
+                    >
+                      {
+                        entry.data.image && (
+                          <div class="blog-post__sidebar-related-image-wrap">
+                            <img
+                              src={entry.data.image}
+                              alt={entry.data.title}
+                              class="blog-post__sidebar-related-image"
+                              loading="lazy"
+                            />
+                          </div>
+                        )
+                      }
+                      <h3>{entry.data.title}</h3>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          <div class="blog-post__panel">
+            <div class="blog-post__panel-head">
+              <p class="blog-post__panel-label">Distribuie</p>
+            </div>
+            <div class="blog-post__share">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={`https://x.com/intent/tweet?url=${encodedShareUrl}&text=${encodedTitle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                X
+              </a>
+              <button type="button" class="blog-post__copy" data-copy-link={shareUrl}>
+                Copiază linkul
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="blog-post__content">
+          <slot />
+        </div>
+      </div>
+
+      <RelatedPosts currentPost={post} />
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener("click", async (event) => {
+    const button = (event.target instanceof Element)
+      ? event.target.closest("[data-copy-link]")
+      : null;
+
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    const url = button.dataset.copyLink;
+    if (!url || !navigator.clipboard) return;
+
+    await navigator.clipboard.writeText(url);
+    const originalText = button.textContent;
+    button.textContent = "Link copiat";
+    window.setTimeout(() => {
+      button.textContent = originalText;
+    }, 1800);
+  });
+</script>
+
+<style>
+  .blog-post.shell {
+    background:
+      radial-gradient(
+        circle at top center,
+        rgba(var(--color-primary-rgb), 0.08),
+        transparent 40%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(var(--color-background-alt-rgb), 0.45),
+        rgba(var(--color-background-rgb), 1)
+      );
+  }
+
+  .blog-post__intro {
+    max-width: 52rem;
+    margin: 0 auto 2rem;
+  }
+
+  .blog-post__back {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .blog-post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+
+  .blog-post h1 {
+    margin: 0;
+    font-size: clamp(2.3rem, 6vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  .blog-post__description {
+    margin: 1.25rem 0 0;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--color-text-light);
+  }
+
+  .blog-post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .blog-post__tag {
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(var(--color-primary-rgb), 0.12);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .blog-post__image-wrap {
+    max-width: 64rem;
+    margin: 0 auto 2rem;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    box-shadow: 0 22px 52px rgba(var(--color-text-rgb), 0.12);
+  }
+
+  .blog-post__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .blog-post__body {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+  }
+
+  .blog-post__sidebar {
+    position: sticky;
+    top: 5.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .blog-post__panel {
+    padding: 1.1rem 1.15rem;
+    border: 1px solid rgba(var(--color-text-rgb), 0.08);
+    border-radius: 1.25rem;
+    background: rgba(var(--color-background-rgb), 0.95);
+    box-shadow: 0 16px 32px rgba(var(--color-text-rgb), 0.06);
+  }
+
+  .blog-post__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(var(--color-text-rgb), 0.06);
+  }
+
+  .blog-post__panel-label {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .blog-post__toc {
+    display: grid;
+    gap: 0.2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .blog-post__toc-item a {
+    display: block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.6rem;
+    color: var(--color-text-light);
+    line-height: 1.3;
+    font-size: 0.88rem;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .blog-post__toc-item a:hover {
+    color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb), 0.08);
+  }
+
+  .blog-post__toc-item.is-sub {
+    margin-left: 0.7rem;
+    padding-left: 0.45rem;
+    border-left: 2px solid rgba(var(--color-text-rgb), 0.06);
+  }
+
+  .blog-post__toc-item.is-sub a {
+    font-size: 0.82rem;
+  }
+
+  .blog-post__sidebar-related {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .blog-post__sidebar-related-item {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .blog-post__sidebar-related-image-wrap {
+    width: 3.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .blog-post__sidebar-related-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+  }
+
+  .blog-post__sidebar-related-item:hover .blog-post__sidebar-related-image {
+    transform: scale(1.05);
+  }
+
+  .blog-post__sidebar-related-item h3 {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+    line-height: 1.35;
+    transition: color 0.2s ease;
+  }
+
+  .blog-post__sidebar-related-item:hover h3 {
+    color: var(--color-primary);
+  }
+
+  .blog-post__share {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .blog-post__share a,
+  .blog-post__copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(var(--color-text-rgb), 0.1);
+    border-radius: 999px;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    color: var(--color-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .blog-post__content {
+    min-width: 0;
+    color: var(--color-text);
+    line-height: 1.85;
+    font-size: 1.05rem;
+  }
+
+  .blog-post__content :global(h2),
+  .blog-post__content :global(h3),
+  .blog-post__content :global(h4) {
+    margin: 2.5rem 0 1rem;
+    line-height: 1.2;
+    color: var(--color-text);
+  }
+
+  .blog-post__content :global(h2) {
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+  }
+
+  .blog-post__content :global(h3) {
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+  }
+
+  .blog-post__content :global(p),
+  .blog-post__content :global(ul),
+  .blog-post__content :global(ol),
+  .blog-post__content :global(blockquote) {
+    margin: 1rem 0;
+  }
+
+  .blog-post__content :global(ul),
+  .blog-post__content :global(ol) {
+    padding-left: 1.35rem;
+  }
+
+  .blog-post__content :global(li) {
+    margin: 0.45rem 0;
+  }
+
+  .blog-post__content :global(pre) {
+    overflow-x: auto;
+    padding: 1rem 1.1rem;
+    border-radius: 1rem;
+    background: rgba(var(--color-text-rgb), 0.04);
+  }
+
+  .blog-post__content :global(code) {
+    font-size: 0.92em;
+  }
+
+  .blog-post__content :global(blockquote) {
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--color-primary);
+    background: rgba(var(--color-primary-rgb), 0.06);
+    border-radius: 0 1rem 1rem 0;
+  }
+
+  @media (max-width: 960px) {
+    .blog-post__body {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-post__sidebar {
+      position: static;
+      order: 2;
+    }
+  }
+</style>

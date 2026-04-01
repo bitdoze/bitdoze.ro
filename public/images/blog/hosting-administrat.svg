@@ -1,0 +1,16 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#F5F7FF"/>
+  <circle cx="1088" cy="138" r="126" fill="#C7D2FE"/>
+  <circle cx="166" cy="612" r="162" fill="#BAE6FD"/>
+  <rect x="136" y="118" width="1008" height="484" rx="34" fill="#111827"/>
+  <rect x="194" y="182" width="892" height="108" rx="24" fill="#1F2937"/>
+  <rect x="194" y="318" width="892" height="108" rx="24" fill="#1F2937"/>
+  <rect x="194" y="454" width="892" height="108" rx="24" fill="#1F2937"/>
+  <circle cx="260" cy="236" r="16" fill="#22C55E"/>
+  <circle cx="260" cy="372" r="16" fill="#38BDF8"/>
+  <circle cx="260" cy="508" r="16" fill="#A78BFA"/>
+  <rect x="320" y="216" width="300" height="18" rx="9" fill="#E5E7EB"/>
+  <rect x="320" y="352" width="260" height="18" rx="9" fill="#E5E7EB"/>
+  <rect x="320" y="488" width="330" height="18" rx="9" fill="#E5E7EB"/>
+  <text x="640" y="650" fill="#111827" font-family="Arial, sans-serif" font-size="58" font-weight="700" text-anchor="middle">Hosting Administrat</text>
+</svg>

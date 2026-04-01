@@ -2,6 +2,21 @@ import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 export const collections = {
+  posts: defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/posts" }),
+    schema: z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      date: z.date().optional(),
+      image: z.string().optional(),
+      author: z.string().default("BitDoze"),
+      categories: z.array(z.string()).default([]),
+      tags: z.array(z.string()).default([]),
+      series: z.tuple([z.string(), z.string()]).optional(),
+      canonical: z.string().optional(),
+      draft: z.boolean().default(false),
+    }),
+  }),
   portofoliu: defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/portofoliu" }),
     schema: z.object({

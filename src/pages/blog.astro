@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import PostCard from "../components/blog/PostCard.astro";
+import { getSortedPosts } from "../utils/blog";
+import { siteConfig } from "../config/site";
+
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const sortedPosts = getSortedPosts(posts);
+---
+
+<Layout
+  title={`Blog | ${siteConfig.name}`}
+  description="Articole practice în limba română despre web design, SEO, hosting și procese digitale."
+  canonical="/blog"
+>
+  <section class="blog-index section-padding">
+    <div class="container">
+      <div class="blog-index__hero">
+        <p class="blog-index__eyebrow">Blog BitDoze</p>
+        <h1>Ghiduri clare pentru site-uri, SEO și infrastructură web</h1>
+        <p class="blog-index__description">
+          Publicăm articole practice pentru companii care vor să înțeleagă mai
+          bine cum își construiesc și își cresc prezența online.
+        </p>
+        <div class="blog-index__actions">
+          <a href="/search" class="btn btn-primary">Caută articole</a>
+          <span class="blog-index__count">{sortedPosts.length} articole publicate</span>
+        </div>
+      </div>
+
+      <div class="blog-index__grid">
+        {sortedPosts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .blog-index {
+    background:
+      radial-gradient(circle at top left, rgba(var(--color-primary-rgb), 0.09), transparent 38%),
+      radial-gradient(circle at bottom right, rgba(var(--color-secondary-rgb), 0.08), transparent 35%),
+      linear-gradient(180deg, rgba(var(--color-background-alt-rgb), 0.72), rgba(var(--color-background-rgb), 1));
+  }
+
+  .blog-index__hero {
+    max-width: 54rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-index__eyebrow {
+    margin: 0 0 0.6rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .blog-index h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+    color: var(--color-text);
+  }
+
+  .blog-index__description {
+    margin: 1.25rem 0 0;
+    max-width: 48rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  .blog-index__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .blog-index__count {
+    color: var(--color-text-light);
+    font-weight: 600;
+  }
+
+  .blog-index__grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+</style>
