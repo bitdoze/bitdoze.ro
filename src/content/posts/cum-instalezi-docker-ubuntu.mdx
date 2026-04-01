@@ -1,0 +1,209 @@
+---
+title: "Cum instalezi Docker pe Ubuntu în 2026"
+description: "Ghid practic pentru instalarea Docker pe Ubuntu, cu scriptul oficial, configurare post-instalare, reguli de firewall și verificări utile."
+date: 2026-04-01
+image: "/images/blog/cum-instalezi-docker-ubuntu.svg"
+author: "BitDoze"
+categories:
+  - Tutoriale
+tags:
+  - docker
+  - ubuntu
+  - linux
+---
+
+Docker a devenit standardul pentru rularea aplicațiilor în containere. Dacă ai un server Ubuntu și vrei să instalezi Docker rapid, fără pași inutili, metoda de mai jos funcționează pe Ubuntu 20.04, 22.04 și 24.04.
+
+## Instalarea cu scriptul oficial
+
+Cea mai rapidă metodă folosește scriptul oficial de instalare de la Docker:
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+Acest script detectează distribuția, adaugă repository-ul oficial Docker și instalează pachetele necesare.
+
+<Notice type="info" title="Alternativă">
+Poți instala Docker manual din repository-ul oficial sau din pachetele Ubuntu (`apt install docker.io`). Varianta manuală dă mai mult control, dar scriptul oficial este suficient pentru majoritatea situațiilor.
+</Notice>
+
+## Adaugă utilizatorul în grupul docker
+
+După instalare, Docker pornește automat. Ca să nu scrii `sudo` la fiecare comandă:
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Deconectează-te și reconectează-te (sau rulează `newgrp docker`) pentru ca modificarea să aibă efect.
+
+Verifică:
+
+```bash
+docker --version
+docker run hello-world
+```
+
+Dacă containerul `hello-world` rulează, instalarea este corectă.
+
+## Ce face Docker la pornire
+
+Docker instalează și activează un serviciu systemd:
+
+```bash
+sudo systemctl status docker
+```
+
+Dacă vrei să pornească automat la boot (deja implicit pe majoritatea instalărilor):
+
+```bash
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+## Configurare UFW firewall
+
+Docker manipulează direct regulile iptables, iar asta poate crea conflicte cu UFW dacă nu configurezi corect.
+
+<Notice type="warning" title="Atenție la UFW și Docker">
+Dacă folosești UFW ca firewall, Docker adaugă reguli proprii în iptables care ocolesc UFW. Containerele cu porturi mapate pot deveni accesibile din exterior chiar dacă UFW pare să le blocheze.
+</Notice>
+
+Verifică starea UFW:
+
+```bash
+sudo ufw status
+```
+
+Dacă UFW este activ, adaugă regulile necesare:
+
+```bash
+sudo ufw allow ssh
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
+```
+
+Pentru a preveni expunerea neintenționată a porturilor containerelor, editează fișierul de configurare Docker:
+
+```bash
+sudo nano /etc/docker/daemon.json
+```
+
+Adaugă:
+
+```json
+{
+  "iptables": false
+}
+```
+
+Apoi restartează Docker:
+
+```bash
+sudo systemctl restart docker
+```
+
+<ListCheck>
+  <ul>
+    <li>Fără `"iptables": false`, Docker adaugă regulile sale direct și ocolește UFW.</li>
+    <li>Cu `"iptables": false`, trebuie să gestionezi manual port forwarding.</li>
+    <li>Dacă nu ai nevoie de mapări de porturi publice, lasă setarea implicită și fii atent la ce publici.</li>
+  </ul>
+</ListCheck>
+
+## Instalează Docker Compose
+
+Docker Compose vine acum integrat în Docker ca plugin:
+
+```bash
+docker compose version
+```
+
+Dacă nu este instalat:
+
+```bash
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
+```
+
+Folosești `docker compose` (cu spațiu, nu cratimă) în loc de vechea comandă `docker-compose`.
+
+## Verificări rapide după instalare
+
+După ce Docker funcționează, rulează aceste comenzi pentru a confirma că totul este în regulă:
+
+```bash
+# Verifică serviciul
+sudo systemctl status docker
+
+# Verifică versiunea
+docker --version
+docker compose version
+
+# Testează un container
+docker run --rm hello-world
+
+# Verifică containerele active
+docker ps
+
+# Verifică disk usage
+docker system df
+```
+
+## Curățare periodică
+
+Docker acumulează imagini, containere și volume care nu mai sunt folosite. Rulează periodic:
+
+```bash
+docker system prune -a --volumes
+```
+
+<Notice type="info" title="Ce face prune">
+Șterge containere oprite, imagini nefolosite, rețele neasociate și volume anonime. Adaugă flag-ul `-a` pentru a șterge și imaginile care nu sunt folosite de niciun container. Flag-ul `--volumes` curăță și volumele.
+</Notice>
+
+## Securitate de bază
+
+<Accordion label="Nu rula containere ca root" group="securitate" expanded="true">
+Implicit, containerele rulează ca root. Creează un utilizator non-root în Dockerfile-ul tău:
+
+```dockerfile
+RUN useradd -m appuser
+USER appuser
+```
+</Accordion>
+
+<Accordion label="Limitează resursele" group="securitate">
+Poți limita CPU și memorie per container:
+
+```bash
+docker run --memory="512m" --cpus="1.0" my-image
+```
+</Accordion>
+
+<Accordion label="Citește logurile" group="securitate">
+Logurile containerelor te ajută să identifici probleme:
+
+```bash
+docker logs <container-id>
+docker logs -f <container-id>
+```
+
+Flag-ul `-f` urmărește logurile în timp real.
+</Accordion>
+
+## Când ai nevoie de ajutor
+
+Dacă gestionezi servere și containere pentru o afacere, partea de instalare este abia începutul. Mentenanța, monitorizarea și actualizările regulate contează pe termen lung.
+
+<Button
+  text="Vezi serviciile BitDoze"
+  link="/servicii"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>
