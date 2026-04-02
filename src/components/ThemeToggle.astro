@@ -28,15 +28,12 @@ const { class: className = "", showLabel = false } = Astro.props;
 </button>
 
 <script is:inline>
-  // This script runs immediately on the client side without waiting for DOMContentLoaded
-  // to prevent flash of light mode during page navigation
-  function applyTheme() {
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
+  function applyTheme(preferDark) {
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const darkModeOn =
       localStorage.getItem("theme") === "dark" ||
-      (!localStorage.getItem("theme") && darkModeMediaQuery.matches);
+      (!localStorage.getItem("theme") &&
+        (typeof preferDark === "boolean" ? preferDark : darkModeMediaQuery.matches));
 
     if (darkModeOn) {
       document.documentElement.classList.add("dark");
@@ -45,16 +42,18 @@ const { class: className = "", showLabel = false } = Astro.props;
     }
   }
 
-  // Apply theme immediately
-  applyTheme();
+  if (!window.__bitdozeApplyTheme) {
+    window.__bitdozeApplyTheme = applyTheme;
+  }
+
+  window.__bitdozeApplyTheme();
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  const initThemeToggle = () => {
     const themeToggleButtons = document.querySelectorAll(".theme-toggle");
 
-    // Toggle function
-    function toggleDarkMode() {
+    const toggleDarkMode = () => {
       if (document.documentElement.classList.contains("dark")) {
         document.documentElement.classList.remove("dark");
         localStorage.setItem("theme", "light");
@@ -62,27 +61,33 @@ const { class: className = "", showLabel = false } = Astro.props;
         document.documentElement.classList.add("dark");
         localStorage.setItem("theme", "dark");
       }
-    }
+    };
 
-    // Event listeners for all theme toggle buttons
     themeToggleButtons.forEach((button) => {
+      if (!(button instanceof HTMLElement)) return;
+      if (button.dataset.themeToggleBound === "true") return;
+      button.dataset.themeToggleBound = "true";
       button.addEventListener("click", toggleDarkMode);
     });
 
-    // Handle system preference change
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-    darkModeMediaQuery.addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
-        if (e.matches) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
+    if (window.__bitdozeThemePreferenceListenerBound) return;
+    window.__bitdozeThemePreferenceListenerBound = true;
+
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    darkModeMediaQuery.addEventListener("change", (event) => {
+      if (!localStorage.getItem("theme") && window.__bitdozeApplyTheme) {
+        window.__bitdozeApplyTheme(event.matches);
       }
     });
-  });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initThemeToggle, { once: true });
+  } else {
+    initThemeToggle();
+  }
+
+  document.addEventListener("astro:page-load", initThemeToggle);
 </script>
 
 <style>

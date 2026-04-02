@@ -28,10 +28,8 @@ const formattedTitle =
   title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
 
 // Build canonical URL
-const canonicalURL = new URL(
-  canonical,
-  Astro.site || Astro.url.origin
-).toString();
+const siteOrigin = Astro.site?.toString() || siteConfig.url;
+const canonicalURL = new URL(canonical, siteOrigin).toString();
 
 // Format robots meta
 const robotsContent = [];
@@ -62,7 +60,7 @@ if (nofollow) robotsContent.push("nofollow");
       content={
         image.startsWith("http")
           ? image
-          : new URL(image, Astro.url.origin).toString()
+          : new URL(image, siteOrigin).toString()
       }
     />
   )
@@ -81,7 +79,7 @@ if (nofollow) robotsContent.push("nofollow");
       content={
         image.startsWith("http")
           ? image
-          : new URL(image, Astro.url.origin).toString()
+          : new URL(image, siteOrigin).toString()
       }
     />
   )
@@ -94,15 +92,18 @@ if (nofollow) robotsContent.push("nofollow");
 <meta name="theme-color" content="#009cef" />
 <!-- Privacy-friendly analytics by Plausible -->
 <script
+  is:inline
   async
   src="https://an3.bitdoze.com/js/pa-oW1swol4hB3VYvnRZjV1I.js"
 ></script>
-<script>
-  window.plausible = window.plausible || function () {
+<script is:inline>
+  const plausible = (window.plausible = window.plausible || function () {
     (plausible.q = plausible.q || []).push(arguments);
+  });
+
+  plausible.init = plausible.init || function (options) {
+    plausible.o = options || {};
   };
-  plausible.init = plausible.init || function (i) {
-    plausible.o = i || {};
-  };
+
   plausible.init();
 </script>

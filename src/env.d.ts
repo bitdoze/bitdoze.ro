@@ -5,6 +5,18 @@ declare module "@tailwindcss/vite" {
   export default plugin;
 }
 
+interface Window {
+  __bitdozeApplyTheme?: (preferDark?: boolean) => void;
+  __bitdozeThemePreferenceListenerBound?: boolean;
+  __bitdozeHeaderScrollBound?: string;
+  plausible?: {
+    (...args: unknown[]): void;
+    q?: unknown[];
+    o?: Record<string, unknown>;
+    init?: (options?: Record<string, unknown>) => void;
+  };
+}
+
 declare module "astro-icon" {
   const integration: any;
   export default integration;

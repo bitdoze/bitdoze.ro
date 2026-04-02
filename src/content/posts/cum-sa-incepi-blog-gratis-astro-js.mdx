@@ -1,0 +1,288 @@
+---
+title: "Cum sa incepi un blog gratis cu Astro JS si Cloudflare Pages"
+description: "Ghid pas cu pas: creeaza un blog cu Astro JS si publica-l gratuit pe Cloudflare Pages. Fara costuri de hosting, fara WordPress, fara bataie de cap."
+date: 2026-04-02
+image: "/images/blog/cum-sa-incepi-blog-gratis-astro-js.svg"
+author: "BitDoze"
+categories:
+  - Web Design
+tags:
+  - astro
+  - blog
+  - cloudflare
+draft: false
+---
+
+Vrei sa pornesti un blog dar nu vrei sa platesti hosting lunar? Cu [Astro JS](https://astro.build/) si Cloudflare Pages poti avea un blog functional, rapid si complet gratuit. Fara WordPress, fara baza de date, fara costuri ascunse.
+
+In ghidul asta parcurgem tot procesul: de la crearea conturilor necesare pana la publicarea primului articol. Dureaza cam 30 de minute daca nu te opresti sa te joci cu culorile (desi o sa te opresti, stim cu totii).
+
+<YouTubeEmbed
+  url="EMLuT8YN8Xs"
+  label="Cum sa faci un blog gratis cu Astro si Cloudflare"
+/>
+
+## Ce ai nevoie inainte sa incepi
+
+<ListCheck>
+  <ul>
+    <li>Un calculator cu acces la internet</li>
+    <li>Cunostinte de baza de Markdown (e mai simplu decat Word)</li>
+    <li>Cam 30 de minute libere</li>
+    <li>Node.js si npm instalate</li>
+    <li>Optional: Visual Studio Code ca editor</li>
+  </ul>
+</ListCheck>
+
+Nu ai nevoie de experienta cu programarea. Daca stii sa copiezi o comanda in terminal si sa editezi un fisier text, esti gata.
+
+## Pasul 1: creeaza un cont GitHub
+
+GitHub este platforma unde vei tine codul blogului. Gandeste-te la el ca la un Google Drive pentru cod, care tine evidenta fiecarei modificari.
+
+1. Mergi la [github.com](https://github.com) si apasa **Sign up**
+2. Alege un username, introdu email-ul si seteaza o parola
+3. Confirma adresa de email
+
+Daca ai deja cont GitHub, treci la pasul urmator.
+
+## Pasul 2: instaleaza Node.js
+
+Astro are nevoie de Node.js ca sa functioneze local pe calculatorul tau.
+
+1. Descarca versiunea LTS de pe [nodejs.org](https://nodejs.org/)
+2. Instaleaz-o ca orice aplicatie
+3. Deschide un terminal si verifica:
+
+```bash
+node --version
+npm --version
+```
+
+Daca vezi numere de versiune, esti gata. Daca nu, incearca sa repornesti terminalul.
+
+<Notice type="info" title="Ce versiune de Node?">
+  Foloseste intotdeauna versiunea LTS (Long Term Support). La momentul scrierii, Node 20 sau 22 LTS functioneaza fara probleme cu Astro.
+</Notice>
+
+## Pasul 3: instaleaza Visual Studio Code
+
+Nu e obligatoriu, dar VS Code face editarea mult mai usoara decat Notepad. Are syntax highlighting pentru Markdown, terminal integrat si extensii pentru Astro.
+
+1. Descarca de pe [code.visualstudio.com](https://code.visualstudio.com/)
+2. Instaleaza si deschide aplicatia
+3. Optional: instaleaza extensia "Astro" din marketplace
+
+## Pasul 4: fa fork la o tema Astro
+
+In loc sa construiesti blogul de la zero, pornesti de la o tema gata facuta. Tema [Bitdoze Astro Theme](https://github.com/bitdoze/bitdoze-astro-theme) include tot ce ai nevoie: layout responsive, dark mode, categorii, tag-uri si paginare.
+
+1. Mergi la [github.com/bitdoze/bitdoze-astro-theme](https://github.com/bitdoze/bitdoze-astro-theme)
+2. Apasa butonul **Fork** din coltul dreapta sus
+3. Numeste repository-ul cum vrei (de exemplu `blogul-meu`)
+4. Apasa **Create fork**
+
+Acum ai o copie a temei in contul tau GitHub.
+
+## Pasul 5: cloneaza repository-ul local
+
+Ca sa lucrezi pe blog de pe calculatorul tau:
+
+1. In repository-ul tau forked, apasa **Code** si copiaza URL-ul HTTPS
+2. Deschide VS Code, apasa `Ctrl+Shift+P` (sau `Cmd+Shift+P` pe Mac)
+3. Scrie **Git: Clone**, apasa Enter
+4. Lipeste URL-ul si alege un folder unde sa se salveze
+5. Deschide proiectul cand VS Code te intreaba
+
+Sau, din terminal:
+
+```bash
+git clone https://github.com/USERNAME/blogul-meu.git
+cd blogul-meu
+```
+
+## Pasul 6: instaleaza dependentele si porneste serverul local
+
+Deschide terminalul in VS Code (`` Ctrl + ` ``) si ruleaza:
+
+```bash
+npm install
+npm run dev
+```
+
+Dupa cateva secunde, deschide browserul la `http://localhost:4321`. Ar trebui sa vezi blogul functional cu articolele demo din tema.
+
+## Pasul 7: personalizeaza blogul
+
+### Configureaza informatiile site-ului
+
+Editeaza fisierul `src/config/config.json`:
+
+```json
+{
+  "site": {
+    "title": "Blogul Meu",
+    "base_url": "https://blogul-meu.pages.dev",
+    "logo_text": "Blogul Meu"
+  },
+  "metadata": {
+    "meta_author": "Numele Tau",
+    "meta_description": "Blog despre subiectele care ma intereseaza"
+  }
+}
+```
+
+### Configureaza detaliile site-ului
+
+Editeaza `src/config/site.ts`:
+
+```typescript
+export const siteConfig = {
+  name: "Blogul Meu",
+  description: "Descrierea blogului tau",
+};
+```
+
+### Personalizeaza culorile
+
+In `src/styles/global.css` poti schimba culorile principale:
+
+```css
+:root {
+  --color-primary-500: #3b82f6;
+}
+```
+
+### Alte lucruri pe care le poti modifica
+
+- **Link-uri sociale**: `src/config/social.json`
+- **Meniul de navigare**: `src/config/menu.json`
+- **Pagini statice**: `src/content/pages/`
+- **Profilul de autor**: `src/content/authors/`
+
+## Pasul 8: scrie primul articol
+
+1. Mergi in folderul `src/content/posts/`
+2. Creeaza un fisier nou, de exemplu `primul-meu-articol.md`
+3. Adauga continutul:
+
+```markdown
+---
+title: "Primul meu articol"
+meta_title: "Primul meu articol pe blog"
+description: "Aici incepe aventura cu blogul."
+date: 2026-04-02
+image: "../../assets/images/web-development.svg"
+authors: ["admin"]
+categories: ["Personal"]
+tags: ["inceputuri"]
+---
+
+## Bine ai venit
+
+Acesta e primul articol de pe blogul meu.
+Am construit totul cu Astro JS si nu am platit nimic pe hosting.
+
+### De ce am ales Astro
+
+- Se incarca rapid
+- Nu am nevoie de baza de date
+- Scriu articolele in Markdown
+- Hosting-ul e gratuit pe Cloudflare Pages
+```
+
+4. Salveaza fisierul si verifica in browser la `http://localhost:4321`
+
+Articolul ar trebui sa apara imediat pe pagina principala.
+
+## Pasul 9: publica blogul pe Cloudflare Pages
+
+Acum vine partea interesanta: sa faci blogul accesibil pe internet.
+
+### Trimite modificarile pe GitHub
+
+Din terminal:
+
+```bash
+git add .
+git commit -m "Configurare initiala blog"
+git push
+```
+
+### Conecteaza Cloudflare Pages
+
+1. Creeaza un cont gratuit pe [cloudflare.com](https://cloudflare.com) si confirma email-ul
+2. In dashboard-ul Cloudflare, mergi la **Workers & Pages** (meniul din stanga)
+3. Apasa **Create** si apoi **Pages** si **Connect to Git**
+4. Autentifica-te cu GitHub si selecteaza repository-ul blogului
+5. Configureaza build-ul:
+   - **Project name**: `blogul-meu`
+   - **Production branch**: `main`
+   - **Build command**: `npm run build`
+   - **Build output directory**: `dist`
+6. Apasa **Save and Deploy**
+
+In 2-3 minute, blogul tau va fi live la adresa `blogul-meu.pages.dev`.
+
+<Notice type="info" title="Domeniu custom">
+  Daca ai un domeniu propriu, il poti conecta din setarile proiectului Cloudflare Pages, sectiunea **Custom domains**. Cloudflare configureaza automat certificatul SSL.
+</Notice>
+
+## Cum adaugi articole noi
+
+Dupa ce totul e configurat, workflow-ul zilnic e simplu:
+
+1. Creeaza un fisier `.md` nou in `src/content/posts/`
+2. Scrie articolul in Markdown
+3. Testeaza local cu `npm run dev`
+4. Trimite pe GitHub:
+
+```bash
+git add .
+git commit -m "Articol nou: titlul articolului"
+git push
+```
+
+Cloudflare Pages detecteaza automat push-ul si republica blogul. In 1-2 minute, articolul nou e online.
+
+Poti scrie si direct pe GitHub, in browser, fara sa descarci nimic local. Creeaza fisierul in `src/content/posts/`, scrie continutul si fa commit. Cloudflare se ocupa de restul.
+
+## Comenzi utile
+
+```bash
+npm run dev        # Porneste serverul local de dezvoltare
+npm run build      # Construieste versiunea de productie
+npm run preview    # Previzualizeaza build-ul de productie
+git add .          # Adauga toate modificarile
+git commit -m "mesaj"  # Salveaza modificarile local
+git push           # Trimite pe GitHub (si declanseaza deploy-ul)
+```
+
+## Probleme frecvente si solutii
+
+<Accordion label="Site-ul nu se construieste. Ce fac?" group="faq">
+  Verifica mesajele de eroare din terminal. Cele mai comune cauze: o eroare de sintaxa in frontmatter-ul unui articol (lipseste o liniuta sau un ghilimea), o imagine referita care nu exista sau o versiune veche de Node.js. Ruleaza `npm run build` local ca sa vezi exact unde e problema.
+</Accordion>
+
+<Accordion label="Pot folosi blogul asta pentru o afacere?" group="faq">
+  Da. Cloudflare Pages permite proiecte comerciale pe planul gratuit. Verifica doar ca tema pe care o folosesti are o licenta care permite utilizare comerciala (tema Bitdoze Astro Theme foloseste licenta MIT, deci e libera).
+</Accordion>
+
+<Accordion label="Cat trafic suporta planul gratuit Cloudflare Pages?" group="faq">
+  Cloudflare Pages nu are limita de bandwidth pe planul gratuit. Poti avea mii de vizitatori pe zi fara probleme. Limita e la 500 de build-uri pe luna, adica 500 de deploy-uri, ceea ce e mult mai mult decat ai nevoie pentru un blog.
+</Accordion>
+
+<Accordion label="Pot migra mai tarziu de la Cloudflare la alt hosting?" group="faq">
+  Da. Blogul tau e un set de fisiere statice. Poti muta acelasi repository pe Vercel, Netlify sau orice alt hosting static fara sa schimbi codul. Schimbi doar configurarea de build pe noua platforma.
+</Accordion>
+
+Daca ai nevoie de ajutor cu configurarea blogului, personalizare sau migrarea continutului de pe WordPress, echipa BitDoze te poate ajuta.
+
+<Button
+  text="Cere o consultatie"
+  link="/contact"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>

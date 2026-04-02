@@ -348,7 +348,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
     const loadingIcon = document.getElementById('loading-icon') as HTMLElement;
 
     if (form && submitButton && buttonText && loadingIcon) {
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', function() {
         // Show loading state
         submitButton.disabled = true;
         buttonText.textContent = 'Se trimite...';

@@ -1,0 +1,18 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0B1220"/>
+  <circle cx="1300" cy="200" r="200" fill="#0EA5E9" fill-opacity="0.18"/>
+  <circle cx="300" cy="750" r="250" fill="#1D4ED8" fill-opacity="0.14"/>
+  <circle cx="1400" cy="700" r="140" fill="#7C3AED" fill-opacity="0.10"/>
+  <text x="120" y="340" fill="white" font-family="Arial, sans-serif" font-size="86" font-weight="700">
+    Blog gratis
+  </text>
+  <text x="120" y="440" fill="white" font-family="Arial, sans-serif" font-size="86" font-weight="700">
+    cu Astro JS
+  </text>
+  <text x="120" y="530" fill="#7DD3FC" font-family="Arial, sans-serif" font-size="36" font-weight="400">
+    De la zero la publicare in 30 de minute
+  </text>
+  <text x="120" y="590" fill="#93C5FD" font-family="Arial, sans-serif" font-size="28">
+    bitdoze.ro
+  </text>
+</svg>

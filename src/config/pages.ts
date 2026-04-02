@@ -1,8 +1,7 @@
 import { siteConfig } from "./site";
 import { companyConfig } from "./company";
-import { services } from "./services";
 import { imageAssets } from "./assets";
-import { ctaConfig, getCtaSection } from "./cta";
+import { getCtaSection } from "./cta";
 
 // Page definitions
 export interface PageConfig {

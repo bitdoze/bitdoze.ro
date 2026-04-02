@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
       <a href="/" class="logo-link flex items-center gap-2 group">
         <img
           src="/bitdoze_logo_better.svg"
-          alt="BitDoze"
+          alt={logoText}
           class="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
         />
       </a>
@@ -179,14 +179,16 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-  // Mobile menu toggle functionality with enhanced animations
-  document.addEventListener("DOMContentLoaded", () => {
+  const initHeader = () => {
     const menuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
     const hamburger = menuButton?.querySelector(".hamburger");
     const hamburgerLines = hamburger?.querySelectorAll(".hamburger-line");
+    const header = document.querySelector(".header-nav");
 
-    if (menuButton && mobileMenu && hamburgerLines) {
+    if (menuButton && mobileMenu && hamburgerLines && menuButton.dataset.menuBound !== "true") {
+      menuButton.dataset.menuBound = "true";
+
       menuButton.addEventListener("click", () => {
         const expanded = menuButton.getAttribute("aria-expanded") === "true";
         const isOpening = !expanded;
@@ -228,36 +230,44 @@ const currentPath = Astro.url.pathname;
       // Close mobile menu when clicking on links
       const mobileMenuItems = mobileMenu.querySelectorAll(".mobile-menu-item");
       mobileMenuItems.forEach((item) => {
+        if (!(item instanceof HTMLElement) || item.dataset.menuItemBound === "true") {
+          return;
+        }
+
+        item.dataset.menuItemBound = "true";
         item.addEventListener("click", () => {
           menuButton.click(); // Trigger close
         });
       });
     }
 
-    // Header scroll effect
-    let lastScrollY = window.scrollY;
-    const header = document.querySelector(".header-nav");
+    if (header instanceof HTMLElement && window.__bitdozeHeaderScrollBound !== "true") {
+      window.__bitdozeHeaderScrollBound = "true";
 
-    window.addEventListener("scroll", () => {
+      window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
 
-      if (header) {
-        const headerEl = header as HTMLElement;
         if (scrollY > 100) {
-          headerEl.style.backgroundColor =
+          header.style.backgroundColor =
             "rgba(var(--color-background-rgb), 0.95)";
-          headerEl.style.boxShadow =
+          header.style.boxShadow =
             "0 4px 20px rgba(var(--color-text-rgb), 0.1)";
         } else {
-          headerEl.style.backgroundColor =
+          header.style.backgroundColor =
             "rgba(var(--color-background-rgb), 0.85)";
-          headerEl.style.boxShadow = "none";
+          header.style.boxShadow = "none";
         }
-      }
+      });
+    }
+  };
 
-      lastScrollY = scrollY;
-    });
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeader, { once: true });
+  } else {
+    initHeader();
+  }
+
+  document.addEventListener("astro:page-load", initHeader);
 </script>
 
 <style>

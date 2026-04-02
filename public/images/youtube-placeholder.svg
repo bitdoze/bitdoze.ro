@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Video indisponibil</title>
+  <desc id="desc">Placeholder pentru embed YouTube indisponibil</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)" />
+  <rect x="460" y="250" width="360" height="220" rx="28" fill="#ef4444" />
+  <path d="M595 305l125 55-125 55z" fill="#fff" />
+  <text x="640" y="560" fill="#e5e7eb" font-family="Arial, sans-serif" font-size="42" text-anchor="middle">
+    Video indisponibil
+  </text>
+</svg>

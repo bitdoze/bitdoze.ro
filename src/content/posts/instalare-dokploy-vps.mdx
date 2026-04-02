@@ -1,0 +1,331 @@
+---
+title: "Cum sa instalezi Dokploy pe un VPS: alternativa self-hosted la Vercel"
+description: "Ghid complet de instalare Dokploy pe un VPS cu Ubuntu. Securizare server, CrowdSec, firewall si primele aplicatii, pas cu pas."
+date: 2026-04-02
+image: "/images/blog/instalare-dokploy-vps.svg"
+author: "BitDoze"
+categories:
+  - Hosting
+tags:
+  - dokploy
+  - vps
+  - self-hosted
+draft: false
+---
+
+Daca ai incercat sa faci deploy la o aplicatie pe Vercel sau Heroku si ai dat de limitarile planului gratuit (sau de factura de la sfarsitul lunii), exista o alternativa: iti instalezi propriul Dokploy pe un VPS si ai control complet asupra aplicatiilor tale.
+
+[Dokploy](https://dokploy.com/) este o platforma open-source de tip PaaS (Platform as a Service) pe care o instalezi pe propriul server. Gandeste-te la el ca la un Vercel self-hosted: conectezi un repository GitHub, configurezi build-ul si Dokploy se ocupa de deploy, SSL, reverse proxy si monitorizare. Diferenta e ca platesti doar VPS-ul (de la 4-5 euro pe luna) si poti rula cate aplicatii incap pe server.
+
+<YouTubeEmbed
+  url="https://www.youtube.com/embed/EaOvNN-RJgI"
+  label="Instalare Dokploy pe VPS"
+/>
+
+## Ce poate face Dokploy
+
+<ListCheck>
+  <ul>
+    <li>Deploy aplicatii Node.js, PHP, Python, Go, Ruby sau orice ruleaza in Docker</li>
+    <li>Baze de date gestionate: MySQL, PostgreSQL, MongoDB, MariaDB, Redis</li>
+    <li>Reverse proxy automat cu Traefik si certificate SSL Let's Encrypt</li>
+    <li>Monitorizare in timp real: CPU, memorie, spatiu pe disc, retea</li>
+    <li>Backup-uri automate pentru baze de date</li>
+    <li>Deploy cu Docker Compose pentru aplicatii complexe</li>
+  </ul>
+</ListCheck>
+
+Practic, poti rula pe un singur VPS de 4 GB RAM aplicatii care pe Vercel, Railway sau Render te-ar costa 50-100 de dolari pe luna.
+
+## Pregatirea VPS-ului
+
+### Alege un furnizor de VPS
+
+Ca sa instalezi Dokploy ai nevoie de un VPS cu Ubuntu (22.04 sau 24.04 LTS). Hetzner ofera servere de la 4-5 euro pe luna cu performanta buna si centre de date in Europa.
+
+<Button
+  link="https://go.bitdoze.com/hetzner"
+  text="Hetzner €20 credit gratuit"
+  variant="solid"
+  color="blue"
+/>
+
+Dupa ce ai VPS-ul creat, conecteaza-te prin SSH:
+
+```bash
+ssh root@IP_VPS
+```
+
+### Actualizeaza sistemul
+
+Prima data, actualizeaza pachetele:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+### Creeaza un utilizator cu drepturi sudo
+
+Nu e recomandat sa lucrezi ca root in mod curent. Creeaza un utilizator dedicat:
+
+```bash
+adduser dragos
+usermod -aG sudo dragos
+```
+
+Urmeaza instructiunile pentru parola si informatiile utilizatorului.
+
+### Configureaza sudo fara parola
+
+Daca folosesti autentificare cu cheie SSH (recomandat), poti permite utilizatorului sa execute comenzi sudo fara parola:
+
+```bash
+echo "dragos ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/dragos
+sudo chmod 0440 /etc/sudoers.d/dragos
+```
+
+### Copiaza cheia SSH de la root
+
+Ca sa te poti conecta cu noul utilizator prin SSH:
+
+```bash
+mkdir -p /home/dragos/.ssh
+cp /root/.ssh/authorized_keys /home/dragos/.ssh/
+chown -R dragos:dragos /home/dragos/.ssh
+chmod 700 /home/dragos/.ssh
+chmod 600 /home/dragos/.ssh/authorized_keys
+```
+
+### Testeaza conexiunea
+
+Deschide un terminal nou (nu inchide sesiunea curenta) si verifica:
+
+```bash
+ssh dragos@IP_VPS
+sudo whoami
+```
+
+Daca primesti `root` ca raspuns, totul functioneaza.
+
+<Notice type="warning" title="Nu inchide sesiunea root">
+  Testeaza intotdeauna conexiunea cu noul utilizator intr-un terminal separat. Daca ceva nu merge, ai nevoie de sesiunea root ca sa repari.
+</Notice>
+
+### Dezactiveaza accesul SSH pentru root
+
+Dupa ce ai confirmat ca noul utilizator functioneaza:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Gaseste linia `PermitRootLogin` si schimb-o in:
+
+```
+PermitRootLogin no
+```
+
+Salveaza si restarteaza SSH:
+
+```bash
+sudo systemctl restart ssh
+```
+
+### Seteaza timeout pentru sesiuni SSH inactive
+
+Ca masura de securitate, deconecteaza sesiunile care stau inactive mai mult de 15 minute:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Adauga sau modifica:
+
+```
+ClientAliveInterval 900
+ClientAliveCountMax 0
+```
+
+```bash
+sudo systemctl restart ssh
+```
+
+### Adauga SWAP
+
+Pe VPS-urile cu RAM limitat, swap-ul ajuta cand memoria fizica se umple:
+
+```bash
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
+## Securizare server cu CrowdSec
+
+CrowdSec este un sistem open-source de protectie care monitorizeaza logurile serverului si blocheaza automat IP-urile care incearca atacuri brute force, scanari de porturi sau alte activitati suspecte.
+
+### Instaleaza CrowdSec
+
+```bash
+curl -s https://install.crowdsec.net | sudo sh
+sudo apt update && sudo apt install crowdsec
+```
+
+### Instaleaza firewall bouncer
+
+Bouncer-ul foloseste iptables ca sa blocheze efectiv IP-urile detectate de CrowdSec:
+
+```bash
+sudo apt install crowdsec-firewall-bouncer-iptables -y
+```
+
+Verifica ca regulile au fost create:
+
+```bash
+sudo iptables -L
+```
+
+Ar trebui sa vezi un lant `CROWDSEC_CHAIN` in output.
+
+### Configureaza regulile de firewall
+
+Permite doar porturile necesare si blocheaza restul:
+
+```bash
+# Conexiuni stabilite deja
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
+
+# SSH (port 22)
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# HTTP (port 80)
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+
+# HTTPS (port 443)
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Dokploy (port 3000)
+sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
+
+# Blocheaza tot restul
+sudo iptables -P INPUT DROP
+```
+
+<Notice type="warning" title="Atentie la portul SSH">
+  Asigura-te ca regula pentru portul 22 e activa inainte de a seta politica DROP. Altfel ramai blocat in afara serverului.
+</Notice>
+
+### Fa regulile persistente
+
+Ca regulile sa supravietuiasca unui restart:
+
+```bash
+sudo apt install iptables-persistent -y
+sudo netfilter-persistent save
+```
+
+La instalare, selecteaza **Yes** cand te intreaba daca vrei sa salvezi regulile IPv4 si IPv6.
+
+### Comenzi utile CrowdSec
+
+```bash
+# Vezi IP-urile blocate
+sudo cscli decisions list
+
+# Alerte recente
+sudo cscli alerts list
+
+# Metrici de securitate
+sudo cscli metrics
+
+# Loguri in timp real
+sudo tail -f /var/log/crowdsec.log
+```
+
+## Instalare Dokploy
+
+Dupa ce serverul e pregatit si securizat, instalarea Dokploy e un singur pas:
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sh
+```
+
+Scriptul instaleaza Docker (daca nu e deja prezent), configureaza Traefik ca reverse proxy si porneste interfata web Dokploy.
+
+### Video mai vechi cu procesul de instalare
+
+<YouTubeEmbed
+  url="https://www.youtube.com/embed/XohTt3lh9qg"
+  label="Instalare Dokploy - tutorial complet"
+/>
+
+## Configureaza domeniul
+
+Ca sa accesezi Dokploy printr-un domeniu sau subdomeniu in loc de IP:
+
+1. Mergi la panoul DNS al furnizorului tau de domenii
+2. Creeaza o inregistrare A:
+
+```
+Type: A
+Name: app (sau ce subdomeniu vrei)
+Value: IP_VPS
+TTL: 3600
+```
+
+3. Asteapta propagarea DNS (de obicei cateva minute)
+4. Acceseaza Dokploy la `http://app.domeniultau.com:3000`
+
+## Primele aplicatii
+
+![Dokploy Dashboard](/images/blog/dokploy-app.png)
+
+Dupa instalare:
+
+1. Deschide browserul la `http://IP_VPS:3000`
+2. Creeaza contul de administrator
+3. Din dashboard poti adauga aplicatii noi, baze de date sau stive Docker Compose
+
+Dokploy suporta deploy din repository GitHub, din imagini Docker sau din Docker Compose. Conectezi repository-ul, setezi variabilele de mediu si Dokploy se ocupa de build, deploy si certificate SSL.
+
+Cateva exemple de ce poti rula:
+
+- aplicatii Next.js, Nuxt, Astro sau orice framework web
+- API-uri Node.js, Python Flask/FastAPI, Go
+- instante WordPress, Ghost, sau alte CMS-uri
+- aplicatii self-hosted: Plausible Analytics, Umami, Gitea, n8n
+- baze de date PostgreSQL, MySQL, MongoDB, Redis
+
+## Cat costa in practica
+
+Un VPS de 4 GB RAM de la Hetzner costa circa 7 euro pe luna. Pe el poti rula confortabil 3-5 aplicatii mici sau 1-2 aplicatii medii. Comparativ, acelasi setup pe Vercel Pro + baza de date gestionata ar costa 40-60 de dolari pe luna.
+
+Compromisul e ca tu te ocupi de administrarea serverului: update-uri de sistem, monitorizare, backup-uri. Daca ai experienta cu Linux sau esti dispus sa inveti, economia merita. Daca nu, exista varianta sa apelezi la cineva care sa administreze serverul pentru tine.
+
+<Accordion label="Ce resurse hardware are nevoie Dokploy?" group="faq">
+  Minimul recomandat e 1 GB RAM si 1 vCPU, dar in practica 2 GB RAM e necesarul real ca sa rulezi confortabil o aplicatie si o baza de date. Cu 4 GB RAM ai loc pentru mai multe proiecte.
+</Accordion>
+
+<Accordion label="Pot folosi Dokploy cu mai multe domenii?" group="faq">
+  Da. Fiecare aplicatie din Dokploy poate avea propriul domeniu sau subdomeniu. Traefik se ocupa automat de rutare si de certificatele SSL prin Let's Encrypt.
+</Accordion>
+
+<Accordion label="Ce se intampla daca serverul pica?" group="faq">
+  Depinde de furnizorul de VPS. Hetzner, de exemplu, are SLA de 99.9% uptime. Aplicatiile Dokploy pornesc automat la restart prin Docker. Pentru aplicatii critice, merita sa ai backup-uri automate si, ideal, un al doilea server.
+</Accordion>
+
+Daca ai nevoie de ajutor cu instalarea, configurarea sau administrarea unui server cu Dokploy, echipa BitDoze lucreaza zilnic cu aceste tehnologii.
+
+<Button
+  text="Cere o consultatie"
+  link="/contact"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>

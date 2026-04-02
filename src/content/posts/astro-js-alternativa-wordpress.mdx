@@ -1,0 +1,137 @@
+---
+title: "Astro JS: alternativa la WordPress pentru site-uri statice gazduite gratis"
+description: "De ce Astro JS inlocuieste WordPress pentru site-uri de prezentare si bloguri, si cum il poti gazdui gratuit pe Cloudflare Pages, Vercel sau Netlify."
+date: 2026-04-02
+image: "/images/blog/astro-js-alternativa-wordpress.svg"
+author: "BitDoze"
+categories:
+  - Web Design
+tags:
+  - astro
+  - wordpress
+  - hosting gratuit
+draft: false
+---
+
+Multe firme din Romania platesc lunar 10-30 de euro pe hosting pentru un site de prezentare facut in WordPress. Site-ul are 5-10 pagini, se incarca greu, primeste update-uri de plugin-uri pe care nimeni nu le face la timp si, din cand in cand, pica din cauza unei incompatibilitati. Daca ti se pare cunoscut scenariul, exista o alternativa care elimina cea mai mare parte din aceste probleme: Astro JS.
+
+## Ce este Astro JS
+
+[Astro](https://astro.build/) este un framework modern care genereaza site-uri statice. Spre deosebire de WordPress, care construieste fiecare pagina pe server la fiecare vizita, Astro genereaza fisiere HTML gata facute in momentul build-ului. Rezultatul este un site care se incarca rapid, nu are nevoie de baza de date si nu are suprafata de atac pentru hackeri.
+
+Astro suporta componente din React, Vue sau Svelte, dar nu trimite JavaScript inutil catre browser. Daca o pagina nu are elemente interactive, browser-ul primeste doar HTML si CSS. Google apreciaza asta la capitolul Core Web Vitals, iar vizitatorii apreciaza ca pagina apare instant.
+
+<Notice type="info" title="Pentru cine se potriveste">
+  Astro functioneaza cel mai bine pentru site-uri de prezentare, bloguri, landing page-uri, portofolii si documentatii. Daca ai nevoie de magazin online cu cos de cumparaturi sau de un sistem complex de utilizatori, WordPress cu WooCommerce ramane o optiune valida.
+</Notice>
+
+## De ce sa renunti la WordPress pentru un site static
+
+WordPress face multe lucruri bine, dar pentru un site de prezentare cu cateva pagini vine cu bagaj inutil:
+
+<ListCheck>
+  <ul>
+    <li>Hosting lunar platit chiar si pentru 5 pagini</li>
+    <li>Update-uri constante la WordPress core, tema si plugin-uri</li>
+    <li>Vulnerabilitati de securitate (plugin-uri neactualizate, brute force pe wp-login)</li>
+    <li>Viteza de incarcare dependenta de server, cache si optimizare</li>
+    <li>Backup-uri pe care trebuie sa le configurezi separat</li>
+  </ul>
+</ListCheck>
+
+Cu Astro, un site de prezentare de 5-10 pagini se transforma intr-un set de fisiere statice. Nu exista baza de date de corupt, nu exista login de spart, nu exista plugin-uri de actualizat. Site-ul e un folder cu fisiere HTML care se serveste de pe un CDN global.
+
+Costul de hosting? Zero. Cloudflare Pages, Vercel si Netlify ofera planuri gratuite care acopera fara probleme traficul unui site de firma sau blog.
+
+## Unde gazdesti un site Astro gratuit
+
+Cele trei platforme principale care ofera hosting gratuit pentru site-uri statice sunt Cloudflare Pages, Vercel si Netlify. Toate trei au un model similar: conectezi un repository GitHub, faci push la cod, platforma construieste si publica site-ul automat.
+
+<Tabs>
+  <Tab name="Cloudflare Pages">
+
+Cloudflare Pages ofera 500 de build-uri pe luna pe planul gratuit, bandwidth nelimitat si integrare nativa cu reteaua CDN Cloudflare, care are servere si in Bucuresti. SSL gratuit, domeniu custom suportat, redirect-uri configurabile.
+
+Este alegerea pe care o recomandam cel mai des pentru site-uri de prezentare din Romania, tocmai pentru ca CDN-ul Cloudflare are punct de prezenta local si paginile se incarca rapid pentru vizitatorii din tara.
+
+  </Tab>
+  <Tab name="Vercel">
+
+Vercel este compania din spatele framework-ului Next.js, dar suporta si Astro. Planul gratuit include 100 GB bandwidth pe luna si build-uri automate la fiecare push. Interfata e curata si deployment-ul merge fara configurare speciala.
+
+Limita principala pe planul gratuit: proiectele comerciale necesita plan Pro (20 dolari pe luna). Citeste termenii de utilizare inainte de a pune un site de firma pe Vercel gratuit.
+
+  </Tab>
+  <Tab name="Netlify">
+
+Netlify a fost printre primele platforme care au oferit hosting gratuit pentru site-uri statice. Planul gratuit include 100 GB bandwidth si 300 de minute de build pe luna. Are sistem de formulare integrat (util daca vrei un formular de contact fara backend) si un CMS optional (Netlify CMS / Decap CMS).
+
+Functioneaza bine, dar nu are servere la fel de aproape de Romania ca Cloudflare.
+
+  </Tab>
+</Tabs>
+
+## Cum arata workflow-ul practic
+
+Daca lucrezi cu WordPress, esti obisnuit sa te loghezi in wp-admin, sa editezi o pagina si sa dai Publish. Cu Astro, procesul e diferit, dar nu mai complicat odata ce il configurezi:
+
+1. Scrii continut in fisiere Markdown sau MDX (practic text cu formatare simpla)
+2. Testezi local cu `npm run dev` si vezi rezultatul in browser
+3. Faci commit si push pe GitHub
+4. Platforma de hosting (Cloudflare, Vercel sau Netlify) detecteaza modificarea si publica automat noua versiune
+
+Intregul ciclu dureaza sub un minut de la push la publicare. Nu exista cache de golit, nu exista probleme de compatibilitate intre plugin-uri si nu exista riscul sa pierzi continut din cauza unei actualizari esuate.
+
+## Ce pierzi daca renunti la WordPress
+
+Ca sa fiu corect, Astro nu inlocuieste WordPress in orice situatie:
+
+- **Editor vizual**: WordPress are Gutenberg si page buildere. Cu Astro, editezi cod sau Markdown. Daca echipa ta nu e confortabila cu asta, exista solutii intermediare (un CMS headless precum Decap CMS sau Tina CMS), dar adauga complexitate.
+- **Plugin-uri**: Formulare de contact, SEO, analytics, tot ce in WordPress rezolvi cu un plugin, in Astro trebuie integrat manual sau prin servicii externe.
+- **E-commerce**: WooCommerce functioneaza direct in WordPress. Cu Astro, un magazin online presupune integrare cu Shopify, Snipcart sau alt serviciu extern.
+- **Continut dinamic**: Comentarii, zona de membri, dashboard-uri. Astro poate face asta prin "island architecture", dar nu e la fel de simplu ca in WordPress.
+
+Pentru un site de prezentare de firma sau un blog tehnic, aceste limitari conteaza rar. Pentru un portal cu sute de utilizatori si continut dinamic, WordPress sau alt CMS traditional ramane alegerea mai practica.
+
+## Cat costa sa treci de la WordPress la Astro
+
+Daca ai deja un site WordPress simplu si vrei sa il refaci in Astro:
+
+- **Domeniu**: il pastrezi, il redirectionezi catre noua platforma (cost zero daca il ai deja)
+- **Hosting**: zero, pe Cloudflare Pages sau Netlify
+- **Dezvoltare**: aici e costul real, depinde de complexitatea site-ului
+
+Un site de prezentare cu 5-10 pagini, construit in Astro, se face intr-o zi-doua de munca. Un blog cu zeci de articole presupune si migrarea continutului, ceea ce adauga timp. Dar odata facut, costurile lunare dispar si mentenanta se reduce la minim.
+
+<Notice type="warning" title="Migrarea nu e automat">
+  Nu exista un buton magic care transforma un site WordPress in Astro. Continutul trebuie extras si reformatat, iar designul trebuie refacut. Daca ai un site complex, fa o analiza inainte sa te apuci.
+</Notice>
+
+## Cand merita sa faci trecerea
+
+Daca site-ul tau e un site de prezentare cu cateva pagini si platesti hosting lunar, trecerea la Astro e aproape sigur o decizie buna. Elimini un cost recurent, obtii viteza mai mare si scapi de grija update-urilor de securitate.
+
+Daca ai un blog cu articole in Markdown sau un portofoliu, la fel. Astro a fost gandit exact pentru tipul asta de continut.
+
+Daca ai un magazin online activ sau un site cu zone de membri, comentarii si formulare complexe, ramane de discutat. Costul de dezvoltare poate depasi economiile de hosting.
+
+<Button
+  text="Vorbeste cu echipa BitDoze"
+  link="/contact"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>
+
+<Accordion label="Pot folosi Astro fara cunostinte de programare?" group="faq">
+  Depinde ce intelegi prin "fara cunostinte". Ca sa scrii articole pe un blog Astro deja configurat, ai nevoie doar sa stii Markdown, care e foarte simplu. Ca sa configurezi site-ul de la zero, ai nevoie de cunostinte minime de HTML, CSS si linia de comanda. Daca nu esti confortabil cu asta, echipa BitDoze te poate ajuta cu setup-ul initial.
+</Accordion>
+
+<Accordion label="Astro e mai rapid decat WordPress?" group="faq">
+  In aproape toate cazurile, da. Un site Astro servit de pe Cloudflare CDN obtine scoruri de 95-100 la Google PageSpeed. Un site WordPress fara optimizare sta de obicei la 40-70. Cu cache si optimizare agresiva, WordPress ajunge la 85-95, dar necesita efort continuu de mentenanta.
+</Accordion>
+
+<Accordion label="Ce se intampla cu SEO daca trec de la WordPress la Astro?" group="faq">
+  SEO-ul depinde de continut, structura si viteza, nu de platforma in sine. Daca pastrezi URL-urile, titlurile, meta descrierile si continutul, trecerea la Astro nu afecteaza negativ SEO-ul. In multe cazuri, viteza mai mare imbunatateste pozitionarea. Redirect-urile 301 de la URL-urile vechi sunt importante daca structura se schimba.
+</Accordion>

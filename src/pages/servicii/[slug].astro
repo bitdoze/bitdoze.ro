@@ -36,10 +36,10 @@ const serviceSlug = getCollectionSlug(entry);
 
 // Get all services for related services section
 const allServices = await getCollection("servicii", ({ data }) => !data.draft);
-// Filter out current service and get 3 random ones
+// Use a deterministic order so builds and snapshots stay stable.
 const relatedServices = allServices
   .filter((service) => getCollectionSlug(service) !== serviceSlug)
-  .sort(() => Math.random() - 0.5)
+  .sort((left, right) => left.data.ordine - right.data.ordine)
   .slice(0, 3);
 
 // Format price and duration nicely for display
@@ -245,7 +245,7 @@ const {
                   Întrebări Frecvente
                 </h2>
                 <div class="space-y-6">
-                  {intrebari_frecvente.map((item, index) => (
+                  {intrebari_frecvente.map((item) => (
                     <div
                       class="faq-item p-6 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer"
                       style="background-color: var(--color-background-alt); box-shadow: var(--shadow-sm); border: 1px solid rgba(var(--color-primary-rgb), 0.1); border-radius: var(--radius-lg);"
@@ -465,7 +465,7 @@ const {
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {
-          relatedServices.map((service, index) => (
+          relatedServices.map((service) => (
             <a
               href={`/servicii/${getCollectionSlug(service)}`}
               class="service-card group h-full rounded-xl shadow-sm overflow-hidden"

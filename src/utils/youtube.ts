@@ -1,6 +1,6 @@
-const PLACEHOLDER_THUMBNAIL = "/images/youtube-placeholder.jpg";
+const PLACEHOLDER_THUMBNAIL = "/images/youtube-placeholder.svg";
 const YOUTUBE_EMBED_BASE = "https://www.youtube.com/embed/";
-const VALID_ID_PATTERN = /^[\\w-]{11}$/;
+const VALID_ID_PATTERN = /^[\w-]{11}$/;
 const KNOWN_PREFIXES = ["www.", "m.", "music.", "gaming."];
 const YOUTUBE_THUMB_BASE = "https://i3.ytimg.com/vi/";
 const DEFAULT_THUMBNAIL = "hqdefault.jpg";
@@ -21,9 +21,12 @@ function sanitizeVideoId(id: string | null): string | null {
 
 export function extractYoutubeVideoId(rawUrl: string): string | null {
   if (!rawUrl) return null;
+  const normalizedInput = rawUrl.trim();
+  const directId = sanitizeVideoId(normalizedInput);
+  if (directId) return directId;
 
   try {
-    const url = new URL(rawUrl);
+    const url = new URL(normalizedInput);
     const host = normalizeHost(url.hostname);
 
     if (host === "youtu.be") {

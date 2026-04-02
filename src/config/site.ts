@@ -19,8 +19,8 @@ export const siteConfig: SiteConfig = {
   name: "BitDoze",
   description:
     "Servicii profesionale de web design, hosting și consultanță IT pentru afacerea ta.",
-  url: "https://bitdoze.ro",
-  ogImage: "/images/og-image.jpg",
+  url: "https://www.bitdoze.ro",
+  ogImage: "/images/og-image.svg",
   links: {
     linkedin: "https://linkedin.com/company/bitdoze",
     facebook: "https://facebook.com/bitdoze",
