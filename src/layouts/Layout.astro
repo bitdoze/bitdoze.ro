@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "../styles/portfolio.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 import MetaTags from "../components/seo/MetaTags.astro";
 import StructuredData from "../components/seo/StructuredData.astro";
 import { siteConfig } from "../config/site";
@@ -88,6 +89,7 @@ const {
       </main>
       <Footer />
     </div>
+    <CookieConsent />
     <script src="/src/scripts/animations.js"></script>
     <style>
       /* Reset and base layout */

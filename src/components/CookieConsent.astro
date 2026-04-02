@@ -1,0 +1,492 @@
+---
+const cookiePolicyHref = "/politica-de-cookies";
+---
+
+<div
+  class="cookie-consent"
+  data-cookie-consent
+  data-policy-href={cookiePolicyHref}
+  hidden
+>
+  <button
+    type="button"
+    class="cookie-consent__manage"
+    data-cookie-manage
+    hidden
+    aria-label="Deschide setările cookie-urilor"
+  >
+    Cookie-uri
+  </button>
+
+  <section
+    class="cookie-consent__panel"
+    data-cookie-panel
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="cookie-consent-title"
+    hidden
+  >
+    <div class="cookie-consent__header">
+      <p class="cookie-consent__eyebrow">Confidențialitate</p>
+      <h2 id="cookie-consent-title">Setări cookie-uri</h2>
+      <button
+        type="button"
+        class="cookie-consent__close"
+        data-cookie-close
+        aria-label="Închide setările cookie-urilor"
+      >
+        ×
+      </button>
+    </div>
+
+    <p class="cookie-consent__intro">
+      Folosim doar ce este necesar pentru funcționare și, opțional, analitice
+      pentru a înțelege cum este folosit site-ul. Puteți activa sau dezactiva
+      categoriile opționale oricând.
+    </p>
+
+    <div class="cookie-consent__options">
+      <label class="cookie-consent__option cookie-consent__option--locked">
+        <span>
+          <strong>Necesare</strong>
+          <small>Funcționare site, securitate, preferințe esențiale.</small>
+        </span>
+        <input type="checkbox" checked disabled />
+      </label>
+
+      <label class="cookie-consent__option">
+        <span>
+          <strong>Analitice</strong>
+          <small>Plausible Analytics fără încărcare înainte de consimțământ.</small>
+        </span>
+        <input type="checkbox" data-consent-toggle="analytics" />
+      </label>
+
+      <label class="cookie-consent__option">
+        <span>
+          <strong>Marketing</strong>
+          <small>Momentan nu este activ pe site, rămâne dezactivat implicit.</small>
+        </span>
+        <input type="checkbox" data-consent-toggle="marketing" />
+      </label>
+    </div>
+
+    <div class="cookie-consent__actions">
+      <button type="button" class="btn btn-secondary btn-sm" data-consent-essential>
+        Doar necesare
+      </button>
+      <button type="button" class="btn btn-secondary btn-sm" data-consent-save>
+        Salvează
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" data-consent-accept>
+        Acceptă selectate
+      </button>
+    </div>
+
+    <p class="cookie-consent__legal">
+      Detalii complete în
+      <a href={cookiePolicyHref}>Politica de Cookie-uri</a>.
+    </p>
+  </section>
+</div>
+
+<script is:inline>
+  (() => {
+    const STORAGE_KEY = "bitdoze_cookie_consent";
+    const COOKIE_NAME = "cookie_consent";
+    const CONSENT_VERSION = "2026-04-02";
+    const PLAUSIBLE_SRC = "https://an3.bitdoze.com/js/pa-oW1swol4hB3VYvnRZjV1I.js";
+    const DEFAULT_CONSENT = {
+      version: CONSENT_VERSION,
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      updatedAt: "",
+    };
+
+    const root = document.querySelector("[data-cookie-consent]");
+    if (!root) return;
+
+    const panel = root.querySelector("[data-cookie-panel]");
+    const manageButton = root.querySelector("[data-cookie-manage]");
+    const closeButton = root.querySelector("[data-cookie-close]");
+    const analyticsToggle = root.querySelector('[data-consent-toggle="analytics"]');
+    const marketingToggle = root.querySelector('[data-consent-toggle="marketing"]');
+    const acceptButton = root.querySelector("[data-consent-accept]");
+    const saveButton = root.querySelector("[data-consent-save]");
+    const essentialButton = root.querySelector("[data-consent-essential]");
+    const externalOpeners = document.querySelectorAll("[data-open-cookie-settings]");
+    const policyHref = root.getAttribute("data-policy-href") || "/politica-de-cookies";
+
+    const serializeConsent = (consent) => encodeURIComponent(JSON.stringify(consent));
+    const persistConsent = (consent) => {
+      const nextConsent = {
+        ...DEFAULT_CONSENT,
+        ...consent,
+        necessary: true,
+        version: CONSENT_VERSION,
+        updatedAt: new Date().toISOString(),
+      };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(nextConsent));
+      document.cookie = `${COOKIE_NAME}=${serializeConsent(nextConsent)}; Max-Age=31536000; Path=/; SameSite=Lax; Secure`;
+      return nextConsent;
+    };
+
+    const readConsent = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (parsed.version !== CONSENT_VERSION) return null;
+        return { ...DEFAULT_CONSENT, ...parsed, necessary: true };
+      } catch {
+        return null;
+      }
+    };
+
+    const syncToggles = (consent) => {
+      if (analyticsToggle instanceof HTMLInputElement) {
+        analyticsToggle.checked = Boolean(consent.analytics);
+      }
+      if (marketingToggle instanceof HTMLInputElement) {
+        marketingToggle.checked = Boolean(consent.marketing);
+      }
+    };
+
+    const showPanel = () => {
+      root.hidden = false;
+      panel?.removeAttribute("hidden");
+      manageButton?.removeAttribute("hidden");
+    };
+
+    const hidePanel = () => {
+      panel?.setAttribute("hidden", "");
+      root.hidden = false;
+      manageButton?.removeAttribute("hidden");
+    };
+
+    const showInitialBanner = () => {
+      root.hidden = false;
+      panel?.removeAttribute("hidden");
+      manageButton?.setAttribute("hidden", "");
+    };
+
+    const loadPlausible = () => {
+      if (document.querySelector('script[data-plausible-loaded="true"]')) return;
+      const script = document.createElement("script");
+      script.src = PLAUSIBLE_SRC;
+      script.async = true;
+      script.defer = true;
+      script.dataset.plausibleLoaded = "true";
+      document.head.appendChild(script);
+    };
+
+    window.plausible =
+      window.plausible ||
+      function () {
+        (window.plausible.q = window.plausible.q || []).push(arguments);
+      };
+
+    window.__bitdozeCookieConsent = {
+      get: () => readConsent() || { ...DEFAULT_CONSENT },
+      open: () => {
+        const consent = readConsent() || { ...DEFAULT_CONSENT };
+        syncToggles(consent);
+        showPanel();
+      },
+      has: (category) => {
+        const consent = readConsent() || { ...DEFAULT_CONSENT };
+        return Boolean(consent[category]);
+      },
+    };
+
+    const emitConsentEvent = (consent) => {
+      document.dispatchEvent(
+        new CustomEvent("bitdoze:cookie-consent-changed", {
+          detail: consent,
+        }),
+      );
+    };
+
+    const applyConsent = (consent) => {
+      syncToggles(consent);
+
+      if (consent.analytics) {
+        loadPlausible();
+      }
+
+      emitConsentEvent(consent);
+      hidePanel();
+    };
+
+    const buildConsentFromToggles = () => ({
+      analytics:
+        analyticsToggle instanceof HTMLInputElement ? analyticsToggle.checked : false,
+      marketing:
+        marketingToggle instanceof HTMLInputElement ? marketingToggle.checked : false,
+    });
+
+    acceptButton?.addEventListener("click", () => {
+      applyConsent(persistConsent(buildConsentFromToggles()));
+    });
+
+    saveButton?.addEventListener("click", () => {
+      applyConsent(persistConsent(buildConsentFromToggles()));
+    });
+
+    essentialButton?.addEventListener("click", () => {
+      if (analyticsToggle instanceof HTMLInputElement) analyticsToggle.checked = false;
+      if (marketingToggle instanceof HTMLInputElement) marketingToggle.checked = false;
+      applyConsent(
+        persistConsent({
+          analytics: false,
+          marketing: false,
+        }),
+      );
+    });
+
+    manageButton?.addEventListener("click", () => {
+      const consent = readConsent() || { ...DEFAULT_CONSENT };
+      syncToggles(consent);
+      showPanel();
+    });
+
+    closeButton?.addEventListener("click", () => {
+      const consent = readConsent();
+      if (consent) {
+        hidePanel();
+      } else {
+        showInitialBanner();
+      }
+    });
+
+    externalOpeners.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const consent = readConsent() || { ...DEFAULT_CONSENT };
+        syncToggles(consent);
+        showPanel();
+      });
+    });
+
+    const initialConsent = readConsent();
+    root.hidden = false;
+
+    if (initialConsent) {
+      applyConsent(initialConsent);
+    } else {
+      syncToggles(DEFAULT_CONSENT);
+      showInitialBanner();
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && panel && !panel.hasAttribute("hidden")) {
+        const consent = readConsent();
+        if (consent) {
+          hidePanel();
+        }
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLAnchorElement)) return;
+
+      if (target.getAttribute("href") === policyHref) {
+        hidePanel();
+      }
+    });
+  })();
+</script>
+
+<style>
+  .cookie-consent {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 90;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  .cookie-consent__manage,
+  .cookie-consent__panel {
+    pointer-events: auto;
+  }
+
+  .cookie-consent__manage {
+    border: 1px solid rgba(var(--color-primary-rgb), 0.22);
+    background: rgba(var(--color-background-rgb), 0.92);
+    color: var(--color-text);
+    border-radius: 999px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+    backdrop-filter: blur(14px);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .cookie-consent__panel {
+    width: min(24rem, calc(100vw - 2rem));
+    border-radius: 1.25rem;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.14);
+    background:
+      linear-gradient(180deg, rgba(var(--color-background-rgb), 0.98), rgba(var(--color-background-alt-rgb), 0.96));
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+    padding: 1rem;
+    backdrop-filter: blur(18px);
+  }
+
+  .cookie-consent__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .cookie-consent__eyebrow {
+    margin: 0 0 0.35rem;
+    color: var(--color-primary);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cookie-consent__header h2 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .cookie-consent__close {
+    border: 0;
+    background: transparent;
+    color: var(--color-text-light);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .cookie-consent__intro,
+  .cookie-consent__legal {
+    margin: 0.85rem 0 0;
+    color: var(--color-text-light);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .cookie-consent__legal a {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .cookie-consent__options {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .cookie-consent__option {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 1rem;
+    padding: 0.9rem 1rem;
+    background: rgba(var(--color-background-rgb), 0.88);
+    border: 1px solid rgba(var(--color-text-rgb), 0.08);
+  }
+
+  .cookie-consent__option strong {
+    display: block;
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+
+  .cookie-consent__option small {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--color-text-light);
+    line-height: 1.45;
+  }
+
+  .cookie-consent__option input {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.15rem;
+    accent-color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .cookie-consent__option--locked {
+    border-color: rgba(var(--color-success-rgb), 0.18);
+    background: rgba(var(--color-success-rgb), 0.07);
+  }
+
+  .cookie-consent__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .cookie-consent__actions .btn {
+    flex: 1 1 10rem;
+  }
+
+  :global(.dark) .cookie-consent__manage {
+    background: rgba(var(--color-dark-background-alt-rgb), 0.9);
+    color: var(--color-dark-text);
+    border-color: rgba(var(--color-primary-rgb), 0.35);
+    box-shadow: 0 18px 40px rgba(2, 6, 23, 0.45);
+  }
+
+  :global(.dark) .cookie-consent__panel {
+    background:
+      linear-gradient(180deg, rgba(var(--color-dark-background-alt-rgb), 0.97), rgba(var(--color-dark-background-rgb), 0.96));
+    border-color: rgba(var(--color-primary-rgb), 0.22);
+    box-shadow: 0 24px 60px rgba(2, 6, 23, 0.48);
+  }
+
+  :global(.dark) .cookie-consent__header h2,
+  :global(.dark) .cookie-consent__option strong {
+    color: var(--color-dark-text);
+  }
+
+  :global(.dark) .cookie-consent__close,
+  :global(.dark) .cookie-consent__intro,
+  :global(.dark) .cookie-consent__legal,
+  :global(.dark) .cookie-consent__option small {
+    color: var(--color-dark-text-light);
+  }
+
+  :global(.dark) .cookie-consent__option {
+    background: rgba(var(--color-dark-background-alt-rgb), 0.92);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :global(.dark) .cookie-consent__option--locked {
+    background: rgba(var(--color-success-rgb), 0.12);
+    border-color: rgba(var(--color-success-rgb), 0.22);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-consent {
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.75rem;
+    }
+
+    .cookie-consent__panel {
+      width: 100%;
+    }
+
+    .cookie-consent__actions .btn {
+      flex-basis: 100%;
+    }
+  }
+</style>
