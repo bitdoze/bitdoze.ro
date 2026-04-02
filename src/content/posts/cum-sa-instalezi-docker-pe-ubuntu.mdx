@@ -1,0 +1,309 @@
+---
+title: "Cum sa instalezi Docker pe Ubuntu"
+description: "Ghid pas cu pas pentru instalarea Docker pe Ubuntu, cu configurare firewall UFW, securitate si comenzi utile pentru administrare."
+date: 2026-04-02
+image: "/images/blog/cum-sa-instalezi-docker-pe-ubuntu.svg"
+author: "BitDoze"
+categories:
+  - Hosting
+tags:
+  - docker
+  - ubuntu
+  - server
+draft: false
+---
+
+Daca ai un VPS sau un server dedicat cu Ubuntu si vrei sa rulezi aplicatii in containere, Docker este alegerea directa. Problema e ca instalarea "clasica" prin repository-ul oficial are vreo zece pasi si presupune sa adaugi chei GPG, sa configurezi surse APT si sa te asiguri ca totul e corect. Exista o cale mai scurta.
+
+In ghidul asta parcurgem instalarea Docker pe Ubuntu folosind scriptul oficial, configurarea firewall-ului UFW (pentru ca Docker si UFW nu se inteleg din prima), adaugarea utilizatorului in grupul `docker` si cateva verificari de securitate pe care merita sa le faci inainte sa pui ceva in productie.
+
+<Notice type="info" title="Versiuni testate">
+  Pasii de mai jos functioneaza pe Ubuntu 22.04 LTS si Ubuntu 24.04 LTS. Scriptul oficial suporta si alte distributii bazate pe Debian, dar recomandarile de firewall sunt specifice UFW.
+</Notice>
+
+## Ce ai nevoie inainte sa incepi
+
+<ListCheck>
+  <ul>
+    <li>Un server sau VPS cu Ubuntu 22.04 sau 24.04</li>
+    <li>Acces SSH cu un utilizator care are drepturi sudo</li>
+    <li>Conexiune la internet pe server</li>
+    <li>Minim 1 GB RAM (2 GB recomandat daca rulezi mai multe containere)</li>
+  </ul>
+</ListCheck>
+
+Daca ai deja o versiune veche de Docker instalata din repository-ul Ubuntu (pachetul `docker.io`), dezinstaleaz-o ca sa nu apara conflicte:
+
+```bash
+sudo apt remove docker docker.io containerd runc -y
+```
+
+## Instalarea Docker cu scriptul oficial
+
+Cea mai rapida metoda este scriptul de la get.docker.com. Descarca si ruleaza ultima versiune de Docker Engine, CLI si containerd:
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+```
+
+Scriptul detecteaza automat distributia si versiunea, adauga repository-ul oficial Docker si instaleaza pachetele necesare. Dureaza de obicei sub un minut pe o conexiune decenta.
+
+Dupa ce se termina, verifica instalarea:
+
+```bash
+docker --version
+```
+
+Ar trebui sa vezi ceva de genul `Docker version 27.x.x`. Ca sa testezi ca totul merge end-to-end:
+
+```bash
+sudo docker run hello-world
+```
+
+Daca primesti mesajul "Hello from Docker!", instalarea e completa.
+
+<Notice type="warning" title="Atentie la productie">
+  Scriptul de la get.docker.com este recomandat pentru medii de test si dezvoltare. Pentru servere de productie, Docker sugereaza instalarea manuala prin repository, ca sa ai control deplin asupra versiunilor. In practica, multi il folosesc si in productie fara probleme, dar trebuie sa stii ce faci cand vine vorba de update-uri.
+</Notice>
+
+## Adaugarea utilizatorului in grupul docker
+
+Implicit, Docker cere `sudo` pentru fiecare comanda. Ca sa eviti asta, adauga-ti utilizatorul in grupul `docker`:
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Dupa comanda asta, deconecteaza-te si reconecteaza-te la SSH (sau ruleaza `newgrp docker`) ca sa se aplice permisiunile. Testeaza fara sudo:
+
+```bash
+docker ps
+```
+
+Daca nu primesti eroare de permisiuni, esti gata.
+
+<Notice type="info" title="Nota de securitate">
+  Accesul la grupul `docker` este echivalent cu acces root pe masina. Nu adauga utilizatori in care nu ai incredere.
+</Notice>
+
+## Configurarea firewall-ului UFW pentru Docker
+
+Aici multi se impiedica. Docker manipuleaza direct regulile iptables si, implicit, ocoleste UFW. Asta inseamna ca porturile expuse prin `docker run -p` sunt accesibile din exterior chiar daca UFW le blocheaza.
+
+### Verificarea problemei
+
+Poti testa rapid. Porneste un container cu un port expus:
+
+```bash
+docker run -d -p 8080:80 nginx
+```
+
+Apoi verifica daca portul 8080 e accesibil din exterior (de pe alt calculator):
+
+```bash
+curl http://IP-UL-TAU:8080
+```
+
+Daca primesti raspuns de la Nginx desi UFW blocheaza portul 8080, ai confirmat problema.
+
+### Solutia: dezactiveaza manipularea iptables de catre Docker
+
+Creeaza sau editeaza fisierul `/etc/docker/daemon.json`:
+
+```bash
+sudo nano /etc/docker/daemon.json
+```
+
+Adauga aceasta configurare:
+
+```json
+{
+  "iptables": false
+}
+```
+
+Restarteaza Docker:
+
+```bash
+sudo systemctl restart docker
+```
+
+Dupa aceasta modificare, Docker nu mai creeaza reguli iptables automat. Porturile containerelor nu mai sunt expuse direct in exterior, iar UFW preia controlul complet.
+
+### Reguli UFW de care ai nevoie
+
+Dupa dezactivarea manipularii iptables, trebuie sa deschizi manual porturile necesare in UFW:
+
+```bash
+# SSH (obligatoriu, altfel pierzi accesul)
+sudo ufw allow 22/tcp
+
+# HTTP si HTTPS (daca ai containere web)
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Activeaza UFW daca nu este deja activ
+sudo ufw enable
+
+# Verifica regulile
+sudo ufw status verbose
+```
+
+<Notice type="warning" title="Nu uita de SSH">
+  Inainte sa activezi UFW, asigura-te ca ai regula pentru portul SSH (implicit 22). Altfel ramai blocat in afara serverului.
+</Notice>
+
+### Alternativa: limiteaza binding-ul la localhost
+
+Daca nu vrei sa dezactivezi iptables complet, poti lega containerele doar la interfata locala. In loc de `-p 8080:80`, foloseste:
+
+```bash
+docker run -d -p 127.0.0.1:8080:80 nginx
+```
+
+Asa, portul 8080 raspunde doar pe localhost. Traficul extern trece prin reverse proxy (Nginx, Caddy, Traefik) unde controlezi tu accesul.
+
+## Instalarea Docker Compose
+
+Docker Compose vine inclus in versiunile recente ca plugin. Verifica daca il ai deja:
+
+```bash
+docker compose version
+```
+
+Daca comanda merge, ai Docker Compose v2 instalat ca plugin. Daca nu, instaleaza-l manual:
+
+```bash
+sudo apt install docker-compose-plugin -y
+```
+
+Testeaza din nou:
+
+```bash
+docker compose version
+```
+
+## Verificari de securitate post-instalare
+
+Dupa ce ai Docker functional, merita sa parcurgi cateva verificari:
+
+<Tabs>
+  <Tab name="Permisiuni">
+
+Verifica cine are acces la socket-ul Docker:
+
+```bash
+ls -la /var/run/docker.sock
+```
+
+Ar trebui sa apartina grupului `docker`. Daca ai utilizatori pe server care nu ar trebui sa aiba acces root, nu-i adauga in acest grup.
+
+  </Tab>
+  <Tab name="Retea">
+
+Verifica ce porturi sunt deschise efectiv:
+
+```bash
+sudo ss -tlnp | grep docker
+```
+
+Compara cu regulile UFW:
+
+```bash
+sudo ufw status numbered
+```
+
+Daca vezi porturi expuse de Docker care nu apar in UFW, revino la sectiunea de firewall.
+
+  </Tab>
+  <Tab name="Update-uri">
+
+Docker nu se actualizeaza automat. Verifica periodic daca ai ultima versiune:
+
+```bash
+sudo apt update && apt list --upgradable 2>/dev/null | grep docker
+```
+
+Sau configureaza `unattended-upgrades` sa includa si repository-ul Docker.
+
+  </Tab>
+</Tabs>
+
+## Comenzi utile de zi cu zi
+
+Un mic cheat sheet ca sa nu cauti de fiecare data:
+
+```bash
+# Vezi containerele active
+docker ps
+
+# Vezi toate containerele (inclusiv oprite)
+docker ps -a
+
+# Opreste un container
+docker stop <container_id>
+
+# Sterge containerele oprite
+docker container prune
+
+# Sterge imaginile nefolosite
+docker image prune -a
+
+# Vezi cat spatiu ocupa Docker
+docker system df
+
+# Curatare completa (containere oprite, imagini, volume, retele nefolosite)
+docker system prune -a --volumes
+```
+
+<Notice type="info" title="Spatiu pe disc">
+  Docker acumuleaza imagini si volume in timp. Pe un VPS cu 20-40 GB, ruleaza `docker system df` lunar si curata ce nu mai folosesti. O imagine nefolosita poate avea si 1-2 GB.
+</Notice>
+
+## Configurarea Docker sa porneasca la boot
+
+Docker ar trebui sa porneasca automat dupa instalarea prin scriptul oficial, dar merita verificat:
+
+```bash
+sudo systemctl is-enabled docker
+```
+
+Daca raspunsul nu este `enabled`:
+
+```bash
+sudo systemctl enable docker
+sudo systemctl enable containerd
+```
+
+## Ce urmeaza dupa instalare
+
+Odata ce ai Docker functional si firewall-ul configurat, poti:
+
+- rula aplicatii web in containere (WordPress, Ghost, aplicatii Node.js)
+- configura un reverse proxy cu Traefik sau Nginx Proxy Manager
+- folosi Docker Compose pentru stive multi-container
+- automatiza deployment-ul cu CI/CD
+
+Daca ai nevoie de ajutor cu configurarea serverului, containere Docker sau administrare VPS, echipa BitDoze lucreaza cu aceste tehnologii zilnic.
+
+<Button
+  text="Cere o consultatie"
+  link="/contact"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>
+
+<Accordion label="Docker Desktop vs Docker Engine: care e diferenta?" group="faq">
+  Docker Desktop este aplicatia cu interfata grafica pentru Windows si macOS, care include si o masina virtuala Linux in spate. Docker Engine este varianta CLI pentru servere Linux, fara interfata grafica. Pe un VPS cu Ubuntu, instalezi Docker Engine, nu Docker Desktop.
+</Accordion>
+
+<Accordion label="Pot folosi Docker pe un VPS cu 512 MB RAM?" group="faq">
+  Tehnic da, dar nu e practic. Docker Engine ocupa cam 100-200 MB RAM la repaus, iar fiecare container adauga la consum. Cu 512 MB ai loc pentru un container mic si atat. Recomandarea minima e 1 GB, iar 2 GB iti ofera confort real.
+</Accordion>
+
+<Accordion label="Scriptul get-docker.sh e sigur?" group="faq">
+  Scriptul este mentinut oficial de Docker Inc. si descarca pachetele din repository-ul lor. Poti citi codul sursa inainte sa-l rulezi cu `cat get-docker.sh`. Riscul principal e ca rulezi un script de pe internet cu drepturi root, asa ca verifica intotdeauna sursa.
+</Accordion>
