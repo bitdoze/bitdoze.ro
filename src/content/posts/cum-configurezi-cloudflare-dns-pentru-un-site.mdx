@@ -1,0 +1,212 @@
+---
+title: "Cum configurezi Cloudflare DNS pentru un site"
+description: "Ghid complet de configurare DNS in Cloudflare: inregistrari A, AAAA, CNAME, MX, NS si cum le leaghi de domeniul tau si de hosting."
+date: 2026-04-02
+image: "/images/blog/cum-configurezi-cloudflare-dns-pentru-un-site.svg"
+author: "BitDoze"
+categories:
+  - Hosting
+tags:
+  - cloudflare
+  - dns
+  - domeniu
+draft: false
+---
+
+Ai cumparat un domeniu, ai hostingul pregatit, dar site-ul nu apare in browser. In 90% din cazuri, problema e la DNS. Cloudflare este cel mai popular manager DNS gratuit si e o alegere buna, dar interfata lui are destule optiuni incat sa te pierzi daca nu stii ce cauti.
+
+In ghidul asta trecem prin fiecare tip de inregistrare DNS pe care o folosesti in practica, cum le adaugi in Cloudflare si la ce trebuie sa fii atent ca totul sa functioneze corect.
+
+<Notice type="info" title="Ce presupune ghidul">
+  Ai deja un domeniu adaugat in contul Cloudflare. Daca nu, primul pas e sa-ti adaugi domeniul si sa schimbi nameserver-urile la registrator (unde ai cumparat domeniul). Cloudflare iti arata exact ce nameservere sa setezi in momentul in care adaugi domeniul.
+</Notice>
+
+## Ce inseamna DNS pe scurt
+
+DNS-ul e sistemul care traduce un nume de domeniu (ex: `bitdoze.ro`) intr-o adresa IP (ex: `104.21.35.187`). Fara el, browserul nu stie unde sa trimita cererea.
+
+Cloudflare tine o tabela cu aceste traduceri. Tu adaugi inregistrari, iar Cloudflare raspunde la intrebarile DNS ale vizitatorilor tai. Daca tabela e gresita, site-ul nu se incarca.
+
+## Inregistrarea A: adreseaza domeniul catre un IP
+
+Inregistrarea A pointeaza un subdomeniu (sau domeniul principal) catre o adresa IP versiunea 4. Asta e cea mai comuna inregistrare si singura de care ai nevoie pentru un site gazduit pe un VPS sau un server dedicat.
+
+In Cloudflare, merge la **DNS > Records > Add record** si completeaza:
+
+| Camp | Valoare |
+|------|---------|
+| Type | A |
+| Name | `@` (pentru domeniul principal) sau subdomeniu |
+| IPv4 address | IP-ul serverului tau |
+| Proxy status | Proxied (portocaliu) sau DNS only (gri) |
+
+<Notice type="warning" title="Proxied vs DNS only">
+  Cand e setat pe **Proxied** (portocaliu), traficul trece prin Cloudflare. Primesti CDN, SSL gratuit si protectie DDoS, dar IP-ul vizitatorilor va fi unul Cloudflare, nu al tau. Cand e **DNS only** (gri), Cloudflare doar traduce numele, fara sa intercepteze traficul. Foloseste DNS only daca ai nevoie de IP-ul real al vizitatorului sau daca serviciul tau nu functioneaza prin proxy.
+</Notice>
+
+Daca hostingul ti-a dat un IP IPv6, adauga si o inregistrare AAAA similara cu IPv6 address in loc de IPv4.
+
+## Inregistrarea CNAME: alias intre subdomenii
+
+CNAME pointeaza un subdomeniu catre alt nume de domeniu, nu catre un IP. Se foloseste cand vrei ca mai multe subdomenii sa duca la acelasi loc.
+
+Exemple practice:
+
+| Name | Target | Ce face |
+|------|--------|---------|
+| `www` | `bitdoze.ro` | www.bitdoze.ro duce la domeniul principal |
+| `blog` | `bitdoze.ro` | blog.bitdoze.ro duce la acelasi site |
+| `app` | `nume-app.fly.dev` | app.bitdoze.ro duce la o aplicatie pe Fly.io |
+
+<Notice type="info" title="Limitare CNAME">
+  Nu poti pune un CNAME pe domeniul principal (`@`) daca ai si alte inregistrari (MX, TXT) pe acelasi domeniu. Pentru domeniu principal, foloseste o inregistrare A. CNAME merge bine pe subdomenii.
+</Notice>
+
+## Inregistrarea MX: email-ul
+
+Daca folosesti Google Workspace, Zoho Mail, Microsoft 365 sau orice alt serviciu de email personalizat, ai nevoie de inregistrari MX. Fara ele, nu primesti emailuri pe adresele de tip `contact@domeniul-tau.ro`.
+
+De exemplu, pentru Google Workspace:
+
+| Type | Name | Mail server | Priority |
+|------|------|-------------|----------|
+| MX | `@` | `ASPMX.L.GOOGLE.COM` | 1 |
+| MX | `@` | `ALT1.ASPMX.L.GOOGLE.COM` | 5 |
+| MX | `@` | `ALT2.ASPMX.L.GOOGLE.COM` | 5 |
+| MX | `@` | `ALT3.ASPMX.L.GOOGLE.COM` | 10 |
+| MX | `@` | `ALT4.ASPMX.L.GOOGLE.COM` | 10 |
+
+<Notice type="warning" title="Emailul si proxy-ul Cloudflare">
+  Cloudflare nu proxifica traficul de email. Inregistrarile MX vor fi mereu setate pe DNS only (gri), nu pe Proxied. Asigura-te ca nu le-activezi proxy-ul, ca nu vor functiona.
+</Notice>
+
+Fiecare furnizor de email iti da lista exacta de servere si prioritati. Copy-paste, nu inventa.
+
+## Inregistrarea TXT: verificare si SPF
+
+TXT tine text liber asociat cu domeniul. Se foloseste la mai multe lucruri:
+
+- **Verificarea proprietatii** Google Search Console, Office 365, Cloudflare, etc
+- **SPF (Sender Policy Framework)** spune care servere au voie sa trimita email in numele domeniului
+- **DKIM** semnatura digitala pentru emailuri
+
+Exemplu de inregistrare SPF pentru Google Workspace:
+
+| Type | Name | Content |
+|------|------|---------|
+| TXT | `@` | `v=spf1 include:_spf.google.com ~all` |
+
+<Notice type="info" title="De ce conteaza SPF">
+  Fara SPF, emailurile trimise din numele domeniului tau pot ajunge in spam sau pot fi respinse. E o configurare simpla care face o diferenta mare la livrarea emailurilor.
+</Notice>
+
+## Inregistrarea NS: nameserver-urile
+
+Acestea le setezi la registratorul domeniului (unde l-ai cumparat), nu in Cloudflare. Cloudflare ti le arata in **Dashboard > Domain Registration > Nameservers** (sau la adaugarea domeniului).
+
+De obicei arata asa:
+- `elsa.ns.cloudflare.com`
+- `ian.ns.cloudflare.com`
+
+Dupa ce le schimbi la registrator, propagarea dureaza intre cateva minute si 24 de ore. Pana atunci, DNS-ul poate raspunde inconsistent.
+
+## Setup complet: de la zero la site functional
+
+Urmeaza acesti pasi in ordine:
+
+<ListCheck>
+  <ul>
+    <li>Adauga domeniul in Cloudflare si schimba nameserver-urile la registrator</li>
+    <li>Asteapta propagarea (verifica cu `dig ns domeniultau.ro`)</li>
+    <li>Adauga inregistrarea A cu IP-ul serverului, setata pe Proxied</li>
+    <li>Daca ai IPv6, adauga si inregistrarea AAAA</li>
+    <li>Adauga CNAME pentru www catre domeniul principal</li>
+    <li>Daca folosesti email, adauga inregistrarile MX de la furnizor</li>
+    <li>Adauga TXT pentru SPF si verificari de proprietate</li>
+    <li>Activeaza SSL in Cloudflare (seteaza pe Full sau Full Strict)</li>
+  </ul>
+</ListCheck>
+
+## SSL: ce setezi in Cloudflare
+
+Dupa ce DNS-ul e corect, seteaza SSL-ul. Merge la **SSL/TLS > Overview** si alege:
+
+<Tabs>
+  <Tab name="Full (Strict)">
+
+Recomandat daca ai un certificat SSL instalat pe server. Cloudflare verifica ca serverul tau are SSL valid. E cea mai sigura optiune si o alegi daca ai Nginx/Caddy cu Let's Encrypt sau un certificat propriu.
+
+  </Tab>
+  <Tab name="Full">
+
+Foloseste-l daca ai SSL pe server dar certificatul e self-signed sau expirat. Cloudflare face conexiune cu vizitatorul peste HTTPS, dar nu verifica validitatea certificatului de pe server. Mai putin sigur, dar merge in cazuri de urgenta.
+
+  </Tab>
+  <Tab name="Flexible">
+
+Cloudflare face HTTPS cu vizitatorul, dar HTTP cu serverul tau. Nu-l folosi decat daca nu ai absolut niciun SSL pe server si nu-l poti instala. Expune traficul intre Cloudflare si server fara criptare.
+
+  </Tab>
+</Tabs>
+
+<Notice type="info" title="SSL cu Caddy">
+  Daca folosesti Caddy ca reverse proxy, obtine automat certificat Let's Encrypt. In Cloudflare seteaza Full (Strict) si DNS pe Proxied. E cea mai simpla configurare posibila.
+</Notice>
+
+## Cum verifici ca DNS-ul e corect
+
+Dupa ce ai facut configurarea, foloseste aceste comenzi pentru a verifica:
+
+```bash
+# Verifica inregistrarea A
+dig domeniultau.ro +short
+
+# Verifica www (ar trebui sa fie CNAME)
+dig www.domeniultau.ro +short
+
+# Verifica MX
+dig domeniultau.ro MX +short
+
+# Verifica SPF
+dig domeniultau.ro TXT +short
+```
+
+Daca `dig` nu e instalat, poti folosi [dnschecker.org](https://dnschecker.org) sau tool-ul din Cloudflare: **DNS > Diagnostics**.
+
+Daca ai setat Proxy pe portocaliu si raspunsul la `dig` e o adresa Cloudflare (nu IP-ul tau), inseamna ca proxy-ul functioneaza corect.
+
+## Greseala frecventa: nu te grabi cu propagarea
+
+DNS-ul nu se propaga instantaneu. Dupa ce adaugi sau modifici o inregistrare in Cloudflare:
+
+- Cloudflare aplica schimbarea in cateva secunde
+- dar providerii DNS intermediari si browserele au cache-uri proprii
+
+Daca site-ul nu apare imediat dupa configurare, nu schimba din nou DNS-ul. Asteapta cateva minute si verifica dintr-un browser in mod incognito sau cu un alt device.
+
+## Ce urmeaza dupa configurarea DNS
+
+Cu DNS-ul si SSL-ul configurate corect, ai fundatia tehnica pregatita. De aici incolo te concentrezi pe ce conteaza: continutul, viteza site-ului si SEO-ul.
+
+Daca configurarea DNS ti se pare complicata sau vrei sa te asiguri ca totul e setat corect, la BitDoze facem asta zilnic pentru clientii nostri.
+
+<Button
+  text="Vezi serviciile BitDoze"
+  link="/servicii"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>
+
+<Accordion label="TTL-ul in Cloudflare: la ce se refera?" group="faq">
+TTL (Time To Live) spune cat timp un server DNS poate tine in cache raspunsul tau. In Cloudflare, cand ai proxy-ul activat, TTL-ul e gestionat automat de Cloudflare. Daca ai DNS only, poti seta TTL manual. Un TTL mic (ex: 5 minute) inseamna ca schimbarile se propaga repede, dar cresti numarul de cereri DNS. Un TTL mare (ex: 1 ora) reduce cererile dar intarzie propagarea schimbarilor.
+</Accordion>
+
+<Accordion label="Pot avea Cloudflare DNS fara sa schimb hostingul?" group="faq">
+Da. DNS-ul e independent de hosting. Poti tine domeniul pe Cloudflare si hostingul pe orice provider (Hostinger, DigitalOcean, Hetzner, etc). Cloudflare doar directioneaza traficul catre IP-ul dorit.
+</Accordion>
+
+<Accordion label="Ce fac daca am eroarea 'Too many redirects'?" group="faq">
+De obicei inseamna ca ai SSL setat pe Flexible in Cloudflare, iar site-ul tau face si el redirect de la HTTP la HTTPS. Se creeaza un loop: Cloudflare face HTTP catre server, serverul redirecteaza la HTTPS, Cloudflare face iar HTTP, si tot asa. Rezolvare: seteaza SSL pe Full (Strict) in Cloudflare.
+</Accordion>
