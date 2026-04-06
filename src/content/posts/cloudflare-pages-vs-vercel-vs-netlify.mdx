@@ -1,0 +1,196 @@
+---
+title: "Cloudflare Pages vs Vercel vs Netlify — unde găzduiești un site gratuit în 2026"
+description: "Comparație directă între Cloudflare Pages, Vercel și Netlify pe plan gratuit: costuri, limite, viteza de build și când are sens să treci la un plan plătit."
+date: 2026-04-06
+image: "/images/blog/cloudflare-pages-vs-vercel-vs-netlify.svg"
+author: "BitDoze"
+categories:
+  - Hosting
+tags:
+  - cloudflare
+  - vercel
+  - netlify
+  - hosting gratuit
+  - site static
+draft: false
+---
+
+Ai un site static sau un proiect Astro/Next.js și vrei hosting gratuit fără capcane. Cloudflare Pages, Vercel și Netlify oferă toate un plan free, dar diferențele apar când treci de la un "hello world" la ceva cu trafic real.
+
+În articolul ăsta compar cele trei platforme pe ce contează cu adevărat: cât de mult poți rula gratuit, unde te limitează și la ce să fii atent înainte să alegi.
+
+<Notice type="info" title="Pe scurt">
+  Dacă vrei răspunsul rapid: Cloudflare Pages câștigă la hosting gratuit pentru site-uri cu trafic. Vercel câștigă la integrarea cu Next.js. Netlify are cel mai bun ecosistem pentru formulare și funcții serverless simple.
+</Notice>
+
+## Ce primești gratuit pe fiecare platformă
+
+Tabelul ăsta acoperă limitele reale pe planul gratuit, fără surprize:
+
+| Caracteristică | Cloudflare Pages | Vercel (Hobby) | Netlify (Free) |
+|----------------|-----------------|----------------|----------------|
+| Bandwidth | Nelimitat | 100 GB/lună | 100 GB/lună |
+| Build-uri/lună | 500 | 300 (10/zi) | 300 credite |
+| Proiecte | Nelimitat | Nelimitat | 1 |
+| Funcții serverless | Workers Free (100K/zi) | 100 GB-ore/lună | 125K invocări/lună |
+| Timeout build | 20 min | 45 min | 300 min/lună total |
+| SSL | Automat | Automat | Automat |
+| CDN global | 300+ locații | 20+ locații | 100+ locații |
+| Utilizare comercială | Da | Nu (Hobby) | Da |
+| Deploy preview | Da | Da | Da |
+| Branch deploys | Da | Da | Da |
+
+<Notice type="warning" title="Vercel Hobby nu permite utilizare comercială">
+  Dacă ai un site de firmă, un SaaS sau orice generează bani, Vercel Hobby nu e suficient. Trebuie să treci pe Pro (20 $/lună/loc). Cloudflare Pages și Netlify permit utilizare comercială pe planul gratuit.
+</Notice>
+
+## Cloudflare Pages: cel mai generos plan gratuit
+
+Cloudflare Pages se diferențiază printr-un singur lucru: bandwidth nelimitat. Nu au limită de transfer, nu au limită de requesturi, și nu opresc site-ul când "depășești" ceva.
+
+### Ce face bine
+
+- **Bandwidth nelimitat** — Cloudflare își rulează propria rețea globală de 300+ data centere. Nu plătești CDN separat, nu ai surprize la trafic.
+- **Deploy instant** — după push pe GitHub, site-ul e live în 1-2 minute.
+- **Funcții Workers** — dacă ai nevoie de API-uri sau funcții serverless, folosește Workers (100.000 requesturi/zi gratis).
+- **Utilizare comercială** — planul gratuit permite proiecte comerciale fără restricții.
+
+### Unde te limitează
+
+- **500 build-uri pe lună** — dacă ai CI/CD agresiv sau faci push de 20 de ori pe zi, îți consumă repede.
+- **1 build concurent** — se pune la coadă, nu construiește simultan mai multe proiecte.
+- **20 minute timeout** — proiectele mari cu build lent pot eșua.
+- **Funcțiile Workers au limită separată** — 100K requesturi/zi pe planul gratuit.
+
+### Pentru cine e
+
+Bloguri, site-uri de prezentare, landing pages, documentații. Oricunde ai trafic dar build-urile sunt rare sau regulate.
+
+## Vercel: alegerea naturală pentru Next.js
+
+Vercel a creat Next.js, deci integrarea e nativă. Dacă folosești Next.js, server components sau ISR, Vercel "merge din cutie" fără configurație.
+
+### Ce face bine
+
+- **Integrare Next.js perfectă** — deploy automat, optimizare de imagini, edge rendering fără setup.
+- **Edge functions** — poți rula cod la marginea rețelei, nu doar într-o singură regiune.
+- **Analitice incluse** — planul gratuit include Analytics basic.
+- **Build timeout generos** — 45 minute pe planul gratuit.
+
+### Unde te limitează
+
+- **100 GB bandwidth pe lună** — sună mult, dar un site cu imagini video sau trafic constant îl depășește.
+- **Fără utilizare comercială pe Hobby** — cel mai mare dezavantaj. Orice site care face bani necesită Pro.
+- **10 secunde timeout pe funcții** — funcțiile serverless nu pot rula mai mult de 10 secunde pe gratuit.
+- **Costuri ascunse pe Pro** — depășirea bandwidth-ului costă 0,15 $/GB, iar edge requests sunt facturate separat.
+- **O singură organizație pe Hobby** — limitări la colaborarea în echipă.
+
+### Pentru cine e
+
+Proiecte personale, demo-uri, prototipuri Next.js. Dacă ai un blog personal cu trafic mic și nu e comercial.
+
+<Notice type="info" title="Când are sens Vercel Pro">
+  Vercel Pro costă 20 $/lună per membru și include 1 TB bandwidth, utilizare comercială și suport prioritar. Dacă chiar rulezi un SaaS pe Next.js și nu vrei să gestionezi infrastructura, poate merita.
+</Notice>
+
+## Netlify: cel mai bun pentru formulare și funcții simple
+
+Netlify a inventat conceptul de Jamstack și are cel mai vechi ecosistem de deployment static. Planul gratuit s-a schimbat recent către un sistem de credite, care e mai flexibil dar și mai confuz.
+
+### Ce face bine
+
+- **Formulare Netlify** — poți adăuga formulare de contact fără backend, fără servicii externe. E gratuit pe planul free.
+- **Funcții serverless** — 125.000 de invocări pe lună, bazate pe Deno (Edge Functions).
+- **Identitate** — autentificare gratuită pentru site-uri cu membri (limitată la 1000 de utilizatori).
+- **Build plugins** — ecosistem bogat de pluginuri pentru procesarea automată a build-urilor.
+- **Utilizare comercială** — permisă pe planul gratuit.
+
+### Unde te limitează
+
+- **Sistemul de credite** — ai 300 de credite pe lună. Un deploy costă 15 credite, deci cam 20 de deploy-uri/lună. Bandwidth-ul costă 10 credite/GB, deci maxim 30 GB efectivi (mai puțin decât cei 100 GB promovați).
+- **Un singur proiect pe gratuit** — limita veche de 3 proiecte a dispărut.
+- **Site-ul se oprește** — când epuizezi creditele, site-ul se pune pe pauză până luna următoare sau când upgradezi.
+- **300 minute de build total** — împărțite între toate proiectele.
+
+### Pentru cine e
+
+Site-uri care au nevoie de formulare fără backend, landing pages simple, proiecte care nu depășesc 20 de deploy-uri pe lună.
+
+## Comparație directă pe scenarii reale
+
+### Blog personal cu 5.000 vizitatori/lună
+
+Toate trei platformele funcționează gratuit. Cloudflare Pages e alegerea cea mai sigură pentru că nu riști să depășești limite de bandwidth.
+
+### Site de firmă cu 20.000 vizitatori/lună
+
+- Cloudflare Pages: gratuit, fără probleme
+- Vercel: necesită Pro (20 $/lună) pentru că utilizarea comercială nu e permisă pe Hobby
+- Netlify: gratuit, dar s-ar putea să depășești creditele dacă faci multe deploy-uri
+
+### Aplicație Next.js cu SSR
+
+- Cloudflare Pages: funcționează dar necesită Workers și configurație suplimentară
+- Vercel: funcționează nativ, deploy cu zero config
+- Netlify: suportă Next.js dar cu unele limitări comparativ cu Vercel
+
+### Proiect cu funcții serverless complexe
+
+- Cloudflare Pages + Workers: 100K requesturi/zi, performanță bună, zero cold starts
+- Vercel: 100 GB-ore/lună, dar 10 secunde timeout
+- Netlify: 125K invocări/lună, dar bazate pe Deno (nu Node.js complet)
+
+## Când treci la un plan plătit
+
+Trecerea la plătit are sens când:
+
+- depășești 500 de build-uri pe lună pe Cloudflare
+- ai nevoie de utilizare comercială pe Vercel
+- consumi creditele Netlify înainte de finalul lunii
+- ai nevoie de colaborare în echipă (mai mulți membri)
+- vrei funcții serverless cu timeout mai mare sau resurse dedicate
+
+Costurile pe planurile plătite:
+
+| Platformă | Plan plătit | Preț lunar | Ce include |
+|-----------|------------|-----------|------------|
+| Cloudflare | Pro | 20 $ | 5000 build-uri, reguli WAF, analitice avansate |
+| Vercel | Pro | 20 $/membru | 1 TB bandwidth, utilizare comercială, 1000 GB-ore funcții |
+| Netlify | Pro | 19 $ | 3000 credite, lățime de bandă crescută, colaborare nelimitată |
+
+## Verdict
+
+Pentru hosting gratuit, Cloudflare Pages este cea mai bună opțiune în 2026. Bandwidth nelimitat, utilizare comercială permisă, 500 de build-uri pe lună sunt mai mult decât suficiente pentru majoritatea proiectelor.
+
+Vercel are sens doar dacă rulezi Next.js și nu ai nevoie de utilizare comercială — sau dacă ești dispus să plătești 20 $ pe lună.
+
+Netlify rămâne relevant pentru formulare fără backend și ecosistemul de pluginuri, dar sistemul de credite face limitările mai puțin transparente.
+
+Dacă ai un site existent pe Vercel sau Netlify și costurile au început să crească, migrarea pe Cloudflare Pages e simplă — e același repository, doar schimbi platforma de build.
+
+Dacă ai nevoie de ajutor cu migrarea sau configurarea hosting-ului, echipa BitDoze te poate ghida.
+
+<Button
+  text="Vezi serviciile BitDoze"
+  link="/servicii"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>
+
+<Accordion label="Pot migra de la Vercel la Cloudflare Pages fără să schimb codul?" group="faq">
+Da. Dacă site-ul e static (generat la build), migrarea e doar o chestiune de configurare. Conectezi repository-ul GitHub la Cloudflare Pages, setezi build command și output directory, și deploy-ul funcționează. Nu modifici codul.
+</Accordion>
+
+<Accordion label="Cloudflare Pages are limită de trafic pe site-uri cu multe imagini?" group="faq">
+Nu. Cloudflare Pages oferă bandwidth nelimitat pe planul gratuit. Nu există limită de transfer, indiferent cât de mult conținut static servești. Singura limită e la build-uri: 500 pe lună.
+</Accordion>
+
+<Accordion label="Netlify a schimbat sistemul de planuri — cum funcționează creditele acum?" group="faq">
+Din 2025, Netlify folosește un sistem de credite pe planul gratuit: 300 de credite pe lună. Un deploy costă 15 credite. Bandwidth-ul costă 10 credite per GB. Deci practic ai cam 20 de deploy-uri sau 30 de GB de trafic, nu ambele. Când se termină creditele, site-ul se pune pe pauză.
+</Accordion>
+
+<Accordion label="Care platformă e cea mai rapidă pentru un utilizator din România?" group="faq">
+Cloudflare Pages are cea mai mare rețea de edge servers, inclusiv în România. Răspunsurile vin de la cel mai apropiat data center, nu din SUA. Vercel și Netlify au edge servers mai puțini în Europa de Est, dar diferența reală e sub 100ms pentru site-uri statice.
+</Accordion>
