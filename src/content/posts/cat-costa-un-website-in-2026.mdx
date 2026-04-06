@@ -1,0 +1,449 @@
+---
+title: "Cât costă un website în 2026 — ghid complet de prețuri reale"
+description: "Costuri reale pentru un website în 2026: domeniu, hosting, SSL, design, dezvoltare, mentenanță. Bugete pentru blog, site de firmă, e-commerce și SaaS, cu prețuri pentru România."
+date: 2026-04-06
+image: "/images/blog/cat-costa-un-website-in-2026.svg"
+author: "BitDoze"
+categories:
+  - Hosting
+tags:
+  - costuri website
+  - buget website
+  - hosting
+  - domeniu
+  - ssl
+  - mentenanta
+draft: false
+---
+
+Dacă vrei un website în 2026, prima întrebare e inevitabilă: cât costă? Răspunsul depinde de tipul site-ului, cine îl construiește și cât de mult ai de gând să-l întreții. Un blog gratuit pe Cloudflare Pages costă 0 €/an. Un e-commerce cu plată integrată și design custom poate depăși 15.000 €.
+
+În articolul ăsta descompun fiecare cost în parte — domeniu, hosting, SSL, design, dezvoltare, mentenanță — și îți dau bugete reale pentru fiecare tip de site, cu prețuri valabile în România.
+
+<Notice type="info" title="Pe scurt">
+  Un website simplu (blog, prezentare) costă între 0 și 200 €/an. Un site de firmă cu design custom între 1.500 și 5.000 €. Un magazin online între 3.000 și 15.000 €. Un SaaS custom între 10.000 și 50.000+ €. Costul anual de mentenanță e între 100 și 5.000 €/an.
+</Notice>
+
+## Componentele unui website și costul fiecăreia
+
+Un website are câteva componente obligatorii și câteva opționale:
+
+| Componentă | Obligatorie? | Cost lunar | Cost anual |
+|------------|-------------|-----------|------------|
+| Domeniu | Da | — | 8-50 € |
+| Hosting | Da | 0-20 € | 0-240 € |
+| SSL | Da (practic) | 0 € (inclus) | 0 € |
+| Design | Depinde | — | 0-10.000 € |
+| Dezvoltare | Depinde | — | 0-50.000 € |
+| Email | Opțional | 0-6 € | 0-72 € |
+| Mentenanță | Recomandată | 10-500 € | 120-6.000 € |
+| SEO | Opțional | 0-500 € | 0-6.000 € |
+| Backup | Recomandat | 0-5 € | 0-60 € |
+
+## Domeniul: numele site-ului
+
+Fără domeniu, nu ai adresă pe internet. Prețul depinde de extensie (.ro, .com, .org, .eu) și de registrar.
+
+### Prețuri medii pe extensii (2026)
+
+| Extensie | Preț primul an | Reînnoire anuală | Observații |
+|----------|---------------|-----------------|------------|
+| .ro | 10-15 € | 10-15 € | Preț fix la ROTLD, unii registrari adaugă marjă |
+| .com | 8-12 € | 13-18 € | Promoții la primul an, reînnoire mai scumpă |
+| .eu | 5-10 € | 8-12 € | Bun pentru afaceri europene |
+| .org | 10-14 € | 14-18 € | Pentru ONG-uri sau proiecte comunitare |
+| .dev | 12-15 € | 12-15 € | SSL obligatoriu, popular pentru portofolii |
+| .shop | 2-5 € (promo) | 25-35 € | Promoții ieftine, reînnoire scumpă |
+| .app | 14-18 € | 14-18 € | SSL obligatoriu |
+
+<Notice type="warning" title="Atenție la promoțiile primului an">
+  Mulți registrari oferă domenii .com la 1-3 € în primul an, dar reînnoirea costă 15-20 €. Când calculezi costul real, ia în calcul reînnoirea, nu prețul promoțional. Pe 5 ani, un .com cu reînnoire de 17 €/an costă 85 €, indiferent cât ai plătit în primul an.
+</Notice>
+
+### Unde cumperi domenii ieftine
+
+- **Cloudflare Registrar** — domenii la cost (fără marjă), WHOIS privacy inclus. Cel mai ieftin pe termen lung.
+- **Namecheap** — prețuri competitive, WHOIS privacy gratuit primul an.
+- **Porkbun** — prețuri bune, interfață simplă.
+- **ROTLD** — singurul registrar oficial pentru .ro. Preț fix de ~10 €/an.
+
+## Hosting-ul: unde stă site-ul
+
+Hosting-ul e serviciul care pune fișierele site-ului tău la dispoziția vizitatorilor. E costul recurent cel mai mare.
+
+### Tipuri de hosting și prețuri
+
+#### Hosting gratuit (0 €/an)
+
+Poți găzdui un site static gratuit pe:
+
+- **Cloudflare Pages** — bandwidth nelimitat, 500 build-uri/lună. Cea mai bună opțiune gratuită.
+- **GitHub Pages** — simplu, dar fără funcții serverless.
+- **Netlify** — gratuit cu limitări de credite.
+- **Vercel** — gratuit dar fără utilizare comercială pe Hobby.
+
+Dacă ai un site static sau un blog pe Astro, poți găzdui gratuit complet. Am detaliat comparația între platforme în articolul [Cloudflare Pages vs Vercel vs Netlify — unde găzduiești un site gratuit în 2026](/blog/cloudflare-pages-vs-vercel-vs-netlify/).
+
+#### Shared hosting (2-15 €/lună)
+
+Cel mai comun tip de hosting. Site-ul tău stă pe același server cu alte sute de site-uri. E ieftin dar performanța e limitată.
+
+| Furnizor | Preț lunar | Include |
+|----------|-----------|--------|
+| Hostinger | 2-4 € | 1 site, 50 GB SSD, SSL gratuit, email |
+| SiteGround | 3-6 € | 1 site, 10 GB, SSL, CDN, backup zilnic |
+| Bluehost | 2-4 € | 1 site, 10 GB SSD, SSL, domeniu gratuit primul an |
+| Romarg (România) | 3-5 € | 1 site, 10 GB SSD, suport în română |
+| Hosterion (România) | 3-6 € | 1 site, cPanel, backup, suport română |
+
+<Notice type="info" title="Când are sens shared hosting">
+  Shared hosting e bun pentru site-uri cu sub 10.000 vizitatori/lună, fără funcții serverless sau cereri API complexe. E cel mai simplu de configurat — plătești, primești cPanel, instalezi WordPress cu un click. Dacă ai un blog sau un site de prezentare, shared hosting e suficient.
+</Notice>
+
+#### VPS hosting (4-50 €/lună)
+
+Un server virtual privat. Ai resurse dedicate, root access, și controlezi totul. Necesită cunoștințe tehnice.
+
+| Furnizor | Preț lunar | Spec | Data center |
+|----------|-----------|------|------------|
+| Hetzner CX22 | 4 € | 2 vCPU, 4 GB RAM, 40 GB SSD | Falkenstein, Helsinki |
+| Contabo VPS S | 5 € | 4 vCPU, 8 GB RAM, 50 GB SSD | Nürnberg, EU, US |
+| DigitalOcean Basic | 6 € | 1 vCPU, 1 GB RAM, 25 GB SSD | Multiple |
+| Vultr Cloud Compute | 6 € | 1 vCPU, 1 GB RAM, 25 GB SSD | București disponibil |
+| OVH VPS | 4 € | 1 vCPU, 2 GB RAM, 40 GB SSD | Strasbourg, EU |
+
+Dacă vrei să-ți configurezi propriul VPS cu Docker și un reverse proxy, ai ghidul complet în articolul [Cum instalezi Docker pe Ubuntu](/blog/cum-sa-instalezi-docker-pe-ubuntu/) și poți folosi Dokploy pentru management — vezi [Instalare Dokploy pe VPS](/blog/instalare-dokploy-vps/).
+
+<Notice type="info" title="Hetzner vs Contabo vs DigitalOcean">
+  Hetzner oferă cel mai bun raport preț-performanță în Europa. Contabo are cel mai mult RAM la prețul minim. DigitalOcean are cea mai bună documentație și interfață. Vultr are data center în București — important dacă ai trafic majoritar din România.
+</Notice>
+
+#### Cloud hosting (10-100+ €/lună)
+
+Platforme scalabile care ajustează resursele automat. Potrivite pentru aplicații cu trafic variabil.
+
+| Furnizor | Preț minim lunar | Model |
+|----------|-----------------|-------|
+| AWS Lightsail | 3,50 $ | Fix, predictibil |
+| AWS EC2 (t3.micro) | 7-10 $ | Pay-as-you-go |
+| Google Cloud Run | 0 (free tier) | Per request |
+| Fly.io | 0 (free tier) | Per VM |
+| Railway | 5 $ | Per resource |
+
+#### Managed hosting (20-200+ €/lună)
+
+Hosting unde furnizorul gestionează serverul, securitatea, actualizările și backup-urile. Tu doar lucrezi pe site.
+
+| Furnizor | Preț lunar | Pentru |
+|----------|-----------|-------|
+| Kinsta | 30-60 $ | WordPress managed |
+| Cloudways | 14-50 $ | Aplicații PHP, WordPress |
+| Platform.sh | 12-50 $ | Aplicații web diverse |
+| Pantheon | 41-160 $ | WordPress, Drupal |
+
+### Ce hosting să alegi
+
+- **Blog personal sau portofoliu** → Cloudflare Pages (gratuit) sau shared hosting (3-5 €/lună)
+- **Site de firmă** → Shared hosting (5-10 €/lună) sau VPS (4-10 €/lună)
+- **E-commerce mic** → VPS (10-20 €/lună)
+- **E-commerce mediu/mare** → Cloud hosting sau managed hosting (30-100 €/lună)
+- **SaaS / aplicație web** → Cloud hosting (10-50 €/lună) sau Cloudflare Workers (gratuit până la 100K requesturi/zi)
+
+## SSL: securitatea conexiunii
+
+SSL-ul criptează datele între vizitator și server. În 2026, nu mai e opțional — browserele marchează site-urile fără SSL ca "Not Secure".
+
+### SSL gratuit vs plătit
+
+| Tip | Preț | Include | Când îl folosești |
+|-----|------|---------|-------------------|
+| Let's Encrypt | 0 € | SSL basic, reînnoire automată | 95% din cazuri |
+| Cloudflare SSL | 0 € | SSL universal, inclus în proxy | Când folosești Cloudflare |
+| DV SSL plătit | 10-50 €/an | Validare domeniu, sigiliu | Doar dacă ai nevoie de suport |
+| OV SSL | 50-200 €/an | Validare organizație | Firme care cer conformitate |
+| EV SSL | 100-500 €/an | Bară verde, validare extinsă | E-commerce, banking |
+
+<Notice type="info" title="SSL gratuit e suficient">
+  Pentru 95% dintre site-uri, SSL-ul gratuit de la Let's Encrypt sau Cloudflare e suficient. Nu plăti pentru SSL decât dacă ai un contract care cere un anumit tip de certificat. Caddy, Nginx cu Certbot și Cloudflare Pages gestionează SSL automat.
+</Notice>
+
+## Design-ul: cum arată site-ul
+
+Designul e costul cel mai variabil. Poate fi 0 (temă gratuită) sau 10.000+ € (design custom de agenție).
+
+### Opțiuni de design și prețuri
+
+#### Teme gratuite sau ieftine (0-100 €)
+
+- **Teme gratuite WordPress** — mii disponibile pe wordpress.org. Calitate variabilă.
+- **Teme Astro/Hugo/Jekyll** — gratuite, rapide, statice.
+- **Teme premium** — ThemeForest, Elegant Themes. 30-80 €, plătești o dată.
+- **Tailwind UI** — 149-249 $ pentru componente premium.
+
+Dacă vrei un blog gratuit cu Astro și o temă modernă, ai ghidul complet în [Cum să începi un blog gratis cu Astro JS](/blog/cum-sa-incepi-blog-gratis-astro-js/).
+
+#### Design cu page builder (0-300 €/an)
+
+- **Elementor** — gratuit basic, 59 $/an Pro. Popular pentru WordPress.
+- **Divi** — 89 $/an sau 249 $ lifetime. Multifuncțional.
+- **Webflow** — gratuit pentru un site, 14-39 $/an pentru planuri plătite.
+- **Framer** — gratuit basic, 5-15 $/lună Pro.
+
+#### Design freelance (500-5.000 €)
+
+Un freelancer din România ia între 30-80 €/oră. Un site de prezentare cu 5-8 pagini durează 20-60 de ore, deci:
+
+| Complexitate | Ore estimat | Cost (50 €/oră) |
+|-------------|------------|-----------------|
+| Landing page | 10-20 ore | 500-1.000 € |
+| Site prezentare (5-8 pagini) | 30-50 ore | 1.500-2.500 € |
+| Site de firmă (10-15 pagini) | 50-80 ore | 2.500-4.000 € |
+| E-commerce (50-200 produse) | 80-150 ore | 4.000-7.500 € |
+
+#### Design agenție (3.000-20.000+ €)
+
+Agențiile din România percep:
+
+| Tip site | Cost agenție |
+|----------|------------|
+| Site de prezentare | 3.000-6.000 € |
+| Site de firmă complex | 5.000-12.000 € |
+| E-commerce | 8.000-25.000 € |
+| SaaS custom | 15.000-50.000+ € |
+
+<Notice type="warning" title="Diferența între freelancer și agenție">
+  Un freelancer bun îți poate face un site de calitate la jumătate de preț față de o agenție. Dar un freelancer lucrează singur — dacă pleacă în concediu sau se îmbolnăvește, proiectul se oprește. O agenție are backup și procese, dar costă mai mult. Pentru site-uri simple, freelancerul e de ajuns. Pentru proiecte complexe cu termene fixe, agenția e mai sigură.
+</Notice>
+
+## Dezvoltarea: funcționalitatea site-ului
+
+Design-ul e cum arată. Dezvoltarea e cum funcționează. Pentru un site static, designul și dezvoltarea sunt același lucru. Pentru aplicații web, dezvoltarea e costul principal.
+
+### Tipuri de dezvoltare
+
+#### Site static (0-500 €)
+
+HTML, CSS, JavaScript simplu. Sau un generator static ca Astro, Hugo, Jekyll. Conținutul e generat la build, nu la fiecare cerere.
+
+- **DIY cu Astro**: 0 € (doar timpul tău)
+- **Freelancer**: 300-500 € pentru configurare și personalizare
+
+#### WordPress (0-3.000 €)
+
+Cel mai popular CMS. Poți construi singur sau angaja un developer.
+
+- **DIY**: 0 € (temă gratuită + pluginuri gratuite)
+- **Freelancer**: 500-2.000 € pentru configurare și personalizare
+- **Agenție**: 1.500-5.000 €
+
+#### CMS headless (0-5.000 €)
+
+Astro + Strapi, Next.js + Contentful, etc. Frontend separat de backend.
+
+- **DIY**: 0 € (dacă ai cunoștințe tehnice)
+- **Freelancer**: 1.000-3.000 €
+- **Agenție**: 3.000-8.000 €
+
+#### E-commerce (500-25.000 €)
+
+| Platformă | Cost inițial | Cost lunar | Observații |
+|-----------|------------|-----------|------------|
+| WooCommerce (WordPress) | 0-2.000 € | 10-50 € | Gratuit, dar ai nevoie de hosting și pluginuri |
+| Shopify | 0 € (template) | 32-350 €/lună | Plătești lunar, nu inițial |
+| PrestaShop | 0-3.000 € | 10-50 € | Open source, popular în Europa |
+| Magento | 5.000-25.000 € | 100-500 € | Pentru e-commerce mare, complex |
+| Custom (Laravel, etc.) | 10.000-50.000 € | 100-1.000 € | Complet customizat |
+
+#### SaaS / aplicație web (5.000-100.000+ €)
+
+Dacă construiești o aplicație web cu autentificare, dashboard, API, plăți:
+
+- **MVP (minimum viable product)**: 5.000-15.000 €
+- **Produs funcțional**: 15.000-50.000 €
+- **Produs complex**: 50.000-200.000+ €
+
+Pentru SaaS-uri mici, poți reduce costul folosind Cloudflare Workers + D1 (gratuit) ca backend. Vezi comparația platformelor în [Cloudflare Pages vs Vercel vs Netlify](/blog/cloudflare-pages-vs-vercel-vs-netlify/).
+
+## Email: adresa de firmă
+
+Emailul profesional (contact@firma-ta.ro) nu e inclus în hosting-ul gratuit și costă separat.
+
+| Serviciu | Preț lunar/adresă | Include |
+|----------|------------------|--------|
+| Zoho Mail | 0 € (gratuit, 1 adresă) | 5 GB stocare, webmail |
+| Google Workspace | 7 $ | 30 GB, Gmail, Calendar, Meet |
+| Microsoft 365 | 6 € | Outlook, Teams, 50 GB |
+| Proton Mail | 4 € | Criptare end-to-end |
+| MXRoute | 3 $ | IMAP/SMTP, fără interfață fancy |
+
+<Notice type="info" title="Email gratuit cu Zoho">
+  Zoho oferă o adresă email gratuită pe domeniul tău (ex: contact@firma-ta.ro). Pentru o firmă mică, un freelancer sau un blog, e suficient. Dacă ai nevoie de mai multe adrese sau colaborare, Google Workspace sau Microsoft 365 sunt opțiuni solide.
+</Notice>
+
+## SEO: trafic organic
+
+SEO nu e un cost obligatoriu dar e unul care se amortizează. Dacă nu investești în SEO, site-ul tău va depinde de reclame plătite pentru trafic.
+
+| Serviciu | Cost lunar | Include |
+|----------|-----------|--------|
+| DIY SEO (Ahrefs Free, Ubersuggest) | 0-30 € | Research cuvinte cheie, audit tehnic |
+| Tool SEO plătit (Ahrefs, SEMrush) | 100-200 € | Analiză completă, tracking poziții |
+| Freelancer SEO (România) | 300-800 €/lună | Optimizare on-page, conținut, link building |
+| Agenție SEO (România) | 500-2.000 €/lună | Strategie completă, raportare, content marketing |
+
+## Mentenanța: costul continuu
+
+Un website nu e un produs pe care îl cumperi o dată și gata. Are nevoie de actualizări, securitate, backup și monitorizare.
+
+### Ce include mentenanța
+
+- Actualizări de software (WordPress, pluginuri, framework)
+- Backup-uri regulate
+- Monitorizare uptime
+- Remedieri de securitate
+- Actualizări de conținut
+- Optimizare performanță
+
+### Costuri de mentenanță
+
+| Tip site | Mentenanță DIY | Mentenanță externalizată |
+|----------|---------------|------------------------|
+| Blog / site static | 0-20 €/lună | 50-100 €/lună |
+| WordPress simplu | 10-30 €/lună | 100-200 €/lună |
+| E-commerce mic | 20-50 €/lună | 200-400 €/lună |
+| E-commerce mediu | 50-100 €/lună | 400-800 €/lună |
+| SaaS / aplicație | 100-500 €/lună | 500-2.000 €/lună |
+
+<Notice type="info" title="Site-urile statice au mentenanță minimă">
+  Dacă site-ul e static (generat cu Astro, Hugo, Jekyll), mentenanța e practic zero. Nu ai pluginuri de actualizat, nu ai baze de date de backupat, nu ai vulnerabilități PHP. Singura mentenanță e actualizarea conținutului. Din acest motiv, site-ile statice sunt cele mai ieftine de întreținut pe termen lung.
+</Notice>
+
+## Bugete reale: cât costă fiecare tip de site
+
+### Blog personal (0-100 €/an)
+
+| Componentă | Cost |
+|-----------|------|
+| Domeniu (.ro) | 10-15 €/an |
+| Hosting (Cloudflare Pages) | 0 € |
+| SSL | 0 € |
+| Design (temă Astro gratuită) | 0 € |
+| Dezvoltare (DIY) | 0 € |
+| **Total** | **10-15 €/an** |
+
+Dacă vrei hosting pe VPS pentru mai mult control, adaugă 4-6 €/lună (48-72 €/an). Am scris un articol detaliat despre cum începi un blog gratis cu Astro pe Cloudflare Pages — [ghidul complet aici](/blog/cum-sa-incepi-blog-gratis-astro-js/).
+
+### Site de prezentare pentru firmă mică (1.500-4.000 € inițial + 150-400 €/an)
+
+| Componentă | Cost |
+|-----------|------|
+| Domeniu (.ro sau .com) | 10-18 €/an |
+| Hosting (shared sau VPS) | 60-120 €/an |
+| SSL (Let's Encrypt) | 0 € |
+| Design + dezvoltare (freelancer) | 1.000-2.500 € (o singură dată) |
+| Email (Zoho sau Google Workspace) | 0-84 €/an |
+| Mentenanță | 100-200 €/an |
+| **Total inițial** | **1.500-3.000 €** |
+| **Cost anual recurent** | **170-420 €/an** |
+
+### Magazin online mic (3.000-10.000 € inițial + 500-2.000 €/an)
+
+| Componentă | Cost |
+|-----------|------|
+| Domeniu | 10-20 €/an |
+| Hosting (VPS sau cloud) | 120-600 €/an |
+| SSL | 0-50 €/an |
+| Platformă (Wooocommerce, Shopify) | 0-400 €/an |
+| Design + dezvoltare | 2.000-7.000 € (o singură dată) |
+| Plăți online (Stripe, procesator românesc) | 1-3% din tranzacții |
+| Email | 0-84 €/an |
+| SEO | 0-600 €/an |
+| Mentenanță | 200-600 €/an |
+| **Total inițial** | **3.000-8.000 €** |
+| **Cost anual recurent** | **500-2.000 €/an** |
+
+### Site de firmă complex / portal (5.000-20.000 € inițial + 1.000-5.000 €/an)
+
+| Componentă | Cost |
+|-----------|------|
+| Domeniu | 10-20 €/an |
+| Hosting (VPS sau cloud) | 120-1.200 €/an |
+| SSL | 0-100 €/an |
+| Design + dezvoltare (agenție) | 4.000-15.000 € (o singură dată) |
+| CMS (licență, pluginuri) | 0-500 €/an |
+| Email | 84-200 €/an |
+| SEO | 600-6.000 €/an |
+| Mentenanță | 500-2.000 €/an |
+| **Total inițial** | **5.000-18.000 €** |
+| **Cost anual recurent** | **1.000-5.000 €/an** |
+
+## Cum reduci costurile unui website
+
+### 1. Folosește hosting gratuit pentru site-uri statice
+
+Cloudflare Pages oferă hosting gratuit cu bandwidth nelimitat. Dacă site-ul tău nu are nevoie de un CMS sau de funcții serverless, nu plăti pentru hosting.
+
+### 2. Alege un domeniu .ro
+
+Domeniile .ro costă ~10 €/an și nu au surprize la reînnoire. Dacă publicul tău e în România, .ro e mai potrivit decât .com.
+
+### 3. Folosește SSL gratuit
+
+Let's Encrypt și Cloudflare oferă SSL gratuit. Nu plăti pentru certificat SSL.
+
+### 4. Învață să construiești singur
+
+Dacă ai timp, poți construi un site de calitate cu Astro sau WordPress fără costuri de dezvoltare. Timpul investit se amortizează rapid.
+
+### 5. Alege site static în loc de WordPress
+
+Un site static e mai rapid, mai sigur și mai ieftin de întreținut decât un WordPress. Pentru un site de prezentare sau un blog, un site static cu Astro e alegerea superioară.
+
+### 6. Configurează singur VPS-ul
+
+Un VPS de la Hetzner (4 €/lună) cu Docker și un reverse proxy e mai ieftin decât shared hosting cu cpanel (5-10 €/lună) și oferă mai mult control. Vezi ghidul de [instalare Docker pe Ubuntu](/blog/cum-sa-instalezi-docker-pe-ubuntu/) și [configurare Dokploy](/blog/instalare-dokploy-vps/).
+
+### 7. Configurează DNS singur
+
+Cloudflare oferă DNS gratuit cu CDN inclus. Dacă cumperi domeniul prin Cloudflare, ai DNS, SSL și CDN fără costuri suplimentare. Vezi ghidul [Cum configurezi Cloudflare DNS pentru un site](/blog/cum-configurezi-cloudflare-dns-pentru-un-site/).
+
+## Concluzie
+
+Costul unui website în 2026 depinde de ce ai nevoie, nu de cât de mult ai de gând să cheltuiești. Un blog pe Cloudflare Pages cu domeniu .ro costă 10-15 € pe an. Un site de firmă cu design custom costă 1.500-3.000 € inițial plus 200-400 €/an mentenanță.
+
+Regula de bază: nu plăti pentru ce nu ai nevoie. Un site static pe hosting gratuit e mai rapid și mai sigur decât un WordPress pe shared hosting de 10 €/lună. Investește în design și conținut, nu în infrastructură scumpă.
+
+Dacă ai nevoie de ajutor cu configurarea site-ului sau vrei o estimare exactă pentru proiectul tău, echipa BitDoze poate analiza cerințele și poate oferi un cost clar.
+
+<Button
+  text="Cere o estimare"
+  link="/contact"
+  variant="solid"
+  color="blue"
+  icon="arrow-right"
+  iconPosition="right"
+/>
+
+<Accordion label="Cât costă cel mai ieftin website posibil?" group="faq">
+Cel mai ieftin website costă 10-15 €/an: un domeniu .ro (10 €) plus hosting gratuit pe Cloudflare Pages (0 €), SSL gratuit (0 €), și o temă gratuită Astro sau Hugo. Construiești singur conținutul. Total: doar costul domeniului. Dacă nu ai nevoie nici de domeniu custom, poți folosi un subdomeniu gratuit de la Cloudflare (site-ul-tau.pages.dev) și costul e literalmente 0.
+</Accordion>
+
+<Accordion label="Merită să plătesc pentru un designer sau pot folosi o temă?" group="faq">
+Depinde de scopul site-ului. Pentru un blog personal sau un portofoliu, o temă gratuită sau premium (30-80 €) e suficientă. Pentru un site de firmă unde imaginea contează pentru clienți, un design custom de la un freelancer (1.000-2.500 €) se amortizează prin credibilitatea pe care o oferă. Pentru un magazin online sau un SaaS, designul custom e practic obligatoriu — template-urile gratuite au limitări serioase la funcționalitate.
+</Accordion>
+
+<Accordion label="WordPress sau site static — care e mai ieftin pe termen lung?" group="faq">
+Site-ul static e mai ieftin. Un WordPress costă 5-15 €/lună hosting plus pluginuri premium, actualizări regulate, backup, și securitate. Un site static pe Cloudflare Pages costă 0 €/lună hosting, nu are pluginuri de actualizat, nu are vulnerabilități PHP, și e mai rapid. Pe 3 ani, un WordPress costă 180-540 € doar hosting, plus timp de mentenanță. Un site static costă doar domeniul: 30-45 € pe 3 ani.
+</Accordion>
+
+<Accordion label="Cât costă să migrez un site de la alt furnizor?" group="faq">
+Migrarea unui site static e gratuită — conectezi repo-ul la noua platformă și deploy-ul funcționează. Migrarea WordPress costă 50-200 € la un freelancer (include transfer fișiere, baze de date, configurare DNS). Dacă ai hosting pe VPS cu Docker, migrarea e o chestiune de a muta containerele. Vezi ghidul [Cloudflare Pages vs Vercel vs Netlify](/blog/cloudflare-pages-vs-vercel-vs-netlify/) pentru detalii despre migrarea între platforme de hosting static.
+</Accordion>
+
+<Accordion label="Trebuie să plătesc pentru SEO?" group="faq">
+Nu obligatoriu. Dacă ai un site cu conținut de calitate, structură HTML corectă și îl configurezi corect (sitemap, meta tags, viteza bună), SEO de bază e gratuit. Dar dacă vrei să concurezi pe cuvinte cheie cu competiție mare, un tool SEO plătit (100-200 €/lună) sau un freelancer SEO (300-800 €/lună) face diferența. Pentru un blog local sau un site de nișă, SEO-ul gratuit (Google Search Console, optimizare on-page) e de ajuns.
+</Accordion>
+
+<Accordion label="Ce costuri ascunse apar de obicei?" group="faq">
+Cele mai frecvente costuri ascunse: reînnoirea domeniului la preț mai mare decât primul an, pluginuri WordPress premium necesare pentru funcționalitate de bază, costuri de backup pe care hostingul gratuit nu le include, taxe de procesare plăți (1-3% din fiecare tranzacție pe e-commerce), și costuri de email care nu sunt incluse în hostingul web. Când bugetezi un site, ia în calcul costul total pe 3 ani, nu doar costul inițial.
+</Accordion>
