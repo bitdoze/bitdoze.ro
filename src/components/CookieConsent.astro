@@ -59,7 +59,7 @@ const cookiePolicyHref = "/politica-de-cookies";
           <strong>Analitice</strong>
           <small>Plausible Analytics fără încărcare înainte de consimțământ.</small>
         </span>
-        <input type="checkbox" data-consent-toggle="analytics" />
+        <input type="checkbox" data-consent-toggle="analytics" checked />
       </label>
 
       <label class="cookie-consent__option">
@@ -99,7 +99,7 @@ const cookiePolicyHref = "/politica-de-cookies";
     const DEFAULT_CONSENT = {
       version: CONSENT_VERSION,
       necessary: true,
-      analytics: false,
+      analytics: true,
       marketing: false,
       updatedAt: "",
     };
