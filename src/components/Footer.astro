@@ -32,7 +32,7 @@ const currentYear = new Date().getFullYear();
           <a href={`mailto:${companyConfig.contact.email}`}>{companyConfig.contact.email}</a>
           <a href={`tel:${companyConfig.contact.phone.replace(/\s+/g, "")}`}>{companyConfig.contact.phone}</a>
         </div>
-        <p class="footer-locale">{companyConfig.contact.address.city}, jud. {companyConfig.contact.address.state}</p>
+        <p class="footer-firm">{companyConfig.legalName} · CUI {companyConfig.cui}<br />{companyConfig.contact.address.street}, {companyConfig.contact.address.city}, jud. {companyConfig.contact.address.state} {companyConfig.contact.address.zip}</p>
         <div class="footer-social">
           {
             companyConfig.socialMedia.map((social) => (
@@ -75,9 +75,16 @@ const currentYear = new Date().getFullYear();
     <p class="wordmark" aria-hidden="true">BitDoze</p>
 
     <div class="footer-bottom">
-      <p>© {currentYear} {companyName} · CUI: {companyConfig.cui} · Făcut cu grijă în România</p>
+      <p>© {currentYear} {companyConfig.legalName} · CUI: {companyConfig.cui} · Făcut cu grijă în România</p>
+      <div class="footer-anpc">
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener noreferrer" aria-label="ANPC — SAL pentru consumatori">
+          <img src="/anpc-sal.webp" alt="ANPC — SAL pentru consumatori" width="160" height="40" loading="lazy" />
+        </a>
+        <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" rel="noopener noreferrer" aria-label="ANPC — Soluționarea Online a Litigiilor (SOL)">
+          <img src="/anpc-sol.png" alt="ANPC — Soluționarea Online a Litigiilor (SOL)" width="160" height="40" loading="lazy" />
+        </a>
+      </div>
       <div class="footer-legal-links">
-        <a href="https://reclamatiisal.anpc.ro/" target="_blank" rel="noopener noreferrer">Soluționare litigii (SAL)</a>
         <button type="button" class="link-btn" data-open-cookie-settings>Setări cookie-uri</button>
         <a href="/contact">Contact</a>
       </div>
@@ -176,24 +183,34 @@ const currentYear = new Date().getFullYear();
   }
   .footer-contact-pills {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.6rem;
+    margin-top: 1.25rem;
   }
   .footer-contact-pills a {
-    font-size: 0.86rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #f2efe6;
     text-decoration: none;
     border: 1.5px solid rgba(255,255,255,0.25);
-    border-radius: 999px;
-    padding: 0.55rem 1.05rem;
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+    gap: 0.6rem;
     overflow-wrap: anywhere;
   }
-  .footer-contact-pills a:hover { border-color: var(--color-ember); color: var(--color-ember-soft); }
-  .footer-locale { margin: 1rem 0 0; font-size: 0.86rem; color: #8f8b80; }
+  .footer-contact-pills a::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    flex-shrink: 0;
+  }
+  .footer-firm { margin: 1rem 0 0; font-size: 0.82rem; line-height: 1.7; color: #8f8b80; }
   .footer-social {
     display: flex;
     flex-wrap: wrap;
@@ -252,10 +269,30 @@ const currentYear = new Date().getFullYear();
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: space-between;
+    align-items: center;
     font-size: 0.82rem;
     color: #8f8b80;
   }
-  .footer-bottom p { margin: 0; }
+  .footer-anpc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .footer-anpc a {
+    display: inline-block;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px;
+    line-height: 0;
+    transition: opacity 120ms ease;
+  }
+  .footer-anpc a:hover { opacity: 0.8; }
+  .footer-anpc img {
+    height: 2.5rem;
+    width: auto;
+    display: block;
+  }
   .footer-legal-links {
     display: flex;
     flex-wrap: wrap;
