@@ -609,9 +609,14 @@ const sidebarRelatedPosts = getRelatedPosts(
     text-decoration-color: rgba(255, 107, 44, 0.5);
   }
 
-  .blog-post__content :global(ul),
+  .blog-post__content :global(ul) {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+
   .blog-post__content :global(ol) {
     padding-left: 1.5rem;
+    list-style-type: decimal;
   }
 
   .blog-post__content :global(li) {
