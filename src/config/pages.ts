@@ -137,6 +137,8 @@ export interface TeamSection {
     image: string;
     socialMedia?: { platform: string; url: string; icon: string }[];
   }[];
+  sideProjectsTitle?: string;
+  sideProjects?: { name: string; proof: string; url: string }[];
 }
 
 export interface ServicesListSection {
@@ -401,7 +403,7 @@ export const aboutPageConfig: PageConfig = {
           name: "Dragoș",
           role: "Fondator & Specialist IT",
           bio: "10+ ani de IT, 4 ani pe DevOps și servere. Îți face site-ul, îl pune pe server și îl ține online — același om de la prima discuție la mentenanță.",
-          image: "",
+          image: "/images/dragos.jpg",
           socialMedia: [
             {
               platform: "LinkedIn",
@@ -414,6 +416,39 @@ export const aboutPageConfig: PageConfig = {
               icon: "mdi:facebook",
             },
           ],
+        },
+      ],
+      sideProjectsTitle: "Ce mai construiesc",
+      sideProjects: [
+        {
+          name: "bitdoze.com",
+          proof: "400+ articole tehnice verificate practic — DevOps, AI, web development, self-hosting.",
+          url: "https://bitdoze.com",
+        },
+        {
+          name: "@webdoze pe YouTube",
+          proof: "10.400+ abonați, 400+ videoclipuri, 1,1M+ vizionări — tutoriale DevOps, AI și self-hosting.",
+          url: "https://www.youtube.com/@webdoze",
+        },
+        {
+          name: "Bitdoze Astro Theme",
+          proof: "Temă open-source de blog cu 25+ stele — MDX, taguri, serii, căutare, RSS.",
+          url: "https://github.com/bitdoze/bitdoze-astro-theme",
+        },
+        {
+          name: "BitBuddies.me",
+          proof: "Aplicație web AI full-stack — self-hosted cu CI/CD pe VPS.",
+          url: "https://github.com/bitdoze/bitbuddies.me",
+        },
+        {
+          name: "Bitdoze Bot",
+          proof: "Agent AI pe Discord cu 20+ stele — Python, căutare vectorială, memorie.",
+          url: "https://github.com/bitdoze/bitdoze_bot",
+        },
+        {
+          name: "Bitdoze Mastra",
+          proof: "Asistent autonom de cod și research — browser automation, Discord, workflow-uri programate.",
+          url: "https://github.com/bitdoze/bitdoze-mastra",
         },
       ],
     },

@@ -96,7 +96,19 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
         <h2>{teamSection.title}</h2>
         {teamSection.team.map(member => (
           <div class="maker-panel">
-            <span class="maker-avatar" aria-hidden="true">{member.name.charAt(0)}</span>
+            {member.image ? (
+              <SmartImage
+                src={member.image}
+                alt={`Fotografie — ${member.name}, ${member.role}`}
+                class="maker-photo"
+                width={256}
+                height={256}
+                widths={[128, 256]}
+                sizes="128px"
+              />
+            ) : (
+              <span class="maker-avatar" aria-hidden="true">{member.name.charAt(0)}</span>
+            )}
             <div class="maker-body">
               <p class="maker-name">{member.name}</p>
               <p class="maker-role">{member.role}</p>
@@ -118,6 +130,21 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
             </div>
           </div>
         ))}
+        {teamSection.sideProjects && teamSection.sideProjects.length > 0 && (
+          <div class="side-work">
+            <p class="side-work-label">{teamSection.sideProjectsTitle ?? "Ce mai construiesc"}</p>
+            <ul class="side-grid">
+              {teamSection.sideProjects.map((project) => (
+                <li>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="side-card">
+                    <span class="side-name">{project.name} <span aria-hidden="true">↗</span></span>
+                    <span class="side-proof">{project.proof}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   )}
@@ -286,6 +313,15 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
     transform: rotate(-2deg);
     flex-shrink: 0;
   }
+  .maker-photo {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 18px;
+    object-fit: cover;
+    transform: rotate(-2deg);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+  }
   .maker-name { margin: 0; font-family: var(--font-serif); font-weight: 640; font-size: 1.9rem; color: #f5f1e6; }
   .maker-role {
     display: inline-block;
@@ -314,8 +350,50 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
     align-items: center;
   }
   .maker-social a:hover { border-color: var(--color-ember); color: var(--color-ember-soft); }
+  .side-work { margin-top: 2.5rem; max-width: 56rem; }
+  .side-work-label {
+    display: inline-flex;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ember-ink);
+    background: var(--color-ember);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    margin: 0 0 1.25rem;
+  }
+  .side-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  @media (min-width: 720px) {
+    .side-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .side-card {
+    display: grid;
+    gap: 0.35rem;
+    height: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    transition: border-color 120ms ease, transform 120ms ease;
+  }
+  .side-card:hover {
+    border-color: var(--color-ember);
+    transform: translate(-1px, -1px);
+  }
+  .side-name { font-weight: 800; font-size: 1rem; color: #f2efe6; }
+  .side-card:hover .side-name { color: var(--color-ember-soft); }
+  .side-proof { font-size: 0.9rem; line-height: 1.6; color: #c2bcae; }
   @media (prefers-reduced-motion: reduce) {
     .value, .value:hover { transform: none; transition: none; }
-    .story-fig img, .maker-avatar { transform: none; }
+    .story-fig img, .maker-avatar, .maker-photo, .side-card:hover { transform: none; }
+    .side-card { transition: none; }
   }
 </style>
