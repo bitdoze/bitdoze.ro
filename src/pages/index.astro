@@ -7,6 +7,7 @@ import Portofoliu from "../components/Portofoliu.astro";
 import HomeFaq from "../components/HomeFaq.astro";
 import CTA from "../components/CTA.astro";
 import TrustBadges from "../components/TrustBadges.astro";
+import { companyConfig } from "../config/company";
 
 import { homePageConfig } from "../config/pages";
 import { getCollection } from "astro:content";
@@ -44,8 +45,19 @@ const featuredServices = servicii
   <div class="proof-strip">
     <div class="container">
       <TrustBadges variant="compact" />
+      <p class="proof-verified">Firmă RO · {companyConfig.legalName} · CUI {companyConfig.cui} · <a href={`mailto:${companyConfig.contact.email}`}>{companyConfig.contact.email}</a> · <a href="/portofoliu">proiecte live →</a></p>
     </div>
   </div>
+
+  {portfolioSection && (
+    <Portofoliu
+      title={portfolioSection.title}
+      subtitle={portfolioSection.subtitle}
+      ctaText={portfolioSection.cta?.text}
+      ctaLink={portfolioSection.cta?.link}
+      limit={portfolioSection.limit ?? 5}
+    />
+  )}
 
   <section class="svc-sec">
     <div class="container">
@@ -83,16 +95,6 @@ const featuredServices = servicii
 
   <LatestArticles />
 
-  {portfolioSection && (
-    <Portofoliu
-      title={portfolioSection.title}
-      subtitle={portfolioSection.subtitle}
-      ctaText={portfolioSection.cta?.text}
-      ctaLink={portfolioSection.cta?.link}
-      limit={portfolioSection.limit ?? 5}
-    />
-  )}
-
   <HomeFaq />
 
   {ctaSection && (
@@ -120,7 +122,13 @@ const featuredServices = servicii
   }
   .proof-strip :global(.proof) { box-shadow: 6px 6px 0 rgba(0,0,0,0.55); }
   :global(.dark) .proof-strip { background: var(--color-dark-background); }
-  .proof-strip .container { max-width: 76rem; }
+  .proof-verified {
+    margin: 1rem 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-dark-text-muted);
+  }
+  .proof-verified a { color: var(--color-ember-soft); }
 
   .svc-sec {
     background: var(--color-background);

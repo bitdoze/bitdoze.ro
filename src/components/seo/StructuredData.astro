@@ -13,7 +13,7 @@ const { type, data } = Astro.props;
 
 const logoUrl = new URL("/bitdoze_logo_better.svg", siteConfig.url).toString();
 const defaultImageUrl = new URL(siteConfig.ogImage || "/images/og-image.jpg", siteConfig.url).toString();
-const localBusinessImageUrl = new URL("/images/welcome-image.jpg", siteConfig.url).toString();
+const localBusinessImageUrl = new URL("/images/og-image.jpg", siteConfig.url).toString();
 
 function getAuthorName(value: StructuredDataProps[keyof StructuredDataProps]) {
   if (typeof value === "string" && value.trim().length > 0) {

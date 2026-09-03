@@ -63,7 +63,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
             <input type="hidden" name="_autoresponse" value="Mulțumim pentru mesajul dumneavoastră! Vă vom răspunde în cel mai scurt timp posibil." />
             <div class="field-row">
-              {formSection.fields.filter(field => ['text', 'email', 'tel'].includes(field.type)).slice(0, 2).map(field => (
+              {formSection.fields.filter(field => field.type === 'text').map(field => (
                 <div class="field">
                   <label for={field.id}>{field.label}{field.required ? " *" : ""}</label>
                   <input
@@ -205,7 +205,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
       <div class="company-grid">
         <div class="company-card">
           <p class="mini-stamp">Companie</p>
-          <p class="company-value">{companyConfig.name}</p>
+          <p class="company-value">{companyConfig.legalName}</p>
         </div>
         <div class="company-card">
           <p class="mini-stamp">CUI</p>

@@ -29,9 +29,11 @@ const {
   modifiedTime,
 } = Astro.props;
 
-// Format title
+// Format title — skip suffix when page title already carries the brand
 const formattedTitle =
-  title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
+  title === siteConfig.name || title.includes(siteConfig.name)
+    ? title
+    : `${title} | ${siteConfig.name}`;
 
 // Build canonical URL
 const siteOrigin = Astro.site?.toString() || siteConfig.url;

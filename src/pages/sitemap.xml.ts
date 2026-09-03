@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { statSync } from "node:fs";
+import path from "node:path";
 import { siteConfig } from "../config/site";
 import { buildPostPath, getPostSlug } from "../utils/blog";
 import { getCollectionSlug } from "../utils/content";
@@ -27,22 +28,24 @@ function toAbsoluteUrl(path: string): string {
 
 // lastmod stabil din mtime-ul fișierului sursă (nu data build-ului,
 // ca să nu pară tot site-ul „actualizat azi" la fiecare deploy).
+// path.join(process.cwd()) — import.meta.url e rescris de Vite la build,
+// deci rezolvarea relativă la modul eșuează și lastmod dispărea.
 function mtimeOf(relativePath: string): string | undefined {
   try {
-    return statSync(new URL(`../../${relativePath}`, import.meta.url))
-      .mtime.toISOString();
+    return statSync(path.join(process.cwd(), relativePath)).mtime.toISOString();
   } catch {
     return undefined;
   }
 }
 
 function createUrlEntry(entry: SitemapUrl): string {
-  return `<url>
-  <loc>${escapeXml(entry.loc)}</loc>
-  ${entry.lastmod ? `<lastmod>${entry.lastmod}</lastmod>` : ""}
-  ${entry.changefreq ? `<changefreq>${entry.changefreq}</changefreq>` : ""}
-  ${entry.priority ? `<priority>${entry.priority}</priority>` : ""}
-</url>`;
+  const rows = [
+    `  <loc>${escapeXml(entry.loc)}</loc>`,
+    entry.lastmod ? `  <lastmod>${entry.lastmod}</lastmod>` : "",
+    entry.changefreq ? `  <changefreq>${entry.changefreq}</changefreq>` : "",
+    entry.priority ? `  <priority>${entry.priority}</priority>` : "",
+  ].filter(Boolean);
+  return `<url>\n${rows.join("\n")}\n</url>`;
 }
 
 export const GET: APIRoute = async () => {

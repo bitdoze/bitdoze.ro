@@ -258,10 +258,9 @@ interface PortfolioSection {
 }
 
 export const homePageConfig: PageConfig = {
-  title:
-    "BitDoze - Agenție Web Profesională | Creare Site-uri & Marketing Digital România",
+  title: "Creare site-uri care aduc clienți",
   description:
-    "Agenție web profesională din România. Creare site-uri, magazine online, SEO și marketing digital. Consultare gratuită. ✓10+ ani experiență ✓50+ proiecte",
+    "Site-uri rapide cu SEO inclus, preț fix înainte de start. 50+ proiecte livrate, răspuns în 24h. Cere ofertă.",
   ogImage: siteConfig.ogImage,
   sections: [
     {
@@ -365,7 +364,7 @@ export const aboutPageConfig: PageConfig = {
       <p>Una dintre pasiunile mele este să scriu despre WordPress, având o platformă dedicată numită wpdoze.com unde îmi împărtășesc cunoștințele despre acest sistem de gestionare a conținutului extrem de popular. De la sfaturi practice la tutoriale detaliate, mă străduiesc să ofer resurse valoroase care să ajute persoanele și afacerile să își optimizeze site-urile WordPress.</p>
 
       <p>Pe lângă pasiunea pentru WordPress, sunt la fel de entuziasmat de Linux, site-uri statice, CMS, VPS și tot ce ține de DevOps. Aceste subiecte m-au determinat să lansez platforma bitdoze.ro, unde explorez funcționalitățile Linux, lumea site-urilor statice și ofer consultanță în domeniul DevOps și soluții personalizate pentru afaceri în mediul digital.</p>`,
-      image: "/images/welcome-image.jpg",
+      image: "/images/portofolio/bitdoze.com.webp",
       stats: [
         { value: "10+", label: "Ani de experiență" },
         { value: "50+", label: "Proiecte livrate" },

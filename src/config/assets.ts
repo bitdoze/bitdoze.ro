@@ -26,9 +26,9 @@ export interface ImageAssets {
 export const imageAssets: ImageAssets = {
   hero: {
     main: "/images/portofolio/bigsales.ro_-scaled-1.webp",
-    about: "/images/welcome-image.jpg",
+    about: "/images/portofolio/bitdoze.com.webp",
     services: "/images/services/web-design.jpg",
-    contact: "/images/welcome-image.jpg",
+    contact: "/images/og-image.jpg",
   },
   logos: {
     site: "/bitdoze_logo_better.svg",

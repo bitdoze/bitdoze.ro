@@ -1,5 +1,6 @@
 export interface CompanyConfig {
   name: string;
+  legalName: string;
   tagline: string;
   description: string;
   cui: string;
@@ -26,7 +27,8 @@ export interface CompanyConfig {
 }
 
 export const companyConfig: CompanyConfig = {
-  name: "BITDOZE WEB CONS S.R.L",
+  name: "BitDoze",
+  legalName: "BITDOZE WEB CONS S.R.L",
   tagline: "Soluții profesionale pentru afacerea ta online",
   description:
     "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",

@@ -44,7 +44,7 @@ const beneficiiList = entry.data.beneficii ?? [];
 const intrebariList = entry.data.intrebari_frecvente ?? [];
 ---
 
-<Layout title={seo.title} description={seo.description} ogType="article">
+<Layout title={seo.title} description={seo.description} ogType="article" structuredData={{ type: "service", data: { name: title, description: descriere } }}>
   <section class="svc-hero">
     <div class="container svc-hero-grid">
       <div>
