@@ -4,15 +4,27 @@
   "description": "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#009cef",
+  "background_color": "#faf7f0",
+  "theme_color": "#0e3b2c",
   "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "categories": [

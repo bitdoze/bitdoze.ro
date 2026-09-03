@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import { resolveImage } from "../utils/images";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "sync" | "auto";
+  fetchpriority?: "high" | "low" | "auto";
+  width?: number;
+  height?: number;
+  widths?: number[];
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  class: className,
+  loading = "lazy",
+  decoding = "async",
+  fetchpriority,
+  width,
+  height,
+  widths,
+  sizes,
+} = Astro.props;
+
+const resolved = resolveImage(src);
+const optimized = typeof resolved !== "string";
+---
+
+{
+  optimized ? (
+    <Image
+      src={resolved}
+      alt={alt}
+      class={className}
+      loading={loading}
+      decoding={decoding}
+      fetchpriority={fetchpriority}
+      width={width}
+      height={height}
+      widths={widths}
+      sizes={sizes}
+    />
+  ) : (
+    <img
+      src={resolved}
+      alt={alt}
+      class={className}
+      loading={loading}
+      decoding={decoding}
+      fetchpriority={fetchpriority}
+      width={width}
+      height={height}
+    />
+  )
+}

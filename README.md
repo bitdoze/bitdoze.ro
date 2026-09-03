@@ -1,178 +1,59 @@
-# Business Website Template
+# bitdoze.ro
 
-A professional and customizable Astro-based business website template with SEO optimization, responsive design, and modular configuration.
+Site-ul de prezentare al agenției BitDoze (Astro 7, română, SSG).
+Servicii, portofoliu, blog, pagini legale. Deploy ca site static.
 
-## 🚀 Features
+## Comenzi
 
-- **Modern Design** with Tailwind CSS 4
-- **CSS Variables** for easy theme customization in global.css
-- **SEO Optimized** with structured data and meta tags
-- **Fully Responsive** for all screen sizes
-- **Performance Focused** built with Astro
-- **Customizable** with easy-to-update configuration files
-- **Icon Integration** using Astro Icon
+- `npm run dev` — server local (`--host`)
+- `npm run build` — build producție
+- `npm run build:ci` — build cu heap 4GB (CI / mașini mici)
+- `npm run preview` — previzualizare build
+- `npm run check` — `astro check` (tipuri + validare)
+- `npm run test` — smoke test pe `dist/` (după build): pagini, meta, asseturi, sitemap
+- `npm run format` / `format:check` — prettier write/check (opt-in, doar
+  fișiere non-`.astro`; repo-ul istoric nu e formatat integral, deci CI nu
+  blochează pe stil — vezi `.prettierignore`)
 
-## 📋 Pages
+## Arhitectură
 
-- **Home** - Landing page with hero, services, testimonials and CTA
-- **About** - Company information, values, and team
-- **Services** - Comprehensive overview of offered services
-- **Contact** - Contact form and company information
+- Conținut în colecții (`src/content.config.ts`): `posts` (`src/content/posts/*.mdx`),
+  `servicii` (`src/content/servicii/*.md`), `portofoliu` (`src/content/portofoliu/*.md`)
+- Layout-uri: `src/layouts/Layout.astro`, `BlogPostLayout.astro`, `ContentLayout.astro`
+- Config: `src/config/` (`site.ts`, `company.ts`, `nav.ts`, `pages.ts`, `cta.ts`, `assets.ts`)
+- Stiluri: `src/styles/global.css` (sursă canonică pentru tokens — vezi `DESIGN.md`)
+  + `src/styles/fonts.css` (Fraunces + Inter self-hosted în `public/fonts/`)
+- Imagini: rasterele stau în `src/assets/images/` și se randează prin
+  `src/components/SmartImage.astro` (astro:assets + srcset; fallback `<img>`
+  pentru SVG-uri din `public/`). Coperțile blogului rămân SVG în `public/images/blog/`.
+- Căutare blog: `/search` + `/search.json`, client `src/scripts/blog-search.js` (fuse.js)
 
-## 🔧 Getting Started
+## Blog
 
-### Prerequisites
+Articole în română, sluguri URL-safe, copertă SVG 16:9 în `public/images/blog/`
+(2–5 cuvinte vizibile). Frontmatter: vezi `AGENTS.md`. Maxim 3 taguri/postare.
+URL-uri sub `/blog/[slug]/`.
 
-- Node.js (version 18 or higher)
-- npm or yarn
+## Formular contact
 
-### Installation
+`POST` către FormSubmit (`office@bitdoze.ro`) cu `_honey` + `_captcha`.
+Prima trimitere după deploy cere activarea adresei din dashboard-ul FormSubmit
+(mail de activare), altfel redirectul spre `/multumim` nu pornește.
 
-1. Clone this repository:
-```bash
-git clone https://github.com/yourusername/business-website-template.git
-cd business-website-template
-```
+## SEO / social
 
-2. Install dependencies:
-```bash
-npm install
-```
+- `robots.txt` în `public/`, sitemap artizanal `src/pages/sitemap.xml.ts`, RSS `rss.xml.ts`
+- Imagine socială: `public/images/og-image.jpg` (1200×630). Meta: `MetaTags.astro`
+- Analytics: Plausible, încărcat doar după consimțământ (`CookieConsent.astro`)
 
-3. Start the development server:
-```bash
-npm run dev
-```
+## Env
 
-## 🛠️ Customization
+Momentan zero variabile de mediu / secrete (`import.meta.env` nefolosit).
+Formularul nu cere chei. Dacă adaugi integrări cu secrete, pune-le în `.env`
+(ignorat de git) și documentează-le aici.
 
-### Theme Customization
+## Deploy
 
-The theme styling is controlled through CSS variables in `src/styles/global.css`. The template uses a robust design system with consistent variables for:
-
-- **Colors**: Customize primary, secondary, accent, and neutral colors
-- **Spacing**: Consistent spacing scale for margins, padding, and gaps
-- **Border Radius**: Various radius options from small to full rounded corners
-- **Box Shadows**: Shadow levels from subtle to pronounced
-- **Typography**: Font families, weights, and sizes
-- **Transitions**: Animation timing variables for smooth interactions
-
-Simply modify the variables in `global.css` to update the entire site's appearance consistently. No Tailwind config file is needed as this uses Tailwind CSS 4's global CSS variable approach.
-
-### Configuration Files
-
-All site configuration is located in the `src/config` directory:
-
-- **site.ts** - Website name, description, and SEO information
-- **nav.ts** - Navigation links for header and footer
-- **company.ts** - Company information
-- **services.ts** - Service descriptions and icons
-- **assets.ts** - Image paths and assets
-- **pages.ts** - Page content and section configurations
-- **cta.ts** - Shared Call-to-Action configuration
-
-### Update Company Information
-
-Edit `src/config/company.ts` to change:
-
-- Company name and tagline
-- Contact information
-- Social media links
-- Call-to-action text and links
-
-### Customize Navigation
-
-Edit `src/config/nav.ts` to update:
-
-- Main navigation links
-- Footer navigation categories
-- Page links and titles
-
-### Modify Services
-
-Edit `src/config/services.ts` to update:
-
-- Service titles and descriptions
-- Service icons (using Iconify icon names)
-- Service detail page links
-
-### Change Assets and Images
-
-Edit `src/config/assets.ts` to update image paths for:
-
-- Hero section images
-- Team member photos
-- Service illustrations
-- Logo and partner logos
-
-### Edit Page Content
-
-Edit `src/config/pages.ts` to update:
-
-- Page titles, descriptions, and metadata
-- Section content for all pages
-- Component properties and configurations
-- Content structure for each page section
-
-### Update Call-to-Action Content
-
-Edit `src/config/cta.ts` to update:
-
-- CTA title and description text
-- Primary and secondary button text and links
-- This shared configuration ensures consistent CTAs across all pages
-
-## 📦 Project Structure
-
-```
-/
-├── public/             # Static assets
-├── src/
-│   ├── assets/         # Images and other assets
-│   ├── components/     # UI components
-│   │   └── seo/        # SEO related components
-│   ├── config/         # Site configuration
-│   ├── layouts/        # Page layouts
-│   ├── pages/          # Page components
-│   ├── scripts/        # JavaScript files
-│   └── styles/         # CSS files
-└── package.json        # Project dependencies
-```
-
-## 🖼️ Icons
-
-This template uses [Astro Icon](https://github.com/natemoo-re/astro-icon) for icons, which provides access to popular icon sets like Material Design Icons.
-
-To use an icon:
-
-```astro
-<Icon name="mdi:account" class="h-6 w-6" style="color: var(--color-primary);" />
-```
-
-Notice how you can apply the global CSS variables to your icons for consistent coloring.
-
-## 🏗️ Adding New Pages
-
-1. Create a new file in `src/pages/` with the `.astro` extension
-2. Use the Layout component and add your content
-3. Update the navigation config if needed
-4. Utilize global CSS variables for consistent styling
-
-### Styling Best Practices
-
-When styling new components or pages:
-- Access color values with `var(--color-primary)`, `var(--color-secondary)`, etc.
-- Use spacing variables like `var(--space-4)` or the `.section-padding` utility class
-- Apply border radius with `var(--radius-lg)` or other radius variables
-- Use shadow variables like `var(--shadow-sm)` for consistent elevation
-- Apply transitions with `var(--transition-normal)` for smooth animations
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- [Astro](https://astro.build/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Iconify](https://iconify.design/)
+Orice host static (loosely: Cloudflare Pages / Netlify / Vercel) cu comanda
+`npm run build` și directorul `dist/`. CI rulează `check` + `build`
+(vezi `.github/workflows/ci.yml`).

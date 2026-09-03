@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
+import { statSync } from "node:fs";
 import { siteConfig } from "../config/site";
 import { buildPostPath, getPostSlug } from "../utils/blog";
 import { getCollectionSlug } from "../utils/content";
@@ -24,6 +25,17 @@ function toAbsoluteUrl(path: string): string {
   return new URL(path, siteConfig.url).toString();
 }
 
+// lastmod stabil din mtime-ul fișierului sursă (nu data build-ului,
+// ca să nu pară tot site-ul „actualizat azi" la fiecare deploy).
+function mtimeOf(relativePath: string): string | undefined {
+  try {
+    return statSync(new URL(`../../${relativePath}`, import.meta.url))
+      .mtime.toISOString();
+  } catch {
+    return undefined;
+  }
+}
+
 function createUrlEntry(entry: SitemapUrl): string {
   return `<url>
   <loc>${escapeXml(entry.loc)}</loc>
@@ -41,16 +53,16 @@ export const GET: APIRoute = async () => {
   ]);
 
   const staticPages: SitemapUrl[] = [
-    { loc: toAbsoluteUrl("/"), changefreq: "weekly", priority: "1.0" },
-    { loc: toAbsoluteUrl("/about"), changefreq: "monthly", priority: "0.6" },
-    { loc: toAbsoluteUrl("/blog"), changefreq: "weekly", priority: "0.9" },
-    { loc: toAbsoluteUrl("/contact"), changefreq: "monthly", priority: "0.9" },
-    { loc: toAbsoluteUrl("/faq"), changefreq: "monthly", priority: "0.6" },
-    { loc: toAbsoluteUrl("/politica-de-confidentialitate"), changefreq: "yearly", priority: "0.3" },
-    { loc: toAbsoluteUrl("/politica-de-cookies"), changefreq: "yearly", priority: "0.3" },
-    { loc: toAbsoluteUrl("/portofoliu"), changefreq: "monthly", priority: "0.8" },
-    { loc: toAbsoluteUrl("/servicii"), changefreq: "weekly", priority: "0.9" },
-    { loc: toAbsoluteUrl("/termeni-si-conditii"), changefreq: "yearly", priority: "0.3" },
+    { loc: toAbsoluteUrl("/"), lastmod: mtimeOf("src/pages/index.astro"), changefreq: "weekly", priority: "1.0" },
+    { loc: toAbsoluteUrl("/about"), lastmod: mtimeOf("src/pages/about.astro"), changefreq: "monthly", priority: "0.6" },
+    { loc: toAbsoluteUrl("/blog"), lastmod: mtimeOf("src/pages/blog.astro"), changefreq: "weekly", priority: "0.9" },
+    { loc: toAbsoluteUrl("/contact"), lastmod: mtimeOf("src/pages/contact.astro"), changefreq: "monthly", priority: "0.9" },
+    { loc: toAbsoluteUrl("/faq"), lastmod: mtimeOf("src/pages/faq.astro"), changefreq: "monthly", priority: "0.6" },
+    { loc: toAbsoluteUrl("/politica-de-confidentialitate"), lastmod: mtimeOf("src/pages/politica-de-confidentialitate.md"), changefreq: "yearly", priority: "0.3" },
+    { loc: toAbsoluteUrl("/politica-de-cookies"), lastmod: mtimeOf("src/pages/politica-de-cookies.md"), changefreq: "yearly", priority: "0.3" },
+    { loc: toAbsoluteUrl("/portofoliu"), lastmod: mtimeOf("src/pages/portofoliu.astro"), changefreq: "monthly", priority: "0.8" },
+    { loc: toAbsoluteUrl("/servicii"), lastmod: mtimeOf("src/pages/servicii.astro"), changefreq: "weekly", priority: "0.9" },
+    { loc: toAbsoluteUrl("/termeni-si-conditii"), lastmod: mtimeOf("src/pages/termeni-si-conditii.md"), changefreq: "yearly", priority: "0.3" },
   ];
 
   const postPages: SitemapUrl[] = posts.map((post) => ({
@@ -62,12 +74,15 @@ export const GET: APIRoute = async () => {
 
   const servicePages: SitemapUrl[] = servicii.map((entry) => ({
     loc: toAbsoluteUrl(`/servicii/${getCollectionSlug(entry)}`),
+    lastmod: mtimeOf(`src/content/servicii/${entry.id}`),
     changefreq: "monthly",
     priority: "0.8",
   }));
 
   const portfolioPages: SitemapUrl[] = portofoliu.map((entry) => ({
     loc: toAbsoluteUrl(`/portofoliu/${getCollectionSlug(entry)}`),
+    // Notă: `entry.data.data` nu e typo — `data` e numele câmpului de dată
+    // din frontmatter-ul românesc (schema `portofoliu` din content.config.ts).
     lastmod: entry.data.data ? new Date(entry.data.data).toISOString() : undefined,
     changefreq: "monthly",
     priority: "0.7",

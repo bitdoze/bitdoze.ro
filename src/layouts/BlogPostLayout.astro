@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import RelatedPosts from "../components/blog/RelatedPosts.astro";
+import SmartImage from "../components/SmartImage.astro";
 import { formatDate } from "../utils/date";
 import { buildPostPath, getPostSlug, getRelatedPosts } from "../utils/blog";
 
@@ -37,6 +38,8 @@ const sidebarRelatedPosts = getRelatedPosts(
   image={image}
   canonical={canonicalPath}
   ogType="article"
+  publishedTime={date?.toISOString()}
+  modifiedTime={date?.toISOString()}
   structuredData={{
     type: "article",
     data: {
@@ -44,6 +47,7 @@ const sidebarRelatedPosts = getRelatedPosts(
       description,
       image,
       datePublished: date?.toISOString(),
+      dateModified: date?.toISOString(),
       author,
     },
   }}
@@ -73,7 +77,7 @@ const sidebarRelatedPosts = getRelatedPosts(
 
       {image && (
         <div class="blog-post__image-wrap">
-          <img src={image} alt={title} class="blog-post__image" fetchpriority="high" decoding="async" />
+          <SmartImage src={image} alt={title} class="blog-post__image" fetchpriority="high" width={1200} height={675} widths={[800, 1200]} sizes="(max-width: 1024px) 100vw, 1024px" />
         </div>
       )}
 
@@ -104,7 +108,7 @@ const sidebarRelatedPosts = getRelatedPosts(
                   <a href={buildPostPath(getPostSlug(entry))} class="blog-post__sidebar-related-item">
                     {entry.data.image && (
                       <span class="blog-post__sidebar-related-image-wrap" aria-hidden="true">
-                        <img src={entry.data.image} alt="" class="blog-post__sidebar-related-image" loading="lazy" decoding="async" />
+                        <SmartImage src={entry.data.image} alt="" class="blog-post__sidebar-related-image" width={128} height={96} />
                       </span>
                     )}
                     <span class="blog-post__sidebar-related-title">{entry.data.title}</span>

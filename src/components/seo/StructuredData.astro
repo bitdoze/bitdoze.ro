@@ -12,7 +12,7 @@ type StructuredDataProps = Props["data"];
 const { type, data } = Astro.props;
 
 const logoUrl = new URL("/bitdoze_logo_better.svg", siteConfig.url).toString();
-const defaultImageUrl = new URL(siteConfig.ogImage || "/images/og-image.svg", siteConfig.url).toString();
+const defaultImageUrl = new URL(siteConfig.ogImage || "/images/og-image.jpg", siteConfig.url).toString();
 const localBusinessImageUrl = new URL("/images/welcome-image.jpg", siteConfig.url).toString();
 
 function getAuthorName(value: StructuredDataProps[keyof StructuredDataProps]) {
@@ -97,8 +97,10 @@ const articleData = {
       url: logoUrl
     }
   },
-  datePublished: data.datePublished || new Date().toISOString(),
-  dateModified: data.dateModified || new Date().toISOString(),
+  // dateModified cade pe datePublished, niciodată pe "acum" —
+  // altfel fiecare build ar pretinde conținut proaspăt.
+  datePublished: (data.datePublished as string | undefined) || new Date().toISOString(),
+  dateModified: (data.dateModified as string | undefined) || (data.datePublished as string | undefined) || new Date().toISOString(),
   ...data
 };
 

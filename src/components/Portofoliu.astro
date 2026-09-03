@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { getCollectionSlug } from "../utils/content";
+import SmartImage from "./SmartImage.astro";
 
 interface Props {
   title?: string;
@@ -39,7 +40,7 @@ const latestProjects = portofoliu
       {latestProjects.map((project) => (
         <a href={`/portofoliu/${getCollectionSlug(project)}`} class="work-card">
           <span class="work-img">
-            <img src={project.data.imagine} alt={project.data.title} loading="lazy" />
+            <SmartImage src={project.data.imagine} alt={project.data.title} width={800} height={500} widths={[400, 800]} sizes="(max-width: 820px) 100vw, 33vw" />
           </span>
           <span class="work-meta">
             <span class="work-client">{project.data.title}</span>

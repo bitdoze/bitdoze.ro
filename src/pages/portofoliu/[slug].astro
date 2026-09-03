@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import CTA from "../../components/CTA.astro";
+import SmartImage from "../../components/SmartImage.astro";
 
 export async function getStaticPaths() {
   const portofoliuEntries = await getCollection("portofoliu");
@@ -53,7 +54,7 @@ const formattedDate = dateFormatter.format(entry.data.data);
       </div>
       <figure class="case-shot">
         <figcaption class="browser-bar"><span></span><span></span><span></span><em>{entry.data.title} — site live</em></figcaption>
-        <img src={entry.data.imagine} alt={`Captură site ${entry.data.title}`} fetchpriority="high" decoding="async" />
+        <SmartImage src={entry.data.imagine} alt={`Captură site ${entry.data.title}`} fetchpriority="high" width={1200} height={750} widths={[800, 1200]} sizes="(max-width: 960px) 100vw, 50vw" />
       </figure>
     </div>
   </section>

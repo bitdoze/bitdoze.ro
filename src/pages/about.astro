@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { aboutPageConfig } from '../config/pages';
 import CTA from '../components/CTA.astro';
 import PageHeader from '../components/PageHeader.astro';
+import SmartImage from '../components/SmartImage.astro';
 
 // Extract sections from config
 const aboutHeroSection = aboutPageConfig.sections.find(section => section.type === "aboutHero");
@@ -33,6 +34,7 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
           <p class="kicker">Povestea</p>
           <h2>{storySection.title}</h2>
           <p class="story-sub">{storySection.subtitle}</p>
+          <!-- Conținut trusted din src/config/pages.ts (nu input utilizator) -->
           <div class="story-content prose prose-lg" set:html={storySection.content} />
 
           {storySection.stats && (
@@ -47,11 +49,13 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
           )}
         </div>
         <figure class="story-fig">
-          <img
+          <SmartImage
             src={storySection.image}
             alt="Povestea BitDoze — echipa la lucru"
-            loading="lazy"
-            decoding="async"
+            width={960}
+            height={720}
+            widths={[480, 960]}
+            sizes="(max-width: 960px) 100vw, 480px"
           />
           <figcaption>Din 2014: site-uri, servere și grijă după lansare.</figcaption>
         </figure>

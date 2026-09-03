@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "../../utils/date";
 import { buildPostPath, getPostSlug } from "../../utils/blog";
+import SmartImage from "../SmartImage.astro";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -15,7 +16,7 @@ const href = buildPostPath(getPostSlug(post));
   <a href={href} class="post-link">
     {post.data.image && (
       <span class="post-img">
-        <img src={post.data.image} alt="" loading="lazy" decoding="async" />
+        <SmartImage src={post.data.image} alt={post.data.title} width={800} height={450} widths={[400, 800]} sizes="(max-width: 820px) 100vw, 33vw" />
       </span>
     )}
     <span class="post-body">

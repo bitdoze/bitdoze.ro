@@ -54,9 +54,12 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
           <p class="kicker">Trimite mesaj</p>
           <h2>{formSection.title}</h2>
           <form action="https://formsubmit.co/office@bitdoze.ro" method="POST">
+            <!-- Notă FormSubmit: prima trimitere cere activarea adresei din
+              dashboard (mail de activare). `_captcha=true` + `_honey` anti-spam. -->
             <input type="hidden" name="_subject" value="Nou mesaj de pe site-ul BitDoze" />
             <input type="hidden" name="_next" value="https://www.bitdoze.ro/multumim" />
             <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="true" />
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
             <input type="hidden" name="_autoresponse" value="Mulțumim pentru mesajul dumneavoastră! Vă vom răspunde în cel mai scurt timp posibil." />
             <div class="field-row">

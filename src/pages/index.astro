@@ -4,7 +4,6 @@ import LatestArticles from "../components/blog/LatestArticles.astro";
 import Welcome from "../components/Welcome.astro";
 import ServiceCardV2 from "../components/ServiceCardV2.astro";
 import Portofoliu from "../components/Portofoliu.astro";
-import Testimonials from "../components/Testimonials.astro";
 import HomeFaq from "../components/HomeFaq.astro";
 import CTA from "../components/CTA.astro";
 import TrustBadges from "../components/TrustBadges.astro";
@@ -21,9 +20,6 @@ const portfolioSection = homePageConfig.sections.find(
 );
 const ctaSection = homePageConfig.sections.find(
   (section) => section.type === "cta"
-);
-const testimonialsSection = homePageConfig.sections.find(
-  (section) => section.type === "testimonials"
 );
 
 const servicii = await getCollection("servicii", ({ data }) => !data.draft);
@@ -94,14 +90,6 @@ const featuredServices = servicii
       ctaText={portfolioSection.cta?.text}
       ctaLink={portfolioSection.cta?.link}
       limit={portfolioSection.limit ?? 5}
-    />
-  )}
-
-  {testimonialsSection && (
-    <Testimonials
-      title={testimonialsSection.title}
-      subtitle={testimonialsSection.subtitle}
-      testimonials={testimonialsSection.testimonials}
     />
   )}
 

@@ -13,6 +13,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       fs: {
+        // Doar pentru dev local (permite servirea fișierelor din afara root).
+        // Nu copiați în config de preview/prod.
         strict: false,
       },
     },

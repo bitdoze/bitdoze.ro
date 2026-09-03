@@ -1,0 +1,7 @@
+# Prettier ignoră fișierele Astro (necesită prettier-plugin-astro, neadoptat încă)
+# și artefactele de build.
+*.astro
+dist/
+.astro/
+public/_headers
+package-lock.json

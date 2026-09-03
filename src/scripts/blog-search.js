@@ -44,7 +44,7 @@ const createResultCard = (post) => {
   article.className = "search-result-card";
 
   const imageHtml = post.image
-    ? `<div class="search-result-card__image-wrap"><img src="${escapeHtml(post.image)}" alt="" class="search-result-card__image" loading="lazy" decoding="async" /></div>`
+    ? `<div class="search-result-card__image-wrap"><img src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" class="search-result-card__image" loading="lazy" decoding="async" width="800" height="450" /></div>`
     : "";
 
   const tagsHtml = (post.tags || [])

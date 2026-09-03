@@ -131,33 +131,37 @@ Sistemul respinge explicit clișeul SaaS: fără gradient mov-albastru, fără h
 
 ## 2. Colors
 
-Hârtie caldă cu cerneală moale, un verde adânc care poartă încrederea și un cărămiziu care marchează momentul de acțiune.
+Sursă canonică: `src/styles/global.css` (`:root`). Valorile de mai jos
+reflectă implementarea live „bold artisanal" (redesign ink + ember).
+
+Banc de lucru din cerneală adâncă, hârtie caldă pentru citit și
+portocaliu-ember pentru momentul de acțiune.
 
 ### Primary
-- **Mușchi adânc** (#1e3a32): culoarea acțiunii principale și a suprafețelor de încredere. Butoane primare, header CTA, bloc CTA verde închis.
-- **Mușchi noapte** (#132720): starea hover pentru verde și fundalul blocului CTA mare.
-- **Mușchi luminos** (#3f6a5d): variație pentru iconițe și legături discrete pe fundal deschis.
+- **Ember** (#ff4d00): culoarea acțiunii principale. Topbar, sticky CTA mobil, badge-uri. Niciodată pentru text pe fundal deschis (contrast ~3.3:1) — doar suprafețe cu text `ember-ink`.
+- **Ember adânc** (#c93a00): buton primar pe light, linkuri în prose. Contrast ~4.6:1 pe hârtie — ok pentru text.
+- **Ember moale** (#ff6b2c): accent pe dark mode.
+- **Mușchi** (#0e3b2c): suprafețe de încredere secundare, `theme-color`. Hover: mușchi noapte (#0c211a).
 
 ### Secondary
-- **Cărămiziu** (#b0492b): accent rar pentru hover pe titluri de servicii și portofoliu, badge accent, linie kicker.
-- **Cărămiziu adânc** (#93391f): hover pentru butonul accent.
+- **Cărămiziu / Clay** (#c93a00): alias al ember-ului adânc, păstrat pentru compatibilitate (`--color-clay`). Folosit rar, ca semnătură.
+- **Cărămiziu adânc** (#a32e00): hover pentru butonul primar.
 
 ### Tertiary
-- **Salvie pală** (#eef3ef): text deschis pe fundal verde închis.
-- **Cărămiziu deschis** (#c96a4b): variație luminoasă pentru stări secundare ale accentului.
+- **Mușchi cerneală** (#eef3ef): text deschis pe fundal verde închis.
 
 ### Neutral
-- **Hârtie caldă** (#faf8f4): fundalul implicit al paginii.
-- **Hârtie adâncă** (#f2ede4): fundal alternativ pentru benzi și miniaturi portofoliu.
-- **Alb card** (#ffffff): fundalul cardurilor plate.
-- **Cerneală** (#181b20): text principal.
-- **Cerneală stinsă** (#5c636e): text secundar și paragrafe lungi.
-- **Ceață** (#8b919b): meta-informații, indexuri de listă, placeholder accesibil.
-- **Linie** (#e4dccf): separatoare hairline și borduri de card.
-- **Linie puternică** (#cfc3ae): borduri pentru butoane secundare și stări hover.
-- **Noapte** (#131514): fundal dark mode.
-- **Noapte ridicată** (#1c1f1d): card dark mode.
-- **Pergament nocturn** (#ece7db): text dark mode.
+- **Hârtie caldă** (#faf7f0): fundalul implicit al paginii.
+- **Hârtie adâncă** (#f1ebe0): fundal alternativ pentru benzi și miniaturi portofoliu.
+- **Alb card** (#ffffff): fundalul cardurilor.
+- **Cerneală** (#141715): text principal, borduri de 2px.
+- **Cerneală stinsă** (#434b54): text secundar și paragrafe lungi.
+- **Ceață** (#5f686f): meta-informații, indexuri de listă.
+- **Linie** (#e2d9c8): separatoare și borduri.
+- **Linie puternică** (#c9bda6): borduri pentru butoane secundare și hover.
+- **Noapte** (#0e1210): fundal dark mode.
+- **Noapte ridicată** (#161c19): card dark mode.
+- **Pergament nocturn** (#f2efe6): text dark mode.
 
 ### Named Rules
 **The Rare Clay Rule.** Cărămiziul apare pe sub 10% din orice ecran. Raritatea lui este semnalul: dacă totul e accent, nimic nu e accent.
@@ -172,11 +176,11 @@ Hârtie caldă cu cerneală moale, un verde adânc care poartă încrederea și 
 **Character:** Serif cu personalitate caldă doar pentru afirmații mari, sans neutru și lizibil pentru tot restul. Contrastul vine din scară și greutate, nu din familii multe.
 
 ### Hierarchy
-- **Display** (560, clamp(2.4rem, 5vw, 4rem), 1.05): titluri hero și de pagină. Fraunces, echilibrat pe mai multe rânduri.
-- **Headline** (560, clamp(1.8rem, 3.4vw, 2.6rem), 1.12): titluri de secțiune. Fraunces.
+- **Display** (640, clamp(2.4rem, 5vw, 4rem), 1.05): titluri hero și de pagină. Fraunces, echilibrat pe mai multe rânduri (`text-wrap: balance`).
+- **Headline** (640, clamp(1.8rem, 3.4vw, 2.6rem), 1.12): titluri de secțiune. Fraunces.
 - **Title** (700, 1.2rem, 1.3): titluri mici de card și subsecțiuni. Inter bold.
 - **Body** (400, 1rem, 1.65): paragrafe și descrieri. Lungime maximă 68ch, culoare stinsă pentru text lung.
-- **Label** (600, 0.72rem, 0.14em, uppercase): kicker cu linie cărămizie de 32px, indexuri de rând serviciu, meta portofoliu.
+- **Label** (800, 0.78rem, 0.06em, uppercase): kicker tip ștampilă (pill ink + bulină ember); mono doar pentru meta/indexuri.
 
 ### Named Rules
 **The Two Voices Rule.** Fraunces vorbește doar în display și headline. Orice altceva în serif diluează vocea.
@@ -184,7 +188,11 @@ Hârtie caldă cu cerneală moale, un verde adânc care poartă încrederea și 
 
 ## 4. Elevation
 
-Sistem plat implicit cu adâncime subtil structurală. Cardurile stau pe hârtie prin bordură hairline, fără umbră la repaus. Hover-ul îngroașă doar culoarea bordurii, nu ridică suprafața. Umbrele există în vocabular dar sunt rezervate pentru stări care chiar se ridică: meniu mobil, dialog, consent, tooltip.
+Sistem bold: cardurile au border ink de 2px la repaus, fără umbră. Hover-ul
+adaugă hard shadow (`5px 5px 0 ink`) + translate subtil — ca o ștampilă
+apăsată, nu ca un card SaaS care plutește. Umbrele blurry există în vocabular
+dar sunt rezervate pentru stări care chiar se ridică: meniu mobil, dialog,
+consent, tooltip.
 
 ### Shadow Vocabulary
 - **Ridicare mică** (`box-shadow: 0 1px 2px rgba(20, 26, 22, 0.06)`): separare minimă pe fundal hârtie.
@@ -193,48 +201,52 @@ Sistem plat implicit cu adâncime subtil structurală. Cardurile stau pe hârtie
 - **Ridicare maximă** (`box-shadow: 0 16px 40px rgba(20, 26, 22, 0.12)`): cazuri rare, suprapuneri pline.
 
 ### Named Rules
-**The Flat-By-Default Rule.** Suprafețele sunt plate la repaus. Umbra apare doar ca răspuns la stare: hover pe meniu, deschidere dialog, focus ridicat.
+**The Bold-At-Rest Rule.** Cardurile au border de 2px ink și hard shadow la hover (`5px 5px 0 ink`, translate `-1px/-1px`). Nu ridicări blurry tip SaaS.
 
 ## 5. Components
 
+Implementarea live: `src/styles/global.css` (`.btn`, `.card`, `.kicker`, `.badge`).
+
 ### Buttons
-Plate și hotărâte: solide, fără lift, fără ripple, tranziție scurtă doar pe culoare.
-- **Shape:** colțuri ușor rotunjite (6px)
-- **Primary:** verde mușchi (#1e3a32) cu text alb, padding 11px 20px, font 600 de 0.95rem
-- **Hover / Focus:** verde noapte (#132720). Focus vizibil cu contur verde de 2px la 2px distanță.
-- **Secondary / Ghost:** transparent cu bordură linie puternică (#cfc3ae), text cerneală. Hover îngroașă bordura spre cerneală cu fundal slab de 4%.
-- **Accent:** cărămiziu (#b0492b) cu text alb, hover cărămiziu adânc (#93391f).
+Solide și hotărâte: fără lift, fără ripple, tranziție scurtă doar pe culoare.
+- **Shape:** rază 12px, padding `0.95rem 1.6rem`, `min-height 50px`, font 700 de 1rem, border 2px transparent
+- **Primary:** ember adânc (#c93a00) cu text alb; hover #a32e00. Pe dark: ember (#ff4d00) cu text ember-ink
+- **Hover / Focus:** focus vizibil cu contur ember-deep de 3px la 2px distanță (`:focus-visible` global)
+- **Secondary / Outline / Ghost:** transparent cu bordură de 2px; hover umple spre ink
+- **Accent (blog widget):** ink cu text hârtie; variantele de brand sunt `primary / secondary / accent` (vezi `Button.astro`)
 
 ### Chips
-- **Style:** fundal transparent sau alb card, text stins (#5c636e), bordură hairline (1px solid #e4dccf), rază mică (4px)
-- **State:** varianta primară colorează textul în verde mușchi cu bordură la 35% opacitate, varianta accent în cărămiziu la 35% opacitate.
+- **Style:** pill (999px) cu border ink de 1.5–2px, fundal hârtie, text ink 800
+- **State:** varianta primară (fundal ink, text hârtie), varianta accent (fundal ember, text ember-ink)
 
 ### Cards / Containers
-- **Corner Style:** rotunjire confortabilă (10px)
+- **Corner Style:** 16px, border 2px ink, fără umbră la repaus
 - **Background:** alb card pe hârtie caldă, hârtie adâncă pentru miniaturi portofoliu
-- **Shadow Strategy:** fără umbră la repaus, vezi Elevation
-- **Border:** hairline de 1px în culoarea linie (#e4dccf), hover spre linie puternică
+- **Shadow Strategy:** hover `5px 5px 0 ink` + translate; pe dark, umbră neagră
 - **Internal Padding:** 24px standard, containere la 1216px maxim cu 20px margine laterală
 
+### Kicker
+- **Style:** pill sans 800 (`0.78rem`, uppercase, `0.06em`), fundal ink cu bulină ember, text hârtie. Pe dark se inversează. Nu e mono cu linie — e ștampilă.
+
 ### Inputs / Fields
-- **Style:** fundal alb card, bordură linie, rază 6px, text cerneală
-- **Focus:** bordură verde mușchi cu contur vizibil de 2px
+- **Style:** fundal hârtie, bordură ink 2px, rază 12px, text cerneală
+- **Focus:** contur vizibil ember-deep de 3px
 - **Error / Disabled:** roșu cărămiziu închis (#a83a2e) pentru eroare, text ceață pentru dezactivat
 
 ### Navigation
-Header lipicios cu fundal hârtie, logo SVG la stânga, navigație centrală Inter 500, CTA primar mic la dreapta. Legătura activă primește subliniere sau greutate mai mare. Pe mobil, meniu tip panou plat cu aceeași ierarhie, fără animație de alunecare agresivă.
+Header lipicios cu fundal hârtie, border-bottom 3px ink + `box-shadow 0 4px 0 ember`, logo SVG la stânga, navigație Inter 750, CTA primar mic la dreapta. Linkul activ e pill ember. Pe mobil, meniu tip panou ink cu linkuri serif mari. Sticky CTA mobil spre /contact (ascuns pe /contact și /multumim).
 
 ### Signature Component
-Rândul de serviciu: grilă cu index mono, titlu serif de 1.45rem și meta la dreapta, separat prin linie de 1px sus. Hover colorează titlul în cărămiziu cu fundal slab de 2.5%. Este alternativa deliberată la grila de carduri identice.
+Cardul îndrăzneț cu border 2px + hard shadow la hover, preț-pilulă și header grafic. Alternativa deliberată la grila de carduri plate identice.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** păstrează fundalul pe hârtie caldă (#faf8f4) cu text cerneală (#181b20) pentru contrast calm și lizibil.
-- **Do** folosește verde mușchi (#1e3a32) pentru acțiunea principală și cărămiziu (#b0492b) rar, ca semnătură.
-- **Do** preferă rânduri cu separatoare hairline în locul cardurilor când listezi servicii sau proiecte.
-- **Do** limitează Fraunces la display și headline, cu echilibrare a rândurilor.
-- **Do** păstrează colțurile mici (4-10px) și suprafețele plate cu bordură de 1px.
+- **Do** păstrează fundalul pe hârtie caldă (#faf7f0) cu text cerneală (#141715) pentru contrast calm și lizibil.
+- **Do** folosește ember (#ff4d00) decisiv pentru CTA și cărămiziu rar, ca semnătură. Niciodată ember pentru text pe deschis — doar ember-deep.
+- **Do** preferă carduri bold cu border 2px + hard shadow la hover, nu suprafețe plate invizibile.
+- **Do** limitează Fraunces la display și headline, cu echilibrare a rândurilor (`text-wrap: balance`).
+- **Do** păstrează colțurile 12–16px și bordurile ink de 2px ca semnătură de atelier.
 
 ### Don't:
 - **Don't** folosi gradient mov-albastru sau text cu gradient. Interzis prin anti-referința SaaS din PRODUCT.md.

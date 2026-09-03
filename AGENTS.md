@@ -11,7 +11,7 @@ Date: 01 April 2026
 
 ## Architecture
 
-- Astro v6 site for BitDoze Romania
+- Astro v7 site for BitDoze Romania
 - Main areas: service pages, portfolio pages, legal pages, and a Romanian blog
 - Content collections live in `src/content.config.ts`
 - Current collections:
@@ -19,6 +19,11 @@ Date: 01 April 2026
   - `servicii` for services in `src/content/servicii/`
   - `portofoliu` for portfolio entries in `src/content/portofoliu/`
 - Main layout: `src/layouts/Layout.astro`
+- Imagini: folosește `SmartImage` (`src/components/SmartImage.astro`) pentru
+  orice imagine din colecții — rezolvă `/images/...` în `src/assets/images/`
+  și generează srcset optimizat, cu fallback `<img>` pentru SVG.
+- Fonturi self-hosted: `public/fonts/` + `src/styles/fonts.css` (latin + latin-ext).
+  Nu adăuga linkuri externe de fonturi.
 - Blog article layout: `src/layouts/BlogPostLayout.astro`
 - Blog widgets: `src/components/blog/widgets/`
 - Blog search: `src/pages/search.astro`, `src/pages/search.json.ts`, `src/scripts/blog-search.js`
@@ -106,11 +111,13 @@ Import is automatic through `MarkdownComponents`, so MDX posts can use these dir
     text="Vezi serviciul"
     link="/servicii/seo"
     variant="solid"
-    color="blue"
+    color="primary"
     icon="arrow-right"
     iconPosition="right"
   />
   ```
+  Culori de brand: `primary` (ember), `secondary` (moss), `accent` (ink).
+  Culorile legacy (`blue/green/red/purple/gray`) mai funcționează ca fallback, dar nu le folosi în articole noi.
 - `ListCheck`
   Example:
   ```mdx
@@ -174,4 +181,4 @@ Import is automatic through `MarkdownComponents`, so MDX posts can use these dir
 
 - Register: brand, platform: web. See `PRODUCT.md` for users, positioning, conversion and principles.
 - Visual system: `DESIGN.md` plus live primitives in `.impeccable/design.json`.
-- Identity: hârtie caldă #faf8f4, cerneală #181b20, verde mușchi #1e3a32, cărămiziu rar #b0492b. Fraunces display + Inter body, suprafețe plate cu hairline.
+- Identity: hârtie caldă #faf7f0, cerneală #141715, verde mușchi #0e3b2c, ember #ff4d00 / cărămiziu #c93a00. Fraunces display + Inter body, suprafețe bold cu border 2px ink + hard shadow.

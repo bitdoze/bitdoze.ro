@@ -42,7 +42,7 @@ export const companyConfig: CompanyConfig = {
       street: "Sat Ciocăneşti Com. Călineşti, Nr.81",
       city: "Călineşti",
       state: "Argeş",
-      zip: "",
+      zip: "117197",
       country: "România",
     },
   },

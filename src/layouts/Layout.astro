@@ -17,6 +17,9 @@ interface Props {
   twitterCard?: "summary" | "summary_large_image";
   noindex?: boolean;
   nofollow?: boolean;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
   structuredData?: {
     type:
       | "website"
@@ -38,6 +41,9 @@ const {
   twitterCard = "summary_large_image",
   noindex = false,
   nofollow = false,
+  author = "BitDoze",
+  publishedTime,
+  modifiedTime,
   structuredData = {
     type: "organization",
     data: { name: companyConfig.name },
@@ -51,29 +57,23 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,640&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"
-      rel="stylesheet"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,640&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <!-- Fonturi self-hosted (public/fonts, @font-face în styles/fonts.css).
+      Fără requesturi către Google — GDPR + fiabilitate. -->
 
     <!-- Script to prevent flash of light mode -->
     <script is:inline>
-      // Apply dark mode immediately if needed
-      const darkModeOn =
-        localStorage.getItem("theme") === "dark" ||
-        (!localStorage.getItem("theme") &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches);
+      try {
+        // Apply dark mode immediately if needed
+        var darkModeOn =
+          localStorage.getItem("theme") === "dark" ||
+          (!localStorage.getItem("theme") &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-      if (darkModeOn) {
-        document.documentElement.classList.add("dark");
+        if (darkModeOn) {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {
+        // private mode / fără localStorage: rămânem pe light
       }
     </script>
 
@@ -87,21 +87,16 @@ const {
       twitterCard={twitterCard}
       noindex={noindex}
       nofollow={nofollow}
+      author={author}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
     />
 
     <!-- Structured Data -->
     <StructuredData type={structuredData.type} data={structuredData.data} />
   </head>
   <body>
-    <a
-      href="#continut"
-      class="skip-link"
-      style="position:absolute;left:1rem;top:-4rem;z-index:100;background:var(--color-moss);color:#fff;padding:0.7rem 1rem;border-radius:6px;text-decoration:none;transition:top 120ms ease;"
-      onfocus="this.style.top='1rem'"
-      onblur="this.style.top='-4rem'"
-    >
-      Sari la conținut
-    </a>
+    <a href="#continut" class="skip-link"> Sari la conținut </a>
     <div class="layout-wrapper">
       <Header />
       <main id="continut">
@@ -117,6 +112,24 @@ const {
         height: 100%;
         margin: 0;
         padding: 0;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -4rem;
+        z-index: 100;
+        background: var(--color-moss);
+        color: #fff;
+        padding: 0.7rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: top 120ms ease;
+      }
+      .skip-link:focus-visible {
+        top: 1rem;
+        outline: 3px solid var(--color-ember-deep);
+        outline-offset: 2px;
       }
 
       .layout-wrapper {

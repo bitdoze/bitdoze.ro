@@ -1,0 +1,8 @@
+# Headere de securitate (Cloudflare Pages / Netlify le aplică automat).
+# Inline scripts (`is:inline`) sunt necesare în Astro, deci `unsafe-inline` rămâne.
+# Plausible se încarcă doar după consimțământ, de pe domeniul propriu.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://an3.bitdoze.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.openstreetmap.org; connect-src 'self' https://an3.bitdoze.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://formsubmit.co
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

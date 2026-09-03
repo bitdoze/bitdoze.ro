@@ -9,7 +9,7 @@ export interface Props {
   label?: string;
   url?: string;
   variant?: "solid" | "outline";
-  color?: "blue" | "green" | "red" | "purple" | "gray";
+  color?: "primary" | "secondary" | "accent" | "blue" | "green" | "red" | "purple" | "gray";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   external?: boolean;
   // Icon support
@@ -26,7 +26,7 @@ const {
   label,
   url,
   variant = "solid",
-  color = "blue",
+  color = "primary",
   size = "md",
   external = false,
   icon,
@@ -72,7 +72,27 @@ const iconOnlyPadding = {
   xl: "p-3",
 };
 
-const colorClasses = {
+const brandClass: Record<string, string> = {
+  primary: "blog-btn-brand-primary",
+  accent: "blog-btn-brand-accent",
+  secondary: "blog-btn-brand-secondary",
+};
+
+// Culorile legacy (blue/green/…) rămân ca fallback, dar nu mai sunt documentate.
+// Folosiți primary / secondary / accent pentru sistemul BitDoze.
+const colorClasses: Record<string, { solid: string; outline: string }> = {
+  primary: {
+    solid: "text-white shadow-sm",
+    outline: "border-current hover:bg-black/5 dark:hover:bg-white/10",
+  },
+  accent: {
+    solid: "text-white shadow-sm",
+    outline: "border-current hover:bg-black/5 dark:hover:bg-white/10",
+  },
+  secondary: {
+    solid: "text-white shadow-sm",
+    outline: "border-current hover:bg-black/5 dark:hover:bg-white/10",
+  },
   blue: {
     solid:
       "bg-blue-600 hover:bg-blue-700 text-white shadow-sm dark:bg-blue-600 dark:hover:bg-blue-700",
@@ -106,9 +126,11 @@ const colorClasses = {
 };
 
 // Construct the button classes based on all the options
+const isBrand = color === "primary" || color === "secondary" || color === "accent";
 const buttonClasses = `mt-2 mb-2 not-prose inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 ease-in-out
 	${variant === "outline" ? "border-2 " : ""}
-	${colorClasses[color][variant]}
+	${colorClasses[color]?.[variant] ?? colorClasses.primary.solid}
+	${isBrand && variant === "solid" ? brandClass[color] : ""}
 	${showIconOnly ? iconOnlyPadding[size] : sizeClasses[size]}
 	${showIconOnly ? "aspect-square" : ""}
 	${hasText ? "gap-2" : ""}
@@ -157,5 +179,28 @@ const buttonClasses = `mt-2 mb-2 not-prose inline-flex items-center justify-cent
   .blog-widget-button__label {
     display: inline-block;
     line-height: 1.2;
+  }
+
+  /* Culori de brand BitDoze (sistemul ember/moss din global.css) */
+  .blog-btn-brand-primary {
+    background-color: var(--color-ember-deep);
+    color: #fff;
+  }
+  .blog-btn-brand-primary:hover {
+    background-color: #a32e00;
+  }
+  .blog-btn-brand-accent {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .blog-btn-brand-accent:hover {
+    background-color: #000;
+  }
+  .blog-btn-brand-secondary {
+    background-color: var(--color-moss);
+    color: #fff;
+  }
+  .blog-btn-brand-secondary:hover {
+    background-color: var(--color-moss-deep);
   }
 </style>

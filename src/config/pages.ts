@@ -277,36 +277,6 @@ export const homePageConfig: PageConfig = {
       },
     },
     {
-      type: "hero",
-      title:
-        "Transformăm Ideile Tale în Succese Digitale Care Generează Profit",
-      subtitle:
-        "Creăm site-uri profesionale și strategii de marketing care aduc clienți noi și cresc veniturile. Răspuns garantat în 24 ore.",
-      ctaPrimary: {
-        text: "Obține Consultare Gratuită",
-        link: "/contact",
-      },
-      ctaSecondary: {
-        text: "Vezi Portofoliul Nostru",
-        link: "/portofoliu",
-      },
-      imageUrl: imageAssets.hero.main,
-      stats: [
-        {
-          value: "50+",
-          label: "Proiecte Finalizate",
-        },
-        {
-          value: "10+",
-          label: "Ani Experiență",
-        },
-        {
-          value: "24/7",
-          label: "Suport Clienți",
-        },
-      ],
-    },
-    {
       type: "welcome",
       title: "Site-uri care arată bine și aduc clienți.",
       subtitle:
@@ -362,38 +332,9 @@ export const homePageConfig: PageConfig = {
         link: "/servicii",
       },
     },
-    {
-      type: "testimonials",
-      title: "Ce Spun Clienții Noștri",
-      subtitle:
-        "Numeroase companii din România au încredere în serviciile noastre pentru a-și dezvolta afacerile.",
-      testimonials: [
-        {
-          content:
-            "Serviciile oferite au transformat complet modul în care ne gestionăm prezența online. Designul site-ului a atras mult mai mulți clienți decât ne așteptam.",
-          author: "Maria Ionescu",
-          role: "Director Marketing",
-          company: "Soluții Digitale SRL",
-          avatar: "",
-        },
-        {
-          content:
-            "Am încercat mai multe agenții înainte, dar nimic nu se compară cu serviciile BitDoze. Optimizările SEO ne-au ajutat să reducem costurile de publicitate cu 35%.",
-          author: "Mihai Popa",
-          role: "Director General",
-          company: "Inovație Plus",
-          avatar: "",
-        },
-        {
-          content:
-            "Suportul pentru clienți este excepțional. Ori de câte ori avem întrebări, echipa răspunde rapid și eficient. Este rar să găsești acest nivel de servicii în România.",
-          author: "Elena Dumitrescu",
-          role: "Manager de Produs",
-          company: "Creștere Digitală SRL",
-          avatar: "",
-        },
-      ],
-    },
+    // Notă: secțiunea testimonials a fost scoasă intenționat până avem
+    // testimoniale reale cu nume/firmă verificabile. Placeholder-ele
+    // generice (nume inventate) scad încrederea exact unde contează.
     {
       ...getCtaSection(),
       trustedBy: "50+ proiecte livrate · suport în română · răspuns în 24h",
@@ -424,8 +365,7 @@ export const aboutPageConfig: PageConfig = {
       <p>Una dintre pasiunile mele este să scriu despre WordPress, având o platformă dedicată numită wpdoze.com unde îmi împărtășesc cunoștințele despre acest sistem de gestionare a conținutului extrem de popular. De la sfaturi practice la tutoriale detaliate, mă străduiesc să ofer resurse valoroase care să ajute persoanele și afacerile să își optimizeze site-urile WordPress.</p>
 
       <p>Pe lângă pasiunea pentru WordPress, sunt la fel de entuziasmat de Linux, site-uri statice, CMS, VPS și tot ce ține de DevOps. Aceste subiecte m-au determinat să lansez platforma bitdoze.ro, unde explorez funcționalitățile Linux, lumea site-urilor statice și ofer consultanță în domeniul DevOps și soluții personalizate pentru afaceri în mediul digital.</p>`,
-      image:
-        "https://images.unsplash.com/photo-1551761429-8232f9f5955c?q=80&w=2070&auto=format&fit=crop",
+      image: "/images/welcome-image.jpg",
       stats: [
         { value: "10+", label: "Ani de experiență" },
         { value: "50+", label: "Proiecte livrate" },
@@ -607,14 +547,14 @@ export const servicesPageConfig: PageConfig = {
 export const contactPageConfig: PageConfig = {
   title: "Contact",
   description:
-    "Contactează echipa noastră pentru întrebări, asistență sau pentru a discuta cum putem ajuta afacerea ta.",
+    "Contactează BitDoze pentru întrebări, asistență sau pentru a discuta cum putem ajuta afacerea ta.",
   ogType: "website",
   sections: [
     {
       type: "contactHero",
       title: "Contact",
       subtitle:
-        "Contactează echipa noastră pentru întrebări, asistență sau pentru a discuta cum putem ajuta afacerea ta.",
+        "Contactează BitDoze pentru întrebări, asistență sau pentru a discuta cum putem ajuta afacerea ta.",
       buttonText: "Contactează-ne",
     },
     {
@@ -722,7 +662,7 @@ export const contactPageConfig: PageConfig = {
       type: "businessHours",
       title: "Program de Lucru",
       subtitle:
-        "Echipa noastră este disponibilă în următoarele ore pentru a vă asista.",
+        "Suntem disponibili în următoarele ore pentru a te asista.",
       hours: [
         {
           days: "Luni - Vineri",

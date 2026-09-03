@@ -1,4 +1,6 @@
 ---
+import SmartImage from "./SmartImage.astro";
+
 interface Props {
   title: string;
   descriere: string;
@@ -15,7 +17,7 @@ const href = slug ? `/portofoliu/${slug}` : url;
 
 <article class="pcard">
   <a href={href} class="pcard-img" aria-label={title} tabindex="-1">
-    <img src={imagine} alt={`Captură site ${title}`} loading="lazy" decoding="async" />
+    <SmartImage src={imagine} alt={`Captură site ${title}`} width={800} height={500} widths={[400, 800]} sizes="(max-width: 820px) 100vw, 33vw" />
   </a>
   <div class="pcard-body">
     <h3 class="pcard-title">

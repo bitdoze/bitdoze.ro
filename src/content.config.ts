@@ -8,7 +8,7 @@ export const collections = {
       title: z.string(),
       description: z.string().optional(),
       date: z.date().optional(),
-      image: z.string().optional(),
+      image: z.string(),
       author: z.string().default("BitDoze"),
       categories: z.array(z.string()).default([]),
       tags: z.array(z.string()).default([]),
