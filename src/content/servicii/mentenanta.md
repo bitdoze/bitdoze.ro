@@ -28,7 +28,7 @@ intrebari_frecvente:
   - intrebare: 'Cât de des faceți backup-uri?'
     raspuns: 'În funcție de pachet, facem backup-uri zilnice sau săptămânale. Le păstrăm timp de 30 de zile, pentru a putea restaura o versiune anterioară oricând este nevoie.'
   - intrebare: 'Ce se întâmplă dacă site-ul meu are o problemă?'
-    raspuns: 'Pachetele noastre includ suport tehnic prioritar. Pentru urgențe, oferim și suport 24/7. Intervenim rapid pentru a rezolva orice problemă.'
+    raspuns: 'Toate pachetele includ suport tehnic prioritar și intervenim rapid pentru orice problemă. Suportul 24/7 pentru urgențe este inclus doar în pachetul Premium.'
   - intrebare: 'Mentenanța include și schimbări de design sau funcționalități noi?'
     raspuns: 'Mici actualizări de conținut — texte, imagini, produse — da, în limita pachetului ales. Un redesign complet sau funcționalități noi sunt un proiect separat; în acest caz îți propunem o ofertă de web design.'
 seo:
@@ -49,30 +49,20 @@ ordine: 3
 
 Un site web performant are nevoie de îngrijire constantă. Ne ocupăm noi de toate aspectele tehnice – actualizări, securitate, backup-uri – pentru ca site-ul tău să funcționeze perfect, iar tu să te poți concentra pe ceea ce contează mai mult: afacerea ta.
 
-Abordarea noastră este proactivă: prevenim problemele înainte ca ele să apară.
+La final de lună primești raportul de activitate: ce am actualizat, ce backup-uri s-au făcut și ce incidente am rezolvat — ca să vezi exact ce ai cumpărat.
 
-### Ce facem concret
-
-*   **Actualizări Tehnice:** Menținem platforma (WordPress, etc.), temele și plugin-urile la zi pentru a preveni vulnerabilitățile.
-*   **Monitorizare Uptime:** Verificăm constant dacă site-ul tău este online și funcționează corect. Intervenim imediat dacă apar probleme.
-*   **Backup-uri și Securitate:** Facem backup-uri regulate și implementăm măsuri de securitate pentru a-ți proteja datele.
-*   **Optimizări de Performanță:** Analizăm și îmbunătățim viteza de încărcare a site-ului pentru o experiență mai bună a utilizatorilor.
-*   **Administrare Conținut:** La cerere, adăugăm sau modificăm texte, imagini sau produse pe site-ul tău.
 
 ### Pachete de Mentenanță
 
-*   **Basic:** Ideal pentru site-uri mici și bloguri. Include actualizări lunare și backup-uri săptămânale.
-*   **Business:** Pentru site-uri de afaceri și magazine online. Include actualizări săptămânale, backup-uri zilnice și suport prioritar.
-*   **Premium:** Pentru site-uri critice. Include totul din pachetul Business, plus monitorizare avansată și suport 24/7.
+| Pachet | Include | Potrivit pentru |
+| --- | --- | --- |
+| Basic | Actualizări lunare, backup-uri săptămânale | Site-uri mici și bloguri |
+| Business | Actualizări săptămânale, backup-uri zilnice, suport prioritar | Site-uri de afaceri și magazine online |
+| Premium | Totul din Business, monitorizare avansată, suport 24/7 | Site-uri critice |
 
-### De ce să lucrezi cu noi?
+> Dacă ai nevoie de mai puțin decât credeai inițial, îți spunem — nu vindem abonamente degeaba.
 
-*   **Expertiză:** Cunoaștem în detaliu diverse platforme web.
-*   **Proactivitate:** Identificăm și rezolvăm problemele înainte să te afecteze.
-*   **Rapoarte Clare:** Primești rapoarte lunare cu tot ce am lucrat.
-*   **Asistență Personalizată:** Adaptăm serviciile la nevoile specifice ale site-ului tău.
-
-Investiția în mentenanță este o asigurare pentru prezența ta online. Lasă-ne pe noi să ne ocupăm de partea tehnică.
+[Trimite-ne adresa site-ului](/contact) și două-trei rânduri despre problemele întâlnite — îți spunem sincer dacă ai nevoie de abonament sau e suficientă o verificare punctuală.
 
 ### Pentru cine e / pentru cine nu e
 
@@ -83,6 +73,8 @@ Mentenanța este potrivită pentru tine dacă site-ul tău contează efectiv în
 ### Preț și termen, pe față
 
 Tariful de pornire este **de la 300 RON/lună**, iar serviciul funcționează ca **servicii continue**: plătești lunar, atâta timp cât ai nevoie de administrare, fără un proiect cu dată de final. Pachetul Basic acoperă un site mic sau un blog — actualizări lunare și backup-uri săptămânale — în timp ce pachetele superioare adaugă frecvență mai mare, backup-uri zilnice și suport 24/7 pentru site-urile unde fiecare oră de nefuncționare costă.
+
+> Oferta exactă pentru cazul tău o primești după auditul inițial gratuit, când știm ce administrăm de fapt.
 
 Ce urcă prețul peste pornire? În primul rând complexitatea: un magazin online cu zeci de plugin-uri, metode de plată și stocuri sincronizate cere mai multă atenție decât un site de prezentare cu cinci pagini. Apoi volumul de actualizări de conținut — câteva modificări pe lună intră în pachetele standard, dar dacă ne trimiți săptămânal produse, articole și bannere noi, ne orientăm spre un pachet superior. Backup-urile zilnice cu păstrare extinsă și monitorizarea avansată cu suport 24/7 sunt celelalte elemente care adaugă cost, firesc, pentru că presupun supraveghere și disponibilitate reale. Ce ține prețul jos? Un site construit curat, cu puține plugin-uri bine alese, actualizări de conținut rare și backup săptămânal standard — adică exact profilul unui site mic de prezentare. Primești oferta exactă după un audit inițial gratuit al site-ului: ne uiți la platformă, număr de plugin-uri, trafic și istoric de probleme, iar apoi îți recomandăm pachetul potrivit, nu cel mai scump. Dacă site-ul este într-o stare proastă și necesită mai întâi reparații — curățare de malware, refacere după un update eșuat — ți le spunem și ți le ofertăm separat, înainte de abonament.
 

@@ -13,9 +13,9 @@ tags:
 draft: false
 ---
 
-Ai cumparat un domeniu, ai hostingul pregatit, dar site-ul nu apare in browser. In 90% din cazuri, problema e la DNS. Cloudflare este cel mai popular manager DNS gratuit si e o alegere buna, dar interfata lui are destule optiuni incat sa te pierzi daca nu stii ce cauti.
+În ~20 de minute legi domeniul de hosting în Cloudflare: înregistrări A, CNAME, MX și TXT, fiecare la locul ei, ca site-ul și emailul să meargă din prima.
 
-In ghidul asta trecem prin fiecare tip de inregistrare DNS pe care o folosesti in practica, cum le adaugi in Cloudflare si la ce trebuie sa fii atent ca totul sa functioneze corect.
+Ai nevoie doar de un domeniu adăugat deja în contul Cloudflare, cu nameserverele schimbate la registrator. În ghidul ăsta trecem prin fiecare tip de înregistrare pe care o folosești în practică, cum o adaugi și la ce trebuie să fii atent ca totul să funcționeze corect.
 
 <Notice type="info" title="Ce presupune ghidul">
   Ai deja un domeniu adaugat in contul Cloudflare. Daca nu, primul pas e sa-ti adaugi domeniul si sa schimbi nameserver-urile la registrator (unde ai cumparat domeniul). Cloudflare iti arata exact ce nameservere sa setezi in momentul in care adaugi domeniul.
@@ -184,15 +184,13 @@ DNS-ul nu se propaga instantaneu. Dupa ce adaugi sau modifici o inregistrare in 
 
 Daca site-ul nu apare imediat dupa configurare, nu schimba din nou DNS-ul. Asteapta cateva minute si verifica dintr-un browser in mod incognito sau cu un alt device.
 
-## Ce urmeaza dupa configurarea DNS
+## Ce urmează după configurarea DNS
 
-Cu DNS-ul si SSL-ul configurate corect, ai fundatia tehnica pregatita. De aici incolo te concentrezi pe ce conteaza: continutul, viteza site-ului si SEO-ul.
-
-Daca configurarea DNS ti se pare complicata sau vrei sa te asiguri ca totul e setat corect, la BitDoze facem asta zilnic pentru clientii nostri.
+Cu DNS-ul și SSL-ul puse corect, ai fundația gata — de aici te ocupi de conținut, viteză și SEO. Dacă vrei să fii sigur că n-ai ratat nimic (un MX pus pe Proxied sau un SPF lipsă te costă emailuri ajunse în spam), aruncăm noi o privire peste zona ta înainte să dai drumul site-ului.
 
 <Button
-  text="Vezi serviciile BitDoze"
-  link="/servicii"
+  text="Cere verificare DNS"
+  link="/contact"
   variant="solid"
   color="blue"
   icon="arrow-right"

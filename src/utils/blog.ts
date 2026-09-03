@@ -29,7 +29,7 @@ export function getRelatedPosts(
   const currentTags = currentPost.data.tags || [];
   const currentCategories = currentPost.data.categories || [];
 
-  return [...otherPosts]
+  const matched = [...otherPosts]
     .map((post) => ({
       post,
       tagMatches: getMatchCount(currentTags, post.data.tags || []),
@@ -53,6 +53,19 @@ export function getRelatedPosts(
     })
     .map(({ post }) => post)
     .slice(0, limit);
+
+  if (matched.length >= limit) {
+    return matched;
+  }
+
+  const matchedIds = new Set(matched.map((post) => post.id));
+  const filler = getSortedPosts(
+    otherPosts.filter(
+      (post) => post.id !== currentPost.id && !matchedIds.has(post.id),
+    ),
+  ).slice(0, limit - matched.length);
+
+  return [...matched, ...filler];
 }
 
 export function normalizeSearchContent(input: string): string {

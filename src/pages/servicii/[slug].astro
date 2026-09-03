@@ -78,6 +78,10 @@ const intrebariList = entry.data.intrebari_frecvente ?? [];
         <article id="continut" class="prose prose-lg">
           <Content />
         </article>
+        <aside class="mid-cta" aria-label="Cere ofertă">
+          <p><strong>Ți se potrivește?</strong> Spune-ne 3–4 fraze despre proiect și primești preț fix și termen în 24h lucrătoare.</p>
+          <a href="/contact" class="btn btn-primary">Cere ofertă →</a>
+        </aside>
 
         {caracteristiciList.length > 0 && (
           <div id="caracteristici" class="block">
@@ -93,9 +97,9 @@ const intrebariList = entry.data.intrebari_frecvente ?? [];
           <div id="beneficii" class="block">
             <p class="kicker">De ce contează</p>
             <h2>Ce câștigi din asta</h2>
-            <ul class="plain-list">
-              {beneficiiList.map((item) => <li>{item}</li>)}
-            </ul>
+            <ol class="gain-grid">
+              {beneficiiList.map((item) => <li class="gain-card">{item}</li>)}
+            </ol>
           </div>
         )}
 
@@ -252,8 +256,56 @@ const intrebariList = entry.data.intrebari_frecvente ?? [];
     justify-content: center;
     margin-top: 0.15rem;
   }
-  .plain-list { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.7rem; color: var(--color-muted); line-height: 1.7; }
-  :global(.dark) .plain-list { color: var(--color-dark-text-light); }
+  .gain-grid {
+    list-style: none;
+    counter-reset: gain;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  @media (min-width: 720px) {
+    .gain-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .gain-card {
+    counter-increment: gain;
+    position: relative;
+    border: 2px solid var(--color-ink);
+    border-radius: 12px;
+    background: var(--color-card);
+    padding: 1rem 1.2rem 1rem 4.2rem;
+    color: var(--color-text);
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  :global(.dark) .gain-card {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-dark-text);
+  }
+  .gain-card::before {
+    content: counter(gain, decimal-leading-zero);
+    position: absolute;
+    left: 1.1rem;
+    top: 0.95rem;
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 640;
+    line-height: 1;
+    color: var(--color-ember-deep);
+  }
+  :global(.dark) .gain-card::before {
+    color: var(--color-ember-soft);
+  }
+  .gain-card::after {
+    content: "";
+    display: block;
+    width: 1.75rem;
+    height: 4px;
+    background: var(--color-ember);
+    border-radius: 999px;
+    margin-top: 0.6rem;
+  }
   .faq { display: grid; gap: 0.8rem; }
   .faq details {
     border: 2px solid var(--color-ink);
@@ -313,6 +365,33 @@ const intrebariList = entry.data.intrebari_frecvente ?? [];
   .side-list a { color: var(--color-text); font-size: 0.95rem; font-weight: 600; text-decoration: none; }
   :global(.dark) .side-list a { color: var(--color-dark-text); }
   .side-list a:hover { color: var(--color-ember-deep); text-decoration: underline; text-underline-offset: 4px; }
+  /* Bandă CTA la mijlocul paginii */
+  .mid-cta {
+    margin-top: 3rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 1.5rem 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    justify-content: space-between;
+    box-shadow: 6px 6px 0 rgba(20, 23, 21, 0.9);
+  }
+  :global(.dark) .mid-cta {
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
+  }
+  .mid-cta p {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    max-width: 32rem;
+  }
+  .mid-cta .btn {
+    flex-shrink: 0;
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
   }

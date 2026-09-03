@@ -29,9 +29,9 @@ export interface CompanyConfig {
 export const companyConfig: CompanyConfig = {
   name: "BitDoze",
   legalName: "BITDOZE WEB CONS S.R.L",
-  tagline: "Soluții profesionale pentru afacerea ta online",
+  tagline: "Site-uri care aduc clienți — preț fix, răspuns în 24h.",
   description:
-    "Oferim servicii complete de web design, hosting și consultanță IT pentru a ajuta afacerea ta să crească în mediul digital.",
+    "Atelier web din Argeș: site-uri rapide, magazine online și mentenanță. Lucrezi direct cu omul care îți face site-ul.",
   cui: "28708326",
   logo: {
     text: "BitDoze",

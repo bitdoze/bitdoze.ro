@@ -13,9 +13,9 @@ tags:
 draft: false
 ---
 
-Daca ai un VPS sau un server dedicat cu Ubuntu si vrei sa rulezi aplicatii in containere, Docker este alegerea directa. Problema e ca instalarea "clasica" prin repository-ul oficial are vreo zece pasi si presupune sa adaugi chei GPG, sa configurezi surse APT si sa te asiguri ca totul e corect. Exista o cale mai scurta.
+În 5 minute ai Docker funcțional pe Ubuntu: rulezi scriptul oficial, adaugi utilizatorul în grupul `docker` și astupi gaura clasică dintre Docker și firewall-ul UFW, ca să nu rămâi cu porturi expuse fără să știi.
 
-In ghidul asta parcurgem instalarea Docker pe Ubuntu folosind scriptul oficial, configurarea firewall-ului UFW (pentru ca Docker si UFW nu se inteleg din prima), adaugarea utilizatorului in grupul `docker` si cateva verificari de securitate pe care merita sa le faci inainte sa pui ceva in productie.
+În ghidul ăsta parcurgem exact pașii ăștia — instalare, UFW, verificări de securitate — ca să poți pune containere în producție fără surprize.
 
 <Notice type="info" title="Versiuni testate">
   Pasii de mai jos functioneaza pe Ubuntu 22.04 LTS si Ubuntu 24.04 LTS. Scriptul oficial suporta si alte distributii bazate pe Debian, dar recomandarile de firewall sunt specifice UFW.
@@ -285,10 +285,10 @@ Odata ce ai Docker functional si firewall-ul configurat, poti:
 - folosi Docker Compose pentru stive multi-container
 - automatiza deployment-ul cu CI/CD
 
-Daca ai nevoie de ajutor cu configurarea serverului, containere Docker sau administrare VPS, echipa BitDoze lucreaza cu aceste tehnologii zilnic.
+După instalare urmează partea care contează cu adevărat: firewall pus corect, reverse proxy și backup-uri. Dacă vrei serverul configurat cap-coadă de cineva care face asta zilnic, scrie-ne.
 
 <Button
-  text="Cere o consultatie"
+  text="Cere configurare server"
   link="/contact"
   variant="solid"
   color="blue"

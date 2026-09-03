@@ -21,13 +21,13 @@ beneficii:
   - 'Decizii bazate pe date'
 intrebari_frecvente:
   - intrebare: 'Ce canale de marketing sunt potrivite pentru mine?'
-    raspuns: 'Depinde de afacerea și publicul tău. Analizăm acești factori și recomandăm mix-ul optim de canale (Google Ads, Facebook, Instagram, Email, etc.) pentru a obține cele mai bune rezultate.'
+    raspuns: 'De pildă, pentru o firmă locală pornim de regulă de la Google Search plus remarketing, iar pentru un magazin online de la Shopping plus Meta. Mixul final îl confirmăm după un audit inițial — [scrie-ne](/contact) ce vinzi și cui, iar îți spunem ce canale au sens pentru tine.'
   - intrebare: 'Cum măsurați succesul?'
     raspuns: 'Prin indicatori de performanță (KPI) clari, stabiliți împreună: de la vizibilitate și interacțiuni, la clienți potențiali (lead-uri), vânzări și rentabilitatea investiției (ROI).'
   - intrebare: 'Care este bugetul minim recomandat?'
     raspuns: 'Depinde de industrie și obiective. Recomandăm un buget de publicitate de cel puțin 1500-2000 RON/lună (separat de costul serviciilor) pentru a putea obține date și rezultate relevante.'
   - intrebare: 'Cât de des primesc rapoarte?'
-    raspuns: 'Primești rapoarte săptămânale pe scurt și rapoarte lunare detaliate, cu analize și recomandări. Monitorizăm campaniile zilnic și le optimizăm în timp real.'
+    raspuns: 'Primești rapoarte săptămânale pe scurt și rapoarte lunare detaliate, cu analize și recomandări. Verificăm zilnic cheltuiala, ajustăm bugetele săptămânal și oprim rapid ce nu performează.'
   - intrebare: 'De ce colaborarea minimă este de 3 luni?'
     raspuns: 'Pentru că marketingul plătit are nevoie de timp ca să producă date relevante: primele săptămâni calibrăm audiențele și mesajele, iar optimizarea reală apare după câteva cicluri de testare. Sub 3 luni am trage concluzii pe date insuficiente.'
 seo:
@@ -48,43 +48,29 @@ ordine: 6
 
 O prezență online puternică este vitală. Oferim servicii de marketing digital care te conectează cu publicul tău, construiesc relații și generează rezultate măsurabile.
 
-Abordarea noastră este strategică și bazată pe date. Creăm strategii unice, concentrate pe obiectivele tale de business.
+Primești o strategie pe o pagină — obiectiv, canale, buget și indicatori — pe care o aprobi înainte să pornim campaniile. [Scrie-ne](/contact) ce vinzi și cui, iar îți spunem ce ar conține pagina pentru cazul tău.
 
-### Ce facem concret
-
-*   **Google Ads & PPC:** Creăm și gestionăm campanii de publicitate (Search, Display, Shopping) care atrag trafic de calitate și generează conversii.
-*   **Social Media Marketing:** Implementăm strategii pentru Facebook, Instagram, LinkedIn etc., pentru a crește vizibilitatea și a crea o comunitate în jurul brandului tău.
-*   **Email Marketing:** Creăm campanii de email și automatizări care transformă abonații în clienți fideli.
-*   **Content Marketing:** Dezvoltăm conținut (articole de blog, ghiduri) care educă audiența, construiește autoritate și atrage clienți.
-*   **Analiză și Raportare:** Folosim date pentru a măsura performanța și a lua decizii informate. Primești rapoarte clare și la obiect.
-
-### De ce să lucrezi cu noi?
-
-*   **Abordare Integrată:** Creăm o strategie coerentă pe toate canalele de marketing.
-*   **Orientare spre Rezultate:** Ne concentrăm pe rezultate măsurabile și pe maximizarea ROI-ului.
-*   **Expertiză:** Suntem la curent cu cele mai noi tendințe și instrumente din industrie.
-*   **Transparență:** Oferim rapoarte clare care îți arată exact cum performează campaniile.
-
-### Cum lucrăm
-
-1.  **Analiză și Strategie:** Înțelegem afacerea ta și creăm o strategie personalizată.
-2.  **Implementare:** Lansăm campaniile și dezvoltăm conținutul.
-3.  **Optimizare:** Monitorizăm constant și facem ajustări pentru a maximiza rezultatele.
-4.  **Raportare:** Primești rapoarte regulate cu performanța și pașii următori.
-
-Fie că ești la început de drum sau vrei să optimizezi strategia existentă, te ajutăm să atingi următorul nivel de creștere.
+> Nu promitem rezultate garantate, pentru că nimeni serios nu poate garanta algoritmi — primești o strategie aprobată de tine și cifre la vedere.
 
 ### Pentru cine e / pentru cine nu e
 
 Marketingul nostru digital este pentru afaceri care au deja o ofertă clară, un site care convertește decent și capacitatea de a prelua clienți noi — adică ai ce vinde, ai unde îi trimite și poți răspunde la cereri. Profilul ideal: firme de servicii locale, magazine online, clinici, școli private sau producători care vor creștere previzibilă și sunt dispuși să investească constant câteva luni, să ne dea acces la date și să aplice feedback-ul nostru (de pildă, să îmbunătățească o pagină care nu convertește). Funcționează cel mai bine când ai deja măcar un istoric minim — clienți existenți, trafic pe site, o listă de emailuri — pentru că pornim de la ceva real, nu de la zero absolut.
 
-Și acum partea onestă, când nu suntem alegerea bună. Dacă vrei „să devii viral săptămâna viitoare" sau cauți pe cineva care să-ți promită primul loc pe Google contra unei sume fixe, nu noi suntem — nu promitem rezultate garantate, pentru că nimeni serios nu poate garanta algoritmi. Dacă nu ai buget de publicitate separat de costul serviciilor noastre (orientativ, minimum 1500–2000 RON/lună plătiți către platforme), campaniile plătite nu au combustibil și mai bine începi cu [SEO](/servicii/seo) și conținut organic. Dacă site-ul tău e învechit, se încarcă greu sau nu are formulare funcționale, banii de reclamă se irosesc trimițând trafic către o destinație proastă — rezolvăm mai întâi site-ul, eventual printr-un proiect de [web design](/servicii/web-design). Și dacă vrei doar „postări pe Facebook" fără strategie, fără buget și fără măsurare, un freelancer part-time e probabil mai potrivit decât o agenție.
+Și acum partea onestă, când nu suntem alegerea bună. Dacă vrei „să devii viral săptămâna viitoare" sau cauți pe cineva care să-ți promită primul loc pe Google contra unei sume fixe, nu noi suntem. Dacă nu ai buget de publicitate separat de costul serviciilor noastre (orientativ, minimum 1500–2000 RON/lună plătiți către platforme), campaniile plătite nu au combustibil și mai bine începi cu [SEO](/servicii/seo) și conținut organic. Dacă site-ul tău e învechit, se încarcă greu sau nu are formulare funcționale, banii de reclamă se irosesc trimițând trafic către o destinație proastă — rezolvăm mai întâi site-ul, eventual printr-un proiect de [web design](/servicii/web-design). Și dacă vrei doar „postări pe Facebook" fără strategie, fără buget și fără măsurare, un freelancer part-time e probabil mai potrivit decât o agenție.
 
 ### Preț și termen, pe față
 
 Costul serviciilor pornește **de la 1200 RON/lună**, iar colaborarea este pe **minim 3 luni**. Pragul de 3 luni nu e o tactică de legare a clientului, ci minimul tehnic în care campaniile apucă să treacă de faza de calibrare și să intre în optimizare pe date reale — oricine îți promite concluzii definitive după două săptămâni de campanie te păcălește. Foarte important și separat de tariful nostru: bugetul de publicitate plătit către Google, Meta sau alte platforme nu este inclus și, din experiență, recomandăm minimum 1500–2000 RON/lună pentru el, altfel volumul de date e prea mic ca să optimizăm ceva.
 
-Ce urcă prețul peste pornire? Numărul de canale administrate simultan — un singur canal (de pildă doar Google Ads) costă mai puțin decât un mix de Google, Meta, email și conținut. Apoi volumul de conținut: câteva postări și un articol de blog pe lună sunt una, producție zilnică de conținut cu filmare și design e alta. Complexitatea contului contează și ea: un magazin cu mii de produse și feed de Shopping cere mai multă muncă decât o firmă de servicii cu trei campanii de Search. Ce ține prețul jos? Să pornești focusat — un canal, un obiectiv clar, un set restrâns de audiențe — și să extinzi după ce vezi ce funcționează. La prima discuție îți spunem exact ce intră în cei 1200 RON pentru cazul tău și ce ar costa extensiile, plus ce buget de reclamă estimăm că îți trebuie. Nu lucrăm cu comision din bugetul de reclamă, tocmai ca recomandările noastre de buget să rămână oneste: nu câștigăm nimic dacă cheltui mai mult pe clickuri.
+| Ce plătești | Cât, orientativ |
+| --- | --- |
+| Servicii de administrare | De la 1200 RON/lună |
+| Buget de reclamă către platforme | Minimum 1500–2000 RON/lună |
+| Punct de pornire real | ~2.700 RON/lună, fără TVA |
+
+Ce urcă prețul peste pornire? Numărul de canale administrate simultan — un singur canal (de pildă doar Google Ads) costă mai puțin decât un mix de Google, Meta, email și conținut. Apoi volumul de conținut: câteva postări și un articol de blog pe lună sunt una, producție zilnică de conținut cu filmare și design e alta. Complexitatea contului contează și ea: un magazin cu mii de produse și feed de Shopping cere mai multă muncă decât o firmă de servicii cu trei campanii de Search. Ce ține prețul jos? Să pornești focusat — un canal, un obiectiv clar, un set restrâns de audiențe — și să extinzi după ce vezi ce funcționează. La prima discuție îți spunem exact ce intră în cei 1200 RON pentru cazul tău și ce ar costa extensiile, plus ce buget de reclamă estimăm că îți trebuie.
+
+> Nu lucrăm cu comision din bugetul de reclamă, tocmai ca recomandările noastre de buget să rămână oneste: nu câștigăm nimic dacă cheltui mai mult pe clickuri.
 
 ### Proces de lucru
 

@@ -21,16 +21,16 @@ intrebari_frecvente:
   - intrebare: 'Cât durează crearea unui site?'
     raspuns: 'Un site de prezentare durează 2-4 săptămâni, iar un magazin online 4-8 săptămâni, în funcție de complexitate.'
   - intrebare: 'Ce tehnologii folosiți?'
-    raspuns: 'Folosim platforme populare ca WordPress, Wix sau Shopify, dar și soluții personalizate (React, Astro) pentru proiecte complexe.'
+    raspuns: 'Folosim platforme populare ca WordPress sau Shopify, dar și soluții personalizate (React, Astro) pentru proiecte complexe.'
   - intrebare: 'De ce informații aveți nevoie?'
-    raspuns: 'Avem nevoie de detalii despre afacerea ta, obiective, preferințe de design, logo, texte și imagini.'
+    raspuns: 'Avem nevoie de detalii despre afacerea ta, obiective, preferințe de design, logo, texte și imagini. Trimite-le prin [formularul de contact](/contact) și îți spunem ce ne mai trebuie ca să-ți facem oferta.'
   - intrebare: 'Includeți și optimizare SEO?'
     raspuns: 'Da, toate site-urile noastre includ optimizare SEO de bază pentru o bună indexare în Google. Oferim și pachete SEO avansate.'
   - intrebare: 'Pot actualiza singur site-ul după lansare?'
     raspuns: 'Da. Predăm site-ul cu accesurile necesare și o instruire scurtă, ca să poți modifica singur texte și imagini. Pentru intervenții tehnice poți apela la planurile noastre de mentenanță.'
 seo:
-  title: 'Servicii Web Design Profesionale'
-  description: 'Creăm site-uri web atractive, responsive și optimizate pentru afacerea ta. Design modern și expertiză tehnică pentru rezultate excelente.'
+  title: 'Web Design Profesional care Convinge și Vinde'
+  description: 'Creăm site-uri web atractive, responsive și optimizate pentru afacerea ta. Design modern și structură gândită să aducă cereri de ofertă și vânzări.'
   keywords:
     - 'web design'
     - 'creare site web'
@@ -44,33 +44,11 @@ ordine: 1
 
 ## Web Design care Convinge și Vinde
 
-Un site excepțional este motorul creșterii tale online. Creăm experiențe web care nu doar arată bine, ci transformă vizitatorii în clienți.
+Un site bun îți aduce cereri de ofertă, comenzi sau programări — nu doar aprecieri pentru cum arată. Uită-te peste [portofoliu](/portofoliu) ca să vezi ce livrăm în mod obișnuit.
 
-Combinăm designul modern cu o funcționalitate intuitivă pentru a livra un site performant, perfect adaptat oricărui dispozitiv.
+Combinăm designul modern cu o funcționalitate intuitivă: un site performant, adaptat oricărui dispozitiv. [Scrie-ne](/contact) ce vinzi și cui te adresezi, iar îți spunem ce structură ți s-ar potrivi.
 
-### Ce facem concret
-
-*   **Design Personalizat:** Creăm un design unic, care reflectă identitatea brandului tău.
-*   **Dezvoltare Responsive:** Site-ul tău va arăta impecabil pe orice dispozitiv (desktop, tabletă, mobil).
-*   **Experiența Utilizatorului (UX):** Construim site-uri ușor de navigat, unde vizitatorii găsesc rapid informațiile de care au nevoie.
-*   **Performanță:** Optimizăm site-ul pentru a se încărca rapid, un factor esențial pentru vizitatori și pentru Google.
-
-### De ce să lucrezi cu noi?
-
-*   **Expertiză:** Avem o echipă de designeri și dezvoltatori cu experiență.
-*   **Soluții pe Măsură:** Nu folosim șabloane. Creăm soluții personalizate pentru nevoile tale.
-*   **Focus pe Rezultate:** Construim site-uri care nu doar arată bine, ci și aduc rezultate (clienți, vânzări).
-
-### Cum lucrăm
-
-1.  **Consultanță:** Înțelegem afacerea și obiectivele tale.
-2.  **Planificare:** Structurăm arhitectura site-ului și experiența utilizatorului.
-3.  **Design:** Creăm o propunere vizuală a site-ului.
-4.  **Dezvoltare:** Transformăm designul într-un site funcțional.
-5.  **Testare:** Verificăm totul pentru a ne asigura că funcționează perfect.
-6.  **Lansare:** Lansăm site-ul și îți oferim suportul necesar.
-
-Fie că ai nevoie de un site de prezentare, un magazin online sau o aplicație web, suntem aici să transformăm viziunea ta în realitate.
+> Construim site-uri care aduc cereri și vânzări, iar oferta îți arată din start ce pagini, funcționalități și termen primești.
 
 ### Pentru cine e / pentru cine nu e
 
@@ -86,7 +64,9 @@ Punctul de plecare este cel afișat: **de la 2.500 RON**, cu o durată de **2–
 
 **Ce îl ține jos:** vii cu textele și imaginile pregătite, într-o formă aproape finală; știi din start ce pagini vrei și ce trebuie să facă fiecare pagină (să informeze, să convingă, să vândă, să colecteze cereri); alegi o platformă standard în locul unei soluții complet personalizate, atunci când platforma standard își face treaba; răspunzi repede și hotărât la propuneri — fiecare rundă de feedback întârziată cu o săptămână mută și lansarea cu o săptămână, iar asta prelungește și costul de coordonare.
 
-Prețul final și termenul exact le primești în ofertă, după consultanța inițială, când cunoaștem structura site-ului și integrările necesare. Fără costuri ascunse: dacă apare pe parcurs ceva în afara ofertei, ți-l semnalăm și îl evaluăm înainte să îl facem, nu ți-l prezentăm direct pe factură.
+Prețul final și termenul exact le primești în ofertă, după consultanța inițială, când cunoaștem structura site-ului și integrările necesare.
+
+> Fără costuri ascunse: dacă apare pe parcurs ceva în afara ofertei, ți-l semnalăm și îl evaluăm înainte să îl facem, nu ți-l prezentăm direct pe factură.
 
 ### Proces de lucru
 

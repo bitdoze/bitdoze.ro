@@ -27,7 +27,7 @@ intrebari_frecvente:
   - intrebare: 'Pot face upgrade la pachetul meu?'
     raspuns: 'Da, pachetele noastre sunt scalabile. Poți adăuga mai multe resurse (CPU, RAM, stocare) rapid, fără a afecta funcționarea serverului.'
   - intrebare: 'Oferiți și management pentru server?'
-    raspuns: 'Da, oferim servicii de management pentru serverele VPS, care includ actualizări de securitate, monitorizare și optimizare. Contactează-ne pentru o ofertă personalizată.'
+    raspuns: 'Da, oferim servicii de management pentru serverele VPS, care includ actualizări de securitate, monitorizare și optimizare. [Scrie-ne](/contact) ce administrezi azi și ce vrei să preluăm noi, iar îți spunem ce intră în management și cât costă în cazul tău.'
   - intrebare: 'Mă ajutați cu mutarea site-ului de pe vechiul hosting?'
     raspuns: 'Da. Planificăm împreună o fereastră de migrare cu trafic redus, configurăm noul mediu și verificăm că totul funcționează înainte de a muta traficul definitiv.'
 seo:
@@ -54,27 +54,20 @@ Infrastructura noastră modernă, bazată pe stocare SSD NVMe și procesoare de 
 
 Oferim o gamă variată de configurații VPS, adaptate pentru diverse nevoi, de la site-uri de prezentare cu trafic intens, la magazine online și aplicații complexe.
 
-*   **Resurse Dedicate:** Fiecare VPS are CPU, RAM și stocare garantate, fără a fi partajate cu alți utilizatori.
-*   **Control Total:** Ai acces root complet pentru a instala și configura orice software ai nevoie.
-*   **Scalabilitate:** Poți începe cu un pachet mic și poți adăuga resurse pe măsură ce afacerea ta crește.
-
-### De ce să alegi un VPS de la noi?
-
-*   **Performanță:** Stocarea SSD NVMe este de până la 10 ori mai rapidă decât SSD-urile tradiționale.
-*   **Securitate:** Mediul izolat al unui VPS oferă un nivel superior de securitate comparativ cu hostingul partajat.
-*   **Flexibilitate:** Poți personaliza complet mediul de hosting pentru a se potrivi perfect nevoilor tale.
-*   **Suport Tehnic:** Echipa noastră este disponibilă 24/7 pentru a te ajuta cu orice problemă tehnică.
+*   **Resurse dedicate:** CPU, RAM și stocare garantate, nepartajate cu alți utilizatori.
+*   **Control total:** acces root complet, instalezi și configurezi orice ai nevoie.
+*   **Scalabilitate:** începi mic și adaugi resurse pe măsură ce crești.
 
 ### Tehnologie și Infrastructură
 
-*   Procesoare Intel Xeon sau AMD EPYC
-*   Stocare 100% SSD NVMe în configurație RAID
-*   Rețea de mare viteză
-*   Datacentere securizate
+*   Stocare SSD NVMe cu redundanță și procesoare moderne de server
+*   Rețea configurată pentru trafic constant și protecție DDoS inclusă
 *   Backup-uri automate zilnice
-*   Protecție DDoS inclusă
+*   Centre de date cu acces controlat și monitorizare
 
-Un VPS este pasul natural pentru orice proiect online care are nevoie de mai multă putere și control. Contactează-ne pentru a discuta care este cea mai bună configurație pentru tine.
+> Țintim un uptime de 99,9% — dacă picăm sub prag într-o lună, primești 10% reducere automat.
+
+Un VPS este pasul natural pentru orice proiect online care are nevoie de mai multă putere și control. [Contactează-ne](/contact) cu detalii despre ce rulezi azi și ce trafic ai, ca să-ți recomandăm configurația potrivită.
 
 ### Pentru cine e / pentru cine nu e
 
@@ -89,6 +82,8 @@ Punctul de plecare este cel afișat: **de la 500 RON pe lună**, cu **activare �
 **Ce urcă prețul:** mai mult CPU, RAM și stocare, firește — un magazin aglomerat sau o aplicație cu baze de date mari consumă mai mult decât un site de prezentare; spațiul de backup peste un anumit prag și politicile de retenție extinse; panourile de administrare comerciale sau licențele software, atunci când le ceri explicit; serviciul de management al serverului — actualizări de securitate, monitorizare, optimizare — care se ofertează personalizat, în funcție de cât preiei tu și cât preluăm noi.
 
 **Ce îl ține jos:** începi cu configurația minimă care îți acoperă nevoile de azi, nu cu serverul de care vei avea nevoie peste doi ani — pachetele sunt scalabile și poți adăuga resurse rapid, fără a afecta funcționarea serverului; vii cu o estimare realistă de trafic și consum, ca să nu supradimensionăm „de siguranță”; preiei în echipa ta sarcinile curente de administrare, dacă ai oamenii potriviți, și ne lași nouă doar infrastructura și suportul.
+
+> Nu plătești promisiuni: configurația exactă o stabilim împreună înainte să achiți ceva.
 
 Filosofia noastră de preț este simplă: pornești mic, crești când cere realitatea, iar fiecare treaptă de upgrade vine cu o justificare pe consum, nu cu presiune de vânzare. Termenul de activare de 24 de ore se referă la serverul propriu-zis; migrarea unui proiect existent se planifică separat, într-o fereastră convenită cu tine, ca să nu pierzi vizitatori pe drum.
 

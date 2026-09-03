@@ -13,9 +13,9 @@ tags:
 draft: false
 ---
 
-Daca ai incercat sa faci deploy la o aplicatie pe Vercel sau Heroku si ai dat de limitarile planului gratuit (sau de factura de la sfarsitul lunii), exista o alternativa: iti instalezi propriul Dokploy pe un VPS si ai control complet asupra aplicatiilor tale.
+Îți vrei propriul Vercel pe un VPS de 4–5 €/lună, fără factura de la sfârșitul lunii? Îți instalezi Dokploy și ai deploy din GitHub, SSL și monitorizare pe serverul tău, cu control complet asupra aplicațiilor.
 
-[Dokploy](https://dokploy.com/) este o platforma open-source de tip PaaS (Platform as a Service) pe care o instalezi pe propriul server. Gandeste-te la el ca la un Vercel self-hosted: conectezi un repository GitHub, configurezi build-ul si Dokploy se ocupa de deploy, SSL, reverse proxy si monitorizare. Diferenta e ca platesti doar VPS-ul (de la 4-5 euro pe luna) si poti rula cate aplicatii incap pe server.
+[Dokploy](https://dokploy.com/) este o platformă open-source de tip PaaS (Platform as a Service) pe care o instalezi pe propriul server. Gândește-te la el ca la un Vercel self-hosted: conectezi un repository GitHub, configurezi build-ul, iar Dokploy se ocupă de deploy, SSL, reverse proxy și monitorizare. Diferența e că plătești doar VPS-ul (de la 4–5 € pe lună) și poți rula câte aplicații încap pe server.
 
 <YouTubeEmbed
   url="https://www.youtube.com/embed/EaOvNN-RJgI"
@@ -319,10 +319,10 @@ Compromisul e ca tu te ocupi de administrarea serverului: update-uri de sistem, 
   Depinde de furnizorul de VPS. Hetzner, de exemplu, are SLA de 99.9% uptime. Aplicatiile Dokploy pornesc automat la restart prin Docker. Pentru aplicatii critice, merita sa ai backup-uri automate si, ideal, un al doilea server.
 </Accordion>
 
-Daca ai nevoie de ajutor cu instalarea, configurarea sau administrarea unui server cu Dokploy, echipa BitDoze lucreaza zilnic cu aceste tehnologii.
+Instalarea e partea ușoară — un script și câteva clickuri. Partea care îți mănâncă serile e administrarea de după: update-uri de sistem, CrowdSec, reguli de firewall și backup-uri automate pentru baze de date. Pe un VPS de câțiva euro pe lună rulezi ce pe Vercel Pro + bază de date gestionată te-ar costa 40–60 $ lunar, dar doar dacă serverul e îngrijit. Dacă nu vrei să înveți administrare Linux ca să ții un Dokploy în picioare, lasă-ni-l nouă.
 
 <Button
-  text="Cere o consultatie"
+  text="Cere instalare Dokploy"
   link="/contact"
   variant="solid"
   color="blue"

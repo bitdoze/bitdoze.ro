@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
-import CTA from "../components/CTA.astro";
 
 // FAQ data organized by category
 const faqCategories = [
@@ -12,12 +11,12 @@ const faqCategories = [
       {
         question: "Ce servicii oferă BitDoze?",
         answer:
-          "Oferim servicii complete de dezvoltare web, hosting, mentenanță site-uri, optimizare SEO, marketing digital și consultanță IT. Suntem specializați în crearea de site-uri profesionale, magazine online și aplicații web personalizate pentru afaceri din România.",
+          "Patru lucruri: site-uri de prezentare (de la 2500 RON), magazine online (de la 5000 RON), SEO tehnic și mentenanță. Atât — fiecare cu preț de pornire și termen asumat în scris.",
       },
       {
-        question: "Cât durează să primiți un răspuns la cererea mea?",
+        question: "Cât durează să primești un răspuns la cererea mea?",
         answer:
-          "Garantăm răspuns în maximum 24 de ore lucrătoare. De obicei, răspundem în câteva ore în timpul programului de lucru (Luni-Vineri, 9:00-18:00). Pentru urgențe, suntem disponibili și prin WhatsApp.",
+          "Maximum 24h lucrătoare — de obicei mult mai repede, în programul de lucru (luni–vineri, 9:00–18:00). Îți răspunde omul care îți va face efectiv site-ul.",
       },
       {
         question: "Unde sunteți localizați?",
@@ -25,9 +24,9 @@ const faqCategories = [
           "Suntem o companie românească, înregistrată în județul Argeș. Lucrăm cu clienți din toată România și oferim servicii atât online, cât și întâlniri față în față pentru clienții din zonă.",
       },
       {
-        question: "De cât timp activați pe piață?",
+        question: "De cât timp activezi pe piață?",
         answer:
-          "Avem peste 10 ani de experiență în domeniul serviciilor digitale. În acest timp, am finalizat peste 50 de proiecte și am ajutat zeci de afaceri să crească online.",
+          "BitDoze înseamnă Dragoș: 10+ ani de IT și 50+ proiecte livrate, din 2014. Același om de la prima discuție la mentenanță.",
       },
     ],
   },
@@ -46,19 +45,19 @@ const faqCategories = [
           "Un site de prezentare standard durează 2-4 săptămâni. Un magazin online necesită 4-8 săptămâni, în funcție de complexitate. Proiectele enterprise sau cu funcționalități complexe pot dura 2-3 luni. Termenul exact îl stabilim împreună după analiza cerințelor.",
       },
       {
-        question: "Ce tehnologii folosiți pentru dezvoltare?",
+        question: "Ce tehnologii folosești pentru dezvoltare?",
         answer:
-          "Folosim tehnologii moderne precum React, Astro, Next.js pentru site-uri performante. Pentru magazine online recomandăm WooCommerce sau Shopify. Pentru site-uri simple, WordPress rămâne o opțiune excelentă. Alegem tehnologia potrivită pentru nevoile și bugetul fiecărui client.",
+          "Aleg ce e mai simplu și mai rapid pentru cazul tău: site de prezentare pe o platformă ușor de administrat sau magazin online cu tot ce trebuie (plăți, stocuri, facturare). Îți explic opțiunea înainte să începem, fără jargon.",
       },
       {
         question: "Site-ul va fi optimizat pentru mobil?",
         answer:
-          "Absolut! Toate site-urile noastre sunt 100% responsive, adică se adaptează perfect pe orice dispozitiv - desktop, tabletă sau telefon mobil. Având în vedere că peste 60% din trafic vine de pe mobil, această optimizare este esențială.",
+          "Da. Toate site-urile sunt 100% responsive — arată și funcționează bine pe telefon, tabletă și desktop. Testez fiecare pagină pe mobil înainte de lansare.",
       },
       {
         question: "Pot face modificări singur după lansare?",
         answer:
-          "Da! Toate site-urile vin cu un sistem de administrare ușor de folosit (CMS). Oferim training gratuit și documentație pentru a vă învăța cum să actualizați conținutul, să adăugați produse sau articole noi. Pentru modificări complexe, suntem mereu aici să ajutăm.",
+          "Da. Primești un sistem de administrare ușor de folosit, training gratuit și documentație ca să actualizezi singur textele, pozele sau produsele. Pentru lucruri complexe, mentenanța lunară le acoperă.",
       },
     ],
   },
@@ -77,14 +76,14 @@ const faqCategories = [
           "SEO este o strategie pe termen lung. Primele îmbunătățiri pot fi vizibile în 2-3 luni, dar rezultate semnificative apar de obicei după 6-12 luni de optimizare constantă. Depinde mult de competiție și de starea actuală a site-ului.",
       },
       {
-        question: "Oferiți servicii de marketing pe social media?",
+        question: "Oferi servicii de marketing pe social media?",
         answer:
-          "Da, oferim pachete complete de social media marketing incluzând: strategie de conținut, creare postări, management comunitate, campanii publicitare pe Facebook/Instagram, raportare lunară. Prețurile încep de la 1500 RON/lună.",
+          "Parțial: le includem în pachetele de [marketing](/servicii/marketing) — strategie, postări și campanii Meta, cu management de la 1200 RON/lună plus bugetul de reclamă. Spune-ne canalele și primești ofertă concretă.",
       },
       {
-        question: "Garantați prima poziție în Google?",
+        question: "Garantezi prima poziție în Google?",
         answer:
-          "Nimeni nu poate garanta prima poziție în Google în mod etic. Ceea ce garantăm sunt îmbunătățiri semnificative ale vizibilității, trafic organic crescut și strategii white-hat conforme cu ghidurile Google. Succesul depinde de mulți factori, inclusiv competiția din nișa dvs.",
+          "Nimeni nu poate garanta prima poziție în Google în mod etic. Ceea ce garantăm sunt îmbunătățiri semnificative ale vizibilității, trafic organic crescut și strategii white-hat conforme cu ghidurile Google. Succesul depinde de mulți factori, inclusiv competiția din nișa ta.",
       },
     ],
   },
@@ -95,22 +94,22 @@ const faqCategories = [
       {
         question: "Ce include serviciul de hosting?",
         answer:
-          "Pachetele noastre de hosting includ: spațiu SSD rapid, certificat SSL gratuit, backup-uri automate zilnice, protecție anti-malware, email profesional, suport tehnic 24/7, uptime garantat 99.9%. Prețurile încep de la 25 RON/lună.",
+          "Hosting VPS cu stocare NVMe, SSL gratuit, backup-uri zilnice și monitorizare — de la 500 RON/lună, cu activare în 24h. Țintim 99,9% uptime, iar migrarea o planificăm într-o fereastră cu trafic redus. Detalii pe pagina de [hosting](/servicii/hosting).",
       },
       {
         question: "Ce include mentenanța lunară?",
         answer:
-          "Mentenanța include: actualizări de securitate, backup-uri regulate, monitorizare uptime, optimizare performanță, rezolvare probleme tehnice, actualizări conținut (în limita pachetului ales), raport lunar de activitate. Prețuri de la 200 RON/lună.",
+          "Actualizări de securitate, backup-uri, monitorizare uptime, optimizare performanță și raport lunar — de la 300 RON/lună, în funcție de pachet. Vezi [mentenanța](/servicii/mentenanta).",
       },
       {
         question: "Ce se întâmplă dacă site-ul meu este atacat?",
         answer:
-          "Avem măsuri proactive de securitate pentru a preveni atacurile. În caz de incident, intervenim imediat pentru a restaura site-ul din backup-uri și a elimina amenințarea. Serviciul este inclus în pachetele de mentenanță.",
+          "Restaurăm site-ul din backup și eliminăm amenințarea. Intervenția în afara programului intră în pachetul Premium; pe celelalte pachete intervenim în următoarea zi lucrătoare.",
       },
       {
         question: "Pot să-mi mut site-ul existent la voi?",
         answer:
-          "Desigur! Oferim migrare gratuită pentru clienții noi. Ne ocupăm de tot procesul tehnic, asigurându-ne că site-ul funcționează perfect pe noua infrastructură, fără timp de nefuncționare.",
+          "Da. Planificăm migrarea împreună, într-o fereastră cu trafic redus, și verificăm totul înainte să mutăm traficul definitiv. Cere ofertă și primești planul migrării odată cu prețul.",
       },
     ],
   },
@@ -124,7 +123,7 @@ const faqCategories = [
           "Acceptăm plăți prin transfer bancar, card online, PayPal și cash (pentru întâlniri față în față). Pentru proiecte mari, oferim posibilitatea plății în rate: 50% avans și 50% la finalizare.",
       },
       {
-        question: "Oferiți factură și contract?",
+        question: "Oferi factură și contract?",
         answer:
           "Da, suntem o firmă înregistrată legal (CUI: 28708326) și oferim factură fiscală pentru toate serviciile. Încheiem contract de prestări servicii care detaliază clar termenii colaborării, livrabile și termene.",
       },
@@ -134,9 +133,9 @@ const faqCategories = [
           "Nu! Prețurile noastre sunt transparente și includ tot ce am agreat în ofertă. Orice serviciu adițional solicitat pe parcurs va fi discutat și aprobat înainte de implementare.",
       },
       {
-        question: "Oferiți reduceri pentru proiecte multiple?",
+        question: "Oferi reduceri pentru proiecte multiple?",
         answer:
-          "Da, oferim reduceri pentru clienții fideli și pentru proiecte multiple. De asemenea, avem oferte speciale pentru ONG-uri și startup-uri. Contactați-ne pentru o ofertă personalizată.",
+          "Da, oferim reduceri pentru clienții fideli și pentru proiecte multiple. De asemenea, avem oferte speciale pentru ONG-uri și startup-uri. Scrie-mi pe pagina de contact pentru o ofertă personalizată.",
       },
     ],
   },
@@ -203,21 +202,13 @@ const structuredData = {
         <h2>Scrie-ne direct.</h2>
         <p>Îți răspunde omul care îți va face efectiv site-ul — în maximum 24 de ore lucrătoare.</p>
         <div class="support-actions">
-          <a href="/contact" class="btn btn-primary btn-lg">Trimite-ne un mesaj →</a>
-          <a href="/servicii" class="btn btn-secondary btn-lg">Vezi serviciile</a>
+          <a href="/contact" class="btn btn-primary btn-lg">Cere ofertă →</a>
+          <a href="/portofoliu" class="support-link">Vezi portofoliul →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <CTA
-    title="Gata de următorul pas?"
-    subtitle="Un mail cu 3–4 fraze despre proiect e suficient ca să primești preț fix și termen."
-    ctaText="Cere ofertă"
-    ctaLink="/contact"
-    secondaryText="Vezi portofoliul"
-    secondaryLink="/portofoliu"
-  />
 </Layout>
 
 <style>
@@ -315,6 +306,7 @@ const structuredData = {
   .support-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
   .support-actions .btn-secondary { color: #f2efe6; border-color: rgba(255,255,255,0.4); }
   .support-actions .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
+  .support-link { color: #f2efe6; font-weight: 700; align-self: center; text-underline-offset: 3px; }
   @media (max-width: 640px) {
     .support-actions .btn { width: 100%; }
     .support-card { padding: 1.75rem; }

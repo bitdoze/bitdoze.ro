@@ -51,7 +51,7 @@ export const navConfig: NavConfig = {
     },
   ],
   ctaButton: {
-    text: "Contactează-ne",
+    text: "Cere ofertă",
     href: "/contact",
   },
   footerNav: {

@@ -484,6 +484,113 @@ section {
   overflow-x: auto;
 }
 
+/* ——— Ritmul paginilor de servicii (.svc-main .prose e HTML din Markdown,
+   deci regulile trebuie să fie globale — stilurile scoped din .astro nu-l ating) ——— */
+.svc-main .prose h2,
+.svc-main .prose h3 {
+  scroll-margin-top: 6rem;
+}
+.svc-main .prose h3 {
+  margin-top: 2.6rem;
+  font-size: 1.28rem;
+  letter-spacing: -0.01em;
+}
+/* Timeline pentru pașii din Proces de lucru */
+.svc-main .prose ol {
+  list-style: none;
+  counter-reset: svc-step;
+  margin: 1.5rem 0 1.2rem;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+.svc-main .prose ol > li {
+  counter-increment: svc-step;
+  position: relative;
+  border: 2px solid var(--color-ink);
+  border-radius: 12px;
+  background: var(--color-card);
+  padding: 1rem 1.2rem 1rem 4rem;
+  color: var(--color-text);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+.dark .svc-main .prose ol > li {
+  background: var(--color-dark-background-alt);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-dark-text);
+}
+.svc-main .prose ol > li::before {
+  content: counter(svc-step, decimal-leading-zero);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--color-ember);
+  color: var(--color-ember-ink);
+  font-size: 0.8rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Tabele de comparație (pachete, configurații) */
+.svc-main .prose table {
+  border: 2px solid var(--color-ink);
+  border-radius: 12px;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.svc-main .prose thead th {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  text-align: left;
+  padding: 0.8rem 1rem;
+  font-weight: 800;
+}
+.dark .svc-main .prose thead th {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-dark-text);
+}
+.svc-main .prose tbody td {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-text);
+  vertical-align: top;
+}
+.dark .svc-main .prose tbody td {
+  border-top-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-dark-text);
+}
+.svc-main .prose tbody td:first-child {
+  font-weight: 750;
+  white-space: nowrap;
+}
+/* Callout pentru fraza-cheie (blockquote din Markdown) */
+.svc-main .prose blockquote {
+  margin: 2rem 0 1.2rem;
+  border: 2px solid var(--color-ink);
+  border-radius: 14px;
+  background: var(--color-paper-deep);
+  padding: 1.25rem 1.4rem;
+}
+.dark .svc-main .prose blockquote {
+  background: var(--color-dark-background-alt);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.svc-main .prose blockquote p {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.14rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.dark .svc-main .prose blockquote p {
+  color: var(--color-dark-text);
+}
+
 .btn:focus-visible,
 .card:focus-visible,
 a:focus-visible,

@@ -22,7 +22,7 @@ intrebari_frecvente:
   - intrebare: 'Când apar primele rezultate SEO?'
     raspuns: 'Primele îmbunătățiri apar în 1-3 luni, iar rezultate semnificative în 3-6 luni. SEO este o strategie pe termen lung.'
   - intrebare: 'Ce vă diferențiază?'
-    raspuns: 'Abordarea noastră este personalizată și etică ("white hat"). Ne concentrăm pe atragerea de vizitatori relevanți, nu doar pe trafic. Oferim transparență și rapoarte clare.'
+    raspuns: 'Transparența. Vezi în raportul lunar exact ce linkuri am obținut și ce am modificat pe site, iar accesul la Search Console rămâne la tine, ca să verifici oricând traficul și pozițiile.'
   - intrebare: 'Garantați prima poziție în Google?'
     raspuns: 'Nu. Nimeni nu poate garanta o poziție anume. Feriți-vă de cei care promit asta. Noi garantăm o strategie etică și o îmbunătățire semnificativă a vizibilității.'
   - intrebare: 'Pentru ce afaceri oferiți SEO?'
@@ -38,6 +38,8 @@ seo:
     - 'crestere trafic organic'
     - 'optimizare Google'
     - 'audit SEO'
+    - 'creștere trafic organic'
+    - 'optimizare SEO'
     - 'link building'
 draft: false
 ordine: 5
@@ -45,35 +47,13 @@ ordine: 5
 
 ## SEO pentru a fi găsit de clienții potriviți
 
-Nu este suficient să ai un site; trebuie să fii vizibil. Serviciile noastre SEO (Optimizare pentru Motoarele de Căutare) îți cresc vizibilitatea în Google, atrăgând trafic relevant și clienți potențiali.
+Clienții tăi caută deja pe Google ce vinzi tu — întrebarea e dacă te găsesc pe tine sau pe concurență. Îți creștem vizibilitatea pentru căutările care aduc clienți, nu pentru cele care aduc doar vizite.
 
-Abordarea noastră este un mix de tehnică, conținut și autoritate, adaptat afacerii tale.
+Primești lunar o listă clară: ce pagini am optimizat, ce conținut am publicat și ce linkuri am obținut. Dacă vrei să știi unde te afli acum, [trimite-ne adresa site-ului](/contact) și îți răspundem cu o primă evaluare.
 
-### Ce facem concret
+> Nu garantăm poziții — garantăm muncă etică, strategie documentată și transparență totală asupra a ceea ce se întâmplă cu banii tăi.
 
-*   **Audit SEO:** Analizăm site-ul tău pentru a identifica problemele și oportunitățile.
-*   **Cercetare Cuvinte Cheie:** Identificăm termenii pe care îi caută clienții tăi.
-*   **Optimizare On-Page:** Optimizăm titlurile, conținutul și structura site-ului.
-*   **Optimizare Tehnică:** Îmbunătățim viteza, experiența pe mobil și indexarea în Google.
-*   **Creare de Conținut:** Dezvoltăm conținut valoros (articole de blog, pagini de servicii) care atrage și convertește.
-*   **Link Building:** Construim autoritatea site-ului tău prin obținerea de link-uri de calitate.
-
-### De ce să lucrezi cu noi?
-
-*   **Expertiză:** Avem peste 10 ani de experiență și suntem la curent cu schimbările Google.
-*   **Strategii Personalizate:** Nu folosim soluții universale. Creăm o strategie adaptată ție.
-*   **Abordare Etică:** Folosim doar tehnici "white hat", sigure și sustenabile.
-*   **Transparență:** Primești rapoarte clare despre acțiunile noastre și rezultatele obținute.
-
-### Cum lucrăm
-
-1.  **Analiză:** Discutăm obiectivele și analizăm starea actuală.
-2.  **Strategie:** Creăm un plan de acțiune personalizat.
-3.  **Implementare:** Aplicăm optimizările tehnice și de conținut.
-4.  **Monitorizare:** Urmărim performanța și facem ajustări continue.
-5.  **Raportare:** Comunicăm constant progresul și rezultatele.
-
-Investiția în SEO este una dintre cele mai profitabile pe termen lung. Te ajutăm să construiești o prezență online care generează clienți constant.
+> Nimeni onest nu poate garanta o poziție anume, iar cine promite asta vinde iluzii.
 
 ### Pentru cine e / pentru cine nu e
 
@@ -85,11 +65,13 @@ Investiția în SEO este una dintre cele mai profitabile pe termen lung. Te ajut
 
 Punctul de plecare este cel afișat: **de la 800 RON pe lună**, cu o colaborare de **minim 3 luni**. Minimul nu este o condiție arbitrară: primele îmbunătățiri apar de regulă în 1–3 luni, iar rezultate semnificative în 3–6 luni, pentru că motoarele de căutare au nevoie de timp ca să descopere, indexeze și evalueze schimbările. Cine îți promite salturi peste noapte fie nu știe despre ce vorbește, fie face lucruri pentru care vei plăti mai târziu.
 
+Concret, la nivelul de pornire primești pagini optimizate, articol și raport lunar — combinația exactă o detaliem în ofertă, după audit.
+
 **Ce urcă prețul:** numărul de pagini și de servicii de optimizat — un magazin cu sute de produse nu se compară cu un site de prezentare de 8 pagini; concurența pe nișă și pe zonă — Bucureștiul sau un sector de ecommerce aglomerat cer mai mult conținut și mai multă autoritate decât o nișă locală liniștită; volumul de conținut nou produs lunar (articole, pagini de servicii, ghiduri); site-urile multilingve, unde fiecare limbă este practic un proiect SEO separat; problemele tehnice grave moștenite — viteză slabă, structură haotică, erori de indexare — care trebuie reparate înainte să construiești ceva deasupra.
 
 **Ce îl ține jos:** un site rapid, curat tehnic și ușor de parcurs de motoarele de căutare; o nișă locală cu concurență redusă, unde câteva pagini bine făcute pot face diferența; conținut parțial existent, bun și actual, pe care îl optimizăm în loc să îl rescriem; o singură limbă și un număr restrâns de servicii prioritare, în loc de „vrem să clasăm pe tot”.
 
-În fiecare lună primești un raport clar: ce acțiuni am făcut, cum au evoluat pozițiile și traficul și ce urmează. Nu garantăm poziții — garantăm muncă etică, strategie documentată și transparență totală asupra a ceea ce se întâmplă cu banii tăi.
+În fiecare lună primești un raport clar: ce acțiuni am făcut, cum au evoluat pozițiile și traficul și ce urmează.
 
 ### Proces de lucru
 

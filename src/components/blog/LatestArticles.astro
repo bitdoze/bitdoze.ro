@@ -17,10 +17,11 @@ const latestPosts = getSortedPosts(posts).slice(0, 3);
             <h2>Note practice, nu teorie</h2>
             <p class="lede">
               Scriem despre ce facem zi de zi: viteză, SEO, hosting, mentenanță.
-              Fără jargon, cu exemple din proiecte reale.
+              Dacă vrei aplicat pe site-ul tău, nu doar citit — scrie-ne.
             </p>
           </div>
           <div class="blog-actions">
+            <a href="/contact" class="btn btn-primary">Cere estimare →</a>
             <a href="/blog" class="btn btn-secondary">Toate articolele →</a>
           </div>
         </div>
@@ -65,7 +66,7 @@ const latestPosts = getSortedPosts(posts).slice(0, 3);
     line-height: 1.7;
   }
   :global(.dark) .lede { color: var(--color-dark-text-light); }
-  .blog-actions { display: flex; gap: 0.75rem; }
+  .blog-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
   .blog-grid {
     display: grid;
     gap: 1.5rem;

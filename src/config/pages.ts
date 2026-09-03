@@ -317,17 +317,17 @@ export const homePageConfig: PageConfig = {
         ],
       },
       image: "/images/welcome-image.jpg",
-      badge: "Răspuns în 24 Ore Garantat",
+      badge: "Răspuns în 24h lucrătoare",
     },
     {
       type: "services",
       title: "Servicii Complete cu Prețuri Transparente",
       subtitle:
-        "Soluții digitale dovedite care aduc rezultate măsurabile. Prețuri de la 2500 RON. Fără costuri ascunse.",
+        "Site de prezentare de la 2500 RON, magazin online de la 5000 RON. Toate cu SEO tehnic și viteză incluse.",
       showAllServices: false,
       limit: 3,
       cta: {
-        text: "Vezi Toate Serviciile →",
+        text: "Vezi toate serviciile →",
         link: "/servicii",
       },
     },
@@ -343,9 +343,9 @@ export const homePageConfig: PageConfig = {
 
 // About page configuration
 export const aboutPageConfig: PageConfig = {
-  title: "Despre Noi",
+  title: "Omul care îți face site-ul",
   description:
-    "Află despre misiunea companiei noastre, valorile și echipa din spatele succesului nostru.",
+    "BitDoze înseamnă Dragoș — 10+ ani de IT, site-uri rapide cu preț fix înainte de start și răspuns în 24h.",
   ogType: "website",
   sections: [
     {
@@ -359,11 +359,7 @@ export const aboutPageConfig: PageConfig = {
       type: "story",
       title: "Povestea Noastră",
       subtitle: "Cum a început totul",
-      content: `<p>Salut! Permite-mi să mă prezint. Numele meu este Dragoș și sunt un profesionist IT cu peste un deceniu de experiență în domeniu. În ultimii patru ani, m-am dedicat lumii fascinante a DevOps, îmbunătățindu-mi constant abilitățile și rămânând la curent cu cele mai recente tendințe din industrie.</p>
-
-      <p>Una dintre pasiunile mele este să scriu despre WordPress, având o platformă dedicată numită wpdoze.com unde îmi împărtășesc cunoștințele despre acest sistem de gestionare a conținutului extrem de popular. De la sfaturi practice la tutoriale detaliate, mă străduiesc să ofer resurse valoroase care să ajute persoanele și afacerile să își optimizeze site-urile WordPress.</p>
-
-      <p>Pe lângă pasiunea pentru WordPress, sunt la fel de entuziasmat de Linux, site-uri statice, CMS, VPS și tot ce ține de DevOps. Aceste subiecte m-au determinat să lansez platforma bitdoze.ro, unde explorez funcționalitățile Linux, lumea site-urilor statice și ofer consultanță în domeniul DevOps și soluții personalizate pentru afaceri în mediul digital.</p>`,
+      content: `<p>Sunt Dragoș. Din 2014 fac site-uri care se încarcă repede și aduc clienți: 50+ proiecte, preț fix înainte de start, întreținere după lansare. Scriu despre WordPress pe wpdoze.com — ce învăț acolo ajunge direct în site-ul tău.</p>`,
       image: "/images/portofolio/bitdoze.com.webp",
       stats: [
         { value: "10+", label: "Ani de experiență" },
@@ -377,40 +373,22 @@ export const aboutPageConfig: PageConfig = {
       subtitle: "Principiile care ghidează tot ceea ce facem",
       values: [
         {
-          title: "Excelență",
+          title: "Preț fix, în scris",
           description:
-            "Ne străduim să oferim excelență în fiecare proiect pe care îl abordăm, asigurând cea mai înaltă calitate a serviciilor pentru clienții noștri.",
-          icon: "mdi:star",
-        },
-        {
-          title: "Inovație",
-          description:
-            "Adoptăm gândirea inovatoare și abordări noi pentru a rezolva probleme complexe și a stimula creșterea afacerilor.",
-          icon: "mdi:lightbulb",
-        },
-        {
-          title: "Integritate",
-          description:
-            "Operăm cu onestitate, transparență și responsabilitate în toate interacțiunile noastre cu clienții și echipa.",
+            "Știi cât costă și când e gata înainte să începem — prețul din ofertă e prețul final.",
           icon: "mdi:shield-check",
         },
         {
-          title: "Colaborare",
+          title: "Răspund eu, nu un tichet",
           description:
-            "Credem în puterea colaborării, lucrând îndeaproape cu clienții și membrii echipei pentru a atinge obiective comune.",
-          icon: "mdi:account-group",
+            "Vorbești direct cu omul care îți face site-ul, în maximum 24h lucrătoare.",
+          icon: "mdi:account",
         },
         {
-          title: "Orientare către client",
+          title: "Rapid și indexabil din prima zi",
           description:
-            "Prioritizăm nevoile și obiectivele clienților noștri, adaptând soluțiile noastre pentru a oferi rezultate semnificative.",
-          icon: "mdi:handshake",
-        },
-        {
-          title: "Învățare continuă",
-          description:
-            "Suntem dedicați învățării și îmbunătățirii continue, rămânând în fruntea tendințelor și practicilor din industrie.",
-          icon: "mdi:book-open-page-variant",
+            "Orice site pleacă rapid și cu SEO tehnic inclus — nu ca extra-opțiuni.",
+          icon: "mdi:rocket",
         },
       ],
     },
@@ -422,7 +400,7 @@ export const aboutPageConfig: PageConfig = {
         {
           name: "Dragoș",
           role: "Fondator & Specialist IT",
-          bio: "Cu peste 10 ani de experiență în IT și 4 ani de specializare în DevOps, Dragoș aduce o viziune tehnică avansată și soluții inovatoare pentru toate proiectele.",
+          bio: "10+ ani de IT, 4 ani pe DevOps și servere. Îți face site-ul, îl pune pe server și îl ține online — același om de la prima discuție la mentenanță.",
           image: "",
           socialMedia: [
             {
@@ -446,122 +424,27 @@ export const aboutPageConfig: PageConfig = {
   ],
 };
 
-// Services page configuration
-export const servicesPageConfig: PageConfig = {
-  title: "Serviciile Noastre",
-  description:
-    "Explorează gama noastră completă de servicii profesionale concepute pentru a ajuta afacerea ta să crească și să aibă succes.",
-  ogType: "website",
-  sections: [
-    {
-      type: "aboutHero",
-      title: "Serviciile Noastre",
-      subtitle: "Soluții complete adaptate nevoilor afacerii tale",
-      imageUrl: imageAssets.hero.services,
-    },
-    {
-      type: "servicesList",
-      title: "Ce Oferim",
-      subtitle:
-        "Explorează gama noastră de servicii profesionale concepute pentru a ajuta afacerea ta să crească și să aibă succes.",
-      showAllServices: true,
-      cta: {
-        text: "Află Mai Multe",
-        link: "/servicii",
-      },
-    },
-    {
-      type: "process",
-      title: "Procesul Nostru",
-      subtitle: "Cum oferim rezultate excepționale pentru afacerea ta",
-      steps: [
-        {
-          number: 1,
-          title: "Analiză",
-          description:
-            "Începem prin a înțelege afacerea, obiectivele, provocările și cerințele tale prin consultații detaliate.",
-          icon: "mdi:magnify",
-        },
-        {
-          number: 2,
-          title: "Strategie",
-          description:
-            "Pe baza constatărilor noastre, dezvoltăm o strategie completă adaptată nevoilor și obiectivelor tale specifice.",
-          icon: "mdi:lightbulb",
-        },
-        {
-          number: 3,
-          title: "Implementare",
-          description:
-            "Echipa noastră de experți implementează strategia, aplicând cele mai bune practici din industrie și abordări inovatoare.",
-          icon: "mdi:cog",
-        },
-        {
-          number: 4,
-          title: "Optimizare",
-          description:
-            "Monitorizăm continuu performanța și facem ajustările necesare pentru a optimiza rezultatele și a asigura succesul.",
-          icon: "mdi:chart-line",
-        },
-      ],
-    },
-    {
-      type: "faq",
-      title: "Întrebări Frecvente",
-      subtitle:
-        "Găsește răspunsuri la întrebările comune despre serviciile noastre",
-      questions: [
-        {
-          question: "Ce industrii deserviți?",
-          answer:
-            "Lucrăm cu clienți din diverse industrii, inclusiv tehnologie, sănătate, finanțe, retail, educație și producție. Expertiza noastră diversă ne permite să înțelegem dinamica diferitelor industrii și să oferim soluții personalizate.",
-        },
-        {
-          question: "Cât durează de obicei un proiect?",
-          answer:
-            "Termenele proiectelor variază în funcție de amploare, complexitate și cerințe specifice. În timpul consultației inițiale, vom oferi un termen realist bazat pe nevoile proiectului tău. Suntem dedicați respectării termenelor, asigurând în același timp rezultate de calitate.",
-        },
-        {
-          question: "Oferiți suport continuu după finalizarea proiectului?",
-          answer:
-            "Da, oferim diverse opțiuni de suport și mentenanță pentru a asigura succesul tău continuu. Putem discuta aceste opțiuni în faza de planificare a proiectului pentru a găsi cea mai bună potrivire pentru nevoile și bugetul tău.",
-        },
-        {
-          question: "Cum gestionați informațiile confidențiale?",
-          answer:
-            "Luăm în serios securitatea datelor și confidențialitatea. Respectăm protocoale stricte și cele mai bune practici din industrie pentru a-ți proteja informațiile. Toate datele clienților sunt tratate cu cea mai mare grijă și suntem dispuși să semnăm acorduri de confidențialitate înainte de a începe orice lucrare.",
-        },
-        {
-          question: "Ce face serviciile voastre diferite de altele?",
-          answer:
-            "Abordarea noastră combină expertiza în industrie, gândirea inovatoare și un focus centrat pe client. Nu oferim doar soluții generice—lucrăm îndeaproape cu tine pentru a înțelege provocările tale unice și a dezvolta strategii personalizate care se aliniază cu obiectivele și viziunea ta specifică.",
-        },
-      ],
-    },
-    getCtaSection(),
-  ],
-};
 
 // Contact page configuration
 export const contactPageConfig: PageConfig = {
-  title: "Contact",
+  title: "Cere ofertă — preț fix în 24h",
   description:
-    "Contactează BitDoze pentru întrebări, asistență sau pentru a discuta cum putem ajuta afacerea ta.",
+    "3–4 fraze despre proiect sunt suficiente. Primești preț fix și termen în 24h lucrătoare, de la omul care îți face site-ul.",
   ogType: "website",
   sections: [
     {
       type: "contactHero",
-      title: "Contact",
+      title: "Cere ofertă",
       subtitle:
-        "Contactează BitDoze pentru întrebări, asistență sau pentru a discuta cum putem ajuta afacerea ta.",
-      buttonText: "Contactează-ne",
+        "3–4 fraze despre proiect sunt suficiente. Primești preț fix și termen în 24h lucrătoare.",
+      buttonText: "Cere ofertă",
     },
     {
       type: "contactInfo",
-      title: "Contactează-ne",
+      title: "Direct, fără formular",
       subtitle:
-        "Ai întrebări sau ești gata să începi? Contactează-ne folosind oricare dintre metodele de mai jos și îți vom răspunde cât mai curând posibil.",
-      sectionTitle: "Conectează-te cu noi",
+        "Mail sau telefon — răspund eu în 24h lucrătoare, cu preț și termen.",
+      sectionTitle: "Direct, fără formular",
       contactInfo: [
         {
           title: "Email",
@@ -587,9 +470,9 @@ export const contactPageConfig: PageConfig = {
     },
     {
       type: "contactForm",
-      title: "Trimite-ne un mesaj",
+      title: "Spune-mi 3–4 fraze despre proiect",
       subtitle:
-        "Completează formularul de mai jos și îți vom răspunde cât mai curând posibil.",
+        "Răspund eu în 24h lucrătoare, cu preț și termen. Fără newsletter, datele ajung doar la mine.",
       fields: [
         {
           type: "text",
@@ -645,23 +528,23 @@ export const contactPageConfig: PageConfig = {
           id: "consent",
           name: "consent",
           label:
-            "Sunt de acord ca acest site web să stocheze informațiile mele trimise pentru a putea răspunde la solicitarea mea.",
+            "Sunt de acord să mă contactezi pe tema cererii mele.",
           required: true,
         },
       ],
-      submitText: "Trimite Mesaj",
+      submitText: "Trimite cererea →",
     },
     {
       type: "map",
       title: "Locația Noastră",
-      subtitle: `Ne găsiți în ${companyConfig.contact.address.city}, Jud. ${companyConfig.contact.address.state}. Vă puteți programa o vizită în timpul orelor de program.`,
+      subtitle: "Atelier în Călinești, Argeș — vizită doar cu programare, stabilită pe mail.",
       address: `${companyConfig.contact.address.street}, ${companyConfig.contact.address.city}, ${companyConfig.contact.address.state} ${companyConfig.contact.address.zip}`,
     },
     {
       type: "businessHours",
       title: "Program de Lucru",
       subtitle:
-        "Suntem disponibili în următoarele ore pentru a te asista.",
+        "Luni–Vineri 9–17, sâmbătă 10–14. În afara lor, mailul e cel mai rapid.",
       hours: [
         {
           days: "Luni - Vineri",
@@ -676,7 +559,7 @@ export const contactPageConfig: PageConfig = {
           hours: "Închis",
         },
       ],
-      note: "Ai nevoie de asistență în afara programului de lucru? Trimite-ne un email și îți vom răspunde cât mai curând posibil.",
+      note: "În afara programului lasă mail — îl citesc eu și răspund în 24h lucrătoare.",
     },
     {
       ...getCtaSection(),

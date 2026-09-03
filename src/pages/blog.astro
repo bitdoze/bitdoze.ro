@@ -18,10 +18,13 @@ const sortedPosts = getSortedPosts(posts);
     <div class="container">
       <div class="blog-index__hero">
         <p class="kicker">Blog · în română, fără jargon</p>
-        <h1>Ce am învățat din proiecte reale</h1>
+        <h1>Ghiduri care îți scutesc bani și ore pe site-ul tău</h1>
         <p class="blog-index__description">
           Ghiduri scurte despre site-uri, SEO și infrastructură web —
           scrise de oamenii care fac efectiv munca.
+        </p>
+        <p class="blog-index__cta">
+          <a href="/contact" class="btn btn-primary">Cere estimare gratuită →</a>
         </p>
         <p class="blog-index__meta">
           <span>{sortedPosts.length} articole</span>
@@ -63,6 +66,9 @@ const sortedPosts = getSortedPosts(posts);
     font-size: 1.08rem;
   }
   :global(.dark) .blog-index__description { color: var(--color-dark-text-light); }
+  .blog-index__cta {
+    margin: 1.5rem 0 0;
+  }
   .blog-index__meta {
     display: flex;
     gap: 0.75rem;

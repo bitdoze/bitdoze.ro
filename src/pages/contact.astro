@@ -61,7 +61,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="true" />
             <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-            <input type="hidden" name="_autoresponse" value="Mulțumim pentru mesajul dumneavoastră! Vă vom răspunde în cel mai scurt timp posibil." />
+            <input type="hidden" name="_autoresponse" value="Mulțumim! Am primit cererea — îți răspund în maximum 24h lucrătoare, cu preț și termen. — Dragoș, BitDoze" />
             <div class="field-row">
               {formSection.fields.filter(field => field.type === 'text').map(field => (
                 <div class="field">
@@ -87,7 +87,7 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
                     name={field.name}
                     rows="5"
                     required={field.required}
-                    placeholder="Descrie-ți proiectul și cum te putem ajuta..."
+                    placeholder="ex: am un service auto în Pitești, vreau site de prezentare cu 5 pagini…"
                   ></textarea>
                 ) : field.type === 'select' ? (
                   <select

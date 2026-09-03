@@ -1,7 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
-import RelatedPosts from "../components/blog/RelatedPosts.astro";
 import SmartImage from "../components/SmartImage.astro";
 import { formatDate } from "../utils/date";
 import { buildPostPath, getPostSlug, getRelatedPosts } from "../utils/blog";
@@ -100,6 +99,12 @@ const sidebarRelatedPosts = getRelatedPosts(
             </nav>
           )}
 
+          <div class="blog-post__panel blog-post__cta">
+            <p class="panel-stamp stamp-ember">Ai un proiect concret?</p>
+            <p class="blog-post__cta-text">Spune-ne ce vrei să construiești — îți răspundem în 24h cu pașii următori.</p>
+            <a href="/contact" class="blog-post__cta-btn">Cere estimare →</a>
+          </div>
+
           {sidebarRelatedPosts.length > 0 && (
             <div class="blog-post__panel">
               <p class="panel-stamp">Citește și</p>
@@ -130,7 +135,34 @@ const sidebarRelatedPosts = getRelatedPosts(
         </aside>
       </div>
 
-      <RelatedPosts currentPost={post} />
+      {sidebarRelatedPosts.length > 0 && (
+        <section class="blog-post__bottom" aria-label="Articole similare">
+          <h2>Articole similare</h2>
+          <div class="blog-post__bottom-grid">
+            {sidebarRelatedPosts.slice(0, 2).map((entry) => (
+              <a href={buildPostPath(getPostSlug(entry))} class="blog-post__bottom-card">
+                {entry.data.image && (
+                  <span class="blog-post__bottom-image-wrap" aria-hidden="true">
+                    <SmartImage src={entry.data.image} alt="" class="blog-post__bottom-image" width={640} height={360} />
+                  </span>
+                )}
+                <span class="blog-post__bottom-title">{entry.data.title}</span>
+                {entry.data.date && (
+                  <time datetime={entry.data.date.toISOString()} class="blog-post__bottom-date">
+                    {formatDate(entry.data.date)}
+                  </time>
+                )}
+              </a>
+            ))}
+            <a href="/contact" class="blog-post__bottom-cta">
+              <span class="panel-stamp stamp-ember">Aplică pe site-ul tău</span>
+              <span class="blog-post__bottom-cta-title">Vrei aplicat pe site-ul tău?</span>
+              <span class="blog-post__bottom-cta-text">Scrie-ne ce vrei să obții — îți răspundem în 24h.</span>
+              <span class="blog-post__bottom-cta-btn">Scrie-ne →</span>
+            </a>
+          </div>
+        </section>
+      )}
     </div>
   </section>
 </Layout>
@@ -733,6 +765,150 @@ const sidebarRelatedPosts = getRelatedPosts(
 
   :global(.dark) .blog-post__content :global(img) {
     border-color: rgba(255, 255, 255, 0.22);
+  }
+  /* ——— Sidebar CTA card ——— */
+  .blog-post__cta-text {
+    margin: 0 0 1rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  :global(.dark) .blog-post__cta-text {
+    color: var(--color-dark-text-light);
+  }
+  .blog-post__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    border-radius: 12px;
+    background: var(--color-ember-deep);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  :global(.dark) .blog-post__cta-btn {
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+  }
+  .blog-post__cta-btn:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  /* ——— Bottom: 2 related + 1 CTA card ——— */
+  .blog-post__bottom {
+    max-width: 74rem;
+    margin: 3.5rem auto 0;
+    border-top: 2px solid var(--color-ink);
+    padding-top: 2.5rem;
+  }
+  :global(.dark) .blog-post__bottom {
+    border-top-color: rgba(255, 255, 255, 0.2);
+  }
+  .blog-post__bottom h2 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+  :global(.dark) .blog-post__bottom h2 {
+    color: var(--color-dark-text);
+  }
+  .blog-post__bottom-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 720px) {
+    .blog-post__bottom-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .blog-post__bottom-card {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+    border: 2px solid var(--color-ink);
+    border-radius: 14px;
+    background: var(--color-card);
+    padding: 0.9rem;
+    text-decoration: none;
+  }
+  :global(.dark) .blog-post__bottom-card {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+  .blog-post__bottom-image-wrap {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    aspect-ratio: 16 / 9;
+  }
+  .blog-post__bottom-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .blog-post__bottom-title {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 750;
+    line-height: 1.45;
+  }
+  :global(.dark) .blog-post__bottom-title {
+    color: var(--color-dark-text);
+  }
+  .blog-post__bottom-card:hover .blog-post__bottom-title {
+    color: var(--color-ember-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .blog-post__bottom-date {
+    color: var(--color-faint);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .blog-post__bottom-cta {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    border: 2px solid var(--color-ink);
+    border-radius: 14px;
+    background: var(--color-ember);
+    padding: 1.25rem 1.1rem;
+    text-decoration: none;
+  }
+  .blog-post__bottom-cta-title {
+    color: var(--color-ember-ink);
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .blog-post__bottom-cta-text {
+    color: var(--color-ember-ink);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .blog-post__bottom-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 0.4rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 12px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+  .blog-post__bottom-cta:hover .blog-post__bottom-cta-btn {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* ——— Mobile: content first, panels stack below ——— */

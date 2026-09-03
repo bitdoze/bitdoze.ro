@@ -23,7 +23,7 @@ intrebari_frecvente:
   - intrebare: 'Ce afaceri pot beneficia de AI?'
     raspuns: 'Orice afacere care dorește să automatizeze procese, să personalizeze experiența clienților sau să analizeze date. De la retail și servicii, la producție și sănătate, evaluăm unde poate AI-ul să aducă cea mai mare valoare.'
   - intrebare: 'Avem nevoie de multe date pentru a folosi AI?'
-    raspuns: 'Nu mereu. Soluțiile moderne de AI pot funcționa și cu seturi de date mai mici. Putem, de asemenea, să te ajutăm să colectezi datele necesare pentru viitor.'
+    raspuns: 'Depinde ce vrei să faci. Asistenții conversaționali și automatizările cu modele generative funcționează și cu volume modeste de date, în timp ce predicțiile și analizele au nevoie de date istorice curate. La evaluarea inițială îți spunem în ce categorie ești și ce ar trebui colectat.'
   - intrebare: 'Cât durează implementarea unui proiect AI?'
     raspuns: 'Un proiect simplu, ca un chatbot de bază, poate dura 2-4 săptămâni. Proiectele complexe pot dura 3-6 luni. Oferim un calendar clar după evaluarea inițială.'
   - intrebare: 'Cum măsurăm succesul?'
@@ -39,6 +39,9 @@ seo:
     - 'implementare AI'
     - 'automatizare procese'
     - 'chatboti personalizati'
+    - 'consultanță AI'
+    - 'inteligență artificială pentru business'
+    - 'chatboți personalizați'
     - 'machine learning'
 draft: false
 ordine: 7
@@ -46,33 +49,9 @@ ordine: 7
 
 ## Consultanță AI pentru afacerea ta
 
-Inteligența artificială (AI) poate transforma modul în care afacerea ta funcționează. Te ajutăm să identifici și să implementezi soluțiile AI potrivite pentru a-ți atinge obiectivele.
+Dacă echipa ta pierde ore întregi în fiecare săptămână cu răspunsuri repetitive, copiat date între sisteme sau documente făcute manual după același șablon, începem cu un pilot îngust pe procesul cel mai costisitor — și extinzi doar dacă cifrele pilotului te conving.
 
-Abordarea noastră este practică: combinăm expertiza tehnică cu înțelegerea nevoilor tale de business pentru a livra rezultate măsurabile.
-
-### Ce facem concret
-
-*   **Evaluare și Strategie:** Analizăm procesele tale și identificăm unde poate AI-ul să aducă cel mai mare impact. Creăm un plan de acțiune clar.
-*   **Implementare Chatboți:** Dezvoltăm chatboți inteligenți pentru a automatiza suportul clienți și a îmbunătăți interacțiunile.
-*   **Automatizarea Proceselor:** Identificăm și automatizăm sarcinile repetitive pentru a crește eficiența și a reduce erorile umane.
-*   **Analiză de Date:** Transformăm datele tale în informații valoroase care te ajută să iei decizii mai bune.
-*   **AI Generativ:** Te ghidăm în folosirea modelelor AI avansate (precum GPT) pentru a crea conținut și a inova.
-
-### De ce să lucrezi cu noi?
-
-*   **Expertiză:** Avem cunoștințe tehnice avansate și experiență practică.
-*   **Focus pe Rezultate:** Ne concentrăm pe valoarea de business, nu doar pe tehnologie.
-*   **Soluții Personalizate:** Adaptăm soluțiile la nevoile specifice ale afacerii tale.
-
-### Cum lucrăm
-
-1.  **Descoperire:** Înțelegem afacerea și obiectivele tale.
-2.  **Strategie:** Creăm un plan de implementare AI.
-3.  **Implementare:** Dezvoltăm și integrăm soluțiile AI.
-4.  **Training:** Îți pregătim echipa pentru a folosi noile instrumente.
-5.  **Optimizare:** Monitorizăm performanța și optimizăm continuu.
-
-Suntem aici pentru a te ajuta să folosești puterea AI în avantajul afacerii tale.
+[Scrie-ne](/contact) ce faceți manual azi, cât de des și cu câți oameni — îți spunem sincer dacă AI-ul poate ajuta și, la fel de important, dacă nu poate.
 
 ### Pentru cine e / pentru cine nu e
 
@@ -82,9 +61,17 @@ Când îți spunem să nu începi? Dacă vrei AI „pentru că e la modă" sau �
 
 ### Preț și termen, pe față
 
-Tariful pornește **de la 1500 RON/zi** de consultanță și implementare, iar **durata este personalizată**, fiindcă proiectele AI diferă enorm între ele: orientativ, un chatbot de bază poate dura 2–4 săptămâni, iar proiectele complexe ajung la 3–6 luni, cu calendar clar stabilit după evaluarea inițială. Tariful pe zi reflectă raritatea competențelor — lucrăm cu modele moderne, integrări și date reale, nu cu demonstrații copiate din tutoriale — dar tocmai de aceea structurăm proiectele în etape cu decizii clare: plătești pas cu pas și poți opri după pilot dacă rezultatele nu te conving.
+Tariful pornește **de la 1500 RON/zi** de consultanță și implementare, iar **durata este personalizată**, fiindcă proiectele AI diferă enorm între ele: orientativ, un chatbot de bază poate dura 2–4 săptămâni, iar proiectele complexe ajung la 3–6 luni, cu calendar clar stabilit după evaluarea inițială. Tariful pe zi reflectă raritatea competențelor — lucrăm cu modele moderne, integrări și date reale, nu cu demonstrații copiate din tutoriale — dar tocmai de aceea structurăm proiectele în etape cu decizii clare.
 
-Ce urcă prețul? Complexitatea integrărilor — un asistent care doar răspunde la întrebări frecvente e mult mai ieftin decât unul legat la CRM, stocuri și programări. Volumul și calitatea datelor contează enorm: dacă datele tale sunt curate și accesibile, mergem repede; dacă trebuie mai întâi să le colectăm, curățăm și structurăm, efortul crește. Personalizarea modelelor, cerințele speciale de securitate și trainingul extins al echipei adaugă și ele zile. Ce ține prețul jos? Să începi cu un pilot îngust — un singur caz de utilizare, cu succes măsurabil — în loc de „automatizăm tot". Să vii cu procesele deja descrise și cu o persoană care cunoaște operațiunea zilnică. Și să accepți soluții standard unde nu ai nevoie de ceva unic: nu construim de la zero ce există deja bun pe piață. La evaluarea inițială primești o estimare de efort pe etape, ca să știi de la început cât costă descoperirea, cât pilotul și cât extinderea — fără surprize pe parcurs.
+| Etapă | Ce primești |
+| --- | --- |
+| Descoperire | Oportunități AI ordonate după impact și fezabilitate |
+| Pilot pe caz real | Versiune funcțională restrânsă, testată cu utilizatori reali |
+| Implementare completă | Soluție integrată în fluxul zilnic + echipă pregătită |
+
+> Plătești pas cu pas și poți opri după pilot dacă rezultatele nu te conving.
+
+Ce urcă prețul? Complexitatea integrărilor — un asistent care doar răspunde la întrebări frecvente e mult mai ieftin decât unul legat la CRM, stocuri și programări. Volumul și calitatea datelor contează enorm: dacă datele tale sunt curate și accesibile, mergem repede; dacă trebuie mai întâi să le colectăm, curățăm și structurăm, efortul crește. Personalizarea modelelor, cerințele speciale de securitate și trainingul extins al echipei adaugă și ele zile. Ce ține prețul jos? Să începi cu un pilot îngust — un singur caz de utilizare, cu succes măsurabil — în loc de „automatizăm tot". Să vii cu procesele deja descrise și cu o persoană care cunoaște operațiunea zilnică. Și să accepți soluții standard unde nu ai nevoie de ceva unic: nu construim de la zero ce există deja bun pe piață.
 
 ### Proces de lucru
 
@@ -99,4 +86,6 @@ Etapele prin care trecem împreună, cu ce dai și ce primești la fiecare:
 
 ### Următorul pas
 
-Dacă ai în minte un proces care vă mănâncă timpul, [povestește-ni-l](/contact) în câteva rânduri: ce faceți manual azi, cât de des și câți oameni implică. Îți răspundem sincer dacă AI-ul poate ajuta și, la fel de important, dacă nu poate — nu vindem proiecte unde nu vedem valoare. Dacă problema ta e mai degrabă infrastructura învechită decât inteligența artificială, începe cu o discuție de [consultanță IT](/servicii/consultanta-it); dacă vrei mai întâi să înțelegi cum gândim, găsești explicații practice pe [blog](/blog), iar exemple de livrări în [portofoliu](/portofoliu).
+Dacă ai în minte un proces care vă mănâncă timpul, [povestește-ni-l](/contact) în câteva rânduri: ce faceți manual azi, cât de des și câți oameni implică. Îți răspundem sincer dacă AI-ul poate ajuta și, la fel de important, dacă nu poate. Dacă problema ta e mai degrabă infrastructura învechită decât inteligența artificială, începe cu o discuție de [consultanță IT](/servicii/consultanta-it); dacă vrei mai întâi să înțelegi cum gândim, găsești explicații practice pe [blog](/blog), iar exemple de livrări în [portofoliu](/portofoliu).
+
+> Nu vindem proiecte unde nu vedem valoare.

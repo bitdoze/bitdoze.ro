@@ -27,7 +27,7 @@ intrebari_frecvente:
   - intrebare: 'Oferiți consultanță pentru migrarea în cloud?'
     raspuns: 'Da, te ajutăm să alegi platforma potrivită (AWS, Azure, Google Cloud), planificăm migrarea și optimizăm costurile și securitatea în cloud.'
   - intrebare: 'Pentru ce tip de companii lucrați?'
-    raspuns: 'Serviciile noastre sunt adaptate pentru orice dimensiune de afacere, de la startup-uri la companii mari. Personalizăm soluțiile în funcție de nevoile tale.'
+    raspuns: 'Lucrăm în principal cu firme mici și mijlocii fără director tehnic intern și cu startup-uri care scalează. Dacă ai deja o echipă IT completă cu procese mature, îți spunem sincer că aportul nostru scade mult.'
   - intrebare: 'Colaborați și cu firme care au deja un responsabil IT?'
     raspuns: 'Da, frecvent. Nu înlocuim omul vostru, ci îl completăm: aducem perspectivă externă, experiență cu proiecte similare și capacitate suplimentară pe perioada schimbărilor mari, cum ar fi o migrare sau o extindere.'
 seo:
@@ -46,32 +46,9 @@ ordine: 4
 
 ## Consultanță IT pentru afacerea ta
 
-Tehnologia informației este esențială pentru succes. Suntem partenerul tău strategic care transformă provocările tehnologice în oportunități de creștere.
+Tehnologia informației este esențială pentru succes. Plătești consultantul pe zile, pentru problema ta concretă — audit, plan de migrare, strategie de securitate — nu pentru un abonament generic. [Scrie-ne](/contact) ce te frământă și primești estimarea de efort înainte să pornim.
 
-Îmbinăm expertiza tehnică cu o înțelegere a mediului de afaceri pentru a-ți oferi soluții IT personalizate, care aduc rezultate reale.
-
-### Ce facem concret
-
-*   **Evaluare și Audit IT:** Analizăm infrastructura ta pentru a identifica oportunitățile de îmbunătățire. Primești un plan de acțiune clar.
-*   **Planificare Strategică:** Dezvoltăm strategii IT pe termen lung, aliniate cu obiectivele tale de business.
-*   **Consultanță Cloud:** Te ajutăm să evaluezi, planifici și implementezi soluții cloud (publice, private sau hibride).
-*   **Optimizare Infrastructură:** Identificăm soluții pentru a reduce costurile, a îmbunătăți performanța și a asigura scalabilitatea.
-*   **Securitate Cibernetică:** Evaluăm vulnerabilitățile și dezvoltăm strategii pentru a-ți proteja datele și sistemele.
-
-### De ce să lucrezi cu noi?
-
-*   **Viziune Completă:** Avem atât expertiză tehnică, cât și o perspectivă de business.
-*   **Soluții Obiective:** Suntem independenți de furnizori, deci recomandările noastre sunt centrate pe nevoile tale.
-*   **Focus pe Impact:** Ne concentrăm pe rezultate măsurabile și optimizarea costurilor.
-
-### Cum lucrăm
-
-1.  **Analiză:** Înțelegem afacerea și obiectivele tale.
-2.  **Strategie:** Dezvoltăm o strategie IT personalizată.
-3.  **Implementare:** Te asistăm în implementarea soluțiilor.
-4.  **Evaluare:** Monitorizăm rezultatele și facem ajustări.
-
-Indiferent de mărimea companiei tale, transformăm tehnologia într-un avantaj strategic.
+> Suntem independenți de furnizori: nu vindem hardware și nu luăm comisioane, așa că îți recomandăm ce ai nevoie, nu ce convine unui vânzător.
 
 ### Pentru cine e / pentru cine nu e
 
@@ -81,9 +58,16 @@ Când nu e pentru tine? Dacă problema ta este punctuală și urgentă — „ni
 
 ### Preț și termen, pe față
 
-Tariful pornește **de la 500 RON/zi** de consultanță, iar **durata este adaptată proiectului**: un audit punctual pentru o firmă mică poate dura câteva zile, în timp ce însoțirea unei migrări complexe se întinde pe săptămâni sau luni, cu implicare intermitentă. Nu vindem pachete umflate cu zile nenecesare — după discuția inițială îți estimăm onest câte zile de lucru presupune problema ta și primești oferta înainte să ne apucăm.
+Tariful pornește **de la 500 RON/zi** de consultanță, iar **durata este adaptată proiectului**. Estimarea exactă a zilelor de lucru o primești înainte să pornim, după discuția inițială.
 
-Ce urcă prețul? Amploarea infrastructurii — zece stații într-un singur birou se evaluează altfel decât trei sedii cu servere proprii și acces la distanță. Complexitatea temei contează și ea: o analiză de licențe și costuri e mai rapidă decât proiectarea unei migrări în cloud cu cerințe de securitate ridicate. Intervin mai mulți bani și când e nevoie de documentație detaliată, de prezență fizică în mai multe locații sau de disponibilitate în afara programului pentru operațiuni critice. Ce ține prețul jos? Să vii pregătit: listă de echipamente și abonamente, acces la sistemele importante, o persoană de contact care cunoaște istoricul și deciziile trecute. Cu cât petrecem mai puțin timp descoperind lucruri pe care le știai deja, cu atât plătești mai puține zile. Și un lucru de principiu: dacă la finalul evaluării concluzia e că nu ai nevoie de schimbări mari, îți spunem asta și nu inventăm un proiect — plătești doar evaluarea, iar raportul rămâne la tine.
+| Intervenție | Durată orientativă |
+| --- | --- |
+| Audit punctual, firmă mică | Câteva zile |
+| Migrare complexă, implicare intermitentă | Săptămâni sau luni |
+
+Ce urcă prețul? Amploarea infrastructurii — zece stații într-un singur birou se evaluează altfel decât trei sedii cu servere proprii și acces la distanță. Complexitatea temei contează și ea: o analiză de licențe și costuri e mai rapidă decât proiectarea unei migrări în cloud cu cerințe de securitate ridicate. Intervin mai mulți bani și când e nevoie de documentație detaliată, de prezență fizică în mai multe locații sau de disponibilitate în afara programului pentru operațiuni critice. Ce ține prețul jos? Să vii pregătit: listă de echipamente și abonamente, acces la sistemele importante, o persoană de contact care cunoaște istoricul și deciziile trecute. Cu cât petrecem mai puțin timp descoperind lucruri pe care le știai deja, cu atât plătești mai puține zile.
+
+> Dacă la finalul evaluării concluzia e că nu ai nevoie de schimbări mari, îți spunem asta și nu inventăm un proiect — plătești doar evaluarea, iar raportul rămâne la tine.
 
 ### Proces de lucru
 
