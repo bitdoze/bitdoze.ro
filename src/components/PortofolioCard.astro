@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface Props {
   title: string;
   descriere: string;
@@ -12,452 +10,95 @@ interface Props {
 }
 
 const { title, descriere, imagine, url, stack, servicii, slug } = Astro.props;
+const href = slug ? `/portofoliu/${slug}` : url;
 ---
 
-<div class="portfolio-card">
-  <!-- Image Section -->
-  <div class="image-section">
-    <div class="image-wrapper">
-      <img src={imagine} alt={title} class="project-image" loading="lazy" />
-      <div class="image-overlay">
-        <div class="overlay-content">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="view-live-btn"
-          >
-            <Icon name="mdi:eye" class="view-icon" />
-            <span>Vezi Live</span>
-          </a>
-        </div>
-      </div>
+<article class="pcard">
+  <a href={href} class="pcard-img" aria-label={title} tabindex="-1">
+    <img src={imagine} alt={`Captură site ${title}`} loading="lazy" decoding="async" />
+  </a>
+  <div class="pcard-body">
+    <h3 class="pcard-title">
+      <a href={href}>{title}</a>
+    </h3>
+    <p class="pcard-desc">{descriere}</p>
+    <p class="pcard-meta">{stack.slice(0, 4).join(" · ")}</p>
+    <p class="pcard-meta dim">{servicii.slice(0, 3).join(" · ")}</p>
+    <div class="pcard-actions">
+      {slug && <a href={`/portofoliu/${slug}`} class="text-link">Studiu de caz →</a>}
+      <a href={url} target="_blank" rel="noopener noreferrer" class="text-link dim-link">Site live ↗</a>
     </div>
   </div>
-
-  <!-- Content Section -->
-  <div class="content-section">
-    <div class="content-header">
-      <h3 class="project-title">
-        {
-          slug ? (
-            <a href={`/portofoliu/${slug}`} class="title-link">
-              {title}
-            </a>
-          ) : (
-            title
-          )
-        }
-      </h3>
-      <p class="project-description">
-        {descriere}
-      </p>
-    </div>
-
-    <!-- Tech Stack -->
-    <div class="tech-stack">
-      <h4 class="section-title">
-        <Icon name="mdi:code-tags" class="section-icon" />
-        Tehnologii
-      </h4>
-      <div class="tech-grid">
-        {
-          stack.slice(0, 4).map((tech) => (
-            <span class="tech-tag">
-              <span class="tech-name">{tech}</span>
-            </span>
-          ))
-        }
-        {
-          stack.length > 4 && (
-            <span class="tech-tag more">+{stack.length - 4}</span>
-          )
-        }
-      </div>
-    </div>
-
-    <!-- Services -->
-    <div class="services-section">
-      <h4 class="section-title">
-        <Icon name="mdi:cog" class="section-icon" />
-        Servicii
-      </h4>
-      <div class="services-grid">
-        {
-          servicii.slice(0, 3).map((serviciu) => (
-            <span class="service-tag">
-              <Icon name="mdi:check" class="service-check" />
-              <span class="service-name">{serviciu}</span>
-            </span>
-          ))
-        }
-        {
-          servicii.length > 3 && (
-            <span class="service-tag more">+{servicii.length - 3}</span>
-          )
-        }
-      </div>
-    </div>
-
-    <!-- Actions -->
-    <div class="card-actions">
-      {
-        slug && (
-          <a href={`/portofoliu/${slug}`} class="action-btn secondary-btn">
-            <Icon name="mdi:information-outline" class="btn-icon" />
-            <span>Detalii</span>
-          </a>
-        )
-      }
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="action-btn primary-btn"
-      >
-        <Icon name="mdi:launch" class="btn-icon" />
-        <span>Vezi Live</span>
-      </a>
-    </div>
-  </div>
-</div>
+</article>
 
 <style>
-  .portfolio-card {
-    position: relative;
+  .pcard {
+    border: 2px solid var(--color-ink);
     border-radius: 16px;
-    background: var(--color-background);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.1);
+    background: var(--color-card);
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
     display: flex;
     flex-direction: column;
-  }
-
-  .portfolio-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-    border-color: rgba(var(--color-primary-rgb), 0.2);
-  }
-
-  /* Image section */
-  .image-section {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-  }
-
-  .project-image {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease;
   }
-
-  .portfolio-card:hover .project-image {
-    transform: scale(1.05);
+  .pcard:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 6px 6px 0 var(--color-ink);
   }
-
-  .image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      45deg,
-      rgba(var(--color-primary-rgb), 0.85),
-      rgba(var(--color-secondary-rgb), 0.85)
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  :global(.dark) .pcard {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255,255,255,0.22);
   }
-
-  .portfolio-card:hover .image-overlay {
-    opacity: 1;
+  :global(.dark) .pcard:hover { box-shadow: 6px 6px 0 rgba(0,0,0,0.6); }
+  .pcard-img {
+    display: block;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--color-paper-2);
+    border-bottom: 2px solid var(--color-ink);
   }
-
-  .overlay-content {
-    text-align: center;
-    color: white;
-  }
-
-  .view-live-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--color-primary);
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    font-size: 0.875rem;
-  }
-
-  .view-live-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    background: white;
-  }
-
-  .view-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Content section */
-  .content-section {
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
-  }
-
-  .content-header {
-    margin-bottom: 0.5rem;
-  }
-
-  .project-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-  }
-
-  .title-link {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .title-link:hover {
-    color: var(--color-primary);
-  }
-
-  .project-description {
-    color: var(--color-text-light);
-    line-height: 1.5;
-    font-size: 0.875rem;
+  .pcard-img img { transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .pcard:hover .pcard-img img { transform: scale(1.03); }
+  :global(.dark) .pcard-img { border-bottom-color: rgba(255,255,255,0.1); }
+  .pcard-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pcard-body { padding: 1.25rem 1.25rem 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+  .pcard-title { margin: 0; font-size: 1.25rem; }
+  .pcard-title a { color: var(--color-text); text-decoration: none; }
+  :global(.dark) .pcard-title a { color: var(--color-dark-text); }
+  .pcard-title a:hover { text-decoration: underline; text-decoration-color: var(--color-ember); text-decoration-thickness: 2.5px; text-underline-offset: 4px; }
+  .pcard-desc {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.65;
+    color: var(--color-muted);
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-
-  .section-title {
+  :global(.dark) .pcard-desc { color: var(--color-dark-text-light); }
+  .pcard-meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--color-muted);
+  }
+  :global(.dark) .pcard-meta { color: var(--color-dark-text-light); }
+  .pcard-meta.dim { color: var(--color-faint); }
+  .pcard-actions {
     display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .section-icon {
-    width: 14px;
-    height: 14px;
-    color: var(--color-primary);
-  }
-
-  /* Tech stack */
-  .tech-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-  }
-
-  .tech-tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.5rem;
-    background: rgba(var(--color-primary-rgb), 0.1);
-    color: var(--color-primary);
-    border-radius: 6px;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-    transition: all 0.3s ease;
-  }
-
-  .tech-tag:hover {
-    background: rgba(var(--color-primary-rgb), 0.15);
-    transform: translateY(-1px);
-  }
-
-  .tech-tag.more {
-    background: rgba(var(--color-text-rgb), 0.1);
-    color: var(--color-text-light);
-    border-color: rgba(var(--color-text-rgb), 0.2);
-  }
-
-  /* Services */
-  .services-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-  }
-
-  .service-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    background: rgba(var(--color-success-rgb), 0.1);
-    color: var(--color-success);
-    border-radius: 6px;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    border: 1px solid rgba(var(--color-success-rgb), 0.2);
-    transition: all 0.3s ease;
-  }
-
-  .service-tag:hover {
-    background: rgba(var(--color-success-rgb), 0.15);
-    transform: translateY(-1px);
-  }
-
-  .service-tag.more {
-    background: rgba(var(--color-text-rgb), 0.1);
-    color: var(--color-text-light);
-    border-color: rgba(var(--color-text-rgb), 0.2);
-  }
-
-  .service-check {
-    width: 10px;
-    height: 10px;
-  }
-
-  /* Actions */
-  .card-actions {
-    display: flex;
-    gap: 0.5rem;
+    gap: 1.25rem;
     margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-line);
   }
-
-  .action-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-    font-size: 0.75rem;
-    flex: 1;
-    justify-content: center;
-  }
-
-  .primary-btn {
-    background: var(--color-primary);
-    color: white;
-    box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.3);
-  }
-
-  .primary-btn:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.4);
-  }
-
-  .secondary-btn {
-    background: transparent;
-    color: var(--color-primary);
-    border-color: rgba(var(--color-primary-rgb), 0.2);
-  }
-
-  .secondary-btn:hover {
-    background: rgba(var(--color-primary-rgb), 0.1);
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-    transform: translateY(-1px);
-  }
-
-  .btn-icon {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Dark mode */
-  :global(.dark) .portfolio-card {
-    background: var(--color-dark-background-alt);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.dark) .project-title {
-    color: var(--color-dark-text);
-  }
-
-  :global(.dark) .project-description {
-    color: var(--color-dark-text-light);
-  }
-
-  :global(.dark) .section-title {
-    color: var(--color-dark-text);
-  }
-
-  :global(.dark) .secondary-btn {
-    color: var(--color-primary-light);
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-  }
-
-  :global(.dark) .secondary-btn:hover {
-    background: rgba(var(--color-primary-rgb), 0.2);
-    border-color: rgba(var(--color-primary-rgb), 0.4);
-  }
-
-  :global(.dark) .tech-tag.more {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--color-dark-text-light);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  :global(.dark) .service-tag.more {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--color-dark-text-light);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .content-section {
-      padding: 1rem;
-    }
-
-    .project-title {
-      font-size: 1.125rem;
-    }
-
-    .card-actions {
-      flex-direction: column;
-    }
-
-    .action-btn {
-      justify-content: center;
-    }
-  }
-
-  /* Ensure consistent card heights in grid */
-  @media (min-width: 768px) {
-    .portfolio-card {
-      min-height: 420px;
-    }
+  :global(.dark) .pcard-actions { border-top-color: rgba(255,255,255,0.1); }
+  .text-link { font-weight: 800; font-size: 0.9rem; color: var(--color-ember-deep); text-decoration: none; }
+  :global(.dark) .text-link { color: var(--color-ember-soft); }
+  .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .dim-link { color: var(--color-muted); font-weight: 500; }
+  @media (prefers-reduced-motion: reduce) {
+    .pcard, .pcard:hover, .pcard-img img { transform: none !important; transition: none; }
   }
 </style>

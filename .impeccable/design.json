@@ -1,0 +1,382 @@
+{
+  "components": [
+    {
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--color-moss, #1e3a32); color: #ffffff; border: 1px solid transparent; border-radius: 6px; padding: 11px 20px; font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 120ms ease; } .ds-btn-primary:hover { background: var(--color-moss-deep, #132720); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-moss, #1e3a32); outline-offset: 2px; }",
+      "description": "Acțiunea principală: cere ofertă, contact, consultare.",
+      "html": "<a class=\"ds-btn-primary\" href=\"/contact\">Cere ofertă</a>",
+      "kind": "button",
+      "name": "Primary Button",
+      "refersTo": "button-primary"
+    },
+    {
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: transparent; color: var(--color-text, #181b20); border: 1px solid var(--color-line-strong, #cfc3ae); border-radius: 6px; padding: 11px 20px; font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; line-height: 1.2; text-decoration: none; cursor: pointer; transition: border-color 120ms ease, background-color 120ms ease; } .ds-btn-secondary:hover { border-color: var(--color-text, #181b20); background: rgba(24,27,32,0.04); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-moss, #1e3a32); outline-offset: 2px; }",
+      "description": "Acțiune secundară cu bordură, fără umplere.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"/portofoliu\">Vezi portofoliul</a>",
+      "kind": "button",
+      "name": "Secondary Button",
+      "refersTo": "button-secondary"
+    },
+    {
+      "css": ".ds-btn-accent { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--color-clay, #b0492b); color: #ffffff; border: 1px solid transparent; border-radius: 6px; padding: 11px 20px; font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 120ms ease; } .ds-btn-accent:hover { background: var(--color-clay-deep, #93391f); } .ds-btn-accent:focus-visible { outline: 2px solid var(--color-clay, #b0492b); outline-offset: 2px; }",
+      "description": "Accent rar, pentru momente de conversie unică.",
+      "html": "<a class=\"ds-btn-accent\" href=\"/contact\">Obține consultare gratuită</a>",
+      "kind": "button",
+      "name": "Accent Button",
+      "refersTo": "button-accent"
+    },
+    {
+      "css": ".ds-card { background: var(--color-card, #ffffff); color: var(--color-text, #181b20); border: 1px solid var(--color-line, #e4dccf); border-radius: 10px; padding: 24px; box-shadow: none; } .ds-card:hover { border-color: var(--color-line-strong, #cfc3ae); } .ds-card h3 { font-family: Inter, system-ui, sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1.3; margin: 0 0 8px; } .ds-card p { margin: 0; color: var(--color-muted, #5c636e); line-height: 1.65; }",
+      "description": "Container plat cu bordură hairline, fără umbră.",
+      "html": "<div class=\"ds-card\"><h3>Web Design</h3><p>Site-uri rapide care transformă vizitatorii în clienți.</p></div>",
+      "kind": "card",
+      "name": "Card",
+      "refersTo": "card"
+    },
+    {
+      "css": ".ds-badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--color-line, #e4dccf); background: transparent; color: var(--color-muted, #5c636e); } .ds-badge--moss { color: var(--color-moss, #1e3a32); border-color: rgba(30,58,50,0.35); } .ds-badge--clay { color: var(--color-clay, #b0492b); border-color: rgba(176,73,43,0.35); }",
+      "description": "Etichetă mică pentru categorii și meta.",
+      "html": "<span class=\"ds-badge ds-badge--moss\">SEO</span>",
+      "kind": "chip",
+      "name": "Badge",
+      "refersTo": "badge"
+    },
+    {
+      "css": ".ds-svc { display: grid; grid-template-columns: 56px 1fr auto; gap: 16px; align-items: baseline; padding: 22px 4px; border-top: 1px solid var(--color-line, #e4dccf); text-decoration: none; color: inherit; } .ds-svc__index { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.8rem; color: var(--color-faint, #8b919b); } .ds-svc__title { font-family: Fraunces, Georgia, serif; font-size: 1.45rem; margin: 0; color: var(--color-text, #181b20); } .ds-svc:hover .ds-svc__title { color: var(--color-clay, #b0492b); } .ds-svc__meta { font-size: 0.85rem; color: var(--color-muted, #5c636e); text-align: right; }",
+      "description": "Rând de serviciu, alternativa la grila de carduri.",
+      "html": "<a class=\"ds-svc\" href=\"/servicii/seo\"><span class=\"ds-svc__index\">05</span><span class=\"ds-svc__title\">SEO</span><span class=\"ds-svc__meta\">de la 2500 RON</span></a>",
+      "kind": "custom",
+      "name": "Service Row",
+      "refersTo": "card"
+    },
+    {
+      "css": ".ds-kicker { display: flex; align-items: center; gap: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-muted, #5c636e); } .ds-kicker::before { content: \"\"; width: 32px; height: 1px; background: var(--color-clay, #b0492b); flex-shrink: 0; }",
+      "description": "Etichetă de secțiune, folosită rar ca sistem de brand.",
+      "html": "<span class=\"ds-kicker\">Servicii</span>",
+      "kind": "custom",
+      "name": "Kicker",
+      "refersTo": "badge"
+    },
+    {
+      "css": ".ds-input { width: 100%; background: var(--color-card, #ffffff); color: var(--color-text, #181b20); border: 1px solid var(--color-line, #e4dccf); border-radius: 6px; padding: 11px 14px; font-family: Inter, system-ui, sans-serif; font-size: 1rem; line-height: 1.5; } .ds-input::placeholder { color: var(--color-faint, #8b919b); } .ds-input:focus { outline: 2px solid var(--color-moss, #1e3a32); outline-offset: 1px; border-color: var(--color-moss, #1e3a32); }",
+      "description": "Câmp de formular pentru contact.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Numele tău\" aria-label=\"Numele tău\" />",
+      "kind": "input",
+      "name": "Text Input",
+      "refersTo": "button-secondary"
+    }
+  ],
+  "extensions": {
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ],
+    "colorMeta": {
+      "card": {
+        "canonical": "#ffffff",
+        "displayName": "Alb card",
+        "role": "neutral",
+        "tonalRamp": [
+          "#6b7280",
+          "#9ca3af",
+          "#d1d5db",
+          "#e9e7e0",
+          "#f2ede4",
+          "#faf8f4",
+          "#fffdf9",
+          "#ffffff"
+        ]
+      },
+      "clay": {
+        "canonical": "#b0492b",
+        "displayName": "Cărămiziu",
+        "role": "secondary",
+        "tonalRamp": [
+          "#3d1a10",
+          "#5d2715",
+          "#7a3018",
+          "#93391f",
+          "#b0492b",
+          "#c96a4b",
+          "#dd9a82",
+          "#f6e3d8"
+        ]
+      },
+      "clay-deep": {
+        "canonical": "#93391f",
+        "displayName": "Cărămiziu adânc",
+        "role": "secondary",
+        "tonalRamp": [
+          "#33150c",
+          "#52200f",
+          "#752c16",
+          "#93391f",
+          "#ab4a2c",
+          "#c96a4b",
+          "#de9d84",
+          "#f3ddd0"
+        ]
+      },
+      "dark-bg": {
+        "canonical": "#131514",
+        "displayName": "Noapte",
+        "role": "neutral",
+        "tonalRamp": [
+          "#0b0d0c",
+          "#131514",
+          "#1c1f1d",
+          "#2a2e2b",
+          "#4a4f4c",
+          "#8a857a",
+          "#b3aca0",
+          "#ece7db"
+        ]
+      },
+      "dark-text": {
+        "canonical": "#ece7db",
+        "displayName": "Pergament nocturn",
+        "role": "neutral",
+        "tonalRamp": [
+          "#4a4f4c",
+          "#6b675e",
+          "#8a857a",
+          "#b3aca0",
+          "#d6cfbf",
+          "#ece7db",
+          "#f6f2e8",
+          "#fffdf7"
+        ]
+      },
+      "faint": {
+        "canonical": "#8b919b",
+        "displayName": "Ceață",
+        "role": "neutral",
+        "tonalRamp": [
+          "#3a3f46",
+          "#4c525a",
+          "#5c636e",
+          "#747b86",
+          "#8b919b",
+          "#adb3bc",
+          "#cdd2d8",
+          "#eef0f2"
+        ]
+      },
+      "ink": {
+        "canonical": "#181b20",
+        "displayName": "Cerneală",
+        "role": "neutral",
+        "tonalRamp": [
+          "#0b0d10",
+          "#111418",
+          "#181b20",
+          "#2a2f36",
+          "#454c56",
+          "#5c636e",
+          "#a8aeb7",
+          "#e6e9ec"
+        ]
+      },
+      "line": {
+        "canonical": "#e4dccf",
+        "displayName": "Linie",
+        "role": "neutral",
+        "tonalRamp": [
+          "#8a857a",
+          "#a89e8c",
+          "#cfc3ae",
+          "#ddd4c2",
+          "#e4dccf",
+          "#ede7d9",
+          "#f5f0e6",
+          "#fbf8f1"
+        ]
+      },
+      "moss": {
+        "canonical": "#1e3a32",
+        "displayName": "Mușchi adânc",
+        "role": "primary",
+        "tonalRamp": [
+          "#0b1613",
+          "#132720",
+          "#1e3a32",
+          "#2c4f44",
+          "#3f6a5d",
+          "#6f9487",
+          "#b3c6bd",
+          "#eef3ef"
+        ]
+      },
+      "moss-deep": {
+        "canonical": "#132720",
+        "displayName": "Mușchi noapte",
+        "role": "primary",
+        "tonalRamp": [
+          "#070f0c",
+          "#0d1b17",
+          "#132720",
+          "#1e3a32",
+          "#33544a",
+          "#5c7d71",
+          "#9db3a9",
+          "#e2eae6"
+        ]
+      },
+      "muted": {
+        "canonical": "#5c636e",
+        "displayName": "Cerneală stinsă",
+        "role": "neutral",
+        "tonalRamp": [
+          "#2a2f36",
+          "#3a414a",
+          "#4c525c",
+          "#5c636e",
+          "#747b86",
+          "#969ca6",
+          "#c2c7cd",
+          "#e8eaed"
+        ]
+      },
+      "paper": {
+        "canonical": "#faf8f4",
+        "displayName": "Hârtie caldă",
+        "role": "neutral",
+        "tonalRamp": [
+          "#6f6a5e",
+          "#8f887a",
+          "#b3a893",
+          "#cfc3ae",
+          "#e4dccf",
+          "#f2ede4",
+          "#faf8f4",
+          "#fffdf9"
+        ]
+      }
+    },
+    "motion": [
+      {
+        "name": "fast",
+        "purpose": "Hover pe butoane și legături, schimbări de culoare.",
+        "value": "120ms ease"
+      },
+      {
+        "name": "normal",
+        "purpose": "Tranziție implicită pentru stări de interfață.",
+        "value": "180ms ease"
+      },
+      {
+        "name": "slow",
+        "purpose": "Panouri și suprapuneri care apar.",
+        "value": "280ms ease"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "ridicare-mică",
+        "purpose": "Separare minimă pe hârtie.",
+        "value": "0 1px 2px rgba(20, 26, 22, 0.06)"
+      },
+      {
+        "name": "ridicare-medie",
+        "purpose": "Meniuri și panouri mici.",
+        "value": "0 2px 8px rgba(20, 26, 22, 0.08)"
+      },
+      {
+        "name": "ridicare-mare",
+        "purpose": "Dialoguri și consimțământ.",
+        "value": "0 8px 24px rgba(20, 26, 22, 0.1)"
+      },
+      {
+        "name": "ridicare-maximă",
+        "purpose": "Suprapuneri pline, cazuri rare.",
+        "value": "0 16px 40px rgba(20, 26, 22, 0.12)"
+      }
+    ],
+    "typographyMeta": {
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragrafe și descrieri, max 68ch."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Titluri hero și de pagină, doar Fraunces."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Titluri de secțiune."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Kicker, indexuri, meta portofoliu."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Titluri mici de card."
+      }
+    }
+  },
+  "generatedAt": "2026-09-03T00:00:00.000Z",
+  "narrative": {
+    "dos": [
+      "Do păstrează fundalul pe hârtie caldă (#faf8f4) cu text cerneală (#181b20) pentru contrast calm și lizibil.",
+      "Do folosește verde mușchi (#1e3a32) pentru acțiunea principală și cărămiziu (#b0492b) rar, ca semnătură.",
+      "Do preferă rânduri cu separatoare hairline în locul cardurilor când listezi servicii sau proiecte.",
+      "Do limitează Fraunces la display și headline, cu echilibrare a rândurilor.",
+      "Do păstrează colțurile mici (4-10px) și suprafețele plate cu bordură de 1px."
+    ],
+    "donts": [
+      "Don't folosi gradient mov-albastru sau text cu gradient.",
+      "Don't construi hero cu metrici mari de tipul număr uriaș plus etichetă mică.",
+      "Don't repeta grila nesfârșită de carduri identice cu iconiță plus titlu plus text.",
+      "Don't adaugă bordură laterală colorată mai groasă de 1px ca accent pe carduri sau alerte.",
+      "Don't pune etichetă mică uppercase cu tracking larg deasupra fiecărei secțiuni.",
+      "Don't folosi glassmorphism decorativ cu blur și carduri de sticlă."
+    ],
+    "keyCharacteristics": [
+      "Hârtie caldă pentru citit, ink drenched pentru forță",
+      "Butoane solide ember cu chenar de 2px, primarul strigă",
+      "Carduri vizuale mari cu header grafic și preț-pilulă",
+      "Serif expresiv doar pentru titluri mari, sans pentru rest",
+      "Accent cărămiziu folosit rar, ca semnătură"
+    ],
+    "northStar": "Atelierul care se vede",
+    "overview": "Banc de lucru din cerneală adâncă, hârtie caldă pentru citit și portocaliu-ember pentru acțiune. Hero și portofoliu drenșate în ink, servicii ca și carduri vizuale mari, CTA drenșat în ember.",
+    "rules": [
+      {
+        "body": "Cărămiziul apare pe sub 10% din orice ecran. Raritatea lui este semnalul.",
+        "name": "The Rare Clay Rule",
+        "section": "colors"
+      },
+      {
+        "body": "Fundalul implicit este întotdeauna hârtie caldă, niciodată alb pur sau gri rece.",
+        "name": "The Paper First Rule",
+        "section": "colors"
+      },
+      {
+        "body": "Fraunces vorbește doar în display și headline.",
+        "name": "The Two Voices Rule",
+        "section": "typography"
+      },
+      {
+        "body": "Suprafețele sunt plate la repaus. Umbra apare doar ca răspuns la stare.",
+        "name": "The Flat-By-Default Rule",
+        "section": "elevation"
+      }
+    ]
+  },
+  "schemaVersion": 2,
+  "title": "Design System: BitDoze"
+}

@@ -1,299 +1,129 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 import { companyConfig } from "../config/company";
 
 const pageTitle = "Mulțumim pentru mesaj!";
 const pageDescription =
-  "Mesajul dumneavoastră a fost trimis cu succes. Vă vom contacta în cel mai scurt timp posibil.";
+  "Mesajul a fost trimis cu succes. Îți răspundem în maximum 24 de ore lucrătoare.";
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
-  <!-- Thank You Section -->
-  <section class="section-padding min-h-screen flex items-center">
-    <div class="container">
-      <div class="max-w-3xl mx-auto text-center">
-        <!-- Success Icon -->
-        <div class="mb-8">
-          <div
-            class="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center animate-pulse"
-            style="background: linear-gradient(135deg, var(--color-success), rgba(var(--color-success-rgb), 0.8));"
-          >
-            <Icon name="mdi:check-circle" class="h-12 w-12 text-white" />
-          </div>
-        </div>
+<Layout title={pageTitle} description={pageDescription} noindex={true}>
+  <section class="thanks">
+    <div class="container thanks-inner">
+      <p class="kicker">Mesaj trimis ✓</p>
+      <h1>Mulțumim! Am primit mesajul.</h1>
+      <p class="lede">
+        Îți răspundem în maximum <strong>24 de ore lucrătoare</strong> — de obicei mult mai repede.
+        Între timp, iată ce se întâmplă:
+      </p>
 
-        <!-- Main Message -->
-        <div class="mb-12">
-          <h1
-            class="text-4xl md:text-5xl font-bold mb-6"
-            style="color: var(--color-text);"
-          >
-            Mulțumim pentru mesaj!
-          </h1>
-          <p
-            class="text-xl md:text-2xl mb-6"
-            style="color: var(--color-text-light);"
-          >
-            Mesajul dumneavoastră a fost trimis cu succes.
-          </p>
-          <p class="text-lg" style="color: var(--color-text-light);">
-            Echipa noastră vă va contacta în cel mai scurt timp posibil, de
-            obicei în maximum 24 de ore lucrătoare.
-          </p>
-        </div>
+      <ol class="steps">
+        <li><strong>Citim cererea.</strong> Omul care face site-ul, nu un robot.</li>
+        <li><strong>Răspundem în 24h.</strong> Cu întrebări bune sau direct cu propunerea.</li>
+        <li><strong>Primești preț + termen.</strong> Negru pe alb, pe mail.</li>
+      </ol>
 
-        <!-- Contact Info Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <!-- Email Card -->
-          <div
-            class="p-6 rounded-xl"
-            style="background-color: var(--color-background-alt); border: 1px solid rgba(var(--color-success-rgb), 0.2);"
-          >
-            <div
-              class="rounded-full p-3 mx-auto mb-4 w-12 h-12 flex items-center justify-center"
-              style="background-color: rgba(var(--color-success-rgb), 0.1);"
-            >
-              <Icon
-                name="mdi:email"
-                class="h-6 w-6"
-                style="color: var(--color-success);"
-              />
-            </div>
-            <h3 class="font-semibold text-lg mb-2">Email</h3>
-            <p class="text-sm" style="color: var(--color-text-light);">
-              Dacă aveți întrebări urgente, ne puteți contacta direct la:
-            </p>
-            <a
-              href={`mailto:${companyConfig.contact.email}`}
-              class="font-medium hover:underline"
-              style="color: var(--color-success);"
-            >
-              {companyConfig.contact.email}
-            </a>
-          </div>
+      <div class="thanks-cards">
+        <a href={`mailto:${companyConfig.contact.email}`} class="tcard">
+          <span class="tlabel">Email</span>
+          <span class="tvalue">{companyConfig.contact.email}</span>
+        </a>
+        <a href={`tel:${companyConfig.contact.phone.replace(/\s+/g, "")}`} class="tcard">
+          <span class="tlabel">Telefon urgent</span>
+          <span class="tvalue">{companyConfig.contact.phone}</span>
+        </a>
+      </div>
 
-          <!-- Phone Card -->
-          <div
-            class="p-6 rounded-xl"
-            style="background-color: var(--color-background-alt); border: 1px solid rgba(var(--color-success-rgb), 0.2);"
-          >
-            <div
-              class="rounded-full p-3 mx-auto mb-4 w-12 h-12 flex items-center justify-center"
-              style="background-color: rgba(var(--color-success-rgb), 0.1);"
-            >
-              <Icon
-                name="mdi:phone"
-                class="h-6 w-6"
-                style="color: var(--color-success);"
-              />
-            </div>
-            <h3 class="font-semibold text-lg mb-2">Telefon</h3>
-            <p class="text-sm" style="color: var(--color-text-light);">
-              Pentru urgențe, sunați direct:
-            </p>
-            <a
-              href={`tel:${companyConfig.contact.phone}`}
-              class="font-medium hover:underline"
-              style="color: var(--color-success);"
-            >
-              {companyConfig.contact.phone}
-            </a>
-          </div>
-        </div>
-
-        <!-- Next Steps -->
-        <div
-          class="p-6 rounded-xl mb-8"
-          style="background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.05), rgba(var(--color-success-rgb), 0.05)); border: 1px solid rgba(var(--color-primary-rgb), 0.2);"
-        >
-          <h2 class="text-2xl font-bold mb-4" style="color: var(--color-text);">
-            Ce urmează?
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-            <div class="flex items-start">
-              <div
-                class="rounded-full p-2 mr-3 mt-1"
-                style="background-color: rgba(var(--color-primary-rgb), 0.1);"
-              >
-                <span
-                  class="block w-6 h-6 rounded-full text-center text-sm font-bold leading-6 text-white"
-                  style="background-color: var(--color-primary);">1</span
-                >
-              </div>
-              <div>
-                <h4 class="font-semibold mb-1">Analizăm cererea</h4>
-                <p class="text-sm" style="color: var(--color-text-light);">
-                  Studiem cu atenție proiectul dumneavoastră
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div
-                class="rounded-full p-2 mr-3 mt-1"
-                style="background-color: rgba(var(--color-primary-rgb), 0.1);"
-              >
-                <span
-                  class="block w-6 h-6 rounded-full text-center text-sm font-bold leading-6 text-white"
-                  style="background-color: var(--color-primary);">2</span
-                >
-              </div>
-              <div>
-                <h4 class="font-semibold mb-1">Vă contactăm</h4>
-                <p class="text-sm" style="color: var(--color-text-light);">
-                  Vă sunaăm în maximum 24h pentru detalii
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div
-                class="rounded-full p-2 mr-3 mt-1"
-                style="background-color: rgba(var(--color-primary-rgb), 0.1);"
-              >
-                <span
-                  class="block w-6 h-6 rounded-full text-center text-sm font-bold leading-6 text-white"
-                  style="background-color: var(--color-primary);">3</span
-                >
-              </div>
-              <div>
-                <h4 class="font-semibold mb-1">Oferim soluția</h4>
-                <p class="text-sm" style="color: var(--color-text-light);">
-                  Prezentăm oferta personalizată
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/"
-            class="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white"
-          >
-            <Icon name="mdi:home" class="mr-2 h-5 w-5" />
-            Înapoi la pagina principală
-          </a>
-
-          <a
-            href="/servicii"
-            class="btn btn-secondary inline-flex items-center justify-center px-8 py-3 text-base font-medium"
-          >
-            <Icon name="mdi:view-grid" class="mr-2 h-5 w-5" />
-            Vezi serviciile noastre
-          </a>
-        </div>
-
-        <!-- Social Media -->
-        <div
-          class="mt-12 pt-8"
-          style="border-top: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);"
-        >
-          <p class="text-sm mb-4" style="color: var(--color-text-light);">
-            Urmărește-ne pe rețelele sociale pentru cele mai recente știri și
-            proiecte:
-          </p>
-          <div class="flex justify-center space-x-4">
-            {
-              companyConfig.socialMedia.map((social) => (
-                <a
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="p-3 rounded-full transition-all duration-300 hover:scale-110"
-                  style="background-color: var(--color-background-alt); color: var(--color-text-light); transition: all var(--transition-normal);"
-                  aria-label={social.platform}
-                >
-                  <Icon name={social.icon} class="h-5 w-5" />
-                </a>
-              ))
-            }
-          </div>
-        </div>
+      <div class="thanks-actions">
+        <a href="/" class="btn btn-primary btn-lg">Înapoi acasă →</a>
+        <a href="/portofoliu" class="btn btn-secondary btn-lg">Vezi portofoliul</a>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  /* Thank you page specific animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .thanks {
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 5rem 0 6rem;
+    background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px);
+    background-size: 22px 22px;
   }
-
-  .section-padding > div > div {
-    animation: fadeInUp 0.8s ease-out;
+  .thanks-inner { max-width: 46rem; }
+  .kicker { background: var(--color-ember); color: var(--color-ember-ink); }
+  .kicker::before { background: var(--color-ink-deep); }
+  .thanks h1 {
+    margin: 1.25rem 0 0;
+    font-size: clamp(2.2rem, 5.4vw, 3.6rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: #f5f1e6;
+    text-wrap: balance;
   }
-
-  /* Hover effects */
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.3);
+  .lede { margin: 1.1rem 0 0; font-size: 1.1rem; line-height: 1.7; color: #c2bcae; }
+  .lede strong { color: #f2efe6; }
+  .steps {
+    list-style: none;
+    margin: 2.25rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+    counter-reset: steps;
   }
-
-  /* Dark mode adjustments */
-  :global(.dark) .section-padding {
-    background-color: var(--color-dark-background);
+  .steps li {
+    position: relative;
+    padding: 1rem 1.2rem 1rem 3.5rem;
+    border: 2px solid rgba(255,255,255,0.22);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.04);
+    color: #c2bcae;
+    line-height: 1.6;
+    counter-increment: steps;
   }
-
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    .section-padding {
-      padding: 2rem 0;
-    }
-
-    h1 {
-      font-size: 2.5rem !important;
-    }
-
-    .grid {
-      gap: 1rem;
-    }
+  .steps li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-weight: 900;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps li strong { color: #f2efe6; }
+  .thanks-cards { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  @media (min-width: 640px) { .thanks-cards { grid-template-columns: 1fr 1fr; } }
+  .tcard {
+    display: grid;
+    gap: 0.25rem;
+    border: 2px solid rgba(255,255,255,0.22);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    transition: border-color 120ms ease;
+  }
+  .tcard:hover { border-color: var(--color-ember); }
+  .tlabel {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8f8b80;
+  }
+  .tvalue { font-weight: 700; color: #f2efe6; overflow-wrap: break-word; }
+  .thanks-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2.25rem; }
+  @media (max-width: 640px) {
+    .thanks-actions .btn { width: 100%; }
+  }
+  @media (max-width: 859px) {
+    /* No sticky CTA on this page -> no bottom room needed */
+    :global(body) { padding-bottom: 0; }
   }
 </style>
-
-<script>
-  // Auto-redirect after 30 seconds to homepage
-  let countdown = 30;
-
-  function updateCountdown() {
-    const countdownElement = document.getElementById("countdown");
-    if (countdownElement) {
-      countdownElement.textContent = countdown.toString();
-    }
-
-    if (countdown <= 0) {
-      window.location.href = "/";
-    } else {
-      countdown--;
-      setTimeout(updateCountdown, 1000);
-    }
-  }
-
-  // Start countdown after page loads
-  document.addEventListener("DOMContentLoaded", () => {
-    // Optional: Add countdown message
-    const container = document.querySelector(".container");
-    if (container) {
-      const countdownDiv = document.createElement("div");
-      countdownDiv.className = "mt-8 text-sm";
-      countdownDiv.style.color = "var(--color-text-lighter)";
-      countdownDiv.innerHTML = `
-        <p>Veți fi redirecționat automat la pagina principală în <span id="countdown">30</span> secunde.</p>
-      `;
-      container.appendChild(countdownDiv);
-
-      // Start the countdown
-      setTimeout(updateCountdown, 1000);
-    }
-  });
-</script>

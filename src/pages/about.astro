@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Icon } from 'astro-icon/components';
 import { aboutPageConfig } from '../config/pages';
 import CTA from '../components/CTA.astro';
 import PageHeader from '../components/PageHeader.astro';
@@ -13,76 +12,71 @@ const teamSection = aboutPageConfig.sections.find(section => section.type === "t
 const ctaSection = aboutPageConfig.sections.find(section => section.type === "cta");
 ---
 
-<Layout 
+<Layout
   title={aboutPageConfig.title}
   description={aboutPageConfig.description}
   ogType={aboutPageConfig.ogType}
 >
-  <!-- Hero Section -->
   {aboutHeroSection && (
     <PageHeader
-      title={aboutHeroSection.title}
-      subtitle={aboutHeroSection.subtitle}
-      align="center"
-      withBlobs={true}
-      withGrid={true}
-      icon="mdi:account-group"
+      title="Omul care îți face site-ul."
+      subtitle="BitDoze înseamnă Dragoș — 10+ ani de IT, DevOps și WordPress — plus o mână de colaboratori când proiectul cere. Fără departament de vânzări, fără tichete."
+      kicker="Despre BitDoze"
     />
   )}
 
   <!-- Our Story -->
   {storySection && (
-    <section class="section-padding">
-      <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-3xl font-bold mb-2">{storySection.title}</h2>
-            <p class="text-lg mb-6" style="color: var(--color-text-light);">{storySection.subtitle}</p>
-            <div class="story-content prose prose-lg" set:html={storySection.content} />
-            
-            {storySection.stats && (
-              <div class="mt-10 flex flex-wrap gap-x-12 gap-y-6 border-t pt-8" style="border-color: var(--color-text-lighter);">
-                {storySection.stats.map((stat, index) => (
-                  <div class="stat-item" style={`animation-delay: ${index * 0.2}s;`}>
-                    <p class="text-4xl font-bold mb-1" style="color: var(--color-primary);">{stat.value}</p>
-                    <p class="text-sm font-medium" style="color: var(--color-text-light);">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <div class="relative">
-            <div class="absolute -top-4 -left-4 w-24 h-24 rounded-full" style="background-color: var(--color-secondary); opacity: 0.1;"></div>
-            <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-full" style="background-color: var(--color-primary); opacity: 0.1;"></div>
-            <img 
-              src={storySection.image} 
-              alt="Our Story" 
-              class="w-full rounded-xl shadow-lg relative z-10"
-              style="border-radius: var(--radius-xl);"
-            />
-          </div>
+    <section class="story">
+      <div class="container story-grid">
+        <div>
+          <p class="kicker">Povestea</p>
+          <h2>{storySection.title}</h2>
+          <p class="story-sub">{storySection.subtitle}</p>
+          <div class="story-content prose prose-lg" set:html={storySection.content} />
+
+          {storySection.stats && (
+            <div class="story-stats">
+              {storySection.stats.map((stat) => (
+                <div class="story-stat">
+                  <span class="story-stat-value">{stat.value}</span>
+                  <span class="story-stat-label">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+        <figure class="story-fig">
+          <img
+            src={storySection.image}
+            alt="Povestea BitDoze — echipa la lucru"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Din 2014: site-uri, servere și grijă după lansare.</figcaption>
+        </figure>
       </div>
     </section>
   )}
 
   <!-- Company Values -->
   {valuesSection && (
-    <section class="section-padding" style="background-color: var(--color-background-alt);">
+    <section class="values">
       <div class="container">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold mb-4">{valuesSection.title}</h2>
-          <p class="max-w-2xl mx-auto" style="color: var(--color-text-light);">
-            {valuesSection.subtitle}
-          </p>
+        <div class="values-head">
+          <div>
+            <p class="kicker">Principii</p>
+            <h2>{valuesSection.title}</h2>
+          </div>
+          <p class="values-lede">{valuesSection.subtitle}</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-          {valuesSection.values.map(value => (
-            <div class="p-6 flex flex-col items-center text-center transition-transform hover:-translate-y-2 duration-300" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-              <Icon name={value.icon} class="w-12 h-12 mb-4" style="color: var(--color-primary);" />
-              <h3 class="text-xl font-bold mb-2">{value.title}</h3>
-              <p style="color: var(--color-text-light);">{value.description}</p>
+        <div class="values-grid">
+          {valuesSection.values.map((value, i) => (
+            <div class="value">
+              <span class="value-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
             </div>
           ))}
         </div>
@@ -92,55 +86,41 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
 
   <!-- Team Section -->
   {teamSection && (
-    <section class="section-padding">
+    <section class="maker">
       <div class="container">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-4">{teamSection.title}</h2>
-          <p class="max-w-2xl mx-auto text-lg" style="color: var(--color-text-light);">
-            {teamSection.subtitle}
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamSection.team.map(member => (
-            <div class="p-6 flex flex-col items-center text-center" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-              <div class="w-28 h-28 rounded-full overflow-hidden mb-4 border-2" style="border-color: var(--color-primary-light);">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <h3 class="text-xl font-bold mb-1">{member.name}</h3>
-              <p class="mb-4" style="color: var(--color-primary);">{member.role}</p>
-              <p class="text-sm" style="color: var(--color-text-light);">{member.bio}</p>
-              
+        <p class="kicker kicker-dark">Cu cine vorbești</p>
+        <h2>{teamSection.title}</h2>
+        {teamSection.team.map(member => (
+          <div class="maker-panel">
+            <span class="maker-avatar" aria-hidden="true">{member.name.charAt(0)}</span>
+            <div class="maker-body">
+              <p class="maker-name">{member.name}</p>
+              <p class="maker-role">{member.role}</p>
+              <p class="maker-bio">{member.bio}</p>
               {member.socialMedia && (
-                <div class="mt-4 flex space-x-3">
-                    {member.socialMedia.map(social => (
-                      <a 
-                        href={social.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class="text-gray-400 hover:text-primary transition-colors"
-                        style="color: var(--color-text-light); hover:color: var(--color-primary);"
-                        aria-label={social.platform}
-                      >
-                        <Icon name={social.icon} class="h-5 w-5" />
-                      </a>
-                    ))}
-                  </div>
+                <div class="maker-social">
+                  {member.socialMedia.map(social => (
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} pe ${social.platform}`}
+                    >
+                      {social.platform} ↗
+                    </a>
+                  ))}
+                </div>
               )}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   )}
 
   <!-- CTA Section -->
   {ctaSection && (
-    <CTA 
+    <CTA
       title={ctaSection.title}
       subtitle={ctaSection.subtitle}
       ctaText={ctaSection.ctaPrimary.text}
@@ -153,26 +133,185 @@ const ctaSection = aboutPageConfig.sections.find(section => section.type === "ct
 </Layout>
 
 <style>
-  .story-content {
-    color: var(--color-text-light);
+  .story { background: var(--color-background); padding: 4rem 0; }
+  :global(.dark) .story { background: var(--color-dark-background); }
+  .story-grid { display: grid; gap: 3rem; align-items: start; }
+  @media (min-width: 960px) {
+    .story-grid { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; }
+    .story-fig { position: sticky; top: 6rem; }
   }
-  
-  .story-content p {
-    margin-bottom: 1.25rem;
-    line-height: 1.7;
+  .story h2 {
+    margin: 1.1rem 0 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
   }
-  
-  .story-content p:last-child {
-    margin-bottom: 0;
+  .story-sub { margin: 0.8rem 0 0; font-size: 1.08rem; font-weight: 600; color: var(--color-text); }
+  :global(.dark) .story-sub { color: var(--color-dark-text); }
+  .story-content { margin-top: 1.25rem; }
+  .story-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2.25rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-card);
+    padding: 1.25rem 1.4rem;
+    box-shadow: 5px 5px 0 var(--color-ink);
   }
-  
-  .stat-item {
-    animation: fadeIn 0.8s ease-out forwards;
-    opacity: 0;
+  :global(.dark) .story-stats { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); box-shadow: 5px 5px 0 rgba(0,0,0,0.6); }
+  .story-stat { display: grid; gap: 0.2rem; }
+  .story-stat-value { font-family: var(--font-serif); font-weight: 640; font-size: 1.9rem; line-height: 1; }
+  .story-stat-value::after {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 4px;
+    background: var(--color-ember);
+    border-radius: 999px;
+    margin-top: 0.45rem;
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  .story-stat-label { font-size: 0.84rem; font-weight: 600; color: var(--color-muted); }
+  :global(.dark) .story-stat-label { color: var(--color-dark-text-light); }
+  .story-fig { margin: 0; display: grid; gap: 0.7rem; }
+  .story-fig img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    box-shadow: 7px 7px 0 var(--color-ink);
+    transform: rotate(1deg);
+  }
+  :global(.dark) .story-fig img { border-color: rgba(255,255,255,0.22); box-shadow: 7px 7px 0 rgba(0,0,0,0.6); }
+  .story-fig figcaption { font-size: 0.86rem; font-weight: 600; color: var(--color-muted); }
+  :global(.dark) .story-fig figcaption { color: var(--color-dark-text-light); }
+
+  .values {
+    background: var(--color-background);
+    border-top: 2px solid var(--color-ink);
+    padding: 4.5rem 0;
+  }
+  :global(.dark) .values { background: var(--color-dark-background); border-top-color: rgba(255,255,255,0.2); }
+  .values-head {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (min-width: 960px) {
+    .values-head { grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: end; }
+  }
+  .values-head h2 {
+    margin: 1.1rem 0 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+  .values-lede { margin: 0; font-size: 1.05rem; line-height: 1.7; color: var(--color-muted); }
+  :global(.dark) .values-lede { color: var(--color-dark-text-light); }
+  .values-grid { display: grid; gap: 1.2rem; }
+  @media (min-width: 760px) {
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1120px) {
+    .values-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .value {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-card);
+    padding: 1.5rem;
+    transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease;
+  }
+  .value:hover { transform: translate(-2px, -3px); box-shadow: 6px 6px 0 var(--color-ink); }
+  :global(.dark) .value { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  :global(.dark) .value:hover { box-shadow: 6px 6px 0 rgba(0,0,0,0.6); }
+  .value-num {
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 2.6rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-ember-deep);
+  }
+  .value h3 { margin: 0.9rem 0 0.5rem; font-family: var(--font-serif); font-size: 1.3rem; letter-spacing: -0.015em; }
+  .value p { margin: 0; font-size: 0.94rem; line-height: 1.65; color: var(--color-muted); }
+  :global(.dark) .value p { color: var(--color-dark-text-light); }
+
+  .maker {
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 5rem 0;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
+  .kicker-dark { background: var(--color-ember); color: var(--color-ember-ink); }
+  .kicker-dark::before { background: var(--color-ink-deep); }
+  .maker h2 {
+    margin: 1.1rem 0 2.25rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    color: #f5f1e6;
+  }
+  .maker-panel {
+    display: grid;
+    gap: 1.75rem;
+    border: 2px solid rgba(255,255,255,0.22);
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    padding: 2rem;
+    max-width: 56rem;
+  }
+  @media (min-width: 720px) {
+    .maker-panel { grid-template-columns: auto 1fr; padding: 2.5rem; }
+  }
+  .maker-avatar {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 18px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 3.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-2deg);
+    flex-shrink: 0;
+  }
+  .maker-name { margin: 0; font-family: var(--font-serif); font-weight: 640; font-size: 1.9rem; color: #f5f1e6; }
+  .maker-role {
+    display: inline-block;
+    margin: 0.6rem 0 0;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ember-soft);
+    border: 1.5px solid var(--color-ember-soft);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+  }
+  .maker-bio { margin: 1rem 0 0; line-height: 1.7; color: #c2bcae; max-width: 40rem; }
+  .maker-social { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.4rem; }
+  .maker-social a {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #f2efe6;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .maker-social a:hover { border-color: var(--color-ember); color: var(--color-ember-soft); }
+  @media (prefers-reduced-motion: reduce) {
+    .value, .value:hover { transform: none; transition: none; }
+    .story-fig img, .maker-avatar { transform: none; }
   }
 </style>

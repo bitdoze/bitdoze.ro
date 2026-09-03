@@ -1,92 +1,123 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import PortofolioCard from "../components/PortofolioCard.astro";
 import PageHeader from "../components/PageHeader.astro";
 import CTA from "../components/CTA.astro";
 import { getCollectionSlug } from "../utils/content";
 
-// Get all non-draft portfolio entries
-const portofoliu = await getCollection("portofoliu", ({ data }) => {
-  return !data.draft;
-});
-
-// Sort by date in descending order
+const portofoliu = await getCollection("portofoliu", ({ data }) => !data.draft);
 const sortedProjects = portofoliu.sort(
   (a, b) => b.data.data.getTime() - a.data.data.getTime()
 );
 ---
 
 <Layout
-  title="Portofoliu - BitDoze"
-  description="Explorați portofoliul nostru de proiecte web și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri."
+  title="Portofoliu"
+  description="Site-uri și magazine online construite de BitDoze: ce problemă avea clientul, ce am făcut, ce a rezultat."
   ogType="website"
 >
-  <!-- Hero Section -->
   <PageHeader
-    title="Portofoliu"
-    subtitle="Explorați colecția noastră de proiecte și descoperiți diversitatea soluțiilor digitale pe care le oferim."
-    align="center"
-    withBlobs={true}
-    withGrid={true}
-    icon="mdi:folder-multiple-image"
+    title="Muncă livrată, nu mockup-uri."
+    subtitle="Fiecare proiect de mai jos e un site real, folosit de clienți reali. Intră pe studii de caz ca să vezi ce am făcut concret."
+    kicker="Portofoliu"
   />
 
-  <!-- Portfolio Section -->
-  <section class="section-padding">
+  <section class="folio">
     <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          sortedProjects.map((project) => (
-            <div class="portfolio-item">
-              <PortofolioCard
-                title={project.data.title}
-                descriere={project.data.descriere}
-                imagine={project.data.imagine}
-                url={project.data.url}
-                stack={project.data.stack}
-                servicii={project.data.servicii}
-                slug={getCollectionSlug(project)}
-              />
-            </div>
-          ))
-        }
+      <div class="folio-head">
+        <p class="kicker">Toate proiectele</p>
+        <p class="folio-count">{sortedProjects.length} site-uri live</p>
       </div>
-
-      <!-- Empty State -->
-      {
-        sortedProjects.length === 0 && (
-          <div
-            class="text-center py-20 px-6 rounded-2xl bg-white"
-            style="box-shadow: var(--shadow-md);"
-          >
-            <Icon
-              name="mdi:folder-open-outline"
-              class="h-20 w-20 mx-auto mb-6"
-              style="color: var(--color-text-lighter);"
+      {sortedProjects.length > 0 ? (
+        <div class="folio-grid">
+          {sortedProjects.map((project) => (
+            <PortofolioCard
+              title={project.data.title}
+              descriere={project.data.descriere}
+              imagine={project.data.imagine}
+              url={project.data.url}
+              stack={project.data.stack}
+              servicii={project.data.servicii}
+              slug={getCollectionSlug(project)}
             />
-            <h3 class="text-2xl font-semibold mb-3">
-              Niciun proiect disponibil
-            </h3>
-            <p style="color: var(--color-text-light);" class="max-w-md mx-auto">
-              Proiectele vor fi adăugate în curând. Reveniți mai târziu pentru a
-              vedea portofoliul nostru.
-            </p>
-          </div>
-        )
-      }
+          ))}
+        </div>
+      ) : (
+        <div class="empty">
+          <h3>Niciun proiect publicat momentan</h3>
+          <p>Revenim curând cu studii de caz noi.</p>
+        </div>
+      )}
+      <p class="folio-note"><span>Capăt de listă — deocamdată.</span> Ai un proiect? <a href="/contact">Primești preț și termen în 24h →</a></p>
     </div>
   </section>
 
-  <!-- CTA Section -->
   <CTA
-    title="Pregătit să duci afacerea ta la următorul nivel?"
-    subtitle="Contactează-ne astăzi pentru o consultație gratuită și descoperă cum serviciile noastre pot accelera creșterea afacerii tale."
-    ctaText="Contactează-ne acum"
+    title="Vrei un proiect ca acestea?"
+    subtitle="Trimite-ne 3–4 fraze despre ce ai nevoie și primești o estimare onestă, nu un call de vânzări."
+    ctaText="Discutăm proiectul"
     ctaLink="/contact"
-    secondaryText="Află mai multe"
-    secondaryLink="/about"
-    trustedBy="De încredere pentru companii de top din România"
+    secondaryText="Vezi serviciile"
+    secondaryLink="/servicii"
   />
 </Layout>
+
+<style>
+  .folio { background: var(--color-background); border-top: 2px solid var(--color-ink); padding: 3.5rem 0 1.5rem; }
+  :global(.dark) .folio { background: var(--color-dark-background); border-top-color: rgba(255,255,255,0.2); }
+  .folio-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .folio-count {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 1.4rem;
+    letter-spacing: -0.015em;
+  }
+  .folio-count::after {
+    content: "";
+    display: block;
+    width: 2rem;
+    height: 4px;
+    background: var(--color-ember);
+    border-radius: 999px;
+    margin-top: 0.4rem;
+  }
+  .folio-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 760px) {
+    .folio-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1120px) {
+    .folio-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .folio-note {
+    margin: 2.5rem 0 3rem;
+    border: 2px dashed var(--color-ink);
+    border-radius: 12px;
+    padding: 1.1rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .folio-note span { font-family: var(--font-serif); font-size: 1.1rem; margin-right: 0.5rem; }
+  .folio-note a { color: var(--color-ember-deep); font-weight: 800; }
+  :global(.dark) .folio-note { border-color: rgba(255,255,255,0.3); }
+  :global(.dark) .folio-note a { color: var(--color-ember-soft); }
+  .empty {
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: left;
+  }
+  .empty h3 { margin: 0 0 0.5rem; }
+  .empty p { margin: 0; color: var(--color-muted); }
+</style>

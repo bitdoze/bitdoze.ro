@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface Props {
   title: string;
   description: string;
@@ -14,189 +12,141 @@ interface Props {
     icon?: string;
   };
   price?: string;
+  features?: string[];
+  featured?: boolean;
 }
 
 const {
   title,
   description,
-  icon,
   link,
   ctaText = "Află mai multe",
   index = 0,
-  badge,
   price,
+  features = [],
+  featured = false,
 } = Astro.props;
 
+const num = String(index + 1).padStart(2, "0");
+const variant = `v${index % 3}`;
+const Wrapper = link ? "a" : "div";
+const ticks = features.slice(0, 3);
 ---
 
-<div class="service-card-minimal" data-index={index}>
-  <div class="card-header">
-    <div class="icon-wrapper">
-      <Icon name={icon} class="service-icon" />
-    </div>
-    {badge && (
-      <span class="card-badge">
-        {badge.text}
+<Wrapper href={link} class:list={["svc-bold", variant, { "is-featured": featured }]}>
+  <span class="svc-visual" aria-hidden="true">
+    <span class="svc-giant">{num}</span>
+    {price && <span class="svc-price-pill">{price}</span>}
+  </span>
+  <span class="svc-body">
+    <span class="svc-title">{title}</span>
+    <span class="svc-desc">{description}</span>
+    {ticks.length > 0 && (
+      <span class="svc-ticks">
+        {ticks.map((f) => (
+          <span class="tick"><i aria-hidden="true">✓</i>{f}</span>
+        ))}
       </span>
     )}
-  </div>
-
-  <div class="card-body">
-    <h3 class="service-title">{title}</h3>
-    <p class="service-description">{description}</p>
-  </div>
-
-  <div class="card-footer">
-    {price && (
-      <span class="price-amount">{price}</span>
-    )}
-    
-    {link ? (
-      <a href={link} class="card-cta">
-        {ctaText} <Icon name="mdi:arrow-right" class="cta-icon" />
-      </a>
-    ) : (
-      <span class="card-cta">
-        {ctaText} <Icon name="mdi:arrow-right" class="cta-icon" />
-      </span>
-    )}
-  </div>
-</div>
+    <span class="svc-foot">
+      <span class="svc-cta">{ctaText} <span aria-hidden="true">→</span></span>
+    </span>
+  </span>
+</Wrapper>
 
 <style>
-  .service-card-minimal {
+  .svc-bold {
     display: flex;
     flex-direction: column;
+    border: 2px solid var(--color-ink);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--color-card);
+    text-decoration: none;
+    color: inherit;
     height: 100%;
-    padding: 2rem;
-    background: var(--color-background);
-    border: 1px solid rgba(var(--color-text-rgb), 0.08);
-    border-radius: 1rem;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease;
   }
-
-  .service-card-minimal:hover {
-    border-color: rgba(var(--color-primary-rgb), 0.3);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
+  .svc-bold:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 7px 7px 0 var(--color-ink);
   }
-
-  :global(.dark) .service-card-minimal {
-    background: var(--color-dark-background);
-    border-color: rgba(255, 255, 255, 0.08);
+  .svc-bold:hover .svc-title { text-decoration: underline; text-decoration-color: var(--color-ember); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  :global(.dark) .svc-bold {
+    background: var(--color-dark-background-alt);
+    border-color: rgba(255,255,255,0.22);
   }
-
-  :global(.dark) .service-card-minimal:hover {
-    border-color: rgba(var(--color-primary-rgb), 0.4);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-header {
+  :global(.dark) .svc-bold:hover { box-shadow: 7px 7px 0 rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.4); }
+  .svc-visual {
+    position: relative;
     display: flex;
+    align-items: flex-end;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
+    min-height: 148px;
+    padding: 1.1rem 1.25rem;
+    overflow: hidden;
   }
-
-  .icon-wrapper {
+  .is-featured .svc-visual { min-height: 178px; }
+  .v0 .svc-visual { background: var(--color-ink-deep); background-image: radial-gradient(rgba(255,255,255,0.16) 1.2px, transparent 1.6px); background-size: 18px 18px; }
+  .v1 .svc-visual { background: var(--color-pine); background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.09) 0 2px, transparent 2px 12px); }
+  .v2 .svc-visual { background: var(--color-ember); background-image: linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 22px 22px; }
+  .svc-giant {
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 4.6rem;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+  }
+  .v0 .svc-giant { color: var(--color-ember-soft); }
+  .v1 .svc-giant { color: #f2efe6; }
+  .v2 .svc-giant { color: var(--color-ink-deep); }
+  .is-featured .svc-giant { font-size: 5.6rem; }
+  .svc-price-pill {
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    border: 2px solid currentColor;
+    white-space: nowrap;
+  }
+  .v0 .svc-price-pill { color: #f2efe6; background: rgba(255,255,255,0.08); }
+  .v1 .svc-price-pill { color: #ffe9d6; background: rgba(255,77,0,0.22); border-color: var(--color-ember-soft); }
+  .v2 .svc-price-pill { color: var(--color-ink-deep); background: var(--color-paper); border-color: var(--color-ink-deep); }
+  .svc-body { display: flex; flex-direction: column; gap: 0.65rem; padding: 1.4rem 1.4rem 1.5rem; flex: 1; }
+  .svc-title {
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .is-featured .svc-title { font-size: 1.9rem; }
+  :global(.dark) .svc-title { color: var(--color-dark-text); }
+  .svc-desc { color: var(--color-muted); line-height: 1.65; font-size: 0.99rem; }
+  :global(.dark) .svc-desc { color: var(--color-dark-text-light); }
+  .svc-ticks { display: grid; gap: 0.45rem; margin-top: 0.35rem; }
+  .tick { display: flex; gap: 0.55rem; align-items: flex-start; font-size: 0.9rem; font-weight: 600; color: var(--color-ink); }
+  :global(.dark) .tick { color: var(--color-dark-text); }
+  .tick i {
+    font-style: normal;
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-size: 0.8rem;
+    font-weight: 900;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.75rem;
-    background: rgba(var(--color-text-rgb), 0.04);
-    color: var(--color-primary);
+    margin-top: 0.1rem;
   }
-
-  :global(.dark) .icon-wrapper {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .service-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .card-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: rgba(var(--color-primary-rgb), 0.1);
-    color: var(--color-primary);
-    letter-spacing: 0.02em;
-  }
-
-  .card-body {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .service-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin: 0;
-    line-height: 1.3;
-  }
-
-  :global(.dark) .service-title {
-    color: var(--color-dark-text);
-  }
-
-  .service-description {
-    color: var(--color-text-light);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  :global(.dark) .service-description {
-    color: var(--color-dark-text-light);
-  }
-
-  .card-footer {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .price-amount {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  :global(.dark) .price-amount {
-    color: var(--color-dark-text);
-  }
-
-  .card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .card-cta:hover {
-    color: var(--color-primary-dark);
-  }
-
-  .cta-icon {
-    width: 1rem;
-    height: 1rem;
-    transition: transform 0.2s ease;
-  }
-
-  .card-cta:hover .cta-icon {
-    transform: translateX(4px);
+  .svc-foot { margin-top: auto; padding-top: 0.9rem; }
+  .svc-cta { font-weight: 800; font-size: 0.95rem; color: var(--color-ink); }
+  :global(.dark) .svc-cta { color: var(--color-dark-text); }
+  @media (prefers-reduced-motion: reduce) {
+    .svc-bold, .svc-bold:hover { transform: none; transition: none; }
   }
 </style>

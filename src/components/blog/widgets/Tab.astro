@@ -79,12 +79,12 @@ const { name } = Astro.props;
   .tab-panel :global(blockquote) {
     margin: 1rem 0;
     padding-left: 1rem;
-    border-left: 4px solid #d1d5db;
+    border-left: 4px solid var(--color-line);
     width: 100%;
   }
 
   :global(.dark) .tab-panel :global(blockquote) {
-    border-left-color: #6b7280;
+    border-left-color: var(--color-dark-text-lighter);
   }
 
   /* Ensure text content uses full width */

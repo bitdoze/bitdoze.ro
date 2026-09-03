@@ -1,8 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import { navConfig } from "../config/nav";
 import { companyConfig } from "../config/company";
-import { ctaConfig } from "../config/cta";
 
 interface Props {
   companyName?: string;
@@ -15,468 +13,266 @@ const {
 } = Astro.props;
 
 const currentYear = new Date().getFullYear();
-const complianceBadges = [
-  {
-    href: "https://reclamatiisal.anpc.ro/",
-    src: "/images/footer-sal.webp",
-    alt: "Solutionarea alternativa a litigiilor",
-    label: "SAL",
-  },
-  {
-    href: "https://europa.eu/youreurope/business/dealing-with-customers/solving-disputes/alternative-dispute-resolution/index_ro.htm",
-    src: "/images/footer-sol.webp",
-    alt: "Solutionarea online a litigiilor",
-    label: "SOL",
-  },
-];
 ---
 
-<footer
-  class="footer-main relative overflow-hidden"
-  style="background: linear-gradient(135deg, rgba(var(--color-background-alt-rgb), 0.95), rgba(var(--color-background-rgb), 0.8)); border-top: 1px solid rgba(var(--color-text-rgb), 0.1); backdrop-filter: blur(10px);"
->
-  <!-- Background decorative elements -->
-  <div class="absolute inset-0 opacity-30 dark:opacity-20">
-    <div
-      class="absolute top-0 left-0 w-96 h-96 -ml-48 -mt-48 rounded-full bg-gradient-to-r from-primary/10 to-secondary/5 blur-3xl"
-    >
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <p class="status-pill"><span class="pulse" aria-hidden="true"></span>Acceptăm proiecte noi · răspuns în 24h</p>
+      <button type="button" class="to-top" data-to-top>↑ Sus</button>
     </div>
-    <div
-      class="absolute bottom-0 right-0 w-80 h-80 -mr-40 -mb-40 rounded-full bg-gradient-to-l from-secondary/10 to-accent/5 blur-3xl"
-    >
-    </div>
-  </div>
-  <div class="container mx-auto relative z-10">
-    <div class="grid grid-cols-1 gap-8 py-16 md:grid-cols-3 lg:grid-cols-5">
-      <!-- Company info -->
-      <div class="col-span-1 md:col-span-1 lg:col-span-2">
-        <a href="/" class="logo-footer group inline-flex items-center gap-2">
-          <img
-            src="/bitdoze_logo_better.svg"
-            alt="BitDoze"
-            class="h-10 w-auto transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-lg"
-          />
+
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <img src="/bitdoze_logo_better.svg" alt="BitDoze" />
         </a>
-        <p
-          class="mt-6 text-base leading-relaxed max-w-sm"
-          style="color: var(--color-text-light);"
-        >
-          {companyTagline}
-        </p>
-        <div class="mt-8 flex space-x-4">
+        <p class="footer-tagline">{companyTagline}</p>
+        <div class="footer-contact-pills">
+          <a href={`mailto:${companyConfig.contact.email}`}>{companyConfig.contact.email}</a>
+          <a href={`tel:${companyConfig.contact.phone.replace(/\s+/g, "")}`}>{companyConfig.contact.phone}</a>
+        </div>
+        <p class="footer-locale">{companyConfig.contact.address.city}, jud. {companyConfig.contact.address.state}</p>
+        <div class="footer-social">
           {
             companyConfig.socialMedia.map((social) => (
-              <a
-                href={social.url}
-                class="social-link group relative p-3 rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-1"
-                style="background: rgba(var(--color-text-rgb), 0.05); backdrop-filter: blur(8px); color: var(--color-text-lighter);"
-                aria-label={social.platform}
-              >
-                <Icon
-                  name={social.icon}
-                  class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
-                />
-                <div class="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              </a>
-            ))
-          }
-        </div>
-        <div class="footer-compliance mt-6" aria-label="Link-uri solutionare litigii">
-          {
-            complianceBadges.map((badge) => (
-              <a
-                href={badge.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="compliance-badge"
-                aria-label={badge.label}
-              >
-                <img src={badge.src} alt={badge.alt} loading="lazy" />
+              <a href={social.url} class="social-link" aria-label={social.platform} target="_blank" rel="noopener noreferrer">
+                {social.platform} ↗
               </a>
             ))
           }
         </div>
       </div>
 
-      <!-- Navigation -->
-      <div class="footer-section">
-        <h3 class="footer-heading text-base font-bold mb-6 relative">
-          <span style="color: var(--color-text);">Resurse</span>
-          <div
-            class="absolute bottom-0 left-0 h-0.5 w-8 rounded-full"
-            style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"
-          >
-          </div>
-        </h3>
-        <ul class="space-y-4">
-          {
-            navConfig.footerNav.resources.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="footer-link group inline-flex items-center text-sm transition-all duration-300 hover:translate-x-2"
-                  style="color: var(--color-text-light);"
-                >
-                  <span class="transition-colors duration-300 group-hover:text-primary">
-                    {item.title}
-                  </span>
-                  <Icon
-                    name="mdi:arrow-right"
-                    class="ml-1 h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
-                  />
-                </a>
-              </li>
-            ))
-          }
+      <nav class="footer-col" aria-label="Resurse">
+        <p class="footer-heading">Resurse</p>
+        <ul>
+          {navConfig.footerNav.resources.map((item) => (
+            <li><a href={item.href}>{item.title}</a></li>
+          ))}
         </ul>
-      </div>
+      </nav>
 
-      <div class="footer-section">
-        <h3 class="footer-heading text-base font-bold mb-6 relative">
-          <span style="color: var(--color-text);">Companie</span>
-          <div
-            class="absolute bottom-0 left-0 h-0.5 w-8 rounded-full"
-            style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"
-          >
-          </div>
-        </h3>
-        <ul class="space-y-4">
-          {
-            navConfig.footerNav.company.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="footer-link group inline-flex items-center text-sm transition-all duration-300 hover:translate-x-2"
-                  style="color: var(--color-text-light);"
-                >
-                  <span class="transition-colors duration-300 group-hover:text-primary">
-                    {item.title}
-                  </span>
-                  <Icon
-                    name="mdi:arrow-right"
-                    class="ml-1 h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
-                  />
-                </a>
-              </li>
-            ))
-          }
+      <nav class="footer-col" aria-label="Companie">
+        <p class="footer-heading">Companie</p>
+        <ul>
+          {navConfig.footerNav.company.map((item) => (
+            <li><a href={item.href}>{item.title}</a></li>
+          ))}
         </ul>
-      </div>
+      </nav>
 
-      <div class="footer-section">
-        <h3 class="footer-heading text-base font-bold mb-6 relative">
-          <span style="color: var(--color-text);">Legal</span>
-          <div
-            class="absolute bottom-0 left-0 h-0.5 w-8 rounded-full"
-            style="background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));"
-          >
-          </div>
-        </h3>
-        <ul class="space-y-4">
-          {
-            navConfig.footerNav.legal.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="footer-link group inline-flex items-center text-sm transition-all duration-300 hover:translate-x-2"
-                  style="color: var(--color-text-light);"
-                >
-                  <span class="transition-colors duration-300 group-hover:text-primary">
-                    {item.title}
-                  </span>
-                  <Icon
-                    name="mdi:arrow-right"
-                    class="ml-1 h-4 w-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
-                  />
-                </a>
-              </li>
-            ))
-          }
+      <nav class="footer-col" aria-label="Legal">
+        <p class="footer-heading">Legal</p>
+        <ul>
+          {navConfig.footerNav.legal.map((item) => (
+            <li><a href={item.href}>{item.title}</a></li>
+          ))}
         </ul>
-      </div>
+      </nav>
     </div>
 
-    <!-- Bottom section with copyright -->
-    <div
-      class="footer-bottom flex flex-col md:flex-row justify-between items-center py-8 mt-8 border-t backdrop-blur-sm"
-      style="border-color: rgba(var(--color-text-rgb), 0.1); background: rgba(var(--color-background-rgb), 0.3);"
-    >
-      <div class="flex flex-col md:flex-row items-center gap-4">
-        <p
-          class="text-sm font-medium"
-          style="color: var(--color-text-lighter);"
-        >
-          &copy; {currentYear}
-          {companyName}. Toate drepturile rezervate.
-        </p>
-        <div
-          class="flex items-center gap-2 text-xs px-3 py-1 rounded-full"
-          style="background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary);"
-        >
-          <Icon name="mdi:shield-check" class="h-3 w-3" />
-          CUI: 28708326
-        </div>
-      </div>
-      <div class="mt-6 md:mt-0">
-        <div class="footer-bottom__actions">
-          <button type="button" class="btn btn-secondary" data-open-cookie-settings>
-            <span class="flex items-center gap-2">
-              Setări cookie-uri
-              <Icon name="mdi:cookie-cog-outline" class="h-4 w-4" />
-            </span>
-          </button>
-          <a href={ctaConfig.primaryAction.href} class="btn btn-primary btn-lg">
-            <span class="flex items-center gap-2">
-              {ctaConfig.primaryAction.text}
-              <Icon name="mdi:rocket-launch" class="h-4 w-4" />
-            </span>
-          </a>
-        </div>
+    <p class="wordmark" aria-hidden="true">BitDoze</p>
+
+    <div class="footer-bottom">
+      <p>© {currentYear} {companyName} · CUI: {companyConfig.cui} · Făcut cu grijă în România</p>
+      <div class="footer-legal-links">
+        <a href="https://reclamatiisal.anpc.ro/" target="_blank" rel="noopener noreferrer">Soluționare litigii (SAL)</a>
+        <button type="button" class="link-btn" data-open-cookie-settings>Setări cookie-uri</button>
+        <a href="/contact">Contact</a>
       </div>
     </div>
   </div>
 </footer>
 
+<script>
+  document.addEventListener("click", (event) => {
+    const button = (event.target instanceof Element)
+      ? event.target.closest("[data-to-top]")
+      : null;
+    if (!(button instanceof HTMLButtonElement)) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+</script>
+
 <style>
-  .footer-main {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    margin-top: auto;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  .site-footer {
+    background: var(--color-ink-deep);
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.5px);
+    background-size: 24px 24px;
+    color: #c2bcae;
+    margin-top: 0;
+    border-top: 4px solid var(--color-ember);
   }
-
-  .footer-main .container {
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .footer-bottom__actions {
+  .footer-top {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 2.5rem;
   }
-
-  @media (max-width: 767px) {
-    .footer-bottom__actions {
-      justify-content: center;
-    }
-  }
-
-  /* Logo hover effects */
-  .logo-footer {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .logo-footer:hover {
-    filter: drop-shadow(0 4px 12px rgba(var(--color-primary-rgb), 0.4));
-  }
-
-  /* Social links */
-  .social-link {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .social-link:hover {
-    color: var(--color-primary);
-    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.25);
-  }
-
-  /* Footer sections */
-  .footer-section {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .footer-section:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-  .footer-section:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-  .footer-section:nth-child(4) {
-    animation-delay: 0.3s;
-  }
-  .footer-section:nth-child(5) {
-    animation-delay: 0.4s;
-  }
-
-  /* Footer headings */
-  .footer-heading {
-    position: relative;
-    padding-bottom: 0.5rem;
-  }
-
-  .footer-heading::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--color-primary),
-      var(--color-secondary)
-    );
-    transition: width 0.3s ease;
-  }
-
-  .footer-heading:hover::before {
-    width: 2rem;
-  }
-
-  /* Footer links */
-  .footer-link {
-    position: relative;
-    padding: 0.25rem 0;
-  }
-
-  .footer-link::before {
-    content: "";
-    position: absolute;
-    left: -0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2px;
-    height: 0;
-    background-color: var(--color-primary);
-    transition: height 0.3s ease;
-  }
-
-  .footer-link:hover::before {
-    height: 1rem;
-  }
-
-  /* Footer CTA uses global .btn now */
-
-  /* Footer bottom section */
-  .footer-bottom {
-    border-radius: 1rem 1rem 0 0;
-    margin: 0 -1rem -1rem -1rem;
-    padding: 2rem 2rem 1rem 2rem;
-  }
-
-  .footer-compliance {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.75rem;
-  }
-
-  .compliance-badge {
+  .status-pill {
+    margin: 0;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-height: 4.5rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(var(--color-text-rgb), 0.08);
-    border-radius: 1rem;
-    background: rgba(var(--color-background-rgb), 0.72);
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease;
+    gap: 0.55rem;
+    font-size: 0.84rem;
+    font-weight: 800;
+    color: var(--color-ember-ink);
+    background: var(--color-ember);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
   }
-
-  .compliance-badge:hover {
-    transform: translateY(-2px);
-    border-color: rgba(var(--color-primary-rgb), 0.24);
-    box-shadow: 0 16px 36px rgba(var(--color-primary-rgb), 0.14);
+  .status-pill .pulse { background: var(--color-ink-deep); }
+  .pulse {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    flex-shrink: 0;
+    animation: pulse-dot 2s ease-in-out infinite;
   }
-
-  .compliance-badge img {
-    display: block;
+  @keyframes pulse-dot {
+    50% { opacity: 0.3; }
+  }
+  .to-top {
+    background: var(--color-ember);
+    border: 0;
+    border-radius: 999px;
+    color: var(--color-ember-ink);
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 800;
+    padding: 0.6rem 1.25rem;
+    min-height: 44px;
+    cursor: pointer;
+    transition: transform 120ms ease;
+  }
+  .to-top:hover { transform: translateY(-2px); }
+  .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px) {
+    .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; }
+  }
+  .footer-logo img {
+    height: 2.1rem;
     width: auto;
-    height: auto;
-    max-width: 12.9375rem;
+    filter: brightness(0) invert(1);
   }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .footer-tagline {
+    margin: 1rem 0 1.25rem;
+    max-width: 26rem;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: #f2efe6;
   }
-
-  /* Dark mode adjustments */
-  :global(.dark) .footer-main {
-    background: linear-gradient(
-      135deg,
-      rgba(var(--color-dark-background-alt-rgb), 0.95),
-      rgba(var(--color-dark-background-rgb), 0.8)
-    );
-    border-top-color: rgba(255, 255, 255, 0.1);
+  .footer-contact-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
-
-  :global(.dark) .social-link {
-    background: rgba(255, 255, 255, 0.05);
+  .footer-contact-pills a {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #f2efe6;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 0.55rem 1.05rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    overflow-wrap: anywhere;
   }
-
-  :global(.dark) .social-link:hover {
-    background: rgba(var(--color-primary-rgb), 0.1);
-    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.3);
+  .footer-contact-pills a:hover { border-color: var(--color-ember); color: var(--color-ember-soft); }
+  .footer-locale { margin: 1rem 0 0; font-size: 0.86rem; color: #8f8b80; }
+  .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
   }
-
-  :global(.dark) .footer-bottom {
-    background: rgba(var(--color-dark-background-rgb), 0.4);
+  .social-link {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #f2efe6;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255,255,255,0.25);
+    padding-bottom: 2px;
   }
-
-  :global(.dark) .compliance-badge {
-    background: rgba(var(--color-dark-background-rgb), 0.88);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35);
+  .social-link:hover { border-bottom-color: var(--color-ember); color: var(--color-ember-soft); }
+  .footer-heading {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #f2efe6;
+    margin: 0 0 1.1rem;
   }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .footer-main .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-
-    .footer-bottom {
-      margin: 0 -1rem -1rem -1rem;
-      border-radius: 0.5rem 0.5rem 0 0;
-    }
-
-    .footer-section {
-      margin-bottom: 2rem;
-    }
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.7rem;
   }
-
-  /* Reduced motion support */
+  .footer-col a {
+    color: #c2bcae;
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 550;
+  }
+  .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+  .wordmark {
+    margin: 1rem 0 -0.5rem;
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: clamp(4.5rem, 15vw, 13rem);
+    line-height: 0.85;
+    letter-spacing: -0.035em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(242, 239, 230, 0.35);
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 1.5rem;
+    padding-bottom: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: #8f8b80;
+  }
+  .footer-bottom p { margin: 0; }
+  .footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+  .footer-legal-links a { color: #c2bcae; text-decoration: none; }
+  .footer-legal-links a:hover { color: #fff; }
+  .link-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: #c2bcae;
+    font: inherit;
+    cursor: pointer;
+  }
+  .link-btn:hover { color: #fff; }
   @media (prefers-reduced-motion: reduce) {
-    .footer-section,
-    .footer-link,
-    .footer-cta,
-    .social-link,
-    .logo-footer {
-      animation: none;
-      transition: none;
-    }
+    .pulse { animation: none; }
   }
-
-  /* Focus states for accessibility */
-  .footer-link:focus-visible,
-  .social-link:focus-visible,
-  .compliance-badge:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-  }
-
-  /* Focus handled by global .btn */
 </style>

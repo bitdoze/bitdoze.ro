@@ -1,6 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import { ctaConfig } from "../config/cta";
+import { companyConfig } from "../config/company";
 
 interface Props {
   title?: string;
@@ -17,478 +17,136 @@ const {
   subtitle = ctaConfig.description,
   ctaText = ctaConfig.primaryAction.text,
   ctaLink = ctaConfig.primaryAction.href,
-  secondaryText = ctaConfig.secondaryAction?.text || "Află Mai Multe",
-  secondaryLink = ctaConfig.secondaryAction?.href || "/servicii",
-  trustedBy = ctaConfig.trustedBy ||
-    "De încredere pentru companii de top din România",
+  secondaryText = ctaConfig.secondaryAction?.text,
+  secondaryLink = ctaConfig.secondaryAction?.href,
+  trustedBy,
 } = Astro.props;
 ---
 
-<section class="cta-section relative overflow-hidden section-padding">
-  <!-- Animated background -->
-  <div class="absolute inset-0 cta-background">
-    <div class="absolute inset-0 bg-mesh-pattern opacity-10"></div>
-  </div>
-
-  <!-- Floating geometric shapes -->
-  <div class="absolute inset-0">
-    <div class="floating-shape floating-shape-1"></div>
-    <div class="floating-shape floating-shape-2"></div>
-    <div class="floating-shape floating-shape-3"></div>
-    <div class="floating-shape floating-shape-4"></div>
-    <div class="floating-shape floating-shape-5"></div>
-  </div>
-
-  <!-- Light rays effect -->
-  <div class="absolute inset-0 light-rays opacity-20"></div>
-
-  <!-- Content overlay -->
-  <div
-    class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20"
-  >
-  </div>
-
-  <div class="container mx-auto relative z-20 py-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <!-- Badge -->
-      <div
-        class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium"
-      >
-        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        <span>Disponibil acum</span>
-        <Icon name="mdi:trending-up" class="w-4 h-4" />
+<section class="cta-wrap">
+  <div class="container">
+    <div class="cta-panel">
+      <div class="cta-text">
+        <p class="cta-stamp">Proiecte noi · răspuns în 24h</p>
+        <h2>{title}</h2>
+        <p class="cta-sub">{subtitle}</p>
+        {trustedBy && <p class="cta-proof">{trustedBy}</p>}
       </div>
-
-      <!-- Main heading with text reveal animation -->
-      <h2
-        class="text-reveal text-4xl md:text-5xl font-black text-white mb-6 leading-tight"
-      >
-        <span class="block" data-text={title}>{title}</span>
-      </h2>
-
-      <!-- Subtitle with typewriter effect -->
-      <p
-        class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed font-light"
-      >
-        {subtitle}
-      </p>
-
-      <!-- Action buttons with enhanced design -->
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
-        <a href={ctaLink} class="btn btn-primary btn-lg">
-          <span class="flex items-center gap-2">{ctaText}<Icon name="mdi:rocket-launch" class="w-5 h-5" /></span>
-        </a>
-        <a href={secondaryLink} class="btn btn-ghost-invert btn-lg">
-          <span class="flex items-center gap-2">{secondaryText}<Icon name="mdi:arrow-right" class="w-5 h-5" /></span>
-        </a>
-      </div>
-
-      <!-- Enhanced trust section -->
-      <div class="trust-section">
-        <div class="flex flex-col items-center space-y-6">
-          <p class="text-white/70 text-sm font-medium flex items-center gap-2">
-            <Icon name="mdi:star" class="w-4 h-4 text-yellow-400" />
-            {trustedBy}
-          </p>
-
-          <!-- Company logos with hover effects -->
-          <div
-            class="flex flex-wrap justify-center items-center gap-6 md:gap-8"
-          >
-            <div class="logo-container group">
-              <img
-                src="/images/logos/bit-tools-logo.svg"
-                alt="Bit Tools"
-                class="h-6 w-auto brightness-0 invert opacity-60 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 filter group-hover:drop-shadow-lg"
-              />
-            </div>
-            <div class="logo-container group">
-              <img
-                src="/images/logos/galtgjiu-logo.svg"
-                alt="Galtgjiu"
-                class="h-6 w-auto brightness-0 invert opacity-60 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 filter group-hover:drop-shadow-lg"
-              />
-            </div>
-            <div class="logo-container group">
-              <img
-                src="/images/logos/toolhunt-logo.svg"
-                alt="ToolHunt"
-                class="h-6 w-auto brightness-0 invert opacity-60 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 filter group-hover:drop-shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
+      <div class="cta-actions">
+        <a href={ctaLink} class="btn cta-main">{ctaText} →</a>
+        {secondaryText && secondaryLink && (
+          <a href={secondaryLink} class="cta-alt">{secondaryText}</a>
+        )}
+        <p class="cta-fine">
+          Sau direct la <a href={`tel:${companyConfig.contact.phone.replace(/\s+/g, "")}`}>{companyConfig.contact.phone}</a> · {companyConfig.contact.email}
+        </p>
       </div>
     </div>
-  </div>
-
-  <!-- Animated particles -->
-  <div class="particles">
-    <div class="particle particle-1"></div>
-    <div class="particle particle-2"></div>
-    <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-    <div class="particle particle-5"></div>
-    <div class="particle particle-6"></div>
   </div>
 </section>
 
 <style>
-  .cta-section {
-    position: relative;
+  .cta-wrap {
+    background: var(--color-background);
+    padding: 5rem 0;
   }
-
-  /* Background styling */
-  .cta-background {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-secondary)
-    );
-  }
-
-  /* Dark mode background */
-  :global(.dark) .cta-background {
-    background: linear-gradient(
-      135deg,
-      hsl(from var(--color-primary) h s calc(l * 0.7)),
-      hsl(from var(--color-secondary) h s calc(l * 0.7))
-    );
-  }
-
-  /* Fallback for browsers without hsl(from) support */
-  @supports not (background: hsl(from red h s l)) {
-    :global(.dark) .cta-background {
-      background: linear-gradient(135deg, #1a365d, #2d1b69);
-      opacity: 0.9;
-    }
-  }
-
-  /* Mesh background pattern */
-  .bg-mesh-pattern {
-    background-image: radial-gradient(
-        circle at 25px 25px,
-        rgba(255, 255, 255, 0.15) 2px,
-        transparent 0
-      ),
-      radial-gradient(
-        circle at 75px 75px,
-        rgba(255, 255, 255, 0.1) 2px,
-        transparent 0
-      );
-    background-size: 100px 100px;
-  }
-
-  /* Floating geometric shapes */
-  .floating-shape {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .floating-shape-1 {
-    width: 80px;
-    height: 80px;
-    top: 10%;
-    left: 10%;
-    border-radius: 50%;
-    animation: float-1 8s ease-in-out infinite;
-  }
-
-  .floating-shape-2 {
-    width: 60px;
-    height: 60px;
-    top: 20%;
-    right: 15%;
-    border-radius: 20px;
-    animation: float-2 10s ease-in-out infinite reverse;
-  }
-
-  .floating-shape-3 {
-    width: 120px;
-    height: 40px;
-    bottom: 30%;
-    left: 5%;
-    border-radius: 20px;
-    animation: float-3 7s ease-in-out infinite;
-  }
-
-  .floating-shape-4 {
-    width: 40px;
-    height: 100px;
-    bottom: 10%;
-    right: 10%;
-    border-radius: 20px;
-    animation: float-4 9s ease-in-out infinite reverse;
-  }
-
-  .floating-shape-5 {
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    left: 3%;
-    border-radius: 50%;
-    animation: float-5 11s ease-in-out infinite;
-  }
-
-  /* Light rays effect */
-  .light-rays {
-    background: linear-gradient(
-      45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 70%
-    );
-    animation: light-sweep 15s linear infinite;
-  }
-
-  /* Text reveal effect */
-  .text-reveal span {
+  :global(.dark) .cta-wrap { background: var(--color-dark-background); }
+  .cta-panel {
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: 22px;
+    padding: 2.75rem;
+    display: grid;
+    gap: 2.25rem;
+    box-shadow: 8px 8px 0 var(--color-ink);
     position: relative;
     overflow: hidden;
-    display: inline-block;
-    animation: text-reveal 1.5s ease-out forwards;
   }
-
-  .text-reveal span::after {
-    content: "";
+  .cta-panel::after {
+    content: "24h";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    animation: shimmer 2s ease-in-out infinite;
-  }
-
-  /* Buttons now use global .btn */
-
-  /* Trust section */
-  .trust-section {
-    animation: fade-in-up 1s ease-out 0.8s both;
-  }
-
-  .logo-container {
-    padding: 1rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-
-  .logo-container:hover {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-  }
-
-  /* Floating particles */
-  .particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    right: -0.5rem;
+    bottom: -2.2rem;
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 9rem;
+    line-height: 1;
+    color: rgba(0,0,0,0.1);
     pointer-events: none;
   }
-
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-  }
-
-  .particle-1 {
-    top: 20%;
-    left: 20%;
-    animation: particle-float 6s ease-in-out infinite;
-  }
-  .particle-2 {
-    top: 40%;
-    left: 80%;
-    animation: particle-float 8s ease-in-out infinite reverse;
-  }
-  .particle-3 {
-    top: 60%;
-    left: 10%;
-    animation: particle-float 7s ease-in-out infinite;
-  }
-  .particle-4 {
-    top: 80%;
-    left: 70%;
-    animation: particle-float 9s ease-in-out infinite reverse;
-  }
-  .particle-5 {
-    top: 10%;
-    left: 60%;
-    animation: particle-float 5s ease-in-out infinite;
-  }
-  .particle-6 {
-    top: 70%;
-    left: 40%;
-    animation: particle-float 10s ease-in-out infinite reverse;
-  }
-
-  /* Animations */
-  @keyframes float-1 {
-    0%,
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-30px) rotate(180deg);
+  @media (min-width: 900px) {
+    .cta-panel {
+      grid-template-columns: 1.5fr 1fr;
+      padding: 3.5rem 3.75rem;
+      align-items: center;
     }
   }
-
-  @keyframes float-2 {
-    0%,
-    100% {
-      transform: translateX(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateX(30px) rotate(-180deg);
-    }
+  .cta-stamp {
+    display: inline-flex;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    margin: 0;
   }
-
-  @keyframes float-3 {
-    0%,
-    100% {
-      transform: translateY(0px) translateX(0px);
-    }
-    50% {
-      transform: translateY(-20px) translateX(20px);
-    }
+  .cta-panel h2 {
+    margin: 1.2rem 0 0.9rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--color-ember-ink);
+    text-wrap: balance;
   }
-
-  @keyframes float-4 {
-    0%,
-    100% {
-      transform: translateY(0px) scale(1);
-    }
-    50% {
-      transform: translateY(-40px) scale(1.1);
-    }
+  .cta-sub {
+    margin: 0;
+    color: rgba(22, 16, 10, 0.82);
+    font-weight: 500;
+    max-width: 36rem;
+    line-height: 1.65;
+    font-size: 1.05rem;
   }
-
-  @keyframes float-5 {
-    0%,
-    100% {
-      transform: translateX(0px) translateY(0px) rotate(0deg);
-    }
-    33% {
-      transform: translateX(20px) translateY(-20px) rotate(120deg);
-    }
-    66% {
-      transform: translateX(-20px) translateY(20px) rotate(240deg);
-    }
+  .cta-proof {
+    margin: 1.3rem 0 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-ember-ink);
   }
-
-  @keyframes light-sweep {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
   }
-
-  @keyframes text-reveal {
-    0% {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0%);
-      opacity: 1;
-    }
+  @media (min-width: 900px) {
+    .cta-actions { border-left: 2px solid rgba(0,0,0,0.2); padding-left: 2.5rem; }
   }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+  .cta-main {
+    background: var(--color-ink-deep);
+    color: #f5f1e6;
+    border-color: var(--color-ink-deep);
+    font-size: 1.05rem;
+    padding: 1rem 1.75rem;
   }
-
-  @keyframes fade-in-up {
-    0% {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .cta-main:hover { background: #000; border-color: #000; color: #fff; }
+  .cta-alt {
+    color: var(--color-ember-ink);
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
   }
-
-  @keyframes particle-float {
-    0%,
-    100% {
-      transform: translateY(0px) scale(1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translateY(-100px) scale(1.5);
-      opacity: 1;
-    }
+  .cta-fine {
+    margin: 0.25rem 0 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(22, 16, 10, 0.75);
   }
-
-  :global(.dark) .bg-mesh-pattern {
-    background-image: radial-gradient(
-        circle at 25px 25px,
-        rgba(255, 255, 255, 0.05) 2px,
-        transparent 0
-      ),
-      radial-gradient(
-        circle at 75px 75px,
-        rgba(255, 255, 255, 0.03) 2px,
-        transparent 0
-      );
-  }
-
-  :global(.dark) .floating-shape {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .text-reveal {
-      font-size: 2rem;
-      line-height: 1.2;
-    }
-
-    .floating-shape-1,
-    .floating-shape-2,
-    .floating-shape-3,
-    .floating-shape-4,
-    .floating-shape-5 {
-      display: none;
-    }
-
-    .btn {
-      width: 100%;
-      max-width: 300px;
-    }
-  }
-
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    .floating-shape,
-    .particle,
-    .light-rays,
-    .text-reveal span::after {
-      animation: none;
-    }
-
-    .btn:hover {
-      transform: none;
-    }
-  }
+  .cta-fine a { color: var(--color-ember-ink); font-weight: 800; }
 </style>

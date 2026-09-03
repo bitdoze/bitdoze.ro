@@ -1,156 +1,202 @@
 ---
+import { companyConfig } from "../config/company";
+
 interface Props {
   title?: string;
   subtitle?: string;
   ctas?: {
-    primary: {
-      text: string;
-      link: string;
-    };
-    secondary?: {
-      text: string;
-      link: string;
-    };
+    primary: { text: string; link: string };
+    secondary?: { text: string; link: string };
   };
 }
 
 const {
-  title = "Construim Soluții Digitale pentru Afacerea Ta",
-  subtitle = "Suntem o agenție de dezvoltare web dedicată creării de site-uri rapide, optimizate SEO și aplicații web performante care te ajută să-ți atingi obiectivele de business.",
+  title = "Site-uri care arată bine și aduc clienți.",
+  subtitle = "BitDoze construiește site-uri rapide, optimizate SEO, și le întreține pe termen lung. Lucrezi direct cu omul care îți face site-ul — fără agenție-suport cu tichete.",
   ctas = {
-    primary: { text: "Vezi Serviciile", link: "/servicii" },
-    secondary: { text: "Contactează-ne", link: "/contact" },
-  }
+    primary: { text: "Cere ofertă", link: "/contact" },
+    secondary: { text: "Vezi servicii și prețuri", link: "/servicii" },
+  },
 } = Astro.props;
+
+const hotPhrase = "aduc clienți.";
+const hotIndex = title.indexOf(hotPhrase);
+const titleStart = hotIndex >= 0 ? title.slice(0, hotIndex) : title;
+const titleEnd = hotIndex >= 0 ? title.slice(hotIndex + hotPhrase.length) : "";
+const hasHot = hotIndex >= 0;
 ---
 
-<section class="welcome-hero section-padding">
-  <div class="container container-lg">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Agenție Web Design & SEO
-      </div>
-      <h1 class="hero-title">
-        {title}
-      </h1>
-      <p class="hero-subtitle">
-        {subtitle}
-      </p>
-      
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <p class="kicker kicker-dark">Atelier web · România · din 2014</p>
+      <h1 class="hero-title">{titleStart}{hasHot && <span class="hero-hot">{hotPhrase}</span>}{titleEnd ? ` ${titleEnd}` : ""}</h1>
+      <p class="hero-sub">{subtitle}</p>
       <div class="hero-actions">
-        {ctas.primary && (
-          <a href={ctas.primary.link} class="btn btn-primary btn-lg">
-            {ctas.primary.text}
-          </a>
-        )}
-        {ctas.secondary && (
-          <a href={ctas.secondary.link} class="btn btn-outline btn-lg">
-            {ctas.secondary.text}
-          </a>
-        )}
+        {ctas.primary && <a href={ctas.primary.link} class="btn btn-primary btn-lg">{ctas.primary.text} →</a>}
+        {ctas.secondary && <a href={ctas.secondary.link} class="btn btn-ghost-invert btn-lg">{ctas.secondary.text}</a>}
+      </div>
+      <dl class="hero-facts">
+        <div><dt>Răspuns</dt><dd>în 24h lucrătoare</dd></div>
+        <div><dt>Proiecte</dt><dd>50+ livrate</dd></div>
+        <div><dt>Contact direct</dt><dd>{companyConfig.contact.phone}</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero-visual" aria-hidden="false">
+      <figure class="browser">
+        <figcaption class="browser-bar"><span></span><span></span><span></span><em>bigsales.ro — magazin online BitDoze</em></figcaption>
+        <img src="/images/portofolio/bigsales.ro_-scaled-1.webp" alt="Magazin online bigsales.ro construit de BitDoze" loading="eager" fetchpriority="high" width="1200" height="750" />
+      </figure>
+      <div class="float float-price">
+        <strong>Preț fix înainte de start</strong>
+        <span>știi cât plătești și când e gata</span>
+      </div>
+      <div class="float float-reply">
+        <strong>Răspuns în 24h</strong>
+        <span>direct de la omul care face site-ul</span>
       </div>
     </div>
   </div>
-
-  <style>
-    .welcome-hero {
-      background-color: var(--color-background);
-      padding-top: 6rem;
-      padding-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    :global(.dark) .welcome-hero {
-      background-color: var(--color-dark-background);
-    }
-
-    .hero-content {
-      max-width: 56rem;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 1rem;
-      background: rgba(var(--color-text-rgb), 0.04);
-      color: var(--color-text);
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid rgba(var(--color-text-rgb), 0.08);
-      margin-bottom: 0.5rem;
-    }
-
-    :global(.dark) .hero-badge {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--color-dark-text);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      background-color: var(--color-primary);
-      border-radius: 50%;
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4.25rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--color-text);
-      margin: 0;
-    }
-
-    :global(.dark) .hero-title {
-      color: var(--color-dark-text);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.1rem, 2.5vw, 1.25rem);
-      color: var(--color-text-light);
-      line-height: 1.6;
-      max-width: 44rem;
-      margin: 0;
-    }
-
-    :global(.dark) .hero-subtitle {
-      color: var(--color-dark-text-light);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 640px) {
-      .welcome-hero {
-        padding-top: 4rem;
-      }
-      
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-        max-width: 20rem;
-      }
-      
-      .hero-actions .btn {
-        width: 100%;
-      }
-    }
-  </style>
 </section>
+
+<style>
+  .hero {
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 4.5rem 0 3.5rem;
+    position: relative;
+    overflow: clip;
+    background-image:
+      radial-gradient(560px 380px at 88% -8%, rgba(255, 77, 0, 0.22), transparent 65%),
+      radial-gradient(rgba(255,255,255,0.075) 1px, transparent 1.5px);
+    background-size: auto, 22px 22px;
+  }
+  .hero-grid {
+    display: grid;
+    gap: 3rem;
+    position: relative;
+  }
+  @media (min-width: 960px) {
+    .hero-grid { grid-template-columns: 1.08fr 0.92fr; gap: 4rem; align-items: center; }
+    .hero { padding: 5.5rem 0 4rem; }
+  }
+  .kicker-dark { background: var(--color-ember); color: var(--color-ember-ink); }
+  .kicker-dark::before { background: var(--color-ink-deep); }
+  .hero-main { animation: hero-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .hero-visual { animation: hero-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both; }
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+  .hero-title {
+    margin: 1.4rem 0 1.2rem;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: #f5f1e6;
+    text-wrap: balance;
+    max-width: 14ch;
+  }
+  .hero-hot { color: var(--color-ember-soft); }
+  .hero-sub {
+    margin: 0;
+    max-width: 36rem;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: #c2bcae;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+  .hero-facts {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 2rem;
+    justify-content: start;
+    margin: 2.5rem 0 0;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255,255,255,0.16);
+  }
+  .hero-facts dt {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8f8b80;
+  }
+  .hero-facts dd {
+    margin: 0.3rem 0 0;
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: #f2efe6;
+    overflow-wrap: break-word;
+  }
+  @media (max-width: 640px) {
+    .hero-facts { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .hero-actions .btn { width: 100%; }
+  }
+  .hero-visual { position: relative; max-width: 560px; }
+  .browser {
+    margin: 0;
+    border: 2px solid rgba(255,255,255,0.22);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    transform: rotate(1.2deg);
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.45);
+  }
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #161c19;
+    padding: 0.6rem 0.9rem;
+  }
+  .browser-bar span { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.25); }
+  .browser-bar span:first-child { background: var(--color-ember); }
+  .browser-bar em { font-style: normal; font-size: 0.75rem; color: #8f8b80; margin-left: 0.5rem; font-family: var(--font-mono); }
+  .browser img { width: 100%; height: auto; display: block; aspect-ratio: 16/10; object-fit: cover; object-position: top; }
+  .float {
+    position: absolute;
+    border: 2px solid var(--color-ink-deep);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    display: grid;
+    gap: 0.15rem;
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.45);
+    max-width: 240px;
+  }
+  .float strong { font-size: 0.95rem; line-height: 1.25; }
+  .float span { font-size: 0.82rem; line-height: 1.4; opacity: 0.85; }
+  .float-price {
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    top: -1.2rem;
+    right: -0.4rem;
+    transform: rotate(2deg);
+  }
+  .float-reply {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    bottom: -1.4rem;
+    left: -0.4rem;
+    transform: rotate(-1.6deg);
+  }
+  @media (max-width: 719px) {
+    .float { position: static; transform: none; max-width: none; margin-top: 0.75rem; box-shadow: 4px 4px 0 rgba(0,0,0,0.45); }
+    .browser { transform: none; }
+    .hero-visual { display: grid; }
+  }
+  .btn-ghost-invert {
+    border-width: 2px;
+    font-weight: 700;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-main, .hero-visual { animation: none; }
+    .browser, .float-price, .float-reply { transform: none; }
+  }
+</style>

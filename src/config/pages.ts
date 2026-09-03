@@ -266,11 +266,11 @@ export const homePageConfig: PageConfig = {
   sections: [
     {
       type: "portfolio",
-      title: "Portofoliu",
+      title: "Site-uri live, nu capturi.",
       subtitle:
-        "Explorați o selecție din proiectele noastre recente și descoperiți soluțiile digitale personalizate pe care le-am creat pentru clienții noștri.",
+        "Cinci proiecte recente, toate online și folosite de clienți reali. Intră pe orice studiu de caz ca să vezi ce am făcut concret.",
       showLatestProjects: true,
-      limit: 3,
+      limit: 5,
       cta: {
         text: "Vezi toate proiectele",
         link: "/portofoliu",
@@ -308,32 +308,32 @@ export const homePageConfig: PageConfig = {
     },
     {
       type: "welcome",
-      title: "Partenerul Tău de Încredere pentru Creștere Digitală",
+      title: "Site-uri care arată bine și aduc clienți.",
       subtitle:
-        "De peste 10 ani, ajutăm afacerile din România să crească online. 100% Satisfacție Garantată sau Banii Înapoi.",
+        "BitDoze construiește site-uri rapide, optimizate SEO, și le întreține pe termen lung. Lucrezi direct cu omul care îți face site-ul.",
       features: [
         {
           icon: "mdi:shield-check",
-          title: "Servicii de Încredere",
+          title: "Preț fix înainte",
           description:
-            "Ne mândrim cu fiabilitatea și excelența în fiecare proiect pe care îl întreprindem.",
+            "Știi cât plătești și când e gata, înainte să începem.",
           iconColor: "var(--color-primary)",
         },
         {
           icon: "mdi:lightbulb",
-          title: "Soluții Inovatoare",
+          title: "Viteză și SEO incluse",
           description:
-            "Aducem gândire creativă și abordări moderne pentru a rezolva provocările afacerii tale.",
+            "Nu sunt extra-opțiuni. Orice site pleacă rapid și indexabil.",
           iconColor: "var(--color-secondary)",
         },
       ],
       ctas: {
         primary: {
-          text: "Începe Proiectul Tău",
+          text: "Cere ofertă",
           link: "/contact",
         },
         secondary: {
-          text: "Vezi Servicii & Prețuri",
+          text: "Vezi servicii și prețuri",
           link: "/servicii",
         },
         welcome: [
@@ -374,7 +374,7 @@ export const homePageConfig: PageConfig = {
           author: "Maria Ionescu",
           role: "Director Marketing",
           company: "Soluții Digitale SRL",
-          avatar: "https://xsgames.co/randomusers/assets/avatars/female/32.jpg",
+          avatar: "",
         },
         {
           content:
@@ -382,7 +382,7 @@ export const homePageConfig: PageConfig = {
           author: "Mihai Popa",
           role: "Director General",
           company: "Inovație Plus",
-          avatar: "https://xsgames.co/randomusers/assets/avatars/male/45.jpg",
+          avatar: "",
         },
         {
           content:
@@ -390,13 +390,13 @@ export const homePageConfig: PageConfig = {
           author: "Elena Dumitrescu",
           role: "Manager de Produs",
           company: "Creștere Digitală SRL",
-          avatar: "https://xsgames.co/randomusers/assets/avatars/female/68.jpg",
+          avatar: "",
         },
       ],
     },
     {
       ...getCtaSection(),
-      trustedBy: "De încredere pentru companii de top din România",
+      trustedBy: "50+ proiecte livrate · suport în română · răspuns în 24h",
     },
   ],
 };
@@ -423,12 +423,12 @@ export const aboutPageConfig: PageConfig = {
 
       <p>Una dintre pasiunile mele este să scriu despre WordPress, având o platformă dedicată numită wpdoze.com unde îmi împărtășesc cunoștințele despre acest sistem de gestionare a conținutului extrem de popular. De la sfaturi practice la tutoriale detaliate, mă străduiesc să ofer resurse valoroase care să ajute persoanele și afacerile să își optimizeze site-urile WordPress.</p>
 
-      <p>Pe lângă pasiunea pentru WordPress, sunt la fel de entuziasmat de Linux, site-uri statice, CMS, VPS și tot ce ține de DevOps. Aceste subiecte m-au determinat să lansez platforma bitdoze.com, unde explorez funcționalitățile Linux, lumea site-urilor statice și ofer consultanță în domeniul DevOps și soluții personalizate pentru afaceri în mediul digital.</p>`,
+      <p>Pe lângă pasiunea pentru WordPress, sunt la fel de entuziasmat de Linux, site-uri statice, CMS, VPS și tot ce ține de DevOps. Aceste subiecte m-au determinat să lansez platforma bitdoze.ro, unde explorez funcționalitățile Linux, lumea site-urilor statice și ofer consultanță în domeniul DevOps și soluții personalizate pentru afaceri în mediul digital.</p>`,
       image:
         "https://images.unsplash.com/photo-1551761429-8232f9f5955c?q=80&w=2070&auto=format&fit=crop",
       stats: [
         { value: "10+", label: "Ani de experiență" },
-        { value: "100+", label: "Clienți mulțumiți" },
+        { value: "50+", label: "Proiecte livrate" },
         { value: "2", label: "Platforme educaționale" },
       ],
     },
@@ -484,11 +484,11 @@ export const aboutPageConfig: PageConfig = {
           name: "Dragoș",
           role: "Fondator & Specialist IT",
           bio: "Cu peste 10 ani de experiență în IT și 4 ani de specializare în DevOps, Dragoș aduce o viziune tehnică avansată și soluții inovatoare pentru toate proiectele.",
-          image: "https://xsgames.co/randomusers/assets/avatars/male/1.jpg",
+          image: "",
           socialMedia: [
             {
               platform: "LinkedIn",
-              url: "https://linkedin.com/in/bitdoze",
+              url: "https://linkedin.com/company/bitdoze",
               icon: "mdi:linkedin",
             },
             {
@@ -498,29 +498,11 @@ export const aboutPageConfig: PageConfig = {
             },
           ],
         },
-        {
-          name: "Ioana",
-          role: "Specialist Web Design",
-          bio: "Maria creează interfețe elegante și intuitive care îmbină estetica cu funcționalitatea, asigurând experiențe de utilizator memorabile.",
-          image: "https://xsgames.co/randomusers/assets/avatars/female/1.jpg",
-          socialMedia: [
-            {
-              platform: "LinkedIn",
-              url: "https://linkedin.com/",
-              icon: "mdi:linkedin",
-            },
-            {
-              platform: "Instagram",
-              url: "https://instagram.com/",
-              icon: "mdi:instagram",
-            },
-          ],
-        },
       ],
     },
     {
       ...getCtaSection(),
-      trustedBy: "De încredere pentru companii de top din România",
+      trustedBy: "50+ proiecte livrate · suport în română · răspuns în 24h",
     },
   ],
 };
@@ -759,7 +741,7 @@ export const contactPageConfig: PageConfig = {
     },
     {
       ...getCtaSection(),
-      trustedBy: "Trusted by leading companies worldwide",
+      trustedBy: "50+ proiecte livrate · suport în română · răspuns în 24h",
     },
   ],
 };

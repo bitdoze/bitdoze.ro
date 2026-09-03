@@ -46,14 +46,11 @@ export const GET: APIRoute = async () => {
     { loc: toAbsoluteUrl("/blog"), changefreq: "weekly", priority: "0.9" },
     { loc: toAbsoluteUrl("/contact"), changefreq: "monthly", priority: "0.9" },
     { loc: toAbsoluteUrl("/faq"), changefreq: "monthly", priority: "0.6" },
-    { loc: toAbsoluteUrl("/multumim"), changefreq: "yearly", priority: "0.3" },
     { loc: toAbsoluteUrl("/politica-de-confidentialitate"), changefreq: "yearly", priority: "0.3" },
     { loc: toAbsoluteUrl("/politica-de-cookies"), changefreq: "yearly", priority: "0.3" },
     { loc: toAbsoluteUrl("/portofoliu"), changefreq: "monthly", priority: "0.8" },
-    { loc: toAbsoluteUrl("/search"), changefreq: "weekly", priority: "0.5" },
     { loc: toAbsoluteUrl("/servicii"), changefreq: "weekly", priority: "0.9" },
     { loc: toAbsoluteUrl("/termeni-si-conditii"), changefreq: "yearly", priority: "0.3" },
-    { loc: toAbsoluteUrl("/rss.xml"), changefreq: "daily", priority: "0.4" },
   ];
 
   const postPages: SitemapUrl[] = posts.map((post) => ({

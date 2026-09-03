@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 import PageHeader from "../components/PageHeader.astro";
 import CTA from "../components/CTA.astro";
 
@@ -143,316 +142,184 @@ const faqCategories = [
   },
 ];
 
-// Structured data for FAQ
+// Structured data for FAQ (questions array; Layout renders JSON-LD once)
+const faqQuestions = faqCategories.flatMap((category) =>
+  category.questions.map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  }))
+);
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqCategories.flatMap((category) =>
-    category.questions.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    }))
-  ),
+  questions: faqQuestions,
 };
 ---
 
 <Layout
-  title="Întrebări Frecvente - BitDoze"
-  description="Găsiți răspunsuri la întrebările frecvente despre serviciile noastre de web design, hosting, SEO și marketing digital. Suport 24/7 disponibil."
+  title="Întrebări Frecvente"
+  description="Răspunsuri directe la întrebările des auzite despre prețuri, termene, SEO, hosting și mentenanță."
   structuredData={{
     type: "faq",
     data: structuredData,
   }}
 >
-  <!-- Hero Section -->
   <PageHeader
-    title="Întrebări Frecvente"
-    subtitle="Găsiți rapid răspunsuri la cele mai comune întrebări despre serviciile noastre"
-    align="center"
-    withBlobs={true}
-    withGrid={true}
-    icon="mdi:help-circle"
+    title="Întrebări frecvente, răspunsuri directe."
+    subtitle="Le auzim des, le răspundem fără ocolișuri. Pentru restul, scrie-ne — primești răspuns în 24h."
+    kicker="Ajutor · fără jargon"
   />
 
-  <!-- FAQ Content -->
-  <section class="section-padding">
-    <div class="container max-w-5xl mx-auto">
-      <!-- Quick Links -->
-      <div class="quick-links mb-12">
-        <h2 class="text-xl font-semibold mb-4 text-center">Navigare Rapidă</h2>
-        <div class="flex flex-wrap justify-center gap-2">
-          {
-            faqCategories.map((cat) => (
-              <a
-                href={`#${cat.category.toLowerCase().replace(/\s+/g, "-")}`}
-                class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all"
-                style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.2);"
-              >
-                <Icon name={cat.icon} class="mr-2 h-4 w-4" />
-                {cat.category}
-              </a>
-            ))
-          }
-        </div>
-      </div>
+  <section class="faq-sec">
+    <div class="container faq-narrow">
+      <nav class="quick-links" aria-label="Categorii întrebări">
+        {faqCategories.map((cat) => (
+          <a href={`#${cat.category.toLowerCase().replace(/\s+/g, "-")}`}>
+            {cat.category}
+          </a>
+        ))}
+      </nav>
 
-      <!-- FAQ Categories -->
-      {
-        faqCategories.map((category, categoryIndex) => (
-          <div
-            id={category.category.toLowerCase().replace(/\s+/g, "-")}
-            class="faq-category mb-12"
-            style={`animation-delay: ${categoryIndex * 100}ms`}
-          >
-            <div class="category-header mb-6">
-              <div class="flex items-center gap-3">
-                <div
-                  class="icon-wrapper"
-                  style="background-color: rgba(var(--color-primary-rgb), 0.1); padding: 0.75rem; border-radius: var(--radius-lg);"
-                >
-                  <Icon
-                    name={category.icon}
-                    class="h-6 w-6"
-                    style="color: var(--color-primary);"
-                  />
-                </div>
-                <h2 class="text-2xl font-bold">{category.category}</h2>
-              </div>
-            </div>
-
-            <div class="space-y-4">
-              {category.questions.map((item, index) => (
-                <div
-                  class="faq-item"
-                  style={`animation-delay: ${
-                    categoryIndex * 100 + index * 50
-                  }ms`}
-                >
-                  <button
-                    class="faq-question w-full text-left p-5 rounded-lg transition-all"
-                    style="background-color: var(--color-background); border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);"
-                    onclick={`this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');`}
-                  >
-                    <div class="flex justify-between items-center">
-                      <h3 class="font-semibold text-lg pr-4">
-                        {item.question}
-                      </h3>
-                      <Icon
-                        name="mdi:chevron-down"
-                        class="faq-icon h-5 w-5 flex-shrink-0 transition-transform"
-                        style="color: var(--color-primary);"
-                      />
-                    </div>
-                  </button>
-                  <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
-                    <div class="p-5 pt-0">
-                      <p style="color: var(--color-text-light); line-height: 1.6;">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))
-      }
-
-      <!-- Contact Support -->
-      <div
-        class="contact-support text-center p-8 rounded-2xl"
-        style="background-color: var(--color-background-alt); border: 1px solid rgba(var(--color-primary-rgb), 0.2);"
-      >
-        <Icon
-          name="mdi:headset"
-          class="h-12 w-12 mx-auto mb-4"
-          style="color: var(--color-primary);"
-        />
-        <h2 class="text-2xl font-bold mb-3">Nu ai găsit răspunsul?</h2>
-        <p
-          style="color: var(--color-text-light);"
-          class="mb-6 max-w-2xl mx-auto"
+      {faqCategories.map((category, categoryIndex) => (
+        <div
+          id={category.category.toLowerCase().replace(/\s+/g, "-")}
+          class="faq-category"
         >
-          Echipa noastră de suport este aici pentru tine. Contactează-ne și îți
-          vom răspunde în maximum 24 de ore.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/contact"
-            class="btn btn-primary inline-flex items-center justify-center px-6 py-3"
-          >
-            <Icon name="mdi:email" class="mr-2 h-5 w-5" />
-            Trimite-ne un mesaj
-          </a>
-          <a
-            href="https://wa.me/40XXXXXXXXX"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-secondary inline-flex items-center justify-center px-6 py-3"
-          >
-            <Icon name="mdi:whatsapp" class="mr-2 h-5 w-5" />
-            WhatsApp
-          </a>
+          <div class="cat-head">
+            <span class="cat-num" aria-hidden="true">{String(categoryIndex + 1).padStart(2, "0")}</span>
+            <h2>{category.category}</h2>
+          </div>
+          <div class="faq-list">
+            {category.questions.map((item) => (
+              <details>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="support-card">
+        <p class="kicker kicker-ember">Nu ai găsit răspunsul?</p>
+        <h2>Scrie-ne direct.</h2>
+        <p>Îți răspunde omul care îți va face efectiv site-ul — în maximum 24 de ore lucrătoare.</p>
+        <div class="support-actions">
+          <a href="/contact" class="btn btn-primary btn-lg">Trimite-ne un mesaj →</a>
+          <a href="/servicii" class="btn btn-secondary btn-lg">Vezi serviciile</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
   <CTA
-    title="Începe proiectul tău astăzi"
-    subtitle="Transformă-ți ideile în realitate cu ajutorul echipei noastre de experți"
-    ctaText="Obține Consultare Gratuită"
+    title="Gata de următorul pas?"
+    subtitle="Un mail cu 3–4 fraze despre proiect e suficient ca să primești preț fix și termen."
+    ctaText="Cere ofertă"
     ctaLink="/contact"
-    secondaryText="Vezi Serviciile"
-    secondaryLink="/servicii"
+    secondaryText="Vezi portofoliul"
+    secondaryLink="/portofoliu"
   />
 </Layout>
 
 <style>
-  /* FAQ Animations */
-  .faq-category {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease-out forwards;
+  .faq-sec { background: var(--color-background); padding: 3.5rem 0 4.5rem; }
+  :global(.dark) .faq-sec { background: var(--color-dark-background); }
+  .faq-narrow { max-width: 52rem; }
+  .quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
   }
-
-  .faq-item {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 0.5s ease-out forwards;
+  .quick-links a {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--color-text);
+    text-decoration: none;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-card);
   }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  :global(.dark) .quick-links a { color: var(--color-dark-text); border-color: rgba(255,255,255,0.3); background: transparent; }
+  .quick-links a:hover { background: var(--color-ink); color: var(--color-paper); }
+  :global(.dark) .quick-links a:hover { background: var(--color-paper); color: var(--color-ink-deep); }
+  .faq-category { margin-bottom: 3rem; scroll-margin-top: 6rem; }
+  .cat-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.4rem; }
+  .cat-num {
+    font-family: var(--font-serif);
+    font-weight: 640;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--color-ember-deep);
   }
-
-  /* FAQ Interaction Styles */
-  .faq-question {
+  .cat-head h2 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.02em;
+  }
+  .faq-list { display: grid; gap: 0.8rem; }
+  .faq-list details {
+    border: 2px solid var(--color-ink);
+    border-radius: 12px;
+    background: var(--color-card);
+    padding: 1rem 1.2rem;
+  }
+  :global(.dark) .faq-list details { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  .faq-list summary {
     cursor: pointer;
-    position: relative;
+    font-weight: 700;
+    font-size: 1.02rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    list-style: none;
   }
-
-  .faq-question:hover {
-    background-color: rgba(var(--color-primary-rgb), 0.02) !important;
-    border-color: rgba(var(--color-primary-rgb), 0.3) !important;
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: "+";
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 160ms ease;
   }
-
-  .faq-question.active {
-    background-color: rgba(var(--color-primary-rgb), 0.05) !important;
-    border-color: var(--color-primary) !important;
+  .faq-list details[open] summary::after { transform: rotate(45deg); }
+  .faq-list details p { margin: 0.7rem 0 0.2rem; color: var(--color-muted); line-height: 1.7; }
+  :global(.dark) .faq-list details p { color: var(--color-dark-text-light); }
+  .support-card {
+    border: 2px solid var(--color-ink);
+    border-radius: 20px;
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 2.5rem;
+    box-shadow: 7px 7px 0 var(--color-ink);
+    margin-top: 1rem;
   }
-
-  .faq-question.active .faq-icon {
-    transform: rotate(180deg);
+  :global(.dark) .support-card { box-shadow: 7px 7px 0 rgba(0,0,0,0.6); }
+  .kicker-ember { background: var(--color-ember); color: var(--color-ember-ink); }
+  .kicker-ember::before { background: var(--color-ink-deep); }
+  .support-card h2 { margin: 1.1rem 0 0.7rem; font-size: clamp(1.7rem, 3.4vw, 2.4rem); color: #f5f1e6; }
+  .support-card > p:not(.kicker) { margin: 0 0 1.75rem; color: #c2bcae; line-height: 1.7; max-width: 34rem; }
+  .support-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+  .support-actions .btn-secondary { color: #f2efe6; border-color: rgba(255,255,255,0.4); }
+  .support-actions .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
+  @media (max-width: 640px) {
+    .support-actions .btn { width: 100%; }
+    .support-card { padding: 1.75rem; }
   }
-
-  .faq-answer {
-    background-color: var(--color-background);
-    border: 1px solid rgba(var(--color-text-lighter-rgb), 0.2);
-    border-top: none;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    margin-top: -1px;
-  }
-
-  .faq-answer.show {
-    max-height: 500px;
-    padding-top: 1rem;
-  }
-
-  /* Quick Links Hover */
-  .quick-links a:hover {
-    background-color: rgba(var(--color-primary-rgb), 0.2) !important;
-    transform: translateY(-2px);
-  }
-
-  /* Contact Support Card */
-  .contact-support {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-support::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(
-      90deg,
-      var(--color-primary),
-      var(--color-secondary),
-      var(--color-accent)
-    );
-    animation: gradientMove 3s ease-in-out infinite;
-  }
-
-  @keyframes gradientMove {
-    0%,
-    100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  /* Dark mode adjustments */
-  :global(.dark) .faq-question {
-    background-color: var(--color-dark-background-alt) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-  }
-
-  :global(.dark) .faq-question:hover {
-    background-color: rgba(var(--color-primary-rgb), 0.1) !important;
-  }
-
-  :global(.dark) .faq-answer {
-    background-color: var(--color-dark-background-alt);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.dark) .contact-support {
-    background-color: var(--color-dark-background-alt) !important;
-    border-color: rgba(var(--color-primary-rgb), 0.3) !important;
-  }
-
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    .faq-question h3 {
-      font-size: 1rem;
-    }
-
-    .faq-answer.show {
-      max-height: 600px;
-      padding-top: 1.5rem;
-    }
-
-    .faq-answer {
-      margin-top: 0.5rem;
-    }
-
-    .faq-answer div {
-      padding: 1.5rem 1rem 1rem 1rem;
-    }
-
-    .quick-links a {
-      font-size: 0.75rem;
-      padding: 0.5rem 0.75rem;
-    }
-
-    .contact-support {
-      padding: 2rem 1.5rem;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-list summary::after { transition: none; }
   }
 </style>
-
-<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />

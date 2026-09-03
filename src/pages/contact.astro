@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Icon } from 'astro-icon/components';
 import { contactPageConfig } from '../config/pages';
 import { companyConfig } from '../config/company';
 import CTA from '../components/CTA.astro';
@@ -34,298 +33,211 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
     }
   }}
 >
-  <!-- Hero Section -->
   {heroSection && (
     <PageHeader
-      title={heroSection.title}
-      subtitle={heroSection.subtitle}
-      align="center"
-      withBlobs={true}
-      withGrid={true}
-      icon="mdi:email-edit"
+      title="Hai să vorbim despre proiectul tău."
+      subtitle="3–4 fraze sunt suficiente. Primești preț fix și termen în 24h lucrătoare — de la omul care îți va face efectiv site-ul."
+      kicker="Contact · răspuns în 24h"
     >
-      <a
-        href="#contact-form"
-        class="btn btn-primary inline-flex h-12 items-center justify-center px-6 font-medium text-white"
-        style="background-color: var(--color-primary); border-radius: var(--radius-lg); transition: all var(--transition-normal);"
-      >
-        {heroSection.buttonText || "Get in Touch"}
-        <Icon name="mdi:arrow-right" class="ml-2 h-5 w-5" />
-      </a>
+      <div class="head-proof">
+        <span>50+ proiecte livrate</span>
+        <span>Prețuri de la 2500 RON</span>
+        <span>Suport în română</span>
+      </div>
     </PageHeader>
   )}
 
-  <!-- Contact Info & Form -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <!-- Contact Information -->
-        {contactInfoSection && (
-          <div>
-            <h2 class="text-2xl font-bold mb-6">{contactInfoSection.title}</h2>
-            <p style="color: var(--color-text-light);" class="mb-8">
-              {contactInfoSection.subtitle}
-            </p>
-
-            <div class="space-y-6">
-              {contactInfoSection.contactInfo.map((item) => (
-                <a href={item.link} class="flex items-start p-4 transition-colors" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); transition: all var(--transition-normal);">
-                  <div class="rounded-full p-3 mr-4" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
-                    <Icon name={item.icon} class="h-6 w-6" style="color: var(--color-primary);" />
-                  </div>
-                  <div>
-                    <h3 class="font-semibold text-lg">{item.title}</h3>
-                    <p style="color: var(--color-text-light);">{item.details}</p>
-                  </div>
-                </a>
+  <section class="contact-main">
+    <div class="container contact-grid">
+      {formSection && (
+        <div id="contact-form" class="form-panel">
+          <p class="kicker">Trimite mesaj</p>
+          <h2>{formSection.title}</h2>
+          <form action="https://formsubmit.co/office@bitdoze.ro" method="POST">
+            <input type="hidden" name="_subject" value="Nou mesaj de pe site-ul BitDoze" />
+            <input type="hidden" name="_next" value="https://www.bitdoze.ro/multumim" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_autoresponse" value="Mulțumim pentru mesajul dumneavoastră! Vă vom răspunde în cel mai scurt timp posibil." />
+            <div class="field-row">
+              {formSection.fields.filter(field => ['text', 'email', 'tel'].includes(field.type)).slice(0, 2).map(field => (
+                <div class="field">
+                  <label for={field.id}>{field.label}{field.required ? " *" : ""}</label>
+                  <input
+                    type={field.type as "text" | "email" | "tel"}
+                    id={field.id}
+                    name={field.type === 'email' ? "_replyto" : field.name}
+                    required={field.required}
+                    autocomplete={field.id.includes("first") ? "given-name" : field.id.includes("last") ? "family-name" : field.type === "email" ? "email" : field.type === "tel" ? "tel" : "off"}
+                    inputmode={field.type === "email" ? "email" : field.type === "tel" ? "tel" : "text"}
+                  />
+                </div>
               ))}
             </div>
 
-            <div class="mt-8">
-              <h3 class="font-semibold text-lg mb-4">{contactInfoSection.sectionTitle || "Connect With Us"}</h3>
-              <div class="flex space-x-4">
-                {companyConfig.socialMedia.map((social) => (
-                  <a
-                    href={social.url}
-                    class="p-3 rounded-full transition-colors"
-                    style="background-color: var(--color-background-alt); transition: all var(--transition-normal);"
-                    aria-label={social.platform}
+            {formSection.fields.filter(field => ['email', 'tel', 'textarea', 'select'].includes(field.type)).map(field => (
+              <div class="field">
+                <label for={field.id}>{field.label}{field.required ? " *" : ""}</label>
+                {field.type === 'textarea' ? (
+                  <textarea
+                    id={field.id}
+                    name={field.name}
+                    rows="5"
+                    required={field.required}
+                    placeholder="Descrie-ți proiectul și cum te putem ajuta..."
+                  ></textarea>
+                ) : field.type === 'select' ? (
+                  <select
+                    id={field.id}
+                    name={field.name}
+                    required={field.required}
                   >
-                    <Icon name={social.icon} class="h-5 w-5" style="color: var(--color-primary);" />
-                  </a>
-                ))}
+                    <option value="">Selectează o opțiune</option>
+                    {field.options?.map(option => (
+                      <option value={option.value}>{option.label}</option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type={field.type as "email" | "tel"}
+                    id={field.id}
+                    name={field.type === 'email' ? "_replyto" : field.name}
+                    required={field.required}
+                    autocomplete={field.type === "email" ? "email" : "tel"}
+                    inputmode={field.type === "email" ? "email" : "tel"}
+                  />
+                )}
               </div>
-            </div>
-          </div>
-        )}
+            ))}
 
-        <!-- Contact Form -->
-        {formSection && (
-          <div id="contact-form" class="lg:col-span-2">
-            <div class="p-8" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-              <h2 class="text-2xl font-bold mb-6">{formSection.title}</h2>
-              <form action="https://formsubmit.co/office@bitdoze.ro" method="POST" class="space-y-6">
-                <!-- FormSubmit Configuration -->
-                <input type="hidden" name="_subject" value="Nou mesaj de pe site-ul BitDoze">
-                <input type="hidden" name="_next" value="https://bitdoze.ro/multumim">
-                <input type="hidden" name="_replyto" value="">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_autoresponse" value="Mulțumim pentru mesajul dumneavoastră! Vă vom răspunde în cel mai scurt timp posibil.">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {formSection.fields.filter(field => ['text', 'email', 'tel'].includes(field.type)).slice(0, 2).map(field => (
-                    <div>
-                      <label for={field.id} class="block text-sm font-medium mb-1" style="color: var(--color-text);">{field.label}</label>
-                      <input
-                        type={field.type as "text" | "email" | "tel"}
-                        id={field.id}
-                        name={field.name}
-                        class="w-full px-4 py-2 border"
-                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                        required={field.required}
-                        onchange={field.type === 'email' ? "document.querySelector('input[name=\"_replyto\"]').value = this.value" : undefined}
-                      />
-                    </div>
-                  ))}
-                </div>
+            {formSection.fields.filter(field => field.type === 'checkbox').map(field => (
+              <div class="check">
+                <input
+                  type="checkbox"
+                  id={field.id}
+                  name={field.name}
+                  required={field.required}
+                />
+                <label for={field.id}>
+                  {field.label}
+                </label>
+              </div>
+            ))}
 
-                {formSection.fields.filter(field => ['email', 'tel', 'textarea', 'select'].includes(field.type)).map(field => (
-                  <div>
-                    <label for={field.id} class="block text-sm font-medium mb-1" style="color: var(--color-text);">{field.label}</label>
-                    {field.type === 'textarea' ? (
-                      <textarea
-                        id={field.id}
-                        name={field.name}
-                        rows="5"
-                        class="w-full px-4 py-2 border"
-                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                        required={field.required}
-                        placeholder="Descrie-ți proiectul și cum te putem ajuta..."
-                      ></textarea>
-                    ) : field.type === 'select' ? (
-                      <select
-                        id={field.id}
-                        name={field.name}
-                        class="w-full px-4 py-2 border"
-                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                        required={field.required}
-                      >
-                        <option value="">Selectează o opțiune</option>
-                        {field.options?.map(option => (
-                          <option value={option.value}>{option.label}</option>
-                        ))}
-                      </select>
-                    ) : (
-                      <input
-                        type={field.type as "email" | "tel"}
-                        id={field.id}
-                        name={field.name}
-                        class="w-full px-4 py-2 border"
-                        style="border-color: var(--color-text-lighter); border-radius: var(--radius-md);"
-                        required={field.required}
-                        onchange={field.type === 'email' ? "document.querySelector('input[name=\"_replyto\"]').value = this.value" : undefined}
-                      />
-                    )}
-                  </div>
-                ))}
-
-                {formSection.fields.filter(field => field.type === 'checkbox').map(field => (
-                  <div class="flex items-start">
-                    <input
-                      type="checkbox"
-                      id={field.id}
-                      name={field.name}
-                      class="mt-1 h-4 w-4"
-                      style="color: var(--color-primary); border-color: var(--color-text-lighter);"
-                      required={field.required}
-                    />
-                    <label for={field.id} class="ml-2 block text-sm" style="color: var(--color-text);">
-                      {field.label}
-                    </label>
-                  </div>
-                ))}
-
-                <div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary inline-flex justify-center w-full md:w-auto px-6 py-3 text-base font-medium text-white"
-                    id="submit-button"
-                  >
-                    <span id="button-text">{formSection.submitText}</span>
-                    <Icon name="mdi:loading" class="ml-2 h-5 w-5 animate-spin hidden" id="loading-icon" />
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  </section>
-
-  <!-- Map Section -->
-  {mapSection && (
-    <section class="section-padding" style="background-color: var(--color-background-alt);">
-      <div class="container">
-        <div class="text-center mb-16" id="our-location">
-          <h2 class="text-3xl font-bold mb-4">{mapSection.title}</h2>
-          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-            {mapSection.subtitle}
-          </p>
-        </div>
-
-        <div class="overflow-hidden h-96" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
-          <!-- Placeholder for an actual map integration -->
-          <div class="w-full h-full flex items-center justify-center" style="background-color: rgba(0,0,0,0.05);">
-            <div class="text-center p-6">
-              <Icon name="mdi:map" class="h-16 w-16 mx-auto mb-4" style="color: var(--color-text-lighter);" />
-              <h3 class="text-xl font-semibold mb-2">Hartă</h3>
-              <p style="color: var(--color-text-light);" class="mb-4">Într-o implementare reală, aici ar fi afișată o hartă interactivă.</p>
-              <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(mapSection.address)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center font-medium"
-                style="color: var(--color-primary); transition: all var(--transition-normal);"
+            <div class="form-foot">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                id="submit-button"
               >
-                Vezi pe Google Maps
-                <Icon name="mdi:arrow-right" class="ml-1 h-4 w-4" />
+                <span id="button-text">{formSection.submitText}</span>
+              </button>
+              <p class="form-fine">Fără newsletter nesolicitat. Datele ajung doar la noi.</p>
+            </div>
+          </form>
+        </div>
+      )}
+
+      <aside class="contact-side">
+        <div class="next-card">
+          <p class="side-stamp">Ce se întâmplă după ce trimiți</p>
+          <ol>
+            <li><strong>Citim cererea.</strong> Omul care face site-ul, nu un robot.</li>
+            <li><strong>Răspundem în 24h.</strong> Cu întrebări bune sau direct cu propunerea.</li>
+            <li><strong>Primești preț + termen.</strong> Negru pe alb, pe mail.</li>
+          </ol>
+        </div>
+
+        {contactInfoSection && (
+          <div class="direct-card">
+            <p class="side-label">Direct, fără formular</p>
+            {contactInfoSection.contactInfo.map((item) => (
+              <a href={item.link} class="direct-row">
+                <span class="direct-title">{item.title}</span>
+                <span class="direct-details">{item.details}</span>
               </a>
+            ))}
+            <div class="social-row">
+              {companyConfig.socialMedia.map((social) => (
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.platform}
+                >
+                  {social.platform} ↗
+                </a>
+              ))}
             </div>
           </div>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  {mapSection && (
+    <section class="map-sec">
+      <div class="container">
+        <div class="map-head">
+          <h2>{mapSection.title}</h2>
+          <p>{mapSection.subtitle}</p>
+        </div>
+        <div class="map-frame">
+          <iframe
+            title="Harta BitDoze — Călinești, Argeș"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=24.9%2C44.7%2C25.1%2C44.9&layer=mapnik&marker=44.8%2C25.0"
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
     </section>
   )}
 
-  <!-- Company Details Section -->
-  <section class="section-padding" style="background-color: var(--color-background);">
+  <section class="company-sec">
     <div class="container">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold mb-4">Detalii Companie</h2>
-          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-            Informații oficiale despre compania noastră pentru transparență și încredere
-          </p>
+      <div class="company-head">
+        <p class="kicker">Transparență</p>
+        <h2>Firmă reală, cu acte.</h2>
+      </div>
+      <div class="company-grid">
+        <div class="company-card">
+          <p class="mini-stamp">Companie</p>
+          <p class="company-value">{companyConfig.name}</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Company Name -->
-          <div class="text-center p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.1);">
-            <div class="rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
-              <Icon name="mdi:office-building" class="h-8 w-8" style="color: var(--color-primary);" />
-            </div>
-            <h3 class="font-semibold text-lg mb-2">Companie</h3>
-            <p style="color: var(--color-text-light);" class="font-medium">{companyConfig.name}</p>
-          </div>
-
-          <!-- CUI -->
-          <div class="text-center p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.1);">
-            <div class="rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
-              <Icon name="mdi:card-account-details" class="h-8 w-8" style="color: var(--color-primary);" />
-            </div>
-            <h3 class="font-semibold text-lg mb-2">CUI</h3>
-            <p style="color: var(--color-text-light);" class="font-medium">{companyConfig.cui}</p>
-          </div>
-
-          <!-- Phone -->
-          <div class="text-center p-6" style="background-color: var(--color-background-alt); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.1);">
-            <div class="rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center" style="background-color: rgba(var(--color-primary-rgb), 0.1);">
-              <Icon name="mdi:phone" class="h-8 w-8" style="color: var(--color-primary);" />
-            </div>
-            <h3 class="font-semibold text-lg mb-2">Telefon</h3>
-            <a href={`tel:${companyConfig.contact.phone}`} style="color: var(--color-primary);" class="font-medium hover:underline">
-              {companyConfig.contact.phone}
-            </a>
-          </div>
+        <div class="company-card">
+          <p class="mini-stamp">CUI</p>
+          <p class="company-value">{companyConfig.cui}</p>
         </div>
-
-        <!-- Additional Company Info -->
-        <div class="mt-8 text-center p-6" style="background-color: rgba(var(--color-primary-rgb), 0.05); border-radius: var(--radius-lg); border: 1px solid rgba(var(--color-primary-rgb), 0.2);">
-          <Icon name="mdi:shield-check" class="h-12 w-12 mx-auto mb-4" style="color: var(--color-primary);" />
-          <h3 class="text-xl font-semibold mb-3">Companie Autorizată</h3>
-          <p style="color: var(--color-text-light);" class="max-w-2xl mx-auto">
-            Suntem o societate cu răspundere limitată înregistrată legal în România, oferind servicii profesionale
-            de dezvoltare web și marketing digital cu over 10 ani de experiență pe piață.
-          </p>
+        <div class="company-card">
+          <p class="mini-stamp">Telefon</p>
+          <p class="company-value"><a href={`tel:${companyConfig.contact.phone.replace(/\s+/g, "")}`}>{companyConfig.contact.phone}</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Business Hours -->
   {hoursSection && (
-    <section class="section-padding">
-      <div class="container">
-        <div class="max-w-2xl mx-auto">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">{hoursSection.title}</h2>
-            <p style="color: var(--color-text-light);">
-              {hoursSection.subtitle}
-            </p>
-          </div>
-
-          <div class="overflow-hidden" style="background-color: var(--color-background); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-text-lighter);">
-            <table class="w-full border-collapse">
-              <tbody>
-                {hoursSection.hours.map((item, index, array) => (
-                  <tr class={index < array.length - 1 ? "border-b" : ""} style="border-color: var(--color-text-lighter);">
-                    <td class="py-4 px-6 font-medium">{item.days}</td>
-                    <td class="py-4 px-6 text-right">{item.hours}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <p style="color: var(--color-text-light);" class="text-center mt-6">
-            {hoursSection.note}
-          </p>
+    <section class="hours-sec">
+      <div class="container hours-narrow">
+        <h2>{hoursSection.title}</h2>
+        <div class="hours-panel">
+          <table>
+            <caption class="sr-only">Program de lucru BitDoze</caption>
+            <tbody>
+              {hoursSection.hours.map((item) => (
+                <tr>
+                  <th scope="row">{item.days}</th>
+                  <td>{item.hours}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+        <p class="hours-note">{hoursSection.note}</p>
       </div>
     </section>
   )}
 
-  <!-- CTA Section -->
   {ctaSection && (
     <CTA
       title={ctaSection.title}
@@ -339,43 +251,245 @@ const ctaSection = contactPageConfig.sections.find(section => section.type === "
   )}
 </Layout>
 
+<style>
+  .head-proof { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; }
+  .head-proof span {
+    font-size: 0.82rem;
+    font-weight: 800;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    background: var(--color-card);
+  }
+  :global(.dark) .head-proof span { border-color: rgba(255,255,255,0.3); background: transparent; }
+
+  .contact-main { background: var(--color-background); padding: 3.5rem 0 4rem; }
+  :global(.dark) .contact-main { background: var(--color-dark-background); }
+  .contact-grid { display: grid; gap: 2rem; align-items: start; }
+  @media (min-width: 1020px) {
+    .contact-grid { grid-template-columns: 1.5fr 1fr; gap: 2.5rem; }
+    .contact-side { position: sticky; top: 6rem; display: grid; gap: 1.4rem; }
+  }
+  @media (max-width: 1019px) { .contact-side { display: grid; gap: 1.4rem; } }
+
+  .form-panel {
+    border: 2px solid var(--color-ink);
+    border-radius: 20px;
+    background: var(--color-card);
+    padding: 2rem;
+    box-shadow: 7px 7px 0 var(--color-ink);
+  }
+  :global(.dark) .form-panel { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); box-shadow: 7px 7px 0 rgba(0,0,0,0.6); }
+  @media (min-width: 720px) { .form-panel { padding: 2.5rem; } }
+  .form-panel h2 { margin: 1.1rem 0 1.75rem; font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -0.02em; }
+  .form-panel form { display: grid; gap: 1.2rem; }
+  .field-row { display: grid; gap: 1.2rem; }
+  @media (min-width: 640px) { .field-row { grid-template-columns: 1fr 1fr; } }
+  .field { display: grid; gap: 0.45rem; }
+  .field label { font-size: 0.9rem; font-weight: 700; }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    min-height: 50px;
+    border: 2px solid var(--color-ink);
+    border-radius: 12px;
+    background: var(--color-background);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+  .field textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+  :global(.dark) .field input, :global(.dark) .field textarea, :global(.dark) .field select {
+    background: var(--color-dark-background);
+    border-color: rgba(255,255,255,0.3);
+    color: var(--color-dark-text);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: 3px solid var(--color-ember-deep);
+    outline-offset: 1px;
+    border-color: var(--color-ember-deep);
+  }
+  .check { display: flex; gap: 0.7rem; align-items: flex-start; }
+  .check input { width: 1.35rem; height: 1.35rem; margin-top: 0.2rem; flex-shrink: 0; accent-color: var(--color-ember-deep); }
+  .check label { font-size: 0.9rem; line-height: 1.6; }
+  .form-foot { display: grid; gap: 0.8rem; justify-items: start; margin-top: 0.4rem; }
+  .form-fine { margin: 0; font-size: 0.84rem; color: var(--color-muted); }
+  :global(.dark) .form-fine { color: var(--color-dark-text-light); }
+
+  .next-card {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 1.6rem;
+    box-shadow: 6px 6px 0 rgba(20, 23, 21, 0.9);
+  }
+  :global(.dark) .next-card { box-shadow: 6px 6px 0 rgba(0,0,0,0.6); }
+  .side-stamp {
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ember-ink);
+    background: var(--color-ember);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    margin: 0 0 1.1rem;
+  }
+  .next-card ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; counter-reset: steps; }
+  .next-card li { position: relative; padding-left: 2.75rem; font-size: 0.93rem; line-height: 1.6; color: #c2bcae; counter-increment: steps; }
+  .next-card li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-weight: 900;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .next-card li strong { color: #f2efe6; }
+
+  .direct-card {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-card);
+    padding: 1.6rem;
+  }
+  :global(.dark) .direct-card { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  .side-label {
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-paper);
+    background: var(--color-ink);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    margin: 0 0 1.1rem;
+  }
+  :global(.dark) .side-label { background: var(--color-paper); color: var(--color-ink-deep); }
+  .direct-row {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--color-line);
+    text-decoration: none;
+  }
+  :global(.dark) .direct-row { border-top-color: rgba(255,255,255,0.12); }
+  .direct-row:first-of-type { border-top: 0; padding-top: 0; }
+  .direct-title { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-muted); }
+  :global(.dark) .direct-title { color: var(--color-dark-text-light); }
+  .direct-details { font-weight: 700; color: var(--color-text); overflow-wrap: break-word; }
+  :global(.dark) .direct-details { color: var(--color-dark-text); }
+  a.direct-row:hover .direct-details { color: var(--color-ember-deep); text-decoration: underline; text-underline-offset: 4px; }
+  .social-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+  .social-row a {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  :global(.dark) .social-row a { color: var(--color-dark-text); border-color: rgba(255,255,255,0.3); }
+  .social-row a:hover { border-color: var(--color-ember-deep); color: var(--color-ember-deep); }
+
+  .map-sec { background: var(--color-background-alt); border-top: 2px solid var(--color-ink); padding: 4rem 0; }
+  :global(.dark) .map-sec { background: var(--color-dark-background); border-top-color: rgba(255,255,255,0.2); }
+  .map-head h2 { margin: 0 0 0.6rem; font-size: clamp(1.7rem, 3.2vw, 2.4rem); letter-spacing: -0.02em; }
+  .map-head p { margin: 0 0 1.75rem; color: var(--color-muted); max-width: 44rem; line-height: 1.7; }
+  :global(.dark) .map-head p { color: var(--color-dark-text-light); }
+  .map-frame {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 6px 6px 0 var(--color-ink);
+    height: 24rem;
+    background: var(--color-paper-2);
+  }
+  :global(.dark) .map-frame { border-color: rgba(255,255,255,0.22); box-shadow: 6px 6px 0 rgba(0,0,0,0.6); }
+  .map-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .company-sec { background: var(--color-background); padding: 4rem 0; }
+  :global(.dark) .company-sec { background: var(--color-dark-background); }
+  .company-head h2 { margin: 1.1rem 0 2rem; font-size: clamp(1.7rem, 3.2vw, 2.4rem); letter-spacing: -0.02em; }
+  .company-grid { display: grid; gap: 1.2rem; }
+  @media (min-width: 820px) { .company-grid { grid-template-columns: repeat(3, 1fr); } }
+  .company-card {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-card);
+    padding: 1.4rem 1.5rem;
+  }
+  :global(.dark) .company-card { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  .mini-stamp {
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ember-ink);
+    background: var(--color-ember);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    margin: 0 0 0.8rem;
+  }
+  .company-value { margin: 0; font-size: 1.15rem; font-weight: 700; overflow-wrap: break-word; }
+  .company-value a { color: inherit; text-decoration: none; }
+  .company-value a:hover { color: var(--color-ember-deep); text-decoration: underline; text-underline-offset: 4px; }
+
+  .hours-sec { background: var(--color-background); padding: 0 0 4.5rem; }
+  :global(.dark) .hours-sec { background: var(--color-dark-background); }
+  .hours-narrow { max-width: 46rem; }
+  .hours-sec h2 { margin: 0 0 1.5rem; font-size: clamp(1.7rem, 3.2vw, 2.4rem); letter-spacing: -0.02em; }
+  .hours-panel {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-card);
+    overflow: hidden;
+  }
+  :global(.dark) .hours-panel { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  .hours-panel table { width: 100%; border-collapse: collapse; }
+  .hours-panel th, .hours-panel td { padding: 1rem 1.4rem; }
+  .hours-panel th { text-align: left; font-weight: 700; }
+  .hours-panel td { text-align: right; color: var(--color-muted); font-weight: 600; }
+  :global(.dark) .hours-panel td { color: var(--color-dark-text-light); }
+  .hours-panel tr + tr { border-top: 1px solid var(--color-line); }
+  :global(.dark) .hours-panel tr + tr { border-top-color: rgba(255,255,255,0.12); }
+  .hours-note { margin: 1.25rem 0 0; color: var(--color-muted); line-height: 1.7; }
+  @media (max-width: 859px) {
+    /* No sticky CTA on this page -> no bottom room needed */
+    :global(body) { padding-bottom: 0; }
+  }
+  :global(.dark) .hours-note { color: var(--color-dark-text-light); }
+</style>
+
 <script>
   // Form submission handling with better UX
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form[action*="formsubmit.co"]');
     const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
     const buttonText = document.getElementById('button-text') as HTMLElement;
-    const loadingIcon = document.getElementById('loading-icon') as HTMLElement;
 
-    if (form && submitButton && buttonText && loadingIcon) {
+    if (form && submitButton && buttonText) {
       form.addEventListener('submit', function() {
-        // Show loading state
+        // Show loading state until redirect
         submitButton.disabled = true;
         buttonText.textContent = 'Se trimite...';
-        loadingIcon.classList.remove('hidden');
-
-        // Re-enable button after 3 seconds (in case of issues)
-        setTimeout(() => {
-          if (submitButton.disabled) {
-            submitButton.disabled = false;
-            buttonText.textContent = 'Trimite Mesaj';
-            loadingIcon.classList.add('hidden');
-          }
-        }, 3000);
       });
     }
-
-    // Auto-populate _replyto field when email is entered
-    const emailInputs = document.querySelectorAll('input[type="email"]');
-    const replyToField = document.querySelector('input[name="_replyto"]') as HTMLInputElement;
-
-    emailInputs.forEach((input) => {
-      const emailInput = input as HTMLInputElement;
-      emailInput.addEventListener('input', function() {
-        if (replyToField) {
-          replyToField.value = emailInput.value;
-        }
-      });
-    });
   });
 </script>

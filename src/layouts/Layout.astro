@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import "../styles/portfolio.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieConsent from "../components/CookieConsent.astro";
@@ -50,8 +49,20 @@ const {
 <html lang="ro" class="h-full">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,640&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"
+      rel="stylesheet"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,640&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Script to prevent flash of light mode -->
     <script is:inline>
@@ -82,15 +93,23 @@ const {
     <StructuredData type={structuredData.type} data={structuredData.data} />
   </head>
   <body>
+    <a
+      href="#continut"
+      class="skip-link"
+      style="position:absolute;left:1rem;top:-4rem;z-index:100;background:var(--color-moss);color:#fff;padding:0.7rem 1rem;border-radius:6px;text-decoration:none;transition:top 120ms ease;"
+      onfocus="this.style.top='1rem'"
+      onblur="this.style.top='-4rem'"
+    >
+      Sari la conținut
+    </a>
     <div class="layout-wrapper">
       <Header />
-      <main>
+      <main id="continut">
         <slot />
       </main>
       <Footer />
     </div>
     <CookieConsent />
-    <script src="/src/scripts/animations.js"></script>
     <style>
       /* Reset and base layout */
       html,

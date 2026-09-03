@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-  title="Caută în blog | BitDoze"
+  title="Caută în blog"
   description="Caută articole și ghiduri publicate pe blogul BitDoze."
   canonical="/search"
   noindex={true}
@@ -18,23 +18,27 @@ import Layout from "../layouts/Layout.astro";
         </p>
       </div>
 
-      <label class="search-page__label" for="search-input">Caută articole</label>
-      <div class="search-page__input-wrap">
-        <input
-          id="search-input"
-          type="text"
-          placeholder="Ex: SEO local, hosting administrat, site de prezentare"
-          class="search-page__input"
-          autocomplete="off"
-        />
-      </div>
+      <form role="search" action="/search" method="get" id="search-form">
+        <label class="search-page__label" for="search-input">Caută articole</label>
+        <div class="search-page__input-wrap">
+          <input
+            id="search-input"
+            name="q"
+            type="search"
+            placeholder="Ex: SEO local, hosting administrat, site de prezentare"
+            class="search-page__input"
+            autocomplete="off"
+          />
+        </div>
+      </form>
 
-      <div id="search-info" class="search-page__info"></div>
+      <div id="search-info" class="search-page__info" role="status" aria-live="polite"></div>
       <div id="search-results" class="search-page__results hidden"></div>
       <div id="no-results" class="search-page__empty hidden">
         Nu am găsit rezultate pentru căutarea ta. Încearcă termeni mai simpli sau
         un alt subiect.
       </div>
+      <noscript><p>Activează JavaScript pentru a folosi căutarea.</p></noscript>
     </div>
   </section>
 </Layout>
@@ -45,9 +49,12 @@ import Layout from "../layouts/Layout.astro";
 
 <style>
   .search-page {
-    background:
-      radial-gradient(circle at top left, rgba(var(--color-primary-rgb), 0.08), transparent 35%),
-      linear-gradient(180deg, rgba(var(--color-background-alt-rgb), 0.65), rgba(var(--color-background-rgb), 1));
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-line);
+  }
+  :global(.dark) .search-page {
+    background: var(--color-dark-background);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
 
   .search-page__container {
@@ -61,8 +68,8 @@ import Layout from "../layouts/Layout.astro";
 
   .search-page__eyebrow {
     margin: 0 0 0.6rem;
-    color: var(--color-primary);
-    font-weight: 700;
+    color: var(--color-ember-deep);
+    font-weight: 800;
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -93,13 +100,17 @@ import Layout from "../layouts/Layout.astro";
 
   .search-page__input {
     width: 100%;
-    min-height: 3.75rem;
+    min-height: 3.5rem;
     padding: 1rem 1.15rem;
-    border: 1px solid rgba(var(--color-text-rgb), 0.12);
-    border-radius: 1rem;
-    background: rgba(var(--color-background-rgb), 0.96);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 8px;
+    background: var(--color-card);
     color: var(--color-text);
-    box-shadow: 0 16px 40px rgba(var(--color-text-rgb), 0.08);
+  }
+  :global(.dark) .search-page__input {
+    background: var(--color-dark-background-alt);
+    color: var(--color-dark-text);
+    border-color: rgba(255, 255, 255, 0.16);
   }
 
   .search-page__info {
@@ -131,23 +142,13 @@ import Layout from "../layouts/Layout.astro";
     height: 100%;
     flex-direction: column;
     overflow: hidden;
-    border-radius: 1.25rem;
-    border: 1px solid rgba(var(--color-text-rgb), 0.08);
-    background:
-      linear-gradient(
-        180deg,
-        rgba(var(--color-background-rgb), 0.98),
-        rgba(var(--color-background-alt-rgb), 0.94)
-      );
-    box-shadow: 0 18px 40px rgba(var(--color-text-rgb), 0.08);
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
+    border-radius: 12px;
+    border: 1px solid var(--color-line);
+    background: var(--color-card);
   }
 
   :global(.search-result-card__link:hover) {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 48px rgba(var(--color-text-rgb), 0.12);
+    border-color: var(--color-line-strong);
   }
 
   :global(.search-result-card__image-wrap) {
@@ -200,8 +201,8 @@ import Layout from "../layouts/Layout.astro";
   :global(.search-result-card__tag) {
     padding: 0.35rem 0.65rem;
     border-radius: 999px;
-    background: rgba(var(--color-primary-rgb), 0.1);
-    color: var(--color-primary);
+    background: rgba(201, 58, 0, 0.08);
+    color: var(--color-ember-deep);
     font-size: 0.8rem;
     font-weight: 600;
   }

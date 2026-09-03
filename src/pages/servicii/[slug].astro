@@ -1,15 +1,7 @@
 ---
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 import CTA from "../../components/CTA.astro";
-import WebDesignIllustration from "../../components/svg/services/WebDesignIllustration.astro";
-import HostingIllustration from "../../components/svg/services/HostingIllustration.astro";
-import SeoIllustration from "../../components/svg/services/SeoIllustration.astro";
-import MentenantaIllustration from "../../components/svg/services/MentenantaIllustration.astro";
-import ConsultantaITIllustration from "../../components/svg/services/ConsultantaITIllustration.astro";
-import MarketingIllustration from "../../components/svg/services/MarketingIllustration.astro";
-import ConsultantaAIIllustration from "../../components/svg/services/ConsultantaAIIllustration.astro";
 import { getCollectionSlug } from "../../utils/content";
 
 export async function getStaticPaths() {
@@ -34,784 +26,294 @@ if (!entry) {
 const { Content } = await render(entry);
 const serviceSlug = getCollectionSlug(entry);
 
-// Get all services for related services section
 const allServices = await getCollection("servicii", ({ data }) => !data.draft);
-// Use a deterministic order so builds and snapshots stay stable.
 const relatedServices = allServices
   .filter((service) => getCollectionSlug(service) !== serviceSlug)
   .sort((left, right) => left.data.ordine - right.data.ordine)
   .slice(0, 3);
 
-// Format price and duration nicely for display
 const {
   title,
   descriere,
-  icon,
-  imagine,
   pret,
   durata,
-  caracteristici,
-  beneficii,
-  intrebari_frecvente,
   seo,
 } = entry.data;
+const caracteristiciList = entry.data.caracteristici ?? [];
+const beneficiiList = entry.data.beneficii ?? [];
+const intrebariList = entry.data.intrebari_frecvente ?? [];
 ---
 
 <Layout title={seo.title} description={seo.description} ogType="article">
-  <!-- Hero Section -->
-  <section
-    class="section-padding relative overflow-hidden"
-    style="background-color: var(--color-background-alt);"
-  >
-    <!-- Background gradient -->
-    <div
-      class="absolute inset-0 opacity-50 dark:opacity-20"
-      style="background: linear-gradient(to bottom right, rgba(var(--color-primary-rgb), 0.1), var(--color-background), rgba(var(--color-secondary-rgb), 0.1));"
-    >
-    </div>
-
-    <!-- Animated background elements -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
-
-    <!-- Grid pattern -->
-    <div class="absolute inset-0 opacity-5">
-      <div class="grid-pattern"></div>
-    </div>
-
-    <div class="container max-w-6xl relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="animate-slide-right">
-          <a
-            href="/servicii"
-            class="inline-flex items-center text-sm font-medium transition-all hover:-translate-x-1 mb-4 badge badge-primary py-1 px-3"
-          >
-            <Icon name="mdi:arrow-left" class="mr-1.5 h-4 w-4" />
-            Înapoi la servicii
-          </a>
-          <div class="flex items-start mb-4">
-            <div
-              class="inline-flex items-center justify-center w-16 h-16 mr-4 rounded-lg transform -rotate-3 shadow-md"
-              style="background-color: rgba(var(--color-primary-rgb), 0.1);"
-            >
-              <Icon
-                name={icon}
-                class="h-8 w-8"
-                style="color: var(--color-primary);"
-              />
-            </div>
-            <h1 class="text-4xl md:text-5xl font-bold relative">
-              {title}
-              <span
-                class="absolute -bottom-2 left-0 w-16 h-1 rounded-full"
-                style="background-color: var(--color-primary);"></span>
-            </h1>
-          </div>
-          <p
-            class="text-xl mb-8 leading-relaxed"
-            style="color: var(--color-text-light);"
-          >
-            {descriere}
-          </p>
-          <div class="flex flex-wrap gap-4 mt-6">
-            {
-              pret && (
-                <div
-                  class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium shadow-sm"
-                  style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.2);"
-                >
-                  <Icon name="mdi:currency-usd" class="mr-1.5 h-5 w-5" />
-                  {pret}
-                </div>
-              )
-            }
-            {
-              durata && (
-                <div
-                  class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium shadow-sm"
-                  style="background-color: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.2);"
-                >
-                  <Icon name="mdi:clock-outline" class="mr-1.5 h-5 w-5" />
-                  {durata}
-                </div>
-              )
-            }
-          </div>
+  <section class="svc-hero">
+    <div class="container svc-hero-grid">
+      <div>
+        <p class="kicker kicker-dark">Servicii · {title}</p>
+        <h1>{title}</h1>
+        <p class="lede">{descriere}</p>
+        <div class="fact-row">
+          {pret && <span class="fact-pill fact-price">{pret}</span>}
+          {durata && <span class="fact-pill">{durata}</span>}
         </div>
-        <div class="service-image-container animate-slide-left">
-          <div
-            class="relative p-2 rounded-xl bg-gradient-to-br shadow-xl"
-            style="background: linear-gradient(to bottom right, rgba(var(--color-primary-rgb), 0.8), rgba(var(--color-secondary-rgb), 0.8));"
-          >
-            {
-              serviceSlug === "web-design" ? (
-                <WebDesignIllustration />
-              ) : serviceSlug === "hosting" ? (
-                <HostingIllustration />
-              ) : serviceSlug === "seo" ? (
-                <SeoIllustration />
-              ) : serviceSlug === "mentenanta" ? (
-                <MentenantaIllustration />
-              ) : serviceSlug === "consultanta-it" ? (
-                <ConsultantaITIllustration />
-              ) : serviceSlug === "marketing" ? (
-                <MarketingIllustration />
-              ) : serviceSlug === "consultanta-ai" ? (
-                <ConsultantaAIIllustration />
-              ) : (
-                <img
-                  src={imagine}
-                  alt={title}
-                  class="w-full h-auto object-cover rounded-lg shadow-inner transform hover:scale-102 transition-transform duration-500"
-                />
-              )
-            }
-            <div
-              class="absolute -bottom-3 -right-3 w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold z-10"
-              style="background-color: var(--color-accent);"
-            >
-              <Icon name="mdi:star" class="h-8 w-8" />
-            </div>
-          </div>
+        <div class="hero-actions">
+          <a href="/contact" class="btn btn-primary btn-lg">Cere ofertă →</a>
+          <a href="/servicii" class="back-link">← Toate serviciile</a>
         </div>
       </div>
+      <aside class="toc" aria-label="Pe această pagină">
+        <p class="toc-label">Pe această pagină</p>
+        <ul>
+          <li><a href="#continut">Descriere</a></li>
+          {caracteristiciList.length > 0 && <li><a href="#caracteristici">Ce primești</a></li>}
+          {beneficiiList.length > 0 && <li><a href="#beneficii">De ce contează</a></li>}
+          {intrebariList.length > 0 && <li><a href="#intrebari">Întrebări frecvente</a></li>}
+        </ul>
+      </aside>
     </div>
   </section>
 
-  <!-- Main Content Section -->
-  <section class="section-padding">
-    <div class="container max-w-6xl">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <!-- Main Content -->
-        <div class="lg:col-span-2">
-          <div
-            class="sticky top-0 z-10 py-4 mb-8 flex overflow-x-auto gap-4 -mx-4 px-4 no-scrollbar"
-            style="background-color: var(--color-background); background-opacity: 0.9; backdrop-filter: blur(4px);"
-          >
-            <a
-              href="#continut"
-              class="flex-none px-4 py-2 rounded-full text-sm font-medium text-white"
-              style="background-color: var(--color-primary);">Conținut</a
-            >
-            {
-              caracteristici && caracteristici.length > 0 && (
-                <a
-                  href="#caracteristici"
-                  class="flex-none px-4 py-2 rounded-full text-sm font-medium transition-colors dark:text-white"
-                  style="background-color: var(--color-background-alt); color: var(--color-text);"
-                >
-                  Caracteristici
-                </a>
-              )
-            }
-            {
-              beneficii && beneficii.length > 0 && (
-                <a
-                  href="#beneficii"
-                  class="flex-none px-4 py-2 rounded-full text-sm font-medium transition-colors dark:text-white"
-                  style="background-color: var(--color-background-alt); color: var(--color-text);"
-                >
-                  Beneficii
-                </a>
-              )
-            }
-            {
-              intrebari_frecvente && intrebari_frecvente.length > 0 && (
-                <a
-                  href="#intrebari"
-                  class="flex-none px-4 py-2 rounded-full text-sm font-medium transition-colors dark:text-white"
-                  style="background-color: var(--color-background-alt); color: var(--color-text);"
-                >
-                  FAQ
-                </a>
-              )
-            }
+  <section class="svc-body">
+    <div class="container svc-body-grid">
+      <div class="svc-main">
+        <article id="continut" class="prose prose-lg">
+          <Content />
+        </article>
+
+        {caracteristiciList.length > 0 && (
+          <div id="caracteristici" class="block">
+            <p class="kicker">Ce primești</p>
+            <h2>Concret, în preț intră:</h2>
+            <ul class="check-list">
+              {caracteristiciList.map((item) => <li>{item}</li>)}
+            </ul>
           </div>
+        )}
 
-          <div id="continut" class="scroll-mt-20">
-            <article class="prose prose-lg max-w-none" style="color: var(--color-text);">
-              <Content />
-            </article>
+        {beneficiiList.length > 0 && (
+          <div id="beneficii" class="block">
+            <p class="kicker">De ce contează</p>
+            <h2>Ce câștigi din asta</h2>
+            <ul class="plain-list">
+              {beneficiiList.map((item) => <li>{item}</li>)}
+            </ul>
           </div>
+        )}
 
-          <!-- FAQ Section -->
-          {
-            intrebari_frecvente && intrebari_frecvente.length > 0 && (
-              <div id="intrebari" class="mt-16 scroll-mt-20">
-                <h2 class="text-2xl font-bold mb-8 service-heading">
-                  Întrebări Frecvente
-                </h2>
-                <div class="space-y-6">
-                  {intrebari_frecvente.map((item) => (
-                    <div
-                      class="faq-item p-6 rounded-lg hover:shadow-md transition-all duration-300 cursor-pointer"
-                      style="background-color: var(--color-background-alt); box-shadow: var(--shadow-sm); border: 1px solid rgba(var(--color-primary-rgb), 0.1); border-radius: var(--radius-lg);"
-                    >
-                      <h3 class="text-lg font-semibold mb-3 flex items-start">
-                        <span class="text-primary mr-2 font-bold">Q.</span>
-                        {item.intrebare}
-                      </h3>
-                      <p style="color: var(--color-text-light);" class="pl-6">
-                        {item.raspuns}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )
-          }
-        </div>
-
-        <!-- Sidebar -->
-        <div class="lg:col-span-1">
-          <div class="sticky top-8 space-y-8">
-            <!-- Características -->
-            {
-              caracteristici && caracteristici.length > 0 && (
-                <div
-                  id="caracteristici"
-                  class="p-6 rounded-lg shadow-md border-t-4 transition-all duration-300 hover:shadow-lg scroll-mt-20"
-                  style="background-color: var(--color-background); border-top-color: var(--color-primary); border-radius: var(--radius-lg);"
-                >
-                  <h3 class="text-xl font-bold mb-4 flex items-center">
-                    <Icon
-                      name="mdi:check-circle"
-                      class="mr-2 h-6 w-6"
-                      style="color: var(--color-primary);"
-                    />
-                    Caracteristici
-                  </h3>
-                  <ul class="space-y-4">
-                    {caracteristici.map((item) => (
-                      <li class="flex items-start p-2 hover:bg-gray-50 rounded-md transition-colors">
-                        <span class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-light flex items-center justify-center mr-3 mt-0.5">
-                          <Icon name="mdi:check" class="h-4 w-4 text-primary" />
-                        </span>
-                        <span style="color: var(--color-text-light);">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            }
-
-            <!-- Beneficios -->
-            {
-              beneficii && beneficii.length > 0 && (
-                <div
-                  id="beneficii"
-                  class="p-6 rounded-lg shadow-md border-t-4 transition-all duration-300 hover:shadow-lg scroll-mt-20"
-                  style="background-color: var(--color-background); border-top-color: var(--color-accent); border-radius: var(--radius-lg);"
-                >
-                  <h3 class="text-xl font-bold mb-4 flex items-center">
-                    <Icon
-                      name="mdi:star"
-                      class="mr-2 h-6 w-6"
-                      style="color: var(--color-accent);"
-                    />
-                    Beneficii
-                  </h3>
-                  <ul class="space-y-4">
-                    {beneficii.map((item) => (
-                      <li class="flex items-start p-2 hover:bg-gray-50 rounded-md transition-colors">
-                        <span class="flex-shrink-0 h-6 w-6 rounded-full bg-accent-light flex items-center justify-center mr-3 mt-0.5">
-                          <Icon
-                            name="mdi:arrow-right"
-                            class="h-4 w-4 text-accent"
-                          />
-                        </span>
-                        <span style="color: var(--color-text-light);">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
-            }
-
-            <!-- Navigation Box -->
-            <div
-              class="p-6 rounded-lg"
-              style="background-color: var(--color-background-alt); box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.05); border-radius: var(--radius-lg);"
-            >
-              <h3 class="text-lg font-semibold mb-4">Explorează</h3>
-              <ul class="space-y-3">
-                <li>
-                  <a
-                    href="/servicii"
-                    class="inline-flex items-center text-sm transition-all hover:translate-x-1"
-                    style="color: var(--color-primary);"
-                  >
-                    <Icon name="mdi:grid" class="mr-1.5 h-4 w-4" />
-                    Toate serviciile
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/portofoliu"
-                    class="inline-flex items-center text-sm transition-all hover:translate-x-1"
-                    style="color: var(--color-primary);"
-                  >
-                    <Icon name="mdi:folder-multiple" class="mr-1.5 h-4 w-4" />
-                    Portofoliu
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/contact"
-                    class="inline-flex items-center text-sm transition-all hover:translate-x-1"
-                    style="color: var(--color-primary);"
-                  >
-                    <Icon name="mdi:email" class="mr-1.5 h-4 w-4" />
-                    Contactează-ne
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Contact Box -->
-            <div
-              class="p-6 rounded-lg relative overflow-hidden"
-              style="background: linear-gradient(135deg, var(--color-primary), var(--color-secondary-dark)); box-shadow: var(--shadow-lg); color: white; border-radius: var(--radius-lg);"
-            >
-              <!-- Add an overlay for dark mode to ensure contrast -->
-              <div class="absolute inset-0 bg-black opacity-0 dark:opacity-20">
-              </div>
-              <div class="absolute top-0 right-0 -mt-10 -mr-10">
-                <div
-                  class="w-40 h-40 rounded-full opacity-10"
-                  style="background: radial-gradient(circle, white 0%, transparent 70%);"
-                >
-                </div>
-              </div>
-              <div class="absolute bottom-0 left-0 -mb-8 -ml-8">
-                <div
-                  class="w-24 h-24 rounded-full opacity-10"
-                  style="background: radial-gradient(circle, white 0%, transparent 70%);"
-                >
-                </div>
-              </div>
-              <h3
-                class="text-xl font-bold mb-4 flex items-center relative z-10"
-              >
-                <Icon name="mdi:message-text" class="mr-2 h-6 w-6" />
-                Ai nevoie de acest serviciu?
-              </h3>
-              <p class="mb-6 text-white text-opacity-90 relative z-10">
-                Contactează-ne acum pentru o consultație gratuită și o ofertă
-                personalizată pentru afacerea ta.
-              </p>
-              <div class="flex flex-col space-y-3 relative z-10">
-                <a
-                  href="/contact"
-                  class="block w-full py-3 px-4 text-center font-medium rounded-lg transition-all hover:shadow-lg hover:-translate-y-1"
-                  style="background-color: white; color: var(--color-primary); border-radius: var(--radius-lg);"
-                >
-                  <Icon name="mdi:send" class="mr-2 h-5 w-5 inline-block" />
-                  Contactează-ne
-                </a>
-                <a
-                  href="tel:+40123456789"
-                  class="block w-full py-3 px-4 text-center font-medium rounded-lg transition-all hover:bg-white/20"
-                  style="background-color: rgba(255,255,255,0.15); color: white; border-radius: var(--radius-lg);"
-                >
-                  <Icon name="mdi:phone" class="mr-2 h-5 w-5 inline-block" />
-                  Sună acum
-                </a>
-              </div>
+        {intrebariList.length > 0 && (
+          <div id="intrebari" class="block">
+            <p class="kicker">Întrebări frecvente</p>
+            <h2>Ce ne întreabă clienții</h2>
+            <div class="faq">
+              {intrebariList.map((item) => (
+                <details>
+                  <summary>{item.intrebare}</summary>
+                  <p>{item.raspuns}</p>
+                </details>
+              ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
+
+      <aside class="svc-side">
+        <div class="side-card side-cta">
+          <p class="side-stamp">Estimare gratuită</p>
+          <p class="side-text">Spune-ne 3–4 fraze despre proiect și primești preț fix și termen în 24h lucrătoare.</p>
+          <a href="/contact" class="btn btn-primary" style="width:100%">Cere ofertă →</a>
+          <a href="/portofoliu" class="side-link">Vezi proiecte similare →</a>
+        </div>
+        <div class="side-card">
+          <p class="side-label">Alte servicii</p>
+          <ul class="side-list">
+            {relatedServices.map((s) => (
+              <li><a href={`/servicii/${getCollectionSlug(s)}`}>{s.data.title}</a></li>
+            ))}
+            <li><a href="/servicii">Toate serviciile →</a></li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <!-- Related Services -->
-  <section
-    class="section-padding relative overflow-hidden"
-    style="background-color: var(--color-background-alt);"
-  >
-    <div
-      class="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-5"
-      style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"
-    >
-    </div>
-    <div
-      class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full opacity-5"
-      style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"
-    >
-    </div>
-
-    <div class="container max-w-6xl">
-      <div class="text-center mb-16">
-        <span
-          class="inline-block px-3 py-1 bg-primary-light/10 text-primary rounded-full text-sm font-medium mb-4"
-        >
-          Explorează mai mult
-        </span>
-        <h2 class="text-3xl font-bold mb-4 relative inline-block">
-          Alte servicii care te-ar putea interesa
-          <span
-            class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary rounded-full"
-          ></span>
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {
-          relatedServices.map((service) => (
-            <a
-              href={`/servicii/${getCollectionSlug(service)}`}
-              class="service-card group h-full rounded-xl shadow-sm overflow-hidden"
-              style="background-color: var(--color-background);"
-            >
-              <div class="p-6 h-full flex flex-col relative z-10">
-                <div
-                  class="inline-flex items-center justify-center w-14 h-14 mb-5 rounded-lg transition-all duration-300 group-hover:scale-110"
-                  style="background-color: rgba(var(--color-primary-rgb), 0.1);"
-                >
-                  <Icon
-                    name={service.data.icon}
-                    class="h-7 w-7"
-                    style="color: var(--color-primary);"
-                  />
-                </div>
-                <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  {service.data.title}
-                </h3>
-                <p
-                  class="mb-5 flex-grow"
-                  style="color: var(--color-text-light);"
-                >
-                  {service.data.descriere}
-                </p>
-                <div
-                  class="inline-flex items-center font-medium transition-all duration-300 group-hover:translate-x-2"
-                  style="color: var(--color-primary);"
-                >
-                  Află mai multe
-                  <Icon
-                    name="mdi:arrow-right"
-                    class="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </div>
-              </div>
-              <div
-                class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-5"
-                style="from-color: var(--color-primary); to-color: var(--color-secondary);"
-              />
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <div class="mt-20">
-    <CTA
-      title="Pregătit să începem colaborarea?"
-      subtitle="Contactează-ne astăzi pentru a discuta despre nevoile tale și a vedea cum serviciile noastre pot ajuta afacerea ta să crească."
-      ctaText="Contactează-ne"
-      ctaLink="/contact"
-      secondaryText="Vezi toate serviciile"
-      secondaryLink="/servicii"
-    />
-  </div>
+  <CTA
+    title={`Vrei ${title.toLowerCase()} făcut bine din prima?`}
+    subtitle="Un mail scurt e suficient. Primești preț fix, termen și ce e inclus — fără call de vânzări."
+    ctaText="Cere ofertă"
+    ctaLink="/contact"
+    secondaryText="Vezi toate serviciile"
+    secondaryLink="/servicii"
+  />
 </Layout>
 
-<style is:global>
-  .prose h2 {
+<style>
+  .svc-hero {
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    padding: 4rem 0 3.5rem;
+    background-image:
+      radial-gradient(560px 380px at 88% -8%, rgba(255, 77, 0, 0.2), transparent 65%),
+      radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px);
+    background-size: auto, 22px 22px;
+  }
+  .kicker-dark { background: var(--color-ember); color: var(--color-ember-ink); }
+  .kicker-dark::before { background: var(--color-ink-deep); }
+  .svc-hero-grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) {
+    .svc-hero-grid { grid-template-columns: 1.7fr 1fr; gap: 4rem; align-items: start; }
+    .toc { position: sticky; top: 6rem; }
+  }
+  .svc-hero h1 {
+    margin: 1.2rem 0 0;
+    font-size: clamp(2.4rem, 5.4vw, 3.9rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: #f5f1e6;
+    text-wrap: balance;
+  }
+  .lede { margin: 1.1rem 0 0; font-size: 1.12rem; line-height: 1.7; color: #c2bcae; max-width: 42rem; }
+  .fact-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+  .fact-pill {
+    font-size: 0.9rem;
+    font-weight: 800;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.35);
+    color: #f2efe6;
+  }
+  .fact-price {
+    background: var(--color-ember);
+    border-color: var(--color-ember);
+    color: var(--color-ember-ink);
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: 2rem; }
+  .back-link { font-size: 0.92rem; font-weight: 700; color: #c2bcae; text-decoration: none; }
+  .back-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+  .toc {
+    border: 2px solid rgba(255,255,255,0.22);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    padding: 1.35rem 1.45rem;
+  }
+  .toc-label {
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ember-ink);
+    background: var(--color-ember);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    margin: 0 0 1rem;
+  }
+  .toc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.65rem; }
+  .toc a { color: #f2efe6; font-size: 0.94rem; font-weight: 600; text-decoration: none; }
+  :global(.dark) .toc a { color: var(--color-dark-text); }
+  .toc a:hover { color: var(--color-ember-soft); text-decoration: underline; text-underline-offset: 4px; }
+
+  .svc-body { background: var(--color-background); padding: 3.5rem 0 4.5rem; }
+  :global(.dark) .svc-body { background: var(--color-dark-background); }
+  .svc-body-grid { display: grid; gap: 3rem; }
+  @media (min-width: 960px) {
+    .svc-body-grid { grid-template-columns: 1.7fr 1fr; gap: 3.5rem; align-items: start; }
+    .svc-side { position: sticky; top: 6rem; display: grid; gap: 1.4rem; }
+  }
+  @media (max-width: 959px) { .svc-side { display: grid; gap: 1.4rem; } }
+  .block { margin-top: 3.25rem; padding-top: 2.5rem; border-top: 2px solid var(--color-ink); }
+  :global(.dark) .block { border-top-color: rgba(255,255,255,0.2); }
+  .block h2 { margin: 1.1rem 0 1.4rem; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.025em; color: var(--color-text); }
+  :global(.dark) .block h2 { color: var(--color-dark-text); }
+  .check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .check-list li {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    border: 2px solid var(--color-ink);
+    border-radius: 12px;
+    background: var(--color-card);
+    padding: 0.9rem 1.1rem;
     color: var(--color-text);
-    font-weight: 700;
-    font-size: 1.75rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-    position: relative;
-    padding-left: 1rem;
+    font-weight: 550;
+    line-height: 1.6;
   }
-
-  .prose h2::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.25rem;
-    bottom: 0.25rem;
-    width: 4px;
-    background-color: var(--color-primary);
-    border-radius: 2px;
+  :global(.dark) .check-list li { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.2); color: var(--color-dark-text); }
+  .check-list li::before {
+    content: "✓";
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-size: 0.85rem;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
   }
-
-  :global(.dark) .prose h2 {
-    color: var(--color-text);
+  .plain-list { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.7rem; color: var(--color-muted); line-height: 1.7; }
+  :global(.dark) .plain-list { color: var(--color-dark-text-light); }
+  .faq { display: grid; gap: 0.8rem; }
+  .faq details {
+    border: 2px solid var(--color-ink);
+    border-radius: 12px;
+    background: var(--color-card);
+    padding: 1rem 1.2rem;
   }
+  :global(.dark) .faq details { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.2); }
+  .faq summary { cursor: pointer; font-weight: 700; color: var(--color-text); min-height: 44px; display: flex; align-items: center; }
+  :global(.dark) .faq summary { color: var(--color-dark-text); }
+  .faq details p { margin: 0.6rem 0 0.2rem; color: var(--color-muted); line-height: 1.7; }
+  :global(.dark) .faq details p { color: var(--color-dark-text-light); }
 
-  .prose h3 {
-    color: var(--color-text);
-    font-weight: 600;
-    font-size: 1.35rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+  .side-card {
+    border: 2px solid var(--color-ink);
+    border-radius: 16px;
+    background: var(--color-card);
+    padding: 1.5rem;
   }
-
-  :global(.dark) .prose h3 {
-    color: var(--color-text);
+  :global(.dark) .side-card { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  .side-cta {
+    background: var(--color-ink-deep);
+    color: #f2efe6;
+    box-shadow: 6px 6px 0 rgba(20, 23, 21, 0.9);
   }
-
-  .prose p {
-    color: var(--color-text-light);
-    margin-bottom: 1.25rem;
-    line-height: 1.7;
+  :global(.dark) .side-cta { box-shadow: 6px 6px 0 rgba(0,0,0,0.6); }
+  .side-stamp {
+    display: inline-flex;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ember-ink);
+    background: var(--color-ember);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    margin: 0 0 1rem;
   }
-
-  :global(.dark) .prose p {
-    color: var(--color-text-light);
+  .side-label {
+    display: inline-flex;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-paper);
+    background: var(--color-ink);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    margin: 0 0 1rem;
   }
-
-  .prose ul {
-    color: var(--color-text-light);
-    margin-bottom: 1.25rem;
-    padding-left: 1.5rem;
-  }
-
-  :global(.dark) .prose ul {
-    color: var(--color-text-light);
-  }
-
-  .prose li {
-    margin-bottom: 0.5rem;
-  }
-
-  :global(.dark) .prose li {
-    color: var(--color-text-light);
-  }
-
-  .service-heading {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    color: var(--color-text);
-  }
-
-  .service-heading::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 80px;
-    height: 3px;
-    background-color: var(--color-primary);
-    border-radius: 3px;
-  }
-
-  :global(.dark) .service-heading {
-    color: var(--color-text);
-  }
-
-  .faq-item {
-    transition: all 0.3s ease;
-  }
-
-  .faq-item:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-  }
-
-  :global(.dark) .faq-item {
-    background-color: var(--color-dark-background-alt) !important;
-    border-color: rgba(var(--color-primary-rgb), 0.2) !important;
-  }
-
-  :global(.dark) .faq-item:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Background grid */
-  .bg-grid {
-    background-size: 40px 40px;
-    background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0.1) 1px,
-        transparent 1px
-      ),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  }
-
-  /* Grid pattern */
-  .grid-pattern {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-    background-size: 25px 25px;
-    height: 100%;
-    width: 100%;
-  }
-
-  /* Background blobs */
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-  }
-
-  .blob-1 {
-    width: 600px;
-    height: 600px;
-    left: -100px;
-    top: -100px;
-    background: rgba(var(--color-primary-rgb), 0.05);
-    animation: blob-move 25s infinite alternate;
-  }
-
-  .blob-2 {
-    width: 400px;
-    height: 400px;
-    right: -50px;
-    top: 30%;
-    background: rgba(56, 189, 248, 0.05);
-    animation: blob-move 18s infinite alternate-reverse;
-  }
-
-  .blob-3 {
-    width: 300px;
-    height: 300px;
-    bottom: 10%;
-    left: 20%;
-    background: rgba(251, 113, 133, 0.05);
-    animation: blob-move 15s infinite alternate;
-  }
-
-  @keyframes blob-move {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(20px, -20px) scale(1.05);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.95);
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
-
-  /* Animations */
-  @keyframes animate-blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
-  }
-
-  .animate-blob {
-    animation: animate-blob 7s ease-in-out infinite;
-  }
-
-  @keyframes animate-float {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-
-  .animate-float {
-    animation: animate-float 6s ease-in-out infinite;
-  }
-
-  .animate-slide-right {
-    animation: slide-in-right 0.8s ease-out forwards;
-  }
-
-  .animate-slide-left {
-    animation: slide-in-left 0.8s ease-out forwards;
-  }
-
-  @keyframes slide-in-right {
-    0% {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slide-in-left {
-    0% {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  /* No scrollbar utility */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* Dark mode specific styles */
-  :global(.dark) .prose a {
-    color: var(--color-primary-light);
-  }
-
-  :global(.dark) .prose a:hover {
-    text-decoration: underline;
-  }
-
-  :global(.dark) .prose h2::before {
-    background-color: var(--color-primary);
-  }
-
-  :global(.dark) .prose blockquote {
-    border-left-color: var(--color-primary);
-    background-color: rgba(var(--color-background-alt-rgb), 0.3);
-  }
-
-  /* Dark mode adjustments */
-  :global(.dark) .grid-pattern {
-    background-image: linear-gradient(
-        rgba(255, 255, 255, 0.05) 1px,
-        transparent 1px
-      ),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  }
-
-  @media (max-width: 768px) {
-    .prose h2 {
-      font-size: 1.5rem;
-    }
-
-    .prose h3 {
-      font-size: 1.25rem;
-    }
+  :global(.dark) .side-label { background: var(--color-paper); color: var(--color-ink-deep); }
+  .side-text { font-size: 0.94rem; color: #c2bcae; line-height: 1.65; margin: 0 0 1.2rem; }
+  .side-cta .side-link { color: var(--color-ember-soft); }
+  .side-link { display: inline-block; margin-top: 0.9rem; font-size: 0.9rem; font-weight: 700; color: var(--color-ember-deep); text-decoration: none; }
+  .side-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .side-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .side-list a { color: var(--color-text); font-size: 0.95rem; font-weight: 600; text-decoration: none; }
+  :global(.dark) .side-list a { color: var(--color-dark-text); }
+  .side-list a:hover { color: var(--color-ember-deep); text-decoration: underline; text-underline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 </style>

@@ -169,3 +169,9 @@ Import is automatic through `MarkdownComponents`, so MDX posts can use these dir
 - Articles should support search well: use concrete nouns, service names, and terms people actually search for
 - Related articles are driven by category and tag overlap, so keep those fields intentional
 - Blog article URLs are under `/blog/[slug]/`
+
+## Design Context
+
+- Register: brand, platform: web. See `PRODUCT.md` for users, positioning, conversion and principles.
+- Visual system: `DESIGN.md` plus live primitives in `.impeccable/design.json`.
+- Identity: hârtie caldă #faf8f4, cerneală #181b20, verde mușchi #1e3a32, cărămiziu rar #b0492b. Fraunces display + Inter body, suprafețe plate cu hairline.

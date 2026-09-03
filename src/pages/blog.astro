@@ -14,19 +14,20 @@ const sortedPosts = getSortedPosts(posts);
   description="Articole practice în limba română despre web design, SEO, hosting și procese digitale."
   canonical="/blog"
 >
-  <section class="blog-index section-padding">
+  <section class="blog-index">
     <div class="container">
       <div class="blog-index__hero">
-        <p class="blog-index__eyebrow">Blog BitDoze</p>
-        <h1>Ghiduri clare pentru site-uri, SEO și infrastructură web</h1>
+        <p class="kicker">Blog · în română, fără jargon</p>
+        <h1>Ce am învățat din proiecte reale</h1>
         <p class="blog-index__description">
-          Publicăm articole practice pentru companii care vor să înțeleagă mai
-          bine cum își construiesc și își cresc prezența online.
+          Ghiduri scurte despre site-uri, SEO și infrastructură web —
+          scrise de oamenii care fac efectiv munca.
         </p>
-        <div class="blog-index__actions">
-          <a href="/search" class="btn btn-primary">Caută articole</a>
-          <span class="blog-index__count">{sortedPosts.length} articole publicate</span>
-        </div>
+        <p class="blog-index__meta">
+          <span>{sortedPosts.length} articole</span>
+          <span aria-hidden="true">·</span>
+          <a href="/search">Caută în blog →</a>
+        </p>
       </div>
 
       <div class="blog-index__grid">
@@ -40,73 +41,45 @@ const sortedPosts = getSortedPosts(posts);
 
 <style>
   .blog-index {
-    background-color: var(--color-background-alt);
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-line);
+    padding: 3.5rem 0 4.5rem;
   }
-
   :global(.dark) .blog-index {
-    background-color: var(--color-dark-background-alt);
+    background-color: var(--color-dark-background);
+    border-bottom-color: rgba(255,255,255,0.1);
   }
-
-  .blog-index__hero {
-    max-width: 54rem;
-    margin-bottom: 3.5rem;
-  }
-
-  .blog-index__eyebrow {
-    margin: 0 0 0.75rem;
-    color: var(--color-primary);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-  }
-
+  .blog-index__hero { max-width: 48rem; margin-bottom: 2.75rem; }
   .blog-index h1 {
-    margin: 0;
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    margin: 1rem 0 0;
+    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
     color: var(--color-text);
   }
-
-  :global(.dark) .blog-index h1 {
-    color: var(--color-dark-text);
-  }
-
+  :global(.dark) .blog-index h1 { color: var(--color-dark-text); }
   .blog-index__description {
-    margin: 1.5rem 0 0;
-    max-width: 48rem;
-    color: var(--color-text-light);
-    line-height: 1.8;
-    font-size: 1.125rem;
+    margin: 1rem 0 0;
+    color: var(--color-muted);
+    line-height: 1.75;
+    font-size: 1.08rem;
   }
-
-  :global(.dark) .blog-index__description {
-    color: var(--color-dark-text-light);
-  }
-
-  .blog-index__actions {
+  :global(.dark) .blog-index__description { color: var(--color-dark-text-light); }
+  .blog-index__meta {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-    margin-top: 2rem;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
   }
-
-  .blog-index__count {
-    color: var(--color-text-light);
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  :global(.dark) .blog-index__count {
-    color: var(--color-dark-text-light);
-  }
-
+  .blog-index__meta a { color: var(--color-moss); font-weight: 600; }
+  :global(.dark) .blog-index__meta a { color: var(--color-ember-soft); }
   .blog-index__grid {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  @media (min-width: 720px) {
+    .blog-index__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1080px) {
+    .blog-index__grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

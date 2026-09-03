@@ -166,7 +166,7 @@ const {
   }
 
   .content-article a {
-    color: var(--color-primary);
+    color: var(--color-ember-deep);
     text-decoration: none;
     font-weight: 500;
     transition: all var(--transition-normal);
@@ -192,7 +192,7 @@ const {
     padding: 0.25rem 0.5rem;
     border-radius: var(--radius-sm);
     font-size: 0.9em;
-    color: var(--color-primary);
+    color: var(--color-text);
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   }
 
@@ -227,73 +227,73 @@ const {
   }
 
   /* Dark mode adjustments */
-  .dark .content-article {
+  :global(.dark) .content-article {
     color: var(--color-dark-text);
   }
 
-  .dark .content-article h1,
-  .dark .content-article h2,
-  .dark .content-article h3,
-  .dark .content-article h4 {
+  :global(.dark) .content-article h1,
+  :global(.dark) .content-article h2,
+  :global(.dark) .content-article h3,
+  :global(.dark) .content-article h4 {
     color: var(--color-dark-text);
   }
 
-  .dark .content-article h2 {
+  :global(.dark) .content-article h2 {
     border-bottom-color: var(--color-dark-text-lighter);
   }
 
-  .dark .content-article p,
-  .dark .content-article li,
-  .dark .content-article td {
+  :global(.dark) .content-article p,
+  :global(.dark) .content-article li,
+  :global(.dark) .content-article td {
     color: var(--color-dark-text-light);
   }
 
-  .dark .content-article p strong,
-  .dark .content-article li strong {
+  :global(.dark) .content-article p strong,
+  :global(.dark) .content-article li strong {
     color: var(--color-dark-text);
   }
 
-  .dark .content-article a {
+  :global(.dark) .content-article a {
     color: var(--color-primary-light);
   }
 
-  .dark .content-article a:hover {
+  :global(.dark) .content-article a:hover {
     color: var(--color-primary);
   }
 
-  .dark .content-article table,
-  .dark .content-article th,
-  .dark .content-article td {
+  :global(.dark) .content-article table,
+  :global(.dark) .content-article th,
+  :global(.dark) .content-article td {
     border-color: var(--color-dark-text-lighter);
   }
 
-  .dark .content-article th {
+  :global(.dark) .content-article th {
     background-color: var(--color-dark-background-alt);
     color: var(--color-dark-text);
   }
 
-  .dark .content-article blockquote {
+  :global(.dark) .content-article blockquote {
     background-color: var(--color-dark-background-alt);
   }
 
-  .dark .content-article code {
+  :global(.dark) .content-article code {
     background-color: var(--color-dark-background-alt);
     color: var(--color-primary-light);
   }
 
-  .dark .content-article pre {
+  :global(.dark) .content-article pre {
     background-color: var(--color-dark-background-alt);
   }
 
-  .dark .content-article pre code {
+  :global(.dark) .content-article pre code {
     color: var(--color-dark-text);
   }
 
-  .dark .content-article hr {
+  :global(.dark) .content-article hr {
     background-color: var(--color-dark-text-lighter);
   }
 
-  .dark .content-article h3 + ul {
+  :global(.dark) .content-article h3 + ul {
     background-color: var(--color-dark-background-alt);
     border-color: var(--color-dark-text-lighter);
   }

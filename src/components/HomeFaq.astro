@@ -1,0 +1,131 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
+  {
+    question: "Cât costă un site web profesional?",
+    answer:
+      "Un site de prezentare începe de la 2500 RON, un magazin online de la 5000 RON. Primești preț fix, în scris, înainte să începem — fără costuri ascunse.",
+  },
+  {
+    question: "Cât durează până e gata?",
+    answer:
+      "Un site de prezentare durează 2–4 săptămâni, un magazin online 4–8 săptămâni. Termenul exact ți-l spunem în propunere și ni-l asumăm.",
+  },
+  {
+    question: "Cât de repede primesc răspuns?",
+    answer:
+      "În maximum 24 de ore lucrătoare, direct de la omul care îți va face site-ul. De obicei răspundem în câteva ore.",
+  },
+  {
+    question: "Există costuri ascunse?",
+    answer:
+      "Nu. Prețul din ofertă e prețul final pentru ce am agreat. Orice extra cerut pe parcurs se discută și se aprobă înainte, niciodată după.",
+  },
+  {
+    question: "Pot modifica singur site-ul după lansare?",
+    answer:
+      "Da. Primești CMS ușor de folosit, training gratuit și documentație. Pentru lucruri complexe, mentenanța lunară acoperă update-uri, backup și monitorizare.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<section class="home-faq">
+  <div class="container faq-grid">
+    <div class="faq-intro">
+      <p class="kicker">Întrebări frecvente</p>
+      <h2>Le auzim des.<br />Răspundem direct.</h2>
+      <p>Preț, termen, garanții — fără ocolișuri. Pentru restul, vezi <a href="/faq">pagina de întrebări frecvente</a>.</p>
+      <a href="/faq" class="btn btn-secondary">Toate întrebările →</a>
+    </div>
+    <div class="faq-list">
+      {faqs.map((item) => (
+        <details>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+<style>
+  .home-faq {
+    background: var(--color-background);
+    border-top: 2px solid var(--color-ink);
+    padding: 5rem 0;
+  }
+  :global(.dark) .home-faq { background: var(--color-dark-background); border-top-color: rgba(255,255,255,0.2); }
+  .faq-grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) {
+    .faq-grid { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: start; }
+    .faq-intro { position: sticky; top: 6rem; }
+  }
+  .faq-intro h2 {
+    margin: 1.1rem 0 1rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+  .faq-intro > p:not(.kicker) { color: var(--color-muted); line-height: 1.7; margin: 0 0 1.5rem; }
+  .faq-intro > p:not(.kicker) a { color: var(--color-ember-deep); font-weight: 700; }
+  :global(.dark) .faq-intro > p:not(.kicker) a { color: var(--color-ember-soft); }
+  :global(.dark) .faq-intro > p:not(.kicker) { color: var(--color-dark-text-light); }
+  .faq-list { display: grid; gap: 0.8rem; }
+  .faq-list details {
+    border: 2px solid var(--color-ink);
+    border-radius: 12px;
+    background: var(--color-card);
+    padding: 1rem 1.2rem;
+  }
+  :global(.dark) .faq-list details { background: var(--color-dark-background-alt); border-color: rgba(255,255,255,0.22); }
+  .faq-list summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.02rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: "+";
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 999px;
+    background: var(--color-ember);
+    color: var(--color-ember-ink);
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 160ms ease;
+  }
+  .faq-list details[open] summary::after { transform: rotate(45deg); }
+  .faq-list details p { margin: 0.7rem 0 0.2rem; color: var(--color-muted); line-height: 1.7; }
+  :global(.dark) .faq-list details p { color: var(--color-dark-text-light); }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-list summary::after { transition: none; }
+  }
+</style>

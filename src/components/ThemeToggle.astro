@@ -10,8 +10,9 @@ const { class: className = "", showLabel = false } = Astro.props;
 ---
 
 <button
-  class={`theme-toggle inline-flex items-center justify-center p-3 md:p-2 rounded-full min-h-[48px] min-w-[48px] md:min-h-[40px] md:min-w-[40px] ${className}`}
+  class={`theme-toggle inline-flex items-center justify-center p-3 md:p-2 rounded-full min-h-[48px] min-w-[48px] md:min-h-[48px] md:min-w-[48px] ${className}`}
   aria-label="Schimbă tema"
+  aria-pressed="false"
 >
   <Icon name="mdi:white-balance-sunny" class="h-5 w-5 dark:hidden" />
   <Icon name="mdi:weather-night" class="h-5 w-5 hidden dark:block" />
@@ -54,13 +55,19 @@ const { class: className = "", showLabel = false } = Astro.props;
     const themeToggleButtons = document.querySelectorAll(".theme-toggle");
 
     const toggleDarkMode = () => {
-      if (document.documentElement.classList.contains("dark")) {
+      const isDark = document.documentElement.classList.contains("dark");
+      if (isDark) {
         document.documentElement.classList.remove("dark");
         localStorage.setItem("theme", "light");
       } else {
         document.documentElement.classList.add("dark");
         localStorage.setItem("theme", "dark");
       }
+      themeToggleButtons.forEach((btn) => {
+        if (btn instanceof HTMLElement) {
+          btn.setAttribute("aria-pressed", String(!isDark));
+        }
+      });
     };
 
     themeToggleButtons.forEach((button) => {
@@ -128,16 +135,16 @@ const { class: className = "", showLabel = false } = Astro.props;
   }
 
   .dark {
-    --color-background: #0f172a; /* slate-900 */
-    --color-background-rgb: 15, 23, 42;
-    --color-background-alt: #1e293b; /* slate-800 */
-    --color-background-alt-rgb: 30, 41, 59;
-    --color-text: #f8fafc; /* slate-50 */
-    --color-text-rgb: 248, 250, 252;
-    --color-text-light: #cbd5e1; /* slate-300 */
-    --color-text-light-rgb: 203, 213, 225;
-    --color-text-lighter: #94a3b8; /* slate-400 */
-    --color-text-lighter-rgb: 148, 163, 184;
+    --color-background: var(--color-dark-background);
+    --color-background-rgb: var(--color-dark-background-rgb);
+    --color-background-alt: var(--color-dark-background-alt);
+    --color-background-alt-rgb: var(--color-dark-background-alt-rgb);
+    --color-text: var(--color-dark-text);
+    --color-text-rgb: var(--color-dark-text-rgb);
+    --color-text-light: var(--color-dark-text-light);
+    --color-text-light-rgb: var(--color-dark-text-light-rgb);
+    --color-text-lighter: var(--color-dark-text-lighter);
+    --color-text-lighter-rgb: var(--color-dark-text-lighter-rgb);
 
     /* Adjust shadow variables for dark mode */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);

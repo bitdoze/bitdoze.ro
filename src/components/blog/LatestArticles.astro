@@ -9,24 +9,23 @@ const latestPosts = getSortedPosts(posts).slice(0, 3);
 
 {
   latestPosts.length > 0 && (
-    <section class="blog-preview section-padding">
+    <section class="blog-sec">
       <div class="container">
-        <div class="blog-preview__header">
+        <div class="blog-head">
           <div>
-            <p class="blog-preview__eyebrow">Resurse practice</p>
-            <h2 class="blog-preview__title">Articole noi pe blog</h2>
-            <p class="blog-preview__subtitle">
-              Ghiduri în limba română despre web design, SEO, hosting și procese
-              digitale care te ajută să iei decizii mai bune.
+            <p class="kicker">Din blog · practic</p>
+            <h2>Note practice, nu teorie</h2>
+            <p class="lede">
+              Scriem despre ce facem zi de zi: viteză, SEO, hosting, mentenanță.
+              Fără jargon, cu exemple din proiecte reale.
             </p>
           </div>
-          <div class="blog-preview__actions">
-            <a href="/blog" class="btn btn-secondary">Vezi toate articolele</a>
-            <a href="/search" class="btn btn-primary">Caută în blog</a>
+          <div class="blog-actions">
+            <a href="/blog" class="btn btn-secondary">Toate articolele →</a>
           </div>
         </div>
 
-        <div class="blog-preview__grid">
+        <div class="blog-grid">
           {latestPosts.map((post) => (
             <PostCard post={post} />
           ))}
@@ -37,61 +36,41 @@ const latestPosts = getSortedPosts(posts).slice(0, 3);
 }
 
 <style>
-  .blog-preview {
-    background:
-      radial-gradient(
-        circle at top left,
-        rgba(var(--color-primary-rgb), 0.08),
-        transparent 45%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(var(--color-background-alt-rgb), 0.75),
-        rgba(var(--color-background-rgb), 1)
-      );
+  .blog-sec {
+    background: var(--color-background-alt);
+    padding: 5rem 0;
+    border-top: 2px solid var(--color-ink);
   }
-
-  .blog-preview__header {
+  :global(.dark) .blog-sec { background: var(--color-dark-background); border-top-color: rgba(255,255,255,0.2); }
+  .blog-head {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 1.5rem;
-    margin-bottom: 2rem;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 2.5rem;
   }
-
-  .blog-preview__eyebrow {
-    margin: 0 0 0.5rem;
-    color: var(--color-primary);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .blog-preview__title {
-    margin: 0;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.1;
+  .blog-head h2 {
+    margin: 1.1rem 0 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
     color: var(--color-text);
   }
-
-  .blog-preview__subtitle {
-    max-width: 48rem;
-    margin: 0.85rem 0 0;
-    color: var(--color-text-light);
-    line-height: 1.8;
+  :global(.dark) .blog-head h2 { color: var(--color-dark-text); }
+  .lede {
+    margin: 0.8rem 0 0;
+    color: var(--color-muted);
+    max-width: 42rem;
+    line-height: 1.7;
   }
-
-  .blog-preview__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-
-  .blog-preview__grid {
+  :global(.dark) .lede { color: var(--color-dark-text-light); }
+  .blog-actions { display: flex; gap: 0.75rem; }
+  .blog-grid {
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  @media (min-width: 820px) {
+    .blog-grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

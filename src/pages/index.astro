@@ -4,20 +4,17 @@ import LatestArticles from "../components/blog/LatestArticles.astro";
 import Welcome from "../components/Welcome.astro";
 import ServiceCardV2 from "../components/ServiceCardV2.astro";
 import Portofoliu from "../components/Portofoliu.astro";
+import Testimonials from "../components/Testimonials.astro";
+import HomeFaq from "../components/HomeFaq.astro";
 import CTA from "../components/CTA.astro";
 import TrustBadges from "../components/TrustBadges.astro";
-import { Icon } from "astro-icon/components";
 
 import { homePageConfig } from "../config/pages";
 import { getCollection } from "astro:content";
 import { getCollectionSlug } from "../utils/content";
 
-// Extract sections from config
 const welcomeSection = homePageConfig.sections.find(
   (section) => section.type === "welcome"
-);
-const servicesSection = homePageConfig.sections.find(
-  (section) => section.type === "services"
 );
 const portfolioSection = homePageConfig.sections.find(
   (section) => section.type === "portfolio"
@@ -25,16 +22,14 @@ const portfolioSection = homePageConfig.sections.find(
 const ctaSection = homePageConfig.sections.find(
   (section) => section.type === "cta"
 );
+const testimonialsSection = homePageConfig.sections.find(
+  (section) => section.type === "testimonials"
+);
 
-// Get all non-draft services entries and sort by order
-const servicii = await getCollection("servicii", ({ data }) => {
-  return !data.draft;
-});
-
-// Sort by order field and limit to 3
+const servicii = await getCollection("servicii", ({ data }) => !data.draft);
 const featuredServices = servicii
   .sort((a, b) => a.data.ordine - b.data.ordine)
-  .slice(0, 3);
+  .slice(0, 5);
 ---
 
 <Layout
@@ -42,155 +37,142 @@ const featuredServices = servicii
   description={homePageConfig.description}
   image={homePageConfig.ogImage}
 >
-  {
-    welcomeSection && (
-      <>
-        <Welcome
-          title={welcomeSection.title}
-          subtitle={welcomeSection.subtitle}
-          ctas={welcomeSection.ctas}
-        />
-        <div class="trust-badges-hero-section">
-          <div class="container container-lg">
-            <TrustBadges variant="compact" />
-          </div>
-        </div>
-      </>
-    )
-  }
-  {
-    servicesSection && (
-      <section class="section-padding-sm services-section">
-        <div class="container container-lg">
-          <div class="section-header-wrapper">
-            <h2 class="section-title">Soluții Complete pentru Afacerea Ta</h2>
-            <p class="section-subtitle">
-              Oferim servicii profesionale web, optimizate pentru performanță și rezultate, la prețuri transparente.
-            </p>
-          </div>
+  {welcomeSection && (
+    <Welcome
+      title={welcomeSection.title}
+      subtitle={welcomeSection.subtitle}
+      ctas={welcomeSection.ctas}
+    />
+  )}
 
-          <div class="services-grid">
-            {featuredServices.map((service, index) => (
-              <ServiceCardV2
-                title={service.data.title}
-                description={service.data.descriere}
-                icon={service.data.icon}
-                link={`/servicii/${getCollectionSlug(service)}`}
-                price={service.data.pret}
-                index={index}
-                ctaText="Află detalii"
-              />
-            ))}
-          </div>
+  <div class="proof-strip">
+    <div class="container">
+      <TrustBadges variant="compact" />
+    </div>
+  </div>
 
-          <div class="cta-wrapper">
-            <a href="/servicii" class="btn btn-outline btn-lg">
-              <span class="flex items-center gap-2">Toate serviciile <Icon name="mdi:arrow-right" class="h-4 w-4" /></span>
-            </a>
-          </div>
+  <section class="svc-sec">
+    <div class="container">
+      <div class="svc-head">
+        <div>
+          <p class="kicker">Servicii · prețuri fixe</p>
+          <h2>Puține lucruri,<br />făcute să vândă.</h2>
         </div>
-      </section>
-    )
-  }
+        <div class="svc-head-side">
+          <p>
+            Nu vindem „pachete de creștere exponențială". Facem site-uri,
+            magazine online, SEO tehnic și mentenanță — cu preț și termen
+            scrise înainte să începem.
+          </p>
+          <a href="/servicii" class="btn btn-secondary">Toate serviciile →</a>
+        </div>
+      </div>
+      <div class="svc-cards">
+        {featuredServices.map((service, index) => (
+          <ServiceCardV2
+            title={service.data.title}
+            description={service.data.descriere}
+            icon={service.data.icon}
+            link={`/servicii/${getCollectionSlug(service)}`}
+            price={service.data.pret}
+            index={index}
+            ctaText="Detalii"
+            features={service.data.caracteristici ?? []}
+            featured={index === 0}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
 
   <LatestArticles />
 
-  {
-    portfolioSection && (
-      <Portofoliu
-        title={portfolioSection.title}
-        subtitle={portfolioSection.subtitle}
-        ctaText={portfolioSection.cta?.text}
-        ctaLink={portfolioSection.cta?.link}
-      />
-    )
-  }
+  {portfolioSection && (
+    <Portofoliu
+      title={portfolioSection.title}
+      subtitle={portfolioSection.subtitle}
+      ctaText={portfolioSection.cta?.text}
+      ctaLink={portfolioSection.cta?.link}
+      limit={portfolioSection.limit ?? 5}
+    />
+  )}
 
-  {
-    ctaSection && (
-      <CTA
-        title={ctaSection.title}
-        subtitle={ctaSection.subtitle}
-        ctaText={ctaSection.ctaPrimary.text}
-        ctaLink={ctaSection.ctaPrimary.link}
-        secondaryText={ctaSection.ctaSecondary?.text}
-        secondaryLink={ctaSection.ctaSecondary?.link}
-        trustedBy={ctaSection.trustedBy}
-      />
-    )
-  }
+  {testimonialsSection && (
+    <Testimonials
+      title={testimonialsSection.title}
+      subtitle={testimonialsSection.subtitle}
+      testimonials={testimonialsSection.testimonials}
+    />
+  )}
+
+  <HomeFaq />
+
+  {ctaSection && (
+    <CTA
+      title={ctaSection.title}
+      subtitle={ctaSection.subtitle}
+      ctaText={ctaSection.ctaPrimary.text}
+      ctaLink={ctaSection.ctaPrimary.link}
+      secondaryText={ctaSection.ctaSecondary?.text}
+      secondaryLink={ctaSection.ctaSecondary?.link}
+      trustedBy={ctaSection.trustedBy}
+    />
+  )}
 </Layout>
 
 <style>
-  .trust-badges-hero-section {
-    background-color: var(--color-background);
-    padding: 2rem 0 3rem;
-    border-bottom: 1px solid rgba(var(--color-text-rgb), 0.05);
+  .proof-strip {
+    background: var(--color-ink-deep);
+    background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    padding: 0 0 4.5rem;
+    margin-top: -1px;
+    position: relative;
+    z-index: 2;
   }
+  .proof-strip :global(.proof) { box-shadow: 6px 6px 0 rgba(0,0,0,0.55); }
+  :global(.dark) .proof-strip { background: var(--color-dark-background); }
+  .proof-strip .container { max-width: 76rem; }
 
-  :global(.dark) .trust-badges-hero-section {
-    background-color: var(--color-dark-background);
-    border-bottom-color: rgba(255, 255, 255, 0.05);
+  .svc-sec {
+    background: var(--color-background);
+    border-top: 2px solid var(--color-ink);
+    padding: 5rem 0;
   }
-
-  /* Services Section Styles */
-  .services-section {
-    background-color: var(--color-background-alt);
-    border-bottom: 1px solid rgba(var(--color-text-rgb), 0.05);
+  :global(.dark) .svc-sec {
+    background: var(--color-dark-background);
+    border-top-color: rgba(255,255,255,0.2);
   }
-  
-  :global(.dark) .services-section {
-    background-color: var(--color-dark-background-alt);
-    border-bottom-color: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Section Header */
-  .section-header-wrapper {
-    text-align: center;
-    margin-bottom: 3.5rem;
-    max-width: 48rem;
-    margin-inline: auto;
-  }
-
-  .section-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-    color: var(--color-text);
-  }
-
-  :global(.dark) .section-title {
-    color: var(--color-dark-text);
-  }
-
-  .section-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--color-text-light);
-  }
-
-  :global(.dark) .section-subtitle {
-    color: var(--color-dark-text-light);
-  }
-
-  /* Services Grid */
-  .services-grid {
+  .svc-head {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
-
-  @media (min-width: 1024px) {
-    .services-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @media (min-width: 960px) {
+    .svc-head { grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: end; }
   }
-
-  /* CTA Button */
-  .cta-wrapper {
-    text-align: center;
+  .svc-head h2 {
+    margin: 1.1rem 0 0;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+  :global(.dark) .svc-head h2 { color: var(--color-dark-text); }
+  .svc-head-side p {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0 0 1.4rem;
+    font-size: 1.05rem;
+  }
+  :global(.dark) .svc-head-side p { color: var(--color-dark-text-light); }
+  .svc-cards {
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+  @media (min-width: 1080px) {
+    .svc-cards :global(.svc-bold.is-featured) { grid-column: span 2; }
   }
 </style>

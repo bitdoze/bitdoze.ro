@@ -31,31 +31,39 @@ const ensureSearchData = async (searchResults) => {
   searchResults.innerHTML = "";
 };
 
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
 const createResultCard = (post) => {
   const article = document.createElement("article");
   article.className = "search-result-card";
 
   const imageHtml = post.image
-    ? `<div class="search-result-card__image-wrap"><img src="${post.image}" alt="${post.title}" class="search-result-card__image" loading="lazy" /></div>`
+    ? `<div class="search-result-card__image-wrap"><img src="${escapeHtml(post.image)}" alt="" class="search-result-card__image" loading="lazy" decoding="async" /></div>`
     : "";
 
   const tagsHtml = (post.tags || [])
     .slice(0, 3)
     .map(
-      (tag) => `<span class="search-result-card__tag">#${tag}</span>`,
+      (tag) => `<span class="search-result-card__tag">#${escapeHtml(tag)}</span>`,
     )
     .join("");
 
   article.innerHTML = `
-    <a href="/blog/${post.slug}/" class="search-result-card__link">
+    <a href="/blog/${escapeHtml(post.slug)}/" class="search-result-card__link">
       ${imageHtml}
       <div class="search-result-card__body">
         <div class="search-result-card__meta">
-          <span>${post.date || ""}</span>
-          <span>${(post.categories || []).join(", ")}</span>
+          <span>${escapeHtml(post.date || "")}</span>
+          <span>${escapeHtml((post.categories || []).join(", "))}</span>
         </div>
-        <h3>${post.title}</h3>
-        ${post.description ? `<p>${post.description}</p>` : ""}
+        <h3>${escapeHtml(post.title)}</h3>
+        ${post.description ? `<p>${escapeHtml(post.description)}</p>` : ""}
         ${tagsHtml ? `<div class="search-result-card__tags">${tagsHtml}</div>` : ""}
       </div>
     </a>
@@ -94,7 +102,14 @@ const performSearch = async (query, searchResults, noResults, searchInfo) => {
     return;
   }
 
-  await ensureSearchData(searchResults);
+  try {
+    await ensureSearchData(searchResults);
+  } catch {
+    searchResults.classList.add("hidden");
+    noResults.classList.remove("hidden");
+    searchInfo.textContent = "Căutarea e indisponibilă momentan. Încearcă din nou.";
+    return;
+  }
   if (!fuse) return;
 
   const searchParams = new URLSearchParams(window.location.search);
